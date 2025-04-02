@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Raycast : MonoBehaviour
 {
-    private Camera _mainCamera;
+    public Camera _mainCamera;
 
     private Ray _ray;
     private RaycastHit _hit;
@@ -28,7 +28,7 @@ public class Raycast : MonoBehaviour
             if (Physics.Raycast(_ray, out _hit))
             {
                 Debug.Log("River Clicked");
-                riverClicked = true; // set riverClicked to true
+                riverClicked = true; // Set bool riverClicked to true
             }
         }
     }
