@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AnimalAi : MonoBehaviour
 {
@@ -22,13 +22,15 @@ public class AnimalAi : MonoBehaviour
     {
         // Get the NavMeshAgent component
         agent = GetComponent<NavMeshAgent>();
+
+        // If agent is null...
         if (agent == null)
         {
-            Debug.LogError("Nav Mesh Agent is Null.");
+            Debug.LogError("Nav Mesh Agent is Null."); // Debug.Log error 
         }
 
         SetDestinationPoint();
-        isWalking = true;
+        isWalking = true; // Set bool isWalking to true
     }
 
     private void Update()
@@ -36,22 +38,21 @@ public class AnimalAi : MonoBehaviour
         AnimalMovement();
     }
 
+    // Set Destination point
     private void SetDestinationPoint()
     {
-        // Get a random index
-        int randomIndex = Random.Range(0, destinationPoints.Count);
+        int randomIndex = Random.Range(0, destinationPoints.Count); // Get a random index
 
-        // Access the destination point at the random index
-        GameObject randomDestinationPoint = destinationPoints[randomIndex];
-        Debug.Log("Random Destination Point: " + randomDestinationPoint.transform.position);
+        GameObject randomDestinationPoint = destinationPoints[randomIndex]; // Access the destination point at the random index
+        Debug.Log("Random Destination Point: " + randomDestinationPoint.transform.position); // Debug.Log the position of the random destination point
 
-        // Set Destination point
-        agent.SetDestination(randomDestinationPoint.transform.position);
+        agent.SetDestination(randomDestinationPoint.transform.position); // Set Destination point
     }
 
+    // Controls animal movement
     private void AnimalMovement()
     {
-        // if bool isWalking is true...
+        // If bool isWalking is true...
         if (isWalking)
         {
             waitCounter = 0f; // Set wait counter back to 0
@@ -59,19 +60,20 @@ public class AnimalAi : MonoBehaviour
             isWaiting = true; // Set bool isWaiting to false
         }
 
-        // if bool isWalking is true...
+        // If bool isWalking is true...
         if (isWaiting)
         {
             waitCounter += Time.deltaTime; // Wait counter is equal to wait counter plus Time.deltaTime
-            if (waitCounter < waitTime) // if wait counter is less than wait time...
+            if (waitCounter < waitTime) // If wait counter is less than wait time...
                 return;
-            isWaiting = false; // set bool isWaiting to false
+            isWaiting = false; // Set bool isWaiting to false
         }
 
+        // If bool isWalking and isWaiting are both false...
         if (!isWalking && !isWaiting)
         {
             SetDestinationPoint();
-            isWalking = true;
+            isWalking = true; // Set bool isWalking to true
         }
     }
 

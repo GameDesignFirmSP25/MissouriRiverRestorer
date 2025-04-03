@@ -14,16 +14,16 @@ public class DestinationPoint : MonoBehaviour
     void Start()
     {
         // If bool isTrashCollected and bool isFloraPlanted are true...
-        if (SampleSceneGameManager.isTrashCollected && SampleSceneGameManager.isFloraPlanted)
+        if (TestTransitionsGameManager.isTrashCollected && TestTransitionsGameManager.isFloraPlanted)
         {
             SetTransform(); 
         }
     }
 
-    // Transform position of destination point gets a new Vector3
+    // Set transform position 
     void SetTransform()
     {
-        transform.position = new Vector3(Random.Range(-xRange, xRange), yPosition, Random.Range(minimumZ, maximumZ));
+        transform.position = new Vector3(Random.Range(-xRange, xRange), yPosition, Random.Range(minimumZ, maximumZ)); // transform position is equal to new Vector3 within range
     }
 
 #if UNITY_EDITOR

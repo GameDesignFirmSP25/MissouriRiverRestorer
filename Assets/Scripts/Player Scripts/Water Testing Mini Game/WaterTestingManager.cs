@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 
 public class WaterTestingManager : MonoBehaviour
 {
@@ -36,23 +35,16 @@ public class WaterTestingManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Set Cursor to be visible
-        Cursor.visible = true;
-
-        // Enable water testing instructions text
-        testingInstructions.SetActive(true);
-
-        // Disable poor water quality text
-        poorWaterQualityText.SetActive(false);
-
-        // Disable good water quality text
-        goodWaterQualityText.SetActive(false);
+        Cursor.visible = true; // Set Cursor to be visible
+        testingInstructions.SetActive(true); // Enable water testing instructions text
+        poorWaterQualityText.SetActive(false); // Disable poor water quality text
+        goodWaterQualityText.SetActive(false); // Disable good water quality text
 
         // Get Slider component on Progress Bar
         progressBar = GameObject.Find("Progress Bar");
         slider = progressBar.GetComponent<Slider>();
 
-        if (SampleSceneGameManager.isTrashCollected && SampleSceneGameManager.isFloraPlanted)
+        if (TestTransitionsGameManager.isTrashCollected && TestTransitionsGameManager.isFloraPlanted)
         {
             isWaterQualityGood = true;
         }
@@ -90,7 +82,8 @@ public class WaterTestingManager : MonoBehaviour
     // Collect water
     public void CollectWater()
     {
-        if (Input.GetMouseButtonDown(0) && !isPressed) // When left mouse button is down and isPressed is false...
+        // If left mouse button is down and isPressed is false...
+        if (Input.GetMouseButtonDown(0) && !isPressed) 
         {
             isWaterCollected = true; // Set bool waterCollected to true
             isPressed = true; // Set bool isPressed to true
@@ -99,37 +92,36 @@ public class WaterTestingManager : MonoBehaviour
             testingInstructions.SetActive(false); // Disable water testing instructions text
         }
 
-        if (Input.GetMouseButtonUp(0) && isPressed) // When left mouse button is down and isPressed is true...
+        // If left mouse button is down and isPressed is true...
+        if (Input.GetMouseButtonUp(0) && isPressed) 
         {
             endTime = Time.time; // endTime is stored
-            pressDuration = endTime - startTime; // measures how long the mouse was pressed for each click
-            //totalTime = totalTime + pressDuration; // total amount of time mouse was pressed
-            Debug.Log("Press Duration: " + pressDuration + "seconds"); // Calculate duration of each mouse button press
-            //Debug.Log("Total Time Pressed: " + totalTime + "seconds"); // Calculate total time mouse button was pressed
-            isPressed = false;
-            isWaterCollected = false;
-            riverScript.riverClicked = false;
+            pressDuration = endTime - startTime; // Calculate duration of each mouse button press
+            Debug.Log("Press Duration: " + pressDuration + "seconds"); // Debug.Log the press duration
+            isPressed = false; // Set bool isPressed to false
+            isWaterCollected = false; // Set bool isWaterCollected to false
+            riverScript.riverClicked = false; // Set bool riverClicked to false
             testingInstructions.SetActive(true); // Enable water testing instructions text
-            CancelInvoke(); // cancel all invokes
+            CancelInvoke(); // Cancel all invokes
         }
     }
 
-    // Add progress to progress bar in increments of 0.1
+    // Invoke Progress Bar
     public void InvokeProgressBar()
     {
-        progressBarScript.IncrementProgress(0.1f);
+        progressBarScript.IncrementProgress(0.1f); // Add progress to progress bar in increments of 0.1
     }
 
     // Load trash collection mini game scene
     public void LoadToTrashCollection()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Test Transitions (water testing mini game)"); //Load scene "Test Transitions (water testing mini game)"
     }
 
-    //Load main scene
+    // Load main scene
     public void LoadToMainScene()
     {
-        SceneManager.LoadScene("Main Scene");
+        SceneManager.LoadScene("Main Scene"); // Load scene "Main Scene"
     }
 
     public void PoorWaterQuality()
@@ -137,7 +129,7 @@ public class WaterTestingManager : MonoBehaviour
         poorWaterQualityText.SetActive(true);// Enable poor water quality text
         progressBar.SetActive(false);// Disable progress bar
         testingInstructions.SetActive(false); // Disable water testing instructions text
-        Invoke("LoadToTrashCollection", loadingTime);
+        Invoke("LoadToTrashCollection", loadingTime); // Invoke method LoadToTrashCollection after loadingTime (in seconds)
     }
 
     public void GoodWaterQuality()
@@ -145,7 +137,7 @@ public class WaterTestingManager : MonoBehaviour
         goodWaterQualityText.SetActive(true);// Enable poor water quality text
         progressBar.SetActive(false);// Disable progress bar
         testingInstructions.SetActive(false); // Disable water testing instructions text
-        Invoke("LoadToMainScene", loadingTime);
+        Invoke("LoadToMainScene", loadingTime); // Invoke method LoadToMainScene after loadingTime (in seconds)
     }
 }
 

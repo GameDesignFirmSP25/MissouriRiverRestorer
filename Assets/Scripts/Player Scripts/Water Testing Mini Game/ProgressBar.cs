@@ -12,18 +12,17 @@ public class ProgressBar : MonoBehaviour
 
     private void Awake()
     {
-        // get slider component
-        slider = gameObject.GetComponent<Slider>();
+        slider = gameObject.GetComponent<Slider>(); // Get slider component
     }
 
     // Update is called once per frame
     void Update()
     {
         if (slider.value < targetProgress)
-            slider.value += FillSpeed * Time.deltaTime;
+            slider.value += FillSpeed * Time.deltaTime; // If the slifer value is less than targetProgress variable, slider value is equal to itself plus FillSpeed variable * Time.deltaTime
     }
 
-    // add progress to bar
+    // Add progress to bar
     public void IncrementProgress(float newProgress)
     {
         targetProgress = slider.value + newProgress;
