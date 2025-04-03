@@ -1,35 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
-public class Trashcast : MonoBehaviour
+public class TrashRemover : MonoBehaviour
 {
-    public Camera _mainCamera;
-
-    private Ray _ray;
-    private RaycastHit _hit;
-
-    public bool TrashClicked = false;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    public int playerScore;
+    void Start()
     {
-        _mainCamera = Camera.main;
+        playerScore = 0;
     }
-
-    public void RiverClicked() // Raycast to detect when the mouse clicks the River
+    void Update()
     {
-        // Detect mouse click.
-        if (Input.GetMouseButtonDown(0))
+        // Check if the player clicks
+        if (Input.GetMouseButtonDown(0)) // 0 = Left Click
         {
+            // Perform Raycast from the camera to the mouse position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(_ray, out _hit))
+            if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("Trash Collected");
-                TrashClicked = true; // Set bool riverClicked to true
+                // Check if the clicked object has the "Trash" tag
+                if (hit.collider.CompareTag("Trash"))
+                {
+                    // Destroy the clicked object
+                    Destroy(hit.collider.gameObject);
+                    playerScore++;
 
+                    Debug.Log("playerScore: " + playerScore);
+
+
+                }
             }
         }
     }
