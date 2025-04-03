@@ -5,13 +5,29 @@ using UnityEngine;
 public static class SFXLibrary
 {                                     
     //only add new sound tags to the end of the list to avoid index swoopling around
+
     public enum SFXType { 
         Default, 
-        Footstep_Grass,
 
-        GrabGood, GrabBad,
-        ScoreUp, ScoreDown,
-        UI_Select
+        Footstep_Grass, Footstep_Wet, Footstep_Dirt, Footstep_Rocks,
+
+        Dig, Plant,
+
+        Planted_Correct, Planted_Incorrect,
+        Grab_Correct, Grab_Incorrect,
+        Invasive_Appearance, Invasive_Disappear,
+        Water_Collect, Water_TestGood, Water_TestBad, 
+        RemoveFromWater_Generic, RemoveFromWater_Trash,
+
+        ClothesRustling, Shore, Brush,
+
+        Score_Up, Score_Down,
+        Menu_Open, Menu_Close, Menu_Navigation,
+        Notbook_Fill25, Notebook_Fill50, Notebook_Fill75, Notebook_Fill100, 
+        Notebook_Open, Notebook_Close, Notebook_PageFlip, 
+        Stamp, Drawing, 
+        UI_Select, 
+        PickUp_Trash,
     }
 
     public static Dictionary<SFXType, SFXSO> sfxDictionary = new Dictionary<SFXType, SFXSO>();
