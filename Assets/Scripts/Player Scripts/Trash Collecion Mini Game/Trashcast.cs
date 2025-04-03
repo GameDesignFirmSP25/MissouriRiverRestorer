@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class TrashRemover : MonoBehaviour
+public class Trashcast : MonoBehaviour
 {
     public int playerScore;
     void Start()
@@ -24,7 +24,7 @@ public class TrashRemover : MonoBehaviour
                 {
                     // Destroy the clicked object
                     Destroy(hit.collider.gameObject);
-                    playerScore++;
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
                     Debug.Log("playerScore: " + playerScore);
 
