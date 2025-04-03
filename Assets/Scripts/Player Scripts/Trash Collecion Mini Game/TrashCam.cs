@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class TrashCam : MonoBehaviour
 {
     public Transform player;  // Reference to the player's Transform
     public Vector3 offset;    // Offset for the camera's position (e.g., distance behind the player)
