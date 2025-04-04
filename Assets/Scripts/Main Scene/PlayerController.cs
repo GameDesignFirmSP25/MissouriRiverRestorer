@@ -33,19 +33,7 @@ public class PlayerController : MonoBehaviour
                controller.Move(move * moveSpeed * Time.deltaTime);
                transform.rotation = Quaternion.LookRotation(move);
           }
-          
-
-          //may try to get this script functional to have the player camera rotate
-          // Get input from the mouse movement axes for rotation
-          //float mouseX = Input.GetAxis("Mouse X"); // Horizontal mouse movement
-          //float mouseY = Input.GetAxis("Mouse Y"); // Vertical mouse movement (optional)
-
-          // Rotate the player based on the mouse X axis
-          //transform.Rotate(0, mouseX * rotationSpeed * Time.deltaTime, 0);
-
-          // Optional: Add rotation based on Mouse Y axis if needed
-          // Example: Tilt the player up/down (can cause unintended effects in some cases)
-          // transform.Rotate(-mouseY * rotationSpeed * Time.deltaTime, 0, 0);
+         
      }
 }
 

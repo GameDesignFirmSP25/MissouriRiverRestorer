@@ -16,16 +16,17 @@ public class TrashCollectionGame : MonoBehaviour
     {
         Time.timeScale = 0f;
         
-        //GameObject panel = GetComponent<GameObject>();
         Panel.SetActive(true);
-        //GameObject startButton = GetComponent<GameObject>();
         StartButton.SetActive(true);
-          //Button Strt = StartBtn.GetComponent<Button>();
           StartBtn.onClick.AddListener(StartGame);
     }
 
-    
-    void Update()// Update is called once per frame
+     private void OnDestroy()
+     {
+          StartBtn.onClick.RemoveListener(StartGame);
+     }
+
+     void Update()// Update is called once per frame
     {
         gameComplete();
     }
