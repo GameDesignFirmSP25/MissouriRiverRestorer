@@ -16,12 +16,12 @@ public class TrashCollectionGame : MonoBehaviour
     {
         Time.timeScale = 0f;
         
-        GameObject panel = GetComponent<GameObject>();
-        panel.SetActive(true);
-        GameObject startButton = GetComponent<GameObject>();
-        startButton.SetActive(true);
-        Button Strt = StartBtn.GetComponent<Button>();
-        Strt.onClick.AddListener(StartGame);
+        //GameObject panel = GetComponent<GameObject>();
+        Panel.SetActive(true);
+        //GameObject startButton = GetComponent<GameObject>();
+        StartButton.SetActive(true);
+          //Button Strt = StartBtn.GetComponent<Button>();
+          StartBtn.onClick.AddListener(StartGame);
     }
 
     
