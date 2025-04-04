@@ -14,7 +14,7 @@ public class TrashCollectionGame : MonoBehaviour
     public GameObject StartButton;
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
-        
+        Time.timeScale = 0f;
         
         GameObject panel = GetComponent<GameObject>();
         panel.SetActive(true);
@@ -31,6 +31,7 @@ public class TrashCollectionGame : MonoBehaviour
     }
     public void StartGame()
     {
+        Time.timeScale = 1f;
         GameScore = 30;
         StartButton.SetActive(false);
         Panel.SetActive(false);
