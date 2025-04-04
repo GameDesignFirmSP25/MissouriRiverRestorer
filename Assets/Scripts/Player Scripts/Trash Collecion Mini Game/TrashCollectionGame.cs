@@ -7,15 +7,15 @@ public class TrashCollectionGame : MonoBehaviour
 {
     
     public int GameScore;
-    
-    public Trashcast trashcastInstance;
+    public bool isgameComplete = false;
+    public Trashcast trashcast;
     public Button StartBtn;
     public GameObject Panel;
     public GameObject StartButton;
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
         
-        GameScore = 30;
+        
         GameObject panel = GetComponent<GameObject>();
         panel.SetActive(true);
         GameObject startButton = GetComponent<GameObject>();
@@ -27,15 +27,22 @@ public class TrashCollectionGame : MonoBehaviour
     
     void Update()// Update is called once per frame
     {
-        
+        gameComplete();
     }
     public void StartGame()
     {
+        GameScore = 30;
         StartButton.SetActive(false);
         Panel.SetActive(false);
-        if (Trashcast.playerScore == GameScore)
+       
+    }
+    public void gameComplete()
+    {
+         if (trashcast.playerScore >= GameScore &&! isgameComplete)
             {
                 Debug.Log("Trash Collected");
+                isgameComplete = true;
+                // add panel to pop up
             }
     }
 }
