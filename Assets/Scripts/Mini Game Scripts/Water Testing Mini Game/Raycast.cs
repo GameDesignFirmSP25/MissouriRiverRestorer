@@ -6,29 +6,33 @@ public class Raycast : MonoBehaviour
 {
     public Camera _mainCamera;
 
-    private Ray _ray;
-    private RaycastHit _hit;
+    private Ray ray;
+    private RaycastHit hit;
 
     public bool riverClicked = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    private void Update()
     {
-        _mainCamera = Camera.main;
+        RiverClicked();
     }
 
     public void RiverClicked() // Raycast to detect when the mouse clicks the River
     {
-        // Detect mouse click.
+        // Detect left mouse click.
         if (Input.GetMouseButtonDown(0))
         {
             
-            _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(_ray, out _hit))
+            if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("River Clicked");
-                riverClicked = true; // Set bool riverClicked to true
+                // Check if the clicked object has the "River" tag
+                if (hit.collider.CompareTag("River"))
+                {
+                    Debug.Log("River Clicked");
+                    riverClicked = true; // Set bool riverClicked to true
+                }
+                
             }
         }
     }

@@ -10,15 +10,22 @@ public class WaterTestingManager : MonoBehaviour
     private GameObject testingInstructions;
 
     [SerializeField]
-    private GameObject poorWaterQualityText;
+    private GameObject poorWaterQualityPanel;
 
     [SerializeField]
-    private GameObject goodWaterQualityText;
+    private GameObject goodWaterQualityPanel;
 
     [SerializeField]
     private GameObject progressBar;
 
+    [SerializeField]
+    private GameObject introductionPanel;
+
+    [SerializeField]
+    private GameObject StartButton;
+
     private Slider slider;
+    public Button StartBtn;
     public Raycast riverScript;
     public ProgressBar progressBarScript;
 
@@ -27,7 +34,7 @@ public class WaterTestingManager : MonoBehaviour
     private float pressDuration;
     private float targetProgress = 1f;
     private float loadingTime = 3f;
-
+    
     public bool isPressed = false;
     public static bool isWaterQualityGood = false;
     public static bool isWaterCollected = false;
@@ -35,50 +42,78 @@ public class WaterTestingManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Cursor.visible = true; // Set Cursor to be visible
-        testingInstructions.SetActive(true); // Enable water testing instructions text
-        poorWaterQualityText.SetActive(false); // Disable poor water quality text
-        goodWaterQualityText.SetActive(false); // Disable good water quality text
-
         // Get Slider component on Progress Bar
         progressBar = GameObject.Find("Progress Bar");
         slider = progressBar.GetComponent<Slider>();
 
+        Cursor.visible = true; // Set Cursor to be visible
+        SwitchUI();
+        Time.timeScale = 0f; // Freezes time
+        if (!TestTransitionsGameManager.isTrashCollected)
+        {
+            introductionPanel.SetActive(true); // Set Panel to active
+            StartButton.SetActive(true); // Set StartButton to active
+            StartBtn.onClick.AddListener(StartGame);
+        }
+        
+
+        // If bool isTrashCollected and isFloraPlanted are true...
         if (TestTransitionsGameManager.isTrashCollected && TestTransitionsGameManager.isFloraPlanted)
         {
-            isWaterQualityGood = true;
+            isWaterQualityGood = true; // Set bool isWaterQualityGood to true
         }
     }
 
     // Update is called once per frame
     public void Update()
-    {
-        // call RiverClicked method from Raycast.cs
-        riverScript.RiverClicked();
-        
-        // if RiverClicked method runs...
+    {   
+        // If bool riverClicked is true...
         if (riverScript.riverClicked) 
         {
-            // if the value on the slider component is less than the targetProgress variable...
+            // If the value on the slider component is less than the targetProgress variable...
             if (slider.value < targetProgress)
             {
                 CollectWater(); // call CollectWater method
             }
         }
 
-        // if slider value is equal to targetProgress variable and bool isWaterQualityGood is false...
+        // If slider value is equal to targetProgress variable and bool isWaterQualityGood is false...
         if (slider.value == targetProgress && !isWaterQualityGood)
         {
             PoorWaterQuality();
         }
 
-        // if slider value is equal to targetProgress variable and bool isWaterQuality...
+        // If slider value is equal to targetProgress variable and bool isWaterQuality...
         if (slider.value == targetProgress && isWaterQualityGood)
         {
             GoodWaterQuality();
         }
     }
-    
+
+    // Start game
+    public void StartGame()
+    {
+        Time.timeScale = 1f; // Unfreeze time
+        StartButton.SetActive(false); // Set StartButton to not active
+        introductionPanel.SetActive(false); // Set Panel to not active
+        testingInstructions.SetActive(true); // Enable water testing instructions text
+        progressBar.SetActive(true); // Enable Progress bar
+        
+    }
+
+    private void OnDestroy()
+    {
+        StartBtn.onClick.RemoveListener(StartGame);
+    }
+
+    private void SwitchUI()
+    {
+        testingInstructions.SetActive(false); // Disable testing intsructions
+        progressBar.SetActive(false); // Disable Progress bar
+        poorWaterQualityPanel.SetActive(false); // Disable poor water quality text
+        goodWaterQualityPanel.SetActive(false); // Disable good water quality text
+    }
+
     // Collect water
     public void CollectWater()
     {
@@ -109,7 +144,7 @@ public class WaterTestingManager : MonoBehaviour
     // Invoke Progress Bar
     public void InvokeProgressBar()
     {
-        progressBarScript.IncrementProgress(0.1f); // Add progress to progress bar in increments of 0.1
+        progressBarScript.IncrementProgress(0.05f); // Add progress to progress bar in increments of 0.05
     }
 
     // Load trash collection mini game scene
@@ -126,7 +161,7 @@ public class WaterTestingManager : MonoBehaviour
 
     public void PoorWaterQuality()
     {
-        poorWaterQualityText.SetActive(true);// Enable poor water quality text
+        poorWaterQualityPanel.SetActive(true);// Enable poor water quality text
         progressBar.SetActive(false);// Disable progress bar
         testingInstructions.SetActive(false); // Disable water testing instructions text
         Invoke("LoadToTrashCollection", loadingTime); // Invoke method LoadToTrashCollection after loadingTime (in seconds)
@@ -134,7 +169,7 @@ public class WaterTestingManager : MonoBehaviour
 
     public void GoodWaterQuality()
     {
-        goodWaterQualityText.SetActive(true);// Enable poor water quality text
+        goodWaterQualityPanel.SetActive(true);// Enable poor water quality text
         progressBar.SetActive(false);// Disable progress bar
         testingInstructions.SetActive(false); // Disable water testing instructions text
         Invoke("LoadToMainScene", loadingTime); // Invoke method LoadToMainScene after loadingTime (in seconds)

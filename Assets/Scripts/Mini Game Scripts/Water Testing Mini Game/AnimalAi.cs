@@ -5,23 +5,29 @@ using System.Collections.Generic;
 
 public class AnimalAi : MonoBehaviour
 {
-    public List<GameObject> destinationPoints;
-
-    private GameObject randomDestinationPoint;
-
     private NavMeshAgent agent;
-
+    private Transform target;
+    
     public float radius;
+    private float timer;
     private float waitTime = 10f;
     private float waitCounter = 0f;
+    //private float minimumX = -285f;
+    //private float maximumX = 240f;
+    //private float yPosition = 0f;
+    //private float minimumZ = -20f;
+    //private float maximumZ = 226f;
+    private float wanderRadius = 40f;
+    private float wanderTimer = 10f;
 
-    public bool isWaiting = false;
+    public bool isWaiting = true;
     public bool isWalking = false;
 
     private void Start()
     {
         // Get the NavMeshAgent component
         agent = GetComponent<NavMeshAgent>();
+        timer = wanderTimer;
 
         // If agent is null...
         if (agent == null)
@@ -29,24 +35,38 @@ public class AnimalAi : MonoBehaviour
             Debug.LogError("Nav Mesh Agent is Null."); // Debug.Log error 
         }
 
-        SetDestinationPoint();
-        isWalking = true; // Set bool isWalking to true
+        //// Set transform position to new Vector3 within specified range
+        //transform.position = new Vector3(Random.Range(minimumX, maximumX), yPosition, Random.Range(minimumZ, maximumZ));   
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        AnimalMovement();
+        timer += Time.deltaTime; // timer is equal to itslef plus Time.deltaTime 
+
+        // If timer is greater than or equal to wanderTimer...
+        if (timer >= wanderTimer)
+        {
+            Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1); // newPos is equal to 
+            agent.SetDestination(newPos);
+            timer = 0;
+            isWalking = true;
+            isWaiting = false;
+            AnimalMovement();
+        }
     }
 
-    // Set Destination point
-    private void SetDestinationPoint()
+    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
-        int randomIndex = Random.Range(0, destinationPoints.Count); // Get a random index
+        Vector3 randDirection = Random.insideUnitSphere * dist;
 
-        GameObject randomDestinationPoint = destinationPoints[randomIndex]; // Access the destination point at the random index
-        Debug.Log("Random Destination Point: " + randomDestinationPoint.transform.position); // Debug.Log the position of the random destination point
+        randDirection += origin;
 
-        agent.SetDestination(randomDestinationPoint.transform.position); // Set Destination point
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+        return navHit.position;
     }
 
     // Controls animal movement
@@ -55,7 +75,6 @@ public class AnimalAi : MonoBehaviour
         // If bool isWalking is true...
         if (isWalking)
         {
-            waitCounter = 0f; // Set wait counter back to 0
             isWalking = false; // Set bool isWalking to true
             isWaiting = true; // Set bool isWaiting to false
         }
@@ -67,13 +86,6 @@ public class AnimalAi : MonoBehaviour
             if (waitCounter < waitTime) // If wait counter is less than wait time...
                 return;
             isWaiting = false; // Set bool isWaiting to false
-        }
-
-        // If bool isWalking and isWaiting are both false...
-        if (!isWalking && !isWaiting)
-        {
-            SetDestinationPoint();
-            isWalking = true; // Set bool isWalking to true
         }
     }
 
