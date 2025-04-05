@@ -38,7 +38,8 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        OnTrashDestroyed();
+        OnFishDestroyed();
     }
     // Spawn trash on the ground
     private void SpawnTrashOnGround()
@@ -67,6 +68,7 @@ public class SpawnManager : MonoBehaviour
                 int trashInRiverIndex = Random.Range(0, trashInRiverPrefabs.Length); // trashInRiverIndex equals a number with in range of 0 to 1
                 Instantiate(trashInRiverPrefabs[trashInRiverIndex], new Vector3(xPositionInRiver, yPositionInRiver,
                     Random.Range(minimumZInRiver, maximumZInRiver)), trashInRiverPrefabs[trashInRiverIndex].transform.rotation); // Instantiate trashInRiverPrefab at trashInRiverIndex at new Vector3
+                trashInRiverPrefabs[trashInRiverIndex].gameObject.tag = "Destructible";
                 spawnedTrashInRiverCount++; // spawnedTrashInRiverCount equals itself plus 1
             }
         }
@@ -86,7 +88,6 @@ public class SpawnManager : MonoBehaviour
                     fishPrefabs[fishIndex].transform.rotation); // Instantiate fishPrefab at fishIndex at new Vector3
                 spawnedFishInRiverCount++; // spawnedFishInRiverCount equals itself plus 1
             }
-
         }
 
         // If bool isTrashCollected is true...
@@ -108,6 +109,14 @@ public class SpawnManager : MonoBehaviour
         if (spawnedTrashInRiverCount > 0)
         {
             spawnedTrashInRiverCount--;
+        }
+    }
+
+    public void OnFishDestroyed()
+    {
+        if (spawnedFishInRiverCount > 0)
+        {
+            spawnedFishInRiverCount--;
         }
     }
 }

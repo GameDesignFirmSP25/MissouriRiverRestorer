@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class Trash : MonoBehaviour
 {
     private float speed;
-    private float minimumSpeed = 5f;
-    private float maximumSpeed = 15f;
+    private float minimumSpeed = 12f;
+    private float maximumSpeed = 25f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
