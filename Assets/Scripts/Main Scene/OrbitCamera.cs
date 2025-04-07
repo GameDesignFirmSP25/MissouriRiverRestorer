@@ -12,8 +12,9 @@ public class OrbitCamera : MonoBehaviour
           transform.position = target.position;
           float mouseX = Input.GetAxis("Mouse X");
 
+          // Not needed at this time. Leaving the zombie code in, in case we want to turn it back on later
           // Rotate the target based on the mouse X axis
-          transform.Rotate(0, mouseX * rotationSpeed * Time.deltaTime, 0);
+          // transform.Rotate(0, mouseX * rotationSpeed * Time.deltaTime, 0);
 
           // Enable this for angle clamping. If we decide we want a fixed view
 /*          if(transform.rotation.eulerAngles.y < 180 && transform.rotation.eulerAngles.y > angleClamp)
