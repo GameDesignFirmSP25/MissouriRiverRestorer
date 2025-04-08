@@ -203,7 +203,7 @@ public class WaterTestingManager : MonoBehaviour
     // Load main scene
     public void LoadToMainScene()
     {
-        SceneManager.LoadScene("Main Scene"); // Load scene "Main Scene"
+        SceneManager.LoadScene("Overworld Transition Testing"); // Load scene "Main Scene"
     }
 
 
