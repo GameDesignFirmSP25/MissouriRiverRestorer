@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneTransistion : MonoBehaviour
+public class SceneTransition : MonoBehaviour
 {
      [SerializeField]
      public string targetSceneName;
