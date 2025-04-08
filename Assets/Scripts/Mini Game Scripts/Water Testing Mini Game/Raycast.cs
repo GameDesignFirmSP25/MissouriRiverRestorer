@@ -10,6 +10,7 @@ public class Raycast : MonoBehaviour
     private RaycastHit hit;
 
     public bool riverClicked = false;
+    public static bool isClickable = false;
 
     private void Update()
     {
@@ -18,21 +19,23 @@ public class Raycast : MonoBehaviour
 
     public void RiverClicked() // Raycast to detect when the mouse clicks the River
     {
-        // Detect left mouse click.
-        if (Input.GetMouseButtonDown(0))
+        if (isClickable)
         {
-            
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
+            // Detect left mouse click.
+            if (Input.GetMouseButtonDown(0))
             {
-                // Check if the clicked object has the "River" tag
-                if (hit.collider.CompareTag("River"))
+
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Debug.Log("River Clicked");
-                    riverClicked = true; // Set bool riverClicked to true
+                    // Check if the clicked object has the "River" tag
+                    if (hit.collider.CompareTag("River"))
+                    {
+                        Debug.Log("River Clicked");
+                        riverClicked = true; // Set bool riverClicked to true
+                    }
                 }
-                
             }
         }
     }
