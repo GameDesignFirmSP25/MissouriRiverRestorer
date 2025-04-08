@@ -194,11 +194,11 @@ public class WaterTestingManager : MonoBehaviour
         progressBarScript.IncrementProgress(progressIncrement); // Add progress to progress bar in increments of progressIncrement
     }
 
-    // Load trash collection mini game scene
-    public void LoadToTrashCollection()
-    {
-        SceneManager.LoadScene("Test Transitions (water testing mini game)"); //Load scene "Test Transitions (water testing mini game)"
-    }
+    //// Load trash collection mini game scene
+    //public void LoadToTrashCollection()
+    //{
+    //    SceneManager.LoadScene("Test Transitions (water testing mini game)"); //Load scene "Test Transitions (water testing mini game)"
+    //}
 
     // Load main scene
     public void LoadToMainScene()
@@ -281,8 +281,8 @@ public class WaterTestingManager : MonoBehaviour
         // If cleanWaterPanelActive is false and isFirstWaterTestComplete is true...
         if (!cleanWaterPanelActive && isFirstWaterTestComplete)
         {
-            Invoke("LoadToTrashCollection", loadingTime); // Invoke method LoadToTrashCollection after loadingTime (in seconds)
-            Debug.Log("Load to Trash Collection"); // Debug.Log message "Load to Trash Collection"
+            Invoke("LoadToMainScene", loadingTime); // Invoke method LoadToMainScene after loadingTime (in seconds)
+            Debug.Log("Load to Main Scene"); // Debug.Log message "Load to Main Scene"
             readyToTransition = true;
         }
 
