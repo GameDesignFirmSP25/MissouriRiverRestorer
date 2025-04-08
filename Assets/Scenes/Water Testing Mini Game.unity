@@ -591,7 +591,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &149216999
 MonoBehaviour:
@@ -640,10 +640,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 149216996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5a7be68df92f84a9950fb7146b8c77, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c287e022569df44ba78f63c0540ede0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPanelClicked: 0
+  isGreatJobPanelClicked: 0
 --- !u!4 &199874568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0138b0249b6782644814c572fe0604fd, type: 3}
@@ -3676,9 +3676,11 @@ MonoBehaviour:
   riverScript: {fileID: 987259332}
   progressBarScript: {fileID: 517747200}
   cleanWaterPanelScript: {fileID: 1791100705}
+  greatJobPanelScript: {fileID: 149217001}
   isPressed: 0
   isWaterCollected: 0
   isMiniGameOver: 0
+  readyToTransition: 0
 --- !u!4 &1444597321 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443677457605652680, guid: 30f6e4f565aeebc499eadc555532a34d, type: 3}
@@ -4331,10 +4333,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1791100700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5a7be68df92f84a9950fb7146b8c77, type: 3}
+  m_Script: {fileID: 11500000, guid: c55307f2ebe82b64d930338ac4894dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPanelClicked: 0
+  isCleanWaterPanelClicked: 0
 --- !u!1 &1791378518
 GameObject:
   m_ObjectHideFlags: 0
