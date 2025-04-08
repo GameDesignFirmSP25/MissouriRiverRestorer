@@ -37,7 +37,8 @@ public class WaterTestingManager : MonoBehaviour
     public Button StartBtn;
     public Raycast riverScript;
     public ProgressBar progressBarScript;
-    public PanelClickHandler cleanWaterPanelScript;
+    public CleanWaterPanelClickHandler cleanWaterPanelScript;
+    public GreatJobPanelClickHandler greatJobPanelScript;
 
     private float startTime;
     private float endTime;
@@ -52,6 +53,7 @@ public class WaterTestingManager : MonoBehaviour
     public bool isPressed = false;
     public bool isWaterCollected = false;
     public bool isMiniGameOver = false;
+    public bool readyToTransition = false;
     public static bool cleanWaterPanelActive = false;
     public static bool greatJobPanelActive = false;
     public static bool isWaterQualityGood = false;
@@ -124,6 +126,7 @@ public class WaterTestingManager : MonoBehaviour
         StartButton.SetActive(false); // Set StartButton to not active
         testingInstructions.SetActive(true); // Enable water testing instructions text
         progressBar.SetActive(true); // Enable Progress bar
+        Raycast.isClickable = true; // Set bool isClickable to true
 
         // If isFirstWaterTestComplete is false...
         if (!isFirstWaterTestComplete)
@@ -215,15 +218,15 @@ public class WaterTestingManager : MonoBehaviour
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isFirstWaterTestComplete = true; // Set bool isFirstWaterTestComplete to true
 
-            // If isMiniGameOver is true and isPanelClicked is false...
-            if (isMiniGameOver && !cleanWaterPanelScript.isPanelClicked)
+            // If isMiniGameOver is true and isCleanWaterPanelClicked is false...
+            if (isMiniGameOver && !cleanWaterPanelScript.isCleanWaterPanelClicked)
             {
                 Invoke("ShowCleanWaterPanel", showPanel); // Invoke method ShowCleanWaterPanel after showPanel (in seconds)
             }
         }
 
-        // If isMiniGameOver and isPanelClicked is true...
-        if (isMiniGameOver && cleanWaterPanelScript.isPanelClicked)
+        // If isMiniGameOver and isCleanWaterPanelClicked is true...
+        if (isMiniGameOver && cleanWaterPanelScript.isCleanWaterPanelClicked && !readyToTransition)
         {
             EndMiniGame();
         }
@@ -242,15 +245,15 @@ public class WaterTestingManager : MonoBehaviour
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
             isSecondWaterTestComplete = true; // Set bool isSecondWaterTestComplete to true
 
-            // If isMiniGameOver is true and isPanelClicked is false...
-            if (isMiniGameOver && !cleanWaterPanelScript.isPanelClicked)
+            // If isMiniGameOver is true and isGreatJobPanelClicked is false...
+            if (isMiniGameOver && !greatJobPanelScript.isGreatJobPanelClicked)
             {
                 Invoke("ShowGreatJobPanel", showPanel); // Invoke method ShowCleanWaterPanel after showPanel (in seconds)
             }
         }
 
-        // If isMiniGameOver and isPanelClicked is true...
-        if (isMiniGameOver && cleanWaterPanelScript.isPanelClicked)
+        // If isMiniGameOver and isPanelGreatJobClicked is true...
+        if (isMiniGameOver && greatJobPanelScript.isGreatJobPanelClicked && !readyToTransition)
         {
             EndMiniGame();
         }
@@ -280,6 +283,7 @@ public class WaterTestingManager : MonoBehaviour
         {
             Invoke("LoadToTrashCollection", loadingTime); // Invoke method LoadToTrashCollection after loadingTime (in seconds)
             Debug.Log("Load to Trash Collection"); // Debug.Log message "Load to Trash Collection"
+            readyToTransition = true;
         }
 
         // If greatJobActive is false and isSecondWaterTestComplete is true
@@ -287,6 +291,7 @@ public class WaterTestingManager : MonoBehaviour
         {
             Invoke("LoadToMainScene", loadingTime); // Invoke method LoadToMainScene after loadingTime (in seconds)
             Debug.Log("Load to Main Scene"); // Debug.Log message "Load to Main Scene"
+            readyToTransition = true;
         }
     }
 }
