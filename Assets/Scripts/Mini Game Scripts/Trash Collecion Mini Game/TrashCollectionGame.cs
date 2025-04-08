@@ -61,7 +61,7 @@ public class TrashCollectionGame : MonoBehaviour
     public void Home() 
     {
         endbtn.onClick.RemoveListener(Home);
-        SceneManager.LoadScene("Main Scene");
+        SceneManager.LoadScene(0);
 
     }
 
