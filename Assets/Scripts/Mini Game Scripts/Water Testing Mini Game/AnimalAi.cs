@@ -12,11 +12,6 @@ public class AnimalAi : MonoBehaviour
     private float timer;
     private float waitTime = 10f;
     private float waitCounter = 0f;
-    //private float minimumX = -285f;
-    //private float maximumX = 240f;
-    //private float yPosition = 0f;
-    //private float minimumZ = -20f;
-    //private float maximumZ = 226f;
     private float wanderRadius = 40f;
     private float wanderTimer = 10f;
 
@@ -33,10 +28,7 @@ public class AnimalAi : MonoBehaviour
         if (agent == null)
         {
             Debug.LogError("Nav Mesh Agent is Null."); // Debug.Log error 
-        }
-
-        //// Set transform position to new Vector3 within specified range
-        //transform.position = new Vector3(Random.Range(minimumX, maximumX), yPosition, Random.Range(minimumZ, maximumZ));   
+        }  
     }
 
     // Update is called once per frame
@@ -48,10 +40,10 @@ public class AnimalAi : MonoBehaviour
         if (timer >= wanderTimer)
         {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1); // newPos is equal to 
-            agent.SetDestination(newPos);
-            timer = 0;
-            isWalking = true;
-            isWaiting = false;
+            agent.SetDestination(newPos); // Set destiantion of agent to newPos
+            timer = 0; // Set timer to 0
+            isWalking = true; // Set bool isWalking to true
+            isWaiting = false; // Set bool isWaiting to false
             AnimalMovement();
         }
     }

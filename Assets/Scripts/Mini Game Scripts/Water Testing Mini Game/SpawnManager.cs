@@ -15,8 +15,8 @@ public class SpawnManager : MonoBehaviour
     private int maximumFishInRiver = 20;
     private int spawnedFishInRiverCount = 0;
 
-    private float spawnTime = 0.5f;
-    private float spawnDelay = 5f;
+    private float spawnTime = 0.05f;
+    private float spawnDelay = 2.5f;
     private float minimumXOnGround = -285f;
     private float maximumXOnGround = 240f;
     private float yPositionOnGround = 0f;
@@ -44,6 +44,7 @@ public class SpawnManager : MonoBehaviour
     // Spawn trash on the ground
     private void SpawnTrashOnGround()
     {
+        // For, i equals 0, i is less than numberOfTrashOnGroundToSpawn; when called i is equal to itself plus 1
         for (int i = 0; i < numberOfTrashOnGroundToSpawn; i++)
         {
             // If bool isTrashCollected is false...
@@ -68,7 +69,7 @@ public class SpawnManager : MonoBehaviour
                 int trashInRiverIndex = Random.Range(0, trashInRiverPrefabs.Length); // trashInRiverIndex equals a number with in range of 0 to 1
                 Instantiate(trashInRiverPrefabs[trashInRiverIndex], new Vector3(xPositionInRiver, yPositionInRiver,
                     Random.Range(minimumZInRiver, maximumZInRiver)), trashInRiverPrefabs[trashInRiverIndex].transform.rotation); // Instantiate trashInRiverPrefab at trashInRiverIndex at new Vector3
-                trashInRiverPrefabs[trashInRiverIndex].gameObject.tag = "Destructible";
+                trashInRiverPrefabs[trashInRiverIndex].gameObject.tag = "Destructible"; // Set tag for all trashInRiverPrefabs within trshInRiverIndex to "Destructible"
                 spawnedTrashInRiverCount++; // spawnedTrashInRiverCount equals itself plus 1
             }
         }
@@ -104,19 +105,23 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    // Call method when trash is destroyed
     public void OnTrashDestroyed()
     {
+        // If spawnedTrashInRiverCount is greater than zero...
         if (spawnedTrashInRiverCount > 0)
         {
-            spawnedTrashInRiverCount--;
+            spawnedTrashInRiverCount--; // spawnedTrashInRiverCount is equal to itself minus 1
         }
     }
 
+    // Call method with fish are destroyed
     public void OnFishDestroyed()
     {
+        // If spawnedFishInRiverCount is greater than zero...
         if (spawnedFishInRiverCount > 0)
         {
-            spawnedFishInRiverCount--;
+            spawnedFishInRiverCount--; // spawnedFishInRiverCount is equal to itself minus 1
         }
     }
 }
