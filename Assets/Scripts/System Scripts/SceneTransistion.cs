@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 public class SceneTransistion : MonoBehaviour
 {
      [SerializeField]
-     public Object transitionScene;
+     public string targetSceneName;
 
      private void OnTriggerEnter(Collider other)
      {
           if(other.tag == "Player")
           {
-               TransitionScene(transitionScene.name);
+               TransitionScene(targetSceneName);
           }
      }
 
