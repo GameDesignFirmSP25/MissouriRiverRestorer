@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,19 +23,19 @@ public class PlayerController : MonoBehaviour
           Vector3 move = new Vector3(moveX, gravity, moveZ);
 
           // Normalize the movement vector to maintain consistent speed diagonally
-          if (move.magnitude > 1)
-        {
-            move.Normalize();
-        }
+          if (move.magnitude > 1) move.Normalize();
 
         // Move the player
-        //transform.Translate(move * moveSpeed * Time.deltaTime, Space.World);
           if(move != Vector3.zero)
           {
                controller.Move(move * moveSpeed * Time.deltaTime);
-               transform.rotation = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+
+               Vector3 lookRotVector = new Vector3(move.x, 0, move.z);
+               if(lookRotVector != Vector3.zero)
+               {
+                    transform.rotation = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+               }
           }
-          
      }
 }
 
