@@ -87,7 +87,7 @@ public class WaterTestingManager : MonoBehaviour
         }
         
         // If bool isTrashCollected and isFloraPlanted are true...
-        if (TestTransitionsGameManager.isTrashCollected && TestTransitionsGameManager.isFloraPlanted)
+        if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
         }
