@@ -7,8 +7,10 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] trashOnGroundPrefabs;
     public GameObject[] trashInRiverPrefabs;
     public GameObject[] fishPrefabs;
+    public GameObject[] mammalPrefabs;
 
-    private int numberOfTrashOnGroundToSpawn = 15;
+    private int numberOfMammalsToSpawn = 7;
+    private int numberOfTrashOnGroundToSpawn = 30;
     private int maximumTrashInRiver = 20;
     private int spawnedTrashInRiverCount = 0;
     private int minimumFishInRiver = 8;
@@ -30,9 +32,21 @@ public class SpawnManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SpawnTrashOnGround();
-        InvokeRepeating("SpawnTrashInRiver", spawnTime, spawnDelay); // repeatedly invoke SpawnTrashInRiver()
-        InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+        if (!WaterTestingManager.isFirstWaterTestComplete)
+        {
+            SpawnMammals();
+            SpawnTrashOnGround();
+            InvokeRepeating("SpawnTrashInRiver", spawnTime, spawnDelay); // repeatedly invoke SpawnTrashInRiver()
+            InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+        }
+
+        if (WaterTestingManager.isFirstWaterTestComplete)
+        {
+            spawnDelay = 1f;
+            numberOfMammalsToSpawn = 20;
+            SpawnMammals();
+            InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+        }
     }
 
     // Update is called once per frame
@@ -41,45 +55,50 @@ public class SpawnManager : MonoBehaviour
         OnTrashDestroyed();
         OnFishDestroyed();
     }
+
+    // Spawn Mammals
+    private void SpawnMammals()
+    {
+        // For, i equals 0, i is less than numberOfTrashOnGroundToSpawn; when called i is equal to itself plus 1
+        for (int i = 0; i < numberOfMammalsToSpawn; i++)
+        {
+            int mammalIndex = Random.Range(0, mammalPrefabs.Length); // mammalIndex equals a number with in range of 0 to 2
+            Instantiate(mammalPrefabs[mammalIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGround, Random.Range(minimumZOnGround, maximumZOnGround)), mammalPrefabs[mammalIndex].transform.rotation); // Instantiate mammalPrefab at mammalIndex at new Vector3
+        }
+    }
+
     // Spawn trash on the ground
     private void SpawnTrashOnGround()
     {
         // For, i equals 0, i is less than numberOfTrashOnGroundToSpawn; when called i is equal to itself plus 1
         for (int i = 0; i < numberOfTrashOnGroundToSpawn; i++)
         {
-            // If bool isTrashCollected is false...
-            if (!TestTransitionsGameManager.isTrashCollected)
-            {
-                int trashOnGroundIndex = Random.Range(0, trashOnGroundPrefabs.Length); // trashOnGroundIndex equals a number with in range of 0 to 2
-                Instantiate(trashOnGroundPrefabs[trashOnGroundIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
-                    yPositionOnGround, Random.Range(minimumZOnGround, maximumZOnGround)), trashOnGroundPrefabs[trashOnGroundIndex].transform.rotation); // Instantiate trashOnGroundPrefab at trashOnGroundIndex at new Vector3
-            }
+            int trashOnGroundIndex = Random.Range(0, trashOnGroundPrefabs.Length); // trashOnGroundIndex equals a number with in range of 0 to 2
+            Instantiate(trashOnGroundPrefabs[trashOnGroundIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGround, Random.Range(minimumZOnGround, maximumZOnGround)), trashOnGroundPrefabs[trashOnGroundIndex].transform.rotation); // Instantiate trashOnGroundPrefab at trashOnGroundIndex at new Vector3
         }
     }
 
     // Spawn trash in the river
     private void SpawnTrashInRiver()
     {
-        // If bool isTrashCollected is false...
-        if (!TestTransitionsGameManager.isTrashCollected)
+        // If spawnedTrashInRiverCount is less than maximumTrashInRiver...
+        if (spawnedTrashInRiverCount < maximumTrashInRiver)
         {
-            // If spawnedTrashInRiverCount is less than maximumTrashInRiver...
-            if (spawnedTrashInRiverCount < maximumTrashInRiver)
-            {
-                int trashInRiverIndex = Random.Range(0, trashInRiverPrefabs.Length); // trashInRiverIndex equals a number with in range of 0 to 1
-                Instantiate(trashInRiverPrefabs[trashInRiverIndex], new Vector3(xPositionInRiver, yPositionInRiver,
-                    Random.Range(minimumZInRiver, maximumZInRiver)), trashInRiverPrefabs[trashInRiverIndex].transform.rotation); // Instantiate trashInRiverPrefab at trashInRiverIndex at new Vector3
-                trashInRiverPrefabs[trashInRiverIndex].gameObject.tag = "Destructible"; // Set tag for all trashInRiverPrefabs within trshInRiverIndex to "Destructible"
-                spawnedTrashInRiverCount++; // spawnedTrashInRiverCount equals itself plus 1
-            }
+            int trashInRiverIndex = Random.Range(0, trashInRiverPrefabs.Length); // trashInRiverIndex equals a number with in range of 0 to 1
+            Instantiate(trashInRiverPrefabs[trashInRiverIndex], new Vector3(xPositionInRiver, yPositionInRiver,
+                Random.Range(minimumZInRiver, maximumZInRiver)), trashInRiverPrefabs[trashInRiverIndex].transform.rotation); // Instantiate trashInRiverPrefab at trashInRiverIndex at new Vector3
+            trashInRiverPrefabs[trashInRiverIndex].gameObject.tag = "Destructible"; // Set tag for all trashInRiverPrefabs within trshInRiverIndex to "Destructible"
+            spawnedTrashInRiverCount++; // spawnedTrashInRiverCount equals itself plus 1
         }
     }
 
     // Spawn fish in the river
     private void SpawnFish()
     {
-        // If bool isTrashCollected is false...
-        if (!TestTransitionsGameManager.isTrashCollected)
+        // If bool isFirstWaterTestComplete is false...
+        if (!WaterTestingManager.isFirstWaterTestComplete)
         {
             // If spawnedFishInRiverCount is less than minimumFishInRiver...
             if (spawnedFishInRiverCount < minimumFishInRiver)
@@ -91,8 +110,8 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        // If bool isTrashCollected is true...
-        if (TestTransitionsGameManager.isTrashCollected)
+        // If bool isFirstWaterTestComplete is true...
+        if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
         {
             // If spawnedFishInRiverCount is less than maximumFishInRiver...
             if (spawnedFishInRiverCount < maximumFishInRiver)
@@ -105,8 +124,8 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // Call method when trash is destroyed
-    public void OnTrashDestroyed()
+    // Method to call when trash is destroyed
+    private void OnTrashDestroyed()
     {
         // If spawnedTrashInRiverCount is greater than zero...
         if (spawnedTrashInRiverCount > 0)
@@ -115,7 +134,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // Call method with fish are destroyed
+    // Method to call when fish are destroyed
     public void OnFishDestroyed()
     {
         // If spawnedFishInRiverCount is greater than zero...

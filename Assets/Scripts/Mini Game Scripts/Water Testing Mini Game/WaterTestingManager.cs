@@ -33,6 +33,12 @@ public class WaterTestingManager : MonoBehaviour
     [SerializeField]
     private GameObject greatJobPanel;
 
+    [SerializeField]
+    private GameObject biodiversityPanel;
+
+    [SerializeField]
+    private GameObject lookAtTrashPanel;
+
     private Slider slider;
     public Button StartBtn;
     public Raycast riverScript;
@@ -44,11 +50,13 @@ public class WaterTestingManager : MonoBehaviour
     private float endTime;
     private float pressDuration;
     private float targetProgress = 1f;
-    private float loadingTime = 3f;
+    private float loadingTime = 0f;
     private float showPanel = 3f;
     private float waitTime = 0f;
     private float repeatRate = 1.0f;
     private float progressIncrement = 0.05f;
+    private float panelTimer = 15f;
+    private float disableTime = 5f;
     
     public bool isPressed = false;
     public bool isWaterCollected = false;
@@ -56,6 +64,8 @@ public class WaterTestingManager : MonoBehaviour
     public bool readyToTransition = false;
     public static bool cleanWaterPanelActive = false;
     public static bool greatJobPanelActive = false;
+    public static bool lookAtTrashPanelActive = false;
+    public static bool biodiversityPanelActive = false;
     public static bool isWaterQualityGood = false;
     public static bool isFirstWaterTestComplete = false;
     public static bool isSecondWaterTestComplete = false;
@@ -94,8 +104,8 @@ public class WaterTestingManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Update()
-    {   
+    void Update()
+    {
         // If bool riverClicked is true...
         if (riverScript.riverClicked) 
         {
@@ -120,13 +130,15 @@ public class WaterTestingManager : MonoBehaviour
     }
 
     // Start game
-    public void StartGame()
+    private void StartGame()
     {
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
         testingInstructions.SetActive(true); // Enable water testing instructions text
+        Invoke("TestingInstructions", disableTime);
         progressBar.SetActive(true); // Enable Progress bar
         Raycast.isClickable = true; // Set bool isClickable to true
+        StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
 
         // If isFirstWaterTestComplete is false...
         if (!isFirstWaterTestComplete)
@@ -141,8 +153,13 @@ public class WaterTestingManager : MonoBehaviour
         }
     }
 
+    //Method for disabling testing instructions
+    private void TestingInstructions()
+    {
+        testingInstructions.SetActive(false); // Disable testingInstructions
+    }
 
-    // On destroy
+    // Method  called On destroy
     private void OnDestroy()
     {
         StartBtn.onClick.RemoveListener(StartGame); // when panel is clicked remove listener StartGame
@@ -158,11 +175,12 @@ public class WaterTestingManager : MonoBehaviour
         greatJobPanel.SetActive(false); // Disable great job panel
         firstIntroductionPanel.SetActive(false); // Disable first intro panel 
         secondIntroductionPanel.SetActive(false); // Disable first intro panel 
-
+        lookAtTrashPanel.SetActive(false); // Disable look at trash panel
+        biodiversityPanel.SetActive(false); // Disable biodiversity panel
     }
 
     // Collect water
-    public void CollectWater()
+    private void CollectWater()
     {
         // If left mouse button is down and isPressed is false...
         if (Input.GetMouseButtonDown(0) && !isPressed) 
@@ -171,7 +189,7 @@ public class WaterTestingManager : MonoBehaviour
             isPressed = true; // Set bool isPressed to true
             startTime = Time.time; // startTime is stored
             InvokeRepeating("InvokeProgressBar", waitTime , repeatRate); // add progress to bar at repeatRate (in seconds) after waitTime (in seconds)
-            testingInstructions.SetActive(false); // Disable water testing instructions text
+            // testingInstructions.SetActive(false); // Disable water testing instructions text
         }
 
         // If left mouse button is down and isPressed is true...
@@ -183,33 +201,26 @@ public class WaterTestingManager : MonoBehaviour
             isPressed = false; // Set bool isPressed to false
             isWaterCollected = false; // Set bool isWaterCollected to false
             riverScript.riverClicked = false; // Set bool riverClicked to false
-            testingInstructions.SetActive(true); // Enable water testing instructions text
+            // testingInstructions.SetActive(true); // Enable water testing instructions text
             CancelInvoke(); // Cancel all invokes
         }
     }
 
     // Invoke Progress Bar
-    public void InvokeProgressBar()
+    private void InvokeProgressBar()
     {
         progressBarScript.IncrementProgress(progressIncrement); // Add progress to progress bar in increments of progressIncrement
     }
 
-    //// Load trash collection mini game scene
-    //public void LoadToTrashCollection()
-    //{
-    //    SceneManager.LoadScene("Test Transitions (water testing mini game)"); //Load scene "Test Transitions (water testing mini game)"
-    //}
-
-    // Load main scene
-    public void LoadToMainScene()
+    private void LoadToMainScene()
     {
         SceneManager.LoadScene("Overworld Transition Testing"); // Load scene "Main Scene"
     }
 
-
-    // Method for if water quality us poor
-    public void PoorWaterQuality()
+    // Method for if water quality is poor
+    private void PoorWaterQuality()
     {
+        // If bool isMiniGameOver is false...
         if (!isMiniGameOver)
         {
             poorWaterQualityPanel.SetActive(true);// Enable poor water quality text
@@ -233,7 +244,7 @@ public class WaterTestingManager : MonoBehaviour
     }
 
     // Method for if water quality is good
-    public void GoodWaterQuality()
+    private void GoodWaterQuality()
     {
         // If isMiniGameOver is false...
         if (!isMiniGameOver)
@@ -260,7 +271,7 @@ public class WaterTestingManager : MonoBehaviour
     }
 
     // Method to show clean water is essential panel
-    public void ShowCleanWaterPanel()
+    private void ShowCleanWaterPanel()
     {
         cleanWaterIsEssentialPanel.SetActive(true); // Enable clean water is essential panel 
         cleanWaterPanelActive = true; // Set bool cleanWaterPanelActive to true
@@ -268,7 +279,7 @@ public class WaterTestingManager : MonoBehaviour
     }
 
     // Method to show great job panel
-    public void ShowGreatJobPanel()
+    private void ShowGreatJobPanel()
     {
         greatJobPanel.SetActive(true); // Enable great job panel
         greatJobPanelActive = true; // Set bool greatJobPanel to true
@@ -276,22 +287,33 @@ public class WaterTestingManager : MonoBehaviour
     }
 
     // Method to end minigame
-    public void EndMiniGame()
+    private void EndMiniGame()
     {
-        // If cleanWaterPanelActive is false and isFirstWaterTestComplete is true...
-        if (!cleanWaterPanelActive && isFirstWaterTestComplete)
+        Invoke("LoadToMainScene", loadingTime); // Invoke method LoadToMainScene after loadingTime (in seconds)
+        Debug.Log("Load to Overworld"); // Debug.Log
+        readyToTransition = true;
+    }
+
+    private IEnumerator TimeDelay()
+    {
+        yield return new WaitForSeconds(panelTimer);
+        ShowPanel();
+    }
+
+    private void ShowPanel()
+    {
+        // If bool isFirstWaterTestComplete is false...
+        if (!isFirstWaterTestComplete)
         {
-            Invoke("LoadToMainScene", loadingTime); // Invoke method LoadToMainScene after loadingTime (in seconds)
-            Debug.Log("Load to Main Scene"); // Debug.Log message "Load to Main Scene"
-            readyToTransition = true;
+            lookAtTrashPanel.SetActive(true); // Enable look at trash panel
+            lookAtTrashPanelActive = true; // Set bool lookAtTrashPanelActive to true
         }
 
-        // If greatJobActive is false and isSecondWaterTestComplete is true
-        if (!greatJobPanelActive && isSecondWaterTestComplete)
+        // If isFirstWaterTestComplete is true...
+        if (isFirstWaterTestComplete)
         {
-            Invoke("LoadToMainScene", loadingTime); // Invoke method LoadToMainScene after loadingTime (in seconds)
-            Debug.Log("Load to Main Scene"); // Debug.Log message "Load to Main Scene"
-            readyToTransition = true;
+            biodiversityPanel.SetActive(true); // Enable biodiversity panel
+            biodiversityPanelActive = true; // Set bool biodiversityPanel to true
         }
     }
 }

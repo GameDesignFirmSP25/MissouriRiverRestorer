@@ -25,6 +25,6 @@ public class ProgressBar : MonoBehaviour
     // Add progress to bar
     public void IncrementProgress(float newProgress)
     {
-        targetProgress = slider.value + newProgress;
+        targetProgress = slider.value + newProgress; // targetProcess is equal to slider value + newProgress
     }
 }
