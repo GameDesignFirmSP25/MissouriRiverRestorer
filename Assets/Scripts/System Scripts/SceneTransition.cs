@@ -16,6 +16,14 @@ public class SceneTransition : MonoBehaviour
 
      public void TransitionScene(string name)
      {
-          SceneManager.LoadScene(name);
+          if (targetSceneName == "")
+          {
+               Debug.Log("Scene name not set. Loading first build scene");
+               SceneManager.LoadScene(0);
+          }
+          else
+          {
+               SceneManager.LoadScene(name);
+          }
      }
 }
