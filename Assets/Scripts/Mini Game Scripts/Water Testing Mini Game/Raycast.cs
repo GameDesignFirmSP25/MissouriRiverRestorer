@@ -32,7 +32,7 @@ public class Raycast : MonoBehaviour
                     // Check if the clicked object has the "River" tag
                     if (hit.collider.CompareTag("River"))
                     {
-                        Debug.Log("River Clicked");
+                        Debug.Log("River Clicked"); // Debug.Log
                         riverClicked = true; // Set bool riverClicked to true
                     }
                 }
