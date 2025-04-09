@@ -3,7 +3,6 @@ using UnityEngine;
 public class AnimalScript : MonoBehaviour
 {
     private float topBound = 30;
-    private float lowerBound = -50;
     public float speed = 40.0f;
     private AnimalGameManager gameManager;
 
@@ -11,16 +10,7 @@ public class AnimalScript : MonoBehaviour
     void Start()
     {
         GameObject managerObject = GameObject.Find("AnimalGameManager");
-
-        if (managerObject != null)
-        {
-            gameManager = managerObject.GetComponent<AnimalGameManager>();
-        }
-
-        if (gameManager == null)
-        {
-            Debug.LogError("AnimalGameManager script not found on AnimalGameManager object!");
-        }
+        gameManager = managerObject.GetComponent<AnimalGameManager>();
     }
 
     // Update is called once per frame
@@ -30,7 +20,7 @@ public class AnimalScript : MonoBehaviour
 
         if (transform.position.z > topBound)
         {
-            Debug.Log("left bounds");
+
             Destroy(gameObject);
         }
 
@@ -41,14 +31,17 @@ public class AnimalScript : MonoBehaviour
         if (gameObject.tag == "Invasive")
         {
             gameManager.Score -= 2;
-            Destroy(gameObject);
-            Debug.Log("Score = " + gameManager.Score);
+
+            if (gameManager.Score < 0)
+            {
+                gameManager.Score = 0;
+            }
         }
         else
         {
             gameManager.Score += 1;
-            Destroy(gameObject);
-            Debug.Log("Score = " + gameManager.Score);
         }
+
+        Destroy(gameObject);
     }
 }
