@@ -18,7 +18,7 @@ public class AnimalAi : MonoBehaviour
     public bool isWaiting = true;
     public bool isWalking = false;
 
-    private void Start()
+    void Start()
     {
         // Get the NavMeshAgent component
         agent = GetComponent<NavMeshAgent>();
