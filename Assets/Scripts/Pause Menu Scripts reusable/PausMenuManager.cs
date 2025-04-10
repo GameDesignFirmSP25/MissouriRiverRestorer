@@ -25,6 +25,8 @@ public class PausMenuManager : MonoBehaviour
         PauseBtn.onClick.AddListener(pause);
         ResumeBtn.onClick.AddListener(Resume);
         MMBtn.onClick.AddListener(MainMenu);
+        SettingsBtn.onClick.AddListener(settings);
+        QuitBtn.onClick.AddListener(quit);
     }
 
     // Update is called once per frame
@@ -58,6 +60,6 @@ public class PausMenuManager : MonoBehaviour
     }
     public void quit()
     {
-        
+        Application.Quit();
     }
 }
