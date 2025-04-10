@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 375188007}
   - component: {fileID: 375188006}
   m_Layer: 5
-  m_Name: Credits
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -825,9 +825,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Credits
-
-'
+  m_text: Exit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -997,6 +995,7 @@ GameObject:
   - component: {fileID: 1591677408}
   - component: {fileID: 1591677407}
   - component: {fileID: 1591677406}
+  - component: {fileID: 1591677409}
   m_Layer: 5
   m_Name: Start Game
   m_TagString: Untagged
@@ -1106,6 +1105,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591677404}
   m_CullTransparentMesh: 1
+--- !u!114 &1591677409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591677404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc48fb7d93c050e4abc964e92fc8fa0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StrtButton: {fileID: 1591677406}
+  ExitButton: {fileID: 375188006}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
