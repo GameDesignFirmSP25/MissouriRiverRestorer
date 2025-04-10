@@ -64,8 +64,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrashBag (static)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}
+      propertyPath: m_TagString
+      value: 'Trash: trash bag'
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1382522832859209696}
   m_SourcePrefab: {fileID: 100100000, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}
+--- !u!1 &5096770984934366158 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}
+  m_PrefabInstance: {fileID: 5366663363164825247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1382522832859209696
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096770984934366158}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.00000016391277, y: 0.48813215, z: -0.024702594}
