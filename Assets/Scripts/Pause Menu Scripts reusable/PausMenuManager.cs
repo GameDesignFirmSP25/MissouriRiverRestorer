@@ -1,0 +1,63 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class PausMenuManager : MonoBehaviour
+{
+    public GameObject PauseUiPanel;
+    public Button PauseBtn;
+    public GameObject pauseButton;
+
+    public Button ResumeBtn;
+    public GameObject ResumeButton;
+    public Button MMBtn;
+    public GameObject MenuButton;
+    public Button SettingsBtn;
+    public GameObject SettingsButton;
+
+    public Button QuitBtn;
+
+    public GameObject QuitButton;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        PauseUiPanel.SetActive(false);
+        PauseBtn.onClick.AddListener(pause);
+        ResumeBtn.onClick.AddListener(Resume);
+        MMBtn.onClick.AddListener(MainMenu);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void pause()
+    {
+        Time.timeScale = 0f;
+
+        PauseUiPanel.SetActive(true);
+    }
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+
+       //Do I need To remove the pause listener in this line? if so uncomment the line below
+       //ResumeBtn.onClick.RemoveListener(pause); 
+       
+        PauseUiPanel.SetActive(false);
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Title");
+    }
+    public void settings()
+    {
+
+    }
+    public void quit()
+    {
+        
+    }
+}
