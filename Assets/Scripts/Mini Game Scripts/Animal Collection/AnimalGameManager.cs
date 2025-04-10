@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class AnimalGameManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class AnimalGameManager : MonoBehaviour
     public TextMeshProUGUI TimerText;
     public TextMeshProUGUI TitleText;
     public GameObject startButton;
+    public GameObject returnButton;
     public GameObject[] animalPrefabs;
     public float spawnRangeX = 20;
     public float spawnPosZ = -30;
@@ -16,6 +18,11 @@ public class AnimalGameManager : MonoBehaviour
     public float timeRemaining = 60f;
     private bool timerRunning = false;
     public float ScoreThreshold = 25f;
+
+    void Start()
+    {
+        returnButton.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -63,14 +70,20 @@ public class AnimalGameManager : MonoBehaviour
     void EndLevel()
     {
         CancelInvoke("SpawnRandomAnimal");
+        returnButton.SetActive(true);
+
         if (Score < ScoreThreshold)
         {
             TitleText.text = "You Lose!";
-            startButton.SetActive(false);
         }
         else
         {
             TitleText.text = "You Win!";
         }
+    }
+
+    public void ReturnButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }

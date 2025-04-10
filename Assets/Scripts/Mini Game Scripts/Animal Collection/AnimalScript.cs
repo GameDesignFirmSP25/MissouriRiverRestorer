@@ -30,16 +30,16 @@ public class AnimalScript : MonoBehaviour
     {
         if (gameObject.tag == "Invasive")
         {
+            gameManager.Score += 1;
+        }
+        else
+        {
             gameManager.Score -= 2;
 
             if (gameManager.Score < 0)
             {
                 gameManager.Score = 0;
             }
-        }
-        else
-        {
-            gameManager.Score += 1;
         }
 
         Destroy(gameObject);
