@@ -97,6 +97,7 @@ public class WaterTestingManager : MonoBehaviour
     public bool isMiniGameOver = false;
     public bool readyToTransition = false;
     public bool objectivesVisible = false;
+    public bool instructionsShown = false;
     public static bool objectivesComplete = false;
     public static bool isTrashBagObjectiveComplete = false;
     public static bool isGasCanObjectiveComplete = false;
@@ -158,14 +159,11 @@ public class WaterTestingManager : MonoBehaviour
             if (slider.value < targetProgress)
             {
                 CollectWater(); // call CollectWater method
+                DisableTestingInstructions();
             }
         }
 
-        if (lookAtTrashPanelScript.isLookAtTrashPanelClicked && !objectivesVisible)
-        {
-            objectivesVisible = true; // Set bool objectivesVisible to true
-            objectives.SetActive(true); // Enable objectives on screen
-        }
+        ShowObjectives();
 
         StrikethroughText();
 
@@ -174,18 +172,21 @@ public class WaterTestingManager : MonoBehaviour
         {
             objectivesComplete = true; // Set bool objectivesComplete to true
             Debug.Log("All objectives complete!"); // Debug.Log 
-            Invoke("EnableTestingInstructions", enableTime); // Invoke method TestingInstructions after disableTime (in seconds)
-            testingInstructionsActive = true; // Set bool testingInstructionsActive to true
         }
 
-        // If bool objectivesComplete is true...
-        if (objectivesComplete)
-        { 
-            // If bool testingInstructionsActive is false...
-            if (testingInstructionsActive)
+        // if bool objectivesComplete is true & bool aPanelIsActive is false & bool isFirstWaterTestComplete is false...
+        if (objectivesComplete && !raycastScript.aPanelIsActive && !isFirstWaterTestComplete && !instructionsShown)
+        {
+            Invoke("EnableTestingInstructions", enableTime); // Invoke method EnableTestingInstructions after enableTime (in seconds)
+        }
+
+        // If bool effectsOfAluminumPanelActive, effectsOfGasPanelActive, effectsOfTirePanelActive, and effectsOfTrashPanelActive are all false...
+        if (!effectsOfAluminumPanelActive && !effectsOfGasPanelActive && !effectsOfTirePanelActive && !effectsOfTrashPanelActive)
+        {
+            // If bool aPanelIsActive is true...
+            if (raycastScript.aPanelIsActive)
             {
-                Invoke("DisableTestingInstructions", disableTime); // Invoke method DisableTestingInstructions after disableTime (in seconds)
-                testingInstructionsActive = false; // Set bool testingInstructionsActive to false
+                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
             }
         }
 
@@ -220,7 +221,18 @@ public class WaterTestingManager : MonoBehaviour
         // If isFirstWaterTestComplete is true and isSecondWaterTestComplete is false...
         if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
-            secondIntroductionPanel.SetActive(false); // Disable seocndIntroductionPanel
+            secondIntroductionPanel.SetActive(false); // Disable secondIntroductionPanel
+        }
+    }
+
+    // Method for showing objectives
+    private void ShowObjectives()
+    {
+        // If bool objectivesVisible is false...
+        if (!objectivesVisible && lookAtTrashPanelScript.isLookAtTrashPanelClicked)
+        {
+            objectives.SetActive(true); // Enable objectives
+            objectivesVisible = true; // Set bool objectivesVisible to true
         }
     }
 
@@ -228,12 +240,15 @@ public class WaterTestingManager : MonoBehaviour
     private void EnableTestingInstructions()
     {
         testingInstructionsPanel.SetActive(true); // Enable testingInstructions
+        testingInstructionsActive = true; // Set bool testingInstructionsActive to true
+        instructionsShown = true; // Set bool instructionsShown to true
     }
 
     // Method for disabling testing instructions
     private void DisableTestingInstructions()
     {
         testingInstructionsPanel.SetActive(false); // Disable testing instructions
+        testingInstructionsActive = false; // Set bool testingInstructionsActive to false
     }
 
     // Method  called On destroy
@@ -305,7 +320,7 @@ public class WaterTestingManager : MonoBehaviour
         {
             endTime = Time.time; // endTime is stored
             pressDuration = endTime - startTime; // Calculate duration of each mouse button press
-            Debug.Log("Press Duration: " + pressDuration + "seconds"); // Debug.Log the press duration
+            Debug.Log("Press Duration: " + pressDuration + "seconds"); // Debug.Log
             isPressed = false; // Set bool isPressed to false
             raycastScript.riverClicked = false; // Set bool riverClicked to false
             CancelInvoke(); // Cancel all invokes
