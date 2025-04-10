@@ -28,7 +28,14 @@ public class PausMenuManager : MonoBehaviour
         SettingsBtn.onClick.AddListener(settings);
         QuitBtn.onClick.AddListener(quit);
     }
-
+    void OnDestroy()
+    {
+                PauseBtn.onClick.RemoveListener(pause);
+        ResumeBtn.onClick.RemoveListener(Resume);
+        MMBtn.onClick.RemoveListener(MainMenu);
+        SettingsBtn.onClick.RemoveListener(settings);
+        QuitBtn.onClick.RemoveListener(quit);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -45,8 +52,7 @@ public class PausMenuManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-       //Do I need To remove the pause listener in this line? if so uncomment the line below
-       //ResumeBtn.onClick.RemoveListener(pause); 
+      
        
         PauseUiPanel.SetActive(false);
     }
