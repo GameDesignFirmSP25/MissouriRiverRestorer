@@ -91,7 +91,6 @@ public class WaterTestingManager : MonoBehaviour
     private float progressIncrement = 0.05f;
     private float panelTimer = 0.1f;
     private float enableTime = 3f;
-    private float disableTime = 5f;
 
     public bool isPressed = false;
     public bool isMiniGameOver = false;
