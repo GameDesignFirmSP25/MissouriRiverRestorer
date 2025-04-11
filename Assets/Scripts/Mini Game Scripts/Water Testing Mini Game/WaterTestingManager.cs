@@ -335,7 +335,7 @@ public class WaterTestingManager : MonoBehaviour
 
     private void LoadToMainScene()
     {
-        SceneManager.LoadScene("Overworld Transition Testing"); // Load scene "Main Scene"
+        SceneManager.LoadScene(0); // Load scene first in build order. Should point to overworld scene
     }
 
     // Method for if water quality is poor
