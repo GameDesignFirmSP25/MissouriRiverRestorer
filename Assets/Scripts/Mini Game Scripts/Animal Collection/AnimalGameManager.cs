@@ -21,6 +21,8 @@ public class AnimalGameManager : MonoBehaviour
     private bool timerRunning = false; //Game is 'active'
     public float Score = 0f; //tracks player score
 
+    public static bool trappingCompleted = false; // Global variable to check if trapping is completed
+
     void Start()
     {
         returnButton.SetActive(false);
@@ -83,6 +85,8 @@ public class AnimalGameManager : MonoBehaviour
         {
             TitleText.text = "You Win!";
         }
+
+        trappingCompleted = true; //set global variable to true
     }
 
     public void ReturnButton()

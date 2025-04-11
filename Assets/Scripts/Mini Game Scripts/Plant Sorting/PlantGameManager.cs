@@ -26,6 +26,8 @@ public class PlantGameManager : MonoBehaviour
     private bool gameActive = false; //Check if the game has started
     private int currentRound = 1;
 
+    public static bool plantingCompleted = false; // Global variable to check if planting is completed
+
     void Start()
     {
         checkButton.SetActive(false);
@@ -171,6 +173,7 @@ public class PlantGameManager : MonoBehaviour
 
     public void ReturnButton()
     {
+        plantingCompleted = true; //Set the global variable to true
         SceneManager.LoadScene(0);
     }
 
