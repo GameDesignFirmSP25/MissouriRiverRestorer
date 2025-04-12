@@ -75,7 +75,7 @@ public class DialogueManager : MonoBehaviour
 
         // Handle input for continuing the story
         // If 
-        if (canContinueToNextLine && currentStory.currentChoices.Count == 0 && (Input.GetKeyDown(KeyCode.Space)))
+        if (canContinueToNextLine && currentStory.currentChoices.Count == 0 && (Input.GetKeyDown(KeyCode.E)))
         {
             ContinueStory();
         }
@@ -143,9 +143,9 @@ public class DialogueManager : MonoBehaviour
         // hide items while text is typing
         HideChoices();
 
-        canContinueToNextLine = false;
+        canContinueToNextLine = false; // Set bool canContinueToNextLine to false
 
-        bool isAddingRichTextTag = false;
+        bool isAddingRichTextTag = false; // Set bool isAddingRichTextTag to false
 
         // display each letter one at a time
         foreach (char letter in line.ToCharArray())
@@ -153,14 +153,16 @@ public class DialogueManager : MonoBehaviour
             // if the submit button is pressed, finish up displaying the line right away
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                dialogueText.maxVisibleCharacters = line.Length;
+                dialogueText.maxVisibleCharacters = line.Length; // Set max visible characters to the length of the line
                 break;
             }
 
             // check for rich text tag, if found, add it without waiting
             if (letter == '<' || isAddingRichTextTag)
             {
-                isAddingRichTextTag = true;
+                isAddingRichTextTag = true; //set bool isAddingRichTextTag to true
+
+                // If the letter is a closing tag, set isAddingRichTextTag to false
                 if (letter == '>')
                 {
                     isAddingRichTextTag = false;
@@ -169,15 +171,15 @@ public class DialogueManager : MonoBehaviour
             // if not rich text, add the next letter and wait a small time
             else
             {
-                dialogueText.maxVisibleCharacters++;
-                yield return new WaitForSeconds(typingSpeed);
+                dialogueText.maxVisibleCharacters++; // Add the next letter
+                yield return new WaitForSeconds(typingSpeed); // Wait for a small time
             }
         }
 
         // actions to take after the entire line has finished displaying
         DisplayChoices();
 
-        canContinueToNextLine = true;
+        canContinueToNextLine = true; // Set bool canContinueToNextLine to true
     }
 
     private void DisplayChoices()
@@ -219,12 +221,12 @@ public class DialogueManager : MonoBehaviour
 
     public void MakeChoice(int choiceIndex)
     {
-
+        // If canContinueToNextLine is true...
         if (canContinueToNextLine)
         {
             currentStory.ChooseChoiceIndex(choiceIndex); // Choose the choice based on the index
-            // NOTE: The below two lines were added to fix a bug after the Youtube video was made
-            Input.GetKeyDown(KeyCode.Space); // this is specific to my InputManager script
+            
+            Input.GetKeyDown(KeyCode.Space); // Simulate the 'E' key press
             ContinueStory();
         }
     }

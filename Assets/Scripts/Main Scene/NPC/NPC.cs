@@ -23,6 +23,7 @@ public class NPC : MonoBehaviour
 
     private float interactDistance = 5f;
 
+    private bool isWithinInteractDistance = false;
     private static bool introPlayed = false;
     private static bool midpointTransitionPlayed = false;
     private static bool firstTransitionPlayed = false;
@@ -37,24 +38,29 @@ public class NPC : MonoBehaviour
     {
         if (!DialogueManager.GetInstance().dialogueIsPlaying)
         {
-            // Check if the 'E' key is pressed
-            if (Keyboard.current.eKey.wasPressedThisFrame)
+            if (isWithinInteractDistance) // Check if the player is within a distance of 2 units from the NPC
             {
-                // Interact
-                Interact(); // Call the interact method
-            }
+                // Check if the 'E' key is pressed
+                if (Keyboard.current.eKey.wasPressedThisFrame)
+                {
+                    // Interact
+                    Interact(); // Call the interact method
+                }
+            } 
         }
 
         //  If the player is not within distance
         if (interactSprite.gameObject.activeSelf && !IsWithinInteractDistance())
         {
             interactSprite.gameObject.SetActive(false); // Deactivate the interact sprite
+            isWithinInteractDistance = false; // set bool isWithinInteractDistance to false
         }
 
         // Else  if the player is within distance...
         else if (!interactSprite.gameObject.activeSelf && IsWithinInteractDistance())
         {
             interactSprite.gameObject.SetActive(true); // Activate the interact sprite
+            isWithinInteractDistance = true; // set bool isWithinInteractDistance to true
         }
     }
 

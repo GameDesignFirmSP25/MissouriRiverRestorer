@@ -62,25 +62,25 @@ public class Raycast : MonoBehaviour
 
                     if (Physics.Raycast(ray, out hit))
                     {
-<<<<<<< Updated upstream
+
                         // If bool isFirstWaterTestCoomplete is true...
                         if (!WaterTestingManager.isFirstWaterTestComplete)
-=======
+
                         // Check if the clicked object has the "Test Tube" tag & if the objectives are complete
                         if (hit.collider.CompareTag("Test Tube") && waterTestingManagerScript.objectivesComplete)
->>>>>>> Stashed changes
+
                         {
                             Debug.Log("Test Tube clicked"); // Debug.Log
                             testTubeClicked = true; // Set bool riverClicked to true
                             Destroy(hit.collider.gameObject); // Destroy the object that was clicked
                         }
 
-<<<<<<< Updated upstream
+
                         // If bool isFirstWaterTestComplete is true & isSecondWaterTestComplete is false...
                         if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
-=======
+
                         if (!aPanelIsActive)
->>>>>>> Stashed changes
+
                         {
                             // If bool isFirstWaterTestCoomplete is true...
                             if (!WaterTestingManager.isFirstWaterTestComplete)
