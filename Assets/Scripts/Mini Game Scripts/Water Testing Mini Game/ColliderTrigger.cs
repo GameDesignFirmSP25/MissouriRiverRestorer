@@ -32,5 +32,12 @@ public class ColliderTrigger : MonoBehaviour
             Debug.Log("Fish entered trigger and was destroyed"); // Debug.Log
             Destroy(other.gameObject); // Destroy the object that triggered this collider
         }
+
+        // If the gameObject has the tag "Test tube"...
+        if (other.gameObject.CompareTag("Test Tube"))
+        {
+            Debug.Log("Test tube entered trigger and was destroyed"); // Debug.Log
+            Destroy(other.gameObject); // Destroy the object that triggered this collider
+        }
     }
 }

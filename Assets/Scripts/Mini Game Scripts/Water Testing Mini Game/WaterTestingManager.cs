@@ -53,7 +53,19 @@ public class WaterTestingManager : MonoBehaviour
     private GameObject effectsOfAluminumPanel;
 
     [SerializeField]
-    private GameObject objectives;
+    private GameObject effectsOfBiodiversityPanel1;
+
+    [SerializeField]
+    private GameObject effectsOfBiodiversityPanel2;
+
+    [SerializeField]
+    private GameObject effectsOfBiodiversityPanel3;
+
+    [SerializeField]
+    private GameObject firstWaterTestObjectives;
+
+    [SerializeField]
+    private GameObject secondWaterTestObjectives;
 
     [SerializeField]
     TextMeshProUGUI gasCanObjectiveText;
@@ -66,6 +78,15 @@ public class WaterTestingManager : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI aluminumCanObjectiveText;
+
+    [SerializeField]
+    TextMeshProUGUI fishObjectiveText;
+
+    [SerializeField]
+    TextMeshProUGUI mammalObjectiveText;
+
+    [SerializeField]
+    TextMeshProUGUI riverbankObjectiveText;
 
     private Slider slider;
     public Button StartBtn;
@@ -80,28 +101,27 @@ public class WaterTestingManager : MonoBehaviour
     public TireEffectsPanelClickHandler tireEffectsPanelScript;
     public AluminumEffectsPanelClickHandler aluminumEffectsPanelScript;
 
-    private float startTime;
-    private float endTime;
-    private float pressDuration;
     private float targetProgress = 1f;
     private float loadingTime = 0f;
     private float showPanel = 3f;
-    private float waitTime = 0f;
-    private float repeatRate = 1.0f;
-    private float progressIncrement = 0.05f;
+    private float progressIncrement = 0.1f;
     private float panelTimer = 0.1f;
     private float enableTime = 3f;
 
     public bool isPressed = false;
     public bool isMiniGameOver = false;
     public bool readyToTransition = false;
-    public bool objectivesVisible = false;
+    public bool firstWaterTestObjectivesVisible = false;
+    public bool secondWaterTestObjectivesVisible = false;
     public bool instructionsShown = false;
     public static bool objectivesComplete = false;
     public static bool isTrashBagObjectiveComplete = false;
     public static bool isGasCanObjectiveComplete = false;
     public static bool isTireObjectiveComplete = false;
     public static bool isAluminumCanObjectiveComplete = false;
+    public static bool isFishObjectiveComplete = false;
+    public static bool isMammalObjectiveComplete = false;
+    public static bool isRiverbankObjectiveComplete = false;
     public static bool cleanWaterPanelActive = false;
     public static bool greatJobPanelActive = false;
     public static bool testingInstructionsActive = false;
@@ -111,6 +131,9 @@ public class WaterTestingManager : MonoBehaviour
     public static bool effectsOfTrashPanelActive = false;
     public static bool effectsOfTirePanelActive = false;
     public static bool effectsOfAluminumPanelActive = false;
+    public static bool effectsOfBiodiversity1PanelActive = false;
+    public static bool effectsOfBiodiversity2PanelActive = false;
+    public static bool effectsOfBiodiversity3PanelActive = false;
     public static bool isWaterQualityGood = false;
     public static bool isFirstWaterTestComplete = false;
     public static bool isSecondWaterTestComplete = false;
@@ -151,14 +174,18 @@ public class WaterTestingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If bool riverClicked is true...
-        if (raycastScript.riverClicked) 
+        // If bool testTubeClicked is true...
+        if (raycastScript.testTubeClicked) 
         {
             // If the value on the slider component is less than the targetProgress variable...
             if (slider.value < targetProgress)
             {
                 CollectWater(); // call CollectWater method
-                DisableTestingInstructions();
+                
+                if (instructionsShown)
+                {
+                    DisableTestingInstructions(); // call DisableTestingInstructions method
+                }
             }
         }
 
@@ -166,28 +193,15 @@ public class WaterTestingManager : MonoBehaviour
 
         StrikethroughText();
 
-        // If bool isAluminumCanObjectiveComplete, isGasCanObjectiveComplete, isTireObjectiveComplete, and isTrashBagObjectiveComplete are all true & bool objectivesComplete is false...
-        if (isAluminumCanObjectiveComplete && isGasCanObjectiveComplete && isTireObjectiveComplete && isTrashBagObjectiveComplete && !objectivesComplete)
-        {
-            objectivesComplete = true; // Set bool objectivesComplete to true
-            Debug.Log("All objectives complete!"); // Debug.Log 
-        }
+        AreObjectivesComplete();
 
         // if bool objectivesComplete is true & bool aPanelIsActive is false & bool isFirstWaterTestComplete is false...
-        if (objectivesComplete && !raycastScript.aPanelIsActive && !isFirstWaterTestComplete && !instructionsShown)
+        if (objectivesComplete && !raycastScript.aPanelIsActive && !instructionsShown)
         {
             Invoke("EnableTestingInstructions", enableTime); // Invoke method EnableTestingInstructions after enableTime (in seconds)
         }
 
-        // If bool effectsOfAluminumPanelActive, effectsOfGasPanelActive, effectsOfTirePanelActive, and effectsOfTrashPanelActive are all false...
-        if (!effectsOfAluminumPanelActive && !effectsOfGasPanelActive && !effectsOfTirePanelActive && !effectsOfTrashPanelActive)
-        {
-            // If bool aPanelIsActive is true...
-            if (raycastScript.aPanelIsActive)
-            {
-                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
-            }
-        }
+        IsAPanelActive();
 
         // If slider value is equal to targetProgress variable and bool isWaterQualityGood is false...
         if (slider.value == targetProgress && !isWaterQualityGood)
@@ -227,11 +241,68 @@ public class WaterTestingManager : MonoBehaviour
     // Method for showing objectives
     private void ShowObjectives()
     {
-        // If bool objectivesVisible is false...
-        if (!objectivesVisible && lookAtTrashPanelScript.isLookAtTrashPanelClicked)
+        // If bool firstWaterTestObjectivesVisible is false...
+        if (!firstWaterTestObjectivesVisible && lookAtTrashPanelScript.isLookAtTrashPanelClicked)
         {
-            objectives.SetActive(true); // Enable objectives
-            objectivesVisible = true; // Set bool objectivesVisible to true
+            firstWaterTestObjectives.SetActive(true); // Enable objectives
+            firstWaterTestObjectivesVisible = true; // Set bool objectivesVisible to true
+        }
+
+        // If bool secondWaterTestObjectivesVisible is false...
+        if (!secondWaterTestObjectivesVisible && biodiversityPanelScript.isBiodiversityPanelClicked)
+        {
+            secondWaterTestObjectives.SetActive(true); // Enable objectives
+            secondWaterTestObjectivesVisible = true; // Set bool objectivesVisible to true
+        }
+    }
+
+    // Method for checking if a panel is active
+    private void IsAPanelActive()
+    {
+        // If bool effectsOfAluminumPanelActive, effectsOfGasPanelActive, effectsOfTirePanelActive, and effectsOfTrashPanelActive are all false...
+        if (!effectsOfAluminumPanelActive && !effectsOfGasPanelActive && !effectsOfTirePanelActive && !effectsOfTrashPanelActive)
+        {
+            // If bool aPanelIsActive is true...
+            if (raycastScript.aPanelIsActive)
+            {
+                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
+            }
+        }
+
+        // If bool effectsOfBiodiversityPanel1Active, effectsOfBiodiversityPanel2Active, and effectsOfBiodiversityPanel3Active are all false...
+        if (!effectsOfBiodiversity1PanelActive && !effectsOfBiodiversity2PanelActive && !effectsOfBiodiversity3PanelActive)
+        {
+            // If bool aPanelIsActive is true...
+            if (raycastScript.aPanelIsActive)
+            {
+                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
+            }
+        }
+    }
+
+    // Method for checking if objectives are complete
+    private void AreObjectivesComplete()
+    {
+        // If bool isFirstWaterTestComplete is false and bool isSecondWaterTestComplete is false...
+        if (!isFirstWaterTestComplete && !isSecondWaterTestComplete)
+        {
+            // If bool isAluminumCanObjectiveComplete, isGasCanObjectiveComplete, isTireObjectiveComplete, and isTrashBagObjectiveComplete are all true...
+            if (isAluminumCanObjectiveComplete && isGasCanObjectiveComplete && isTireObjectiveComplete && isTrashBagObjectiveComplete && !objectivesComplete)
+            {
+                Debug.Log("All objectives complete!"); // Debug.Log
+                objectivesComplete = true; // Set bool objectivesComplete to true
+            }
+        }
+
+        // If bool isFirstWaterTestComplete is true and bool isSecondWaterTestComplete is false...
+        if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
+        {
+            // If bool isFishObjectiveComplete, isMammalObjectiveComplete, and isRiverbankObjectiveComplete are all true and objectivesComplete is false...
+            if (isFishObjectiveComplete && isMammalObjectiveComplete && isRiverbankObjectiveComplete && !objectivesComplete)
+            {
+                Debug.Log("All objectives complete!"); // Debug.Log
+                objectivesComplete = true; // Set bool objectivesComplete to true
+            }
         }
     }
 
@@ -272,12 +343,17 @@ public class WaterTestingManager : MonoBehaviour
         effectsOfTrashPanel.SetActive(false); // Disable affects of trash panel
         effectsOfTirePanel.SetActive(false); // Disable affects of tire panel
         effectsOfAluminumPanel.SetActive(false); // Disable affects of aluminum panel
-        objectives.SetActive(false); // Disable objectives on screen
+        firstWaterTestObjectives.SetActive(false); // Disable objectives on screen
+        secondWaterTestObjectives.SetActive(false); // Disable objectives on screen
+        effectsOfBiodiversityPanel1.SetActive(false); // Disable affects of biodiversity panel 1
+        effectsOfBiodiversityPanel2.SetActive(false); // Disable affects of biodiversity panel 2
+        effectsOfBiodiversityPanel3.SetActive(false); // Disable affects of biodiversity panel 3
     }
 
     // Method to strikethrough text
     private void StrikethroughText()
     {
+        // If bool isFirstWaterTestComplete is false...
         if (!isFirstWaterTestComplete)
         {
             // If bool isAluminumCanObjectiveComplete is true and bool objectivesComplete is false...
@@ -301,6 +377,28 @@ public class WaterTestingManager : MonoBehaviour
                 trashBagObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
             }
         }
+
+        // If bool isFirstWaterTestComplete is true...
+        if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
+        {
+            // If bool isFishObjectiveComplete is true and bool objectivesComplete is false...
+            if (isFishObjectiveComplete && !objectivesComplete)
+            {
+                fishObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            }
+
+            // If bool isMammalObjectiveComplete is true and bool objectivesComplete is false...
+            if (isMammalObjectiveComplete && !objectivesComplete)
+            {
+                mammalObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            }
+
+            // If bool isRiverbankObjectiveComplete is true and bool objectivesComplete is false...
+            if (isRiverbankObjectiveComplete && !objectivesComplete)
+            {
+                riverbankObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            }
+        }
     }
 
     // Collect water
@@ -310,19 +408,15 @@ public class WaterTestingManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isPressed) 
         {
             isPressed = true; // Set bool isPressed to true
-            startTime = Time.time; // startTime is stored
-            InvokeRepeating("InvokeProgressBar", waitTime , repeatRate); // add progress to bar at repeatRate (in seconds) after waitTime (in seconds)
+            InvokeProgressBar(); // Call method InvokeProgressBar
+            Debug.Log("Collecting water..."); // Debug.Log
         }
 
         // If left mouse button is down and isPressed is true...
         if (Input.GetMouseButtonUp(0) && isPressed) 
         {
-            endTime = Time.time; // endTime is stored
-            pressDuration = endTime - startTime; // Calculate duration of each mouse button press
-            Debug.Log("Press Duration: " + pressDuration + "seconds"); // Debug.Log
             isPressed = false; // Set bool isPressed to false
-            raycastScript.riverClicked = false; // Set bool riverClicked to false
-            CancelInvoke(); // Cancel all invokes
+            raycastScript.testTubeClicked = false; // Set bool testTubeClicked to false
         }
     }
 
