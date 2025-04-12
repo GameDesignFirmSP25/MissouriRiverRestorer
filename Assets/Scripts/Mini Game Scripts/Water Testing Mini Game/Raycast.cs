@@ -55,7 +55,7 @@ public class Raycast : MonoBehaviour
                     if (!aPanelIsActive)
                     {
                         // If bool isFirstWaterTestCoomplete is true...
-                        if (!WaterTestingManager.isFirstWaterTestCoomplete)
+                        if (!WaterTestingManager.isFirstWaterTestComplete)
                         {
                             // Check if the clicked object has the "Trash: can" tag & bool isAluminumCanObjectiveComplete is false
                             if (hit.collider.CompareTag("Trash: can") && !WaterTestingManager.isAluminumCanObjectiveComplete)
@@ -116,7 +116,7 @@ public class Raycast : MonoBehaviour
                         }
 
                         // If bool isFirstWaterTestComplete is true & isSecondWaterTestComplete is false...
-                        if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestCcomplete)
+                        if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
                         {
                             // Check if clicked object has the "Fish" tag & bool isFishObjectiveComplete is false
                             if (hit.collider.CompareTag("Fish") && !WaterTestingManager.isFishObjectiveComplete)
