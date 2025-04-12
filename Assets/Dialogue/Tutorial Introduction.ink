@@ -8,7 +8,10 @@ Professor: “Same to you. You’ve certainly come into your own from that timid
 
 Player: “Yeah. I still can’t believe I’m out here with you, Professor.”
 Professor: “Now, now! No more of that ‘Professor’ jargon.”
-Professor: “We’re colleagues, dear [Y/N]. ‘William’ is just fine by me.”
+Professor: “We’re colleagues, dear."
+    *Yes
+    *No
+    -Professor: "‘William’ is just fine by me.”
 Player: “O-Oh! I dunno if I can do that just yet. I think I’ll just start with “Doctor” and work from there.”
 William: “Ohohoho, fair enough! But that’s enough chewing the fat. We’ve got business to attend to.”
 

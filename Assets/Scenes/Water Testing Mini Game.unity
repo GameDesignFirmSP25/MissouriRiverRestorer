@@ -2685,7 +2685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6238,7 +6238,11 @@ MonoBehaviour:
   effectsOfTrashPanel: {fileID: 1167187712}
   effectsOfTirePanel: {fileID: 2106384459}
   effectsOfAluminumPanel: {fileID: 477652799}
+  effectsOfBiodiversityPanel1: {fileID: 1079880918}
+  effectsOfBiodiversityPanel2: {fileID: 1606585175}
+  effectsOfBiodiversityPanel3: {fileID: 1176660792}
   _mainCamera: {fileID: 987259329}
+  waterTestingManagerScript: {fileID: 1411706655}
   testTubeClicked: 0
   aPanelIsActive: 0
 --- !u!1 &1048890745 stripped
@@ -8213,6 +8217,7 @@ MonoBehaviour:
   firstWaterTestObjectivesVisible: 0
   secondWaterTestObjectivesVisible: 0
   instructionsShown: 0
+  objectivesComplete: 0
 --- !u!1 &1436269420
 GameObject:
   m_ObjectHideFlags: 0
@@ -8561,68 +8566,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1582321111
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1582321114}
-  - component: {fileID: 1582321113}
-  - component: {fileID: 1582321112}
-  m_Layer: 4
-  m_Name: River
-  m_TagString: River
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!65 &1582321112
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582321111}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &1582321113
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582321111}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1582321114
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582321111}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.922272, y: -24, z: -80}
-  m_LocalScale: {x: 525, y: 1, z: 100}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1606585175
 GameObject:
   m_ObjectHideFlags: 0
@@ -11335,7 +11278,6 @@ SceneRoots:
   - {fileID: 2024579452}
   - {fileID: 1450347247}
   - {fileID: 118346452}
-  - {fileID: 1582321114}
   - {fileID: 1325515821}
   - {fileID: 258403995}
   - {fileID: 1805945393}
