@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Trash : MonoBehaviour
 {
     private float speed;
-    private float minimumSpeed = 12f;
+    private float minimumSpeed = 10f;
     private float maximumSpeed = 25f;
 
     private void Update()
