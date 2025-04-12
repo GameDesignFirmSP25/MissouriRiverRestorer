@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class AnimalScript : MonoBehaviour
 {
-    private float topBound = 30;
-    public float speed = 40.0f;
+    private float RightBoundry = 30; //how far right the animal despawns
+    public float speed = 40.0f; //how fast the animal moves
     private AnimalGameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject managerObject = GameObject.Find("AnimalGameManager");
+        GameObject managerObject = GameObject.Find("AnimalGameManager"); //reference the AnimalGameManager
         gameManager = managerObject.GetComponent<AnimalGameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed); //move the animal
 
-        if (transform.position.z > topBound)
+        if (transform.position.z > RightBoundry) //check if animal is out of bounds
         {
 
             Destroy(gameObject);
@@ -26,9 +26,13 @@ public class AnimalScript : MonoBehaviour
 
     }
 
-    void OnMouseDown()
+    void OnMouseDown() //when the player clicks an animal with mouse
     {
-        if (gameObject.tag == "Invasive")
+        if (gameObject.tag == "Invasive") //A 'bad' animal is clicked
+        {
+            gameManager.Score += 1;
+        }
+        else //A 'good' animal is clicked
         {
             gameManager.Score -= 2;
 
@@ -36,10 +40,6 @@ public class AnimalScript : MonoBehaviour
             {
                 gameManager.Score = 0;
             }
-        }
-        else
-        {
-            gameManager.Score += 1;
         }
 
         Destroy(gameObject);

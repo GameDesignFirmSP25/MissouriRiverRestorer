@@ -24,7 +24,7 @@ public class StartGame : MonoBehaviour
     void StartGameButton()
     {
         Debug.Log("Button CLicked");
-        SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
+        SceneManager.LoadScene(0);
     }
     void Exit()
     {

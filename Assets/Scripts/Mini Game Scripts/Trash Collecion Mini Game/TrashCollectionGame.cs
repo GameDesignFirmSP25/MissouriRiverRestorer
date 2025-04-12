@@ -17,6 +17,9 @@ public class TrashCollectionGame : MonoBehaviour
     public Button endbtn;
     public GameObject EndButton;
     public GameObject Finishpanel;
+
+    public static bool trashCollected = false; // global variable to check if trash is collected
+
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
         Time.timeScale = 0f;
@@ -50,8 +53,9 @@ public class TrashCollectionGame : MonoBehaviour
             {
                 Debug.Log("Trash Collected");
                 isgameComplete = true;
+                trashCollected = true; // set the global variable to true
                 // add panel to pop up
-                EndButton.SetActive(true);// sets button active
+            EndButton.SetActive(true);// sets button active
                 Finishpanel.SetActive(true);// sets panel active
             endbtn.onClick.AddListener(Home);
 

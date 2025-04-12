@@ -8,11 +8,19 @@ public class CameraFollow : MonoBehaviour
 
      void LateUpdate()
     {
-          transform.position = target.position + offset;
           // Update the camera's position
-          //transform.localPosition = offset;
+          transform.position = target.TransformPoint(offset);
 
-        // Make the camera look at the player
-        transform.LookAt(target);
+          if (Input.GetKey(KeyCode.Q))
+          {
+               target.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+          }
+          if (Input.GetKey(KeyCode.E))
+          {
+               target.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
+          }
+
+          // Make the camera look at the player
+          transform.LookAt(target);
     }
 }

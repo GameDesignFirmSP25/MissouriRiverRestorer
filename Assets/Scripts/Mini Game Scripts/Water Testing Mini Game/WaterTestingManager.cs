@@ -3,11 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class WaterTestingManager : MonoBehaviour
 {
     [SerializeField] 
-    private GameObject testingInstructions;
+    private GameObject testingInstructionsPanel;
 
     [SerializeField]
     private GameObject poorWaterQualityPanel;
@@ -39,12 +40,45 @@ public class WaterTestingManager : MonoBehaviour
     [SerializeField]
     private GameObject lookAtTrashPanel;
 
+    [SerializeField]
+    private GameObject effectsOfGasPanel;
+
+    [SerializeField]
+    private GameObject effectsOfTrashPanel;
+
+    [SerializeField]
+    private GameObject effectsOfTirePanel;
+
+    [SerializeField]
+    private GameObject effectsOfAluminumPanel;
+
+    [SerializeField]
+    private GameObject objectives;
+
+    [SerializeField]
+    TextMeshProUGUI gasCanObjectiveText;
+
+    [SerializeField]
+    TextMeshProUGUI trashBagObjectiveText;
+
+    [SerializeField]
+    TextMeshProUGUI tireObjectiveText;
+
+    [SerializeField]
+    TextMeshProUGUI aluminumCanObjectiveText;
+
     private Slider slider;
     public Button StartBtn;
-    public Raycast riverScript;
+    public Raycast raycastScript;
     public ProgressBar progressBarScript;
     public CleanWaterPanelClickHandler cleanWaterPanelScript;
     public GreatJobPanelClickHandler greatJobPanelScript;
+    public LookAtTrashPanelClickHandler lookAtTrashPanelScript;
+    public BiodiversityPanelClickHandler biodiversityPanelScript;
+    public GasEffectsPanelClickHandler gasEffectsPanelScript;
+    public TrashEffectsPanelClickHandler trashEffectsPanelScript;
+    public TireEffectsPanelClickHandler tireEffectsPanelScript;
+    public AluminumEffectsPanelClickHandler aluminumEffectsPanelScript;
 
     private float startTime;
     private float endTime;
@@ -55,17 +89,28 @@ public class WaterTestingManager : MonoBehaviour
     private float waitTime = 0f;
     private float repeatRate = 1.0f;
     private float progressIncrement = 0.05f;
-    private float panelTimer = 15f;
-    private float disableTime = 5f;
-    
+    private float panelTimer = 0.1f;
+    private float enableTime = 3f;
+
     public bool isPressed = false;
-    public bool isWaterCollected = false;
     public bool isMiniGameOver = false;
     public bool readyToTransition = false;
+    public bool objectivesVisible = false;
+    public bool instructionsShown = false;
+    public static bool objectivesComplete = false;
+    public static bool isTrashBagObjectiveComplete = false;
+    public static bool isGasCanObjectiveComplete = false;
+    public static bool isTireObjectiveComplete = false;
+    public static bool isAluminumCanObjectiveComplete = false;
     public static bool cleanWaterPanelActive = false;
     public static bool greatJobPanelActive = false;
+    public static bool testingInstructionsActive = false;
     public static bool lookAtTrashPanelActive = false;
     public static bool biodiversityPanelActive = false;
+    public static bool effectsOfGasPanelActive = false;
+    public static bool effectsOfTrashPanelActive = false;
+    public static bool effectsOfTirePanelActive = false;
+    public static bool effectsOfAluminumPanelActive = false;
     public static bool isWaterQualityGood = false;
     public static bool isFirstWaterTestComplete = false;
     public static bool isSecondWaterTestComplete = false;
@@ -107,12 +152,40 @@ public class WaterTestingManager : MonoBehaviour
     void Update()
     {
         // If bool riverClicked is true...
-        if (riverScript.riverClicked) 
+        if (raycastScript.riverClicked) 
         {
             // If the value on the slider component is less than the targetProgress variable...
             if (slider.value < targetProgress)
             {
                 CollectWater(); // call CollectWater method
+                DisableTestingInstructions();
+            }
+        }
+
+        ShowObjectives();
+
+        StrikethroughText();
+
+        // If bool isAluminumCanObjectiveComplete, isGasCanObjectiveComplete, isTireObjectiveComplete, and isTrashBagObjectiveComplete are all true & bool objectivesComplete is false...
+        if (isAluminumCanObjectiveComplete && isGasCanObjectiveComplete && isTireObjectiveComplete && isTrashBagObjectiveComplete && !objectivesComplete)
+        {
+            objectivesComplete = true; // Set bool objectivesComplete to true
+            Debug.Log("All objectives complete!"); // Debug.Log 
+        }
+
+        // if bool objectivesComplete is true & bool aPanelIsActive is false & bool isFirstWaterTestComplete is false...
+        if (objectivesComplete && !raycastScript.aPanelIsActive && !isFirstWaterTestComplete && !instructionsShown)
+        {
+            Invoke("EnableTestingInstructions", enableTime); // Invoke method EnableTestingInstructions after enableTime (in seconds)
+        }
+
+        // If bool effectsOfAluminumPanelActive, effectsOfGasPanelActive, effectsOfTirePanelActive, and effectsOfTrashPanelActive are all false...
+        if (!effectsOfAluminumPanelActive && !effectsOfGasPanelActive && !effectsOfTirePanelActive && !effectsOfTrashPanelActive)
+        {
+            // If bool aPanelIsActive is true...
+            if (raycastScript.aPanelIsActive)
+            {
+                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
             }
         }
 
@@ -134,8 +207,6 @@ public class WaterTestingManager : MonoBehaviour
     {
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
-        testingInstructions.SetActive(true); // Enable water testing instructions text
-        Invoke("TestingInstructions", disableTime);
         progressBar.SetActive(true); // Enable Progress bar
         Raycast.isClickable = true; // Set bool isClickable to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
@@ -149,14 +220,34 @@ public class WaterTestingManager : MonoBehaviour
         // If isFirstWaterTestComplete is true and isSecondWaterTestComplete is false...
         if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
-            secondIntroductionPanel.SetActive(false); // Disable seocndIntroductionPanel
+            secondIntroductionPanel.SetActive(false); // Disable secondIntroductionPanel
         }
     }
 
-    //Method for disabling testing instructions
-    private void TestingInstructions()
+    // Method for showing objectives
+    private void ShowObjectives()
     {
-        testingInstructions.SetActive(false); // Disable testingInstructions
+        // If bool objectivesVisible is false...
+        if (!objectivesVisible && lookAtTrashPanelScript.isLookAtTrashPanelClicked)
+        {
+            objectives.SetActive(true); // Enable objectives
+            objectivesVisible = true; // Set bool objectivesVisible to true
+        }
+    }
+
+    // Method for enabling testing instructions
+    private void EnableTestingInstructions()
+    {
+        testingInstructionsPanel.SetActive(true); // Enable testingInstructions
+        testingInstructionsActive = true; // Set bool testingInstructionsActive to true
+        instructionsShown = true; // Set bool instructionsShown to true
+    }
+
+    // Method for disabling testing instructions
+    private void DisableTestingInstructions()
+    {
+        testingInstructionsPanel.SetActive(false); // Disable testing instructions
+        testingInstructionsActive = false; // Set bool testingInstructionsActive to false
     }
 
     // Method  called On destroy
@@ -167,7 +258,7 @@ public class WaterTestingManager : MonoBehaviour
 
     private void SwitchUI()
     {
-        testingInstructions.SetActive(false); // Disable testing intsructions
+        testingInstructionsPanel.SetActive(false); // Disable testing intsructions
         progressBar.SetActive(false); // Disable Progress bar
         poorWaterQualityPanel.SetActive(false); // Disable poor water quality panel
         goodWaterQualityPanel.SetActive(false); // Disable good water quality panel
@@ -177,6 +268,39 @@ public class WaterTestingManager : MonoBehaviour
         secondIntroductionPanel.SetActive(false); // Disable first intro panel 
         lookAtTrashPanel.SetActive(false); // Disable look at trash panel
         biodiversityPanel.SetActive(false); // Disable biodiversity panel
+        effectsOfGasPanel.SetActive(false); // Disable affects of gas panel
+        effectsOfTrashPanel.SetActive(false); // Disable affects of trash panel
+        effectsOfTirePanel.SetActive(false); // Disable affects of tire panel
+        effectsOfAluminumPanel.SetActive(false); // Disable affects of aluminum panel
+        objectives.SetActive(false); // Disable objectives on screen
+    }
+
+    // Method to strikethrough text
+    private void StrikethroughText()
+    {
+        if (!isFirstWaterTestComplete)
+        {
+            // If bool isAluminumCanObjectiveComplete is true and bool objectivesComplete is false...
+            if (isAluminumCanObjectiveComplete && !objectivesComplete)
+            {
+                aluminumCanObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            }
+            // If bool isGasCanObjectiveComplete is true and bool objectivesComplete is false...
+            if (isGasCanObjectiveComplete && !objectivesComplete)
+            {
+                gasCanObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            }
+            // If bool isTireObjectiveComplete is true and bool objectivesComplete is false...
+            if (isTireObjectiveComplete && !objectivesComplete)
+            {
+                tireObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            }
+            // If bool isTrashBagObjectiveComplete is true and bool objectivesComplete is false...
+            if (isTrashBagObjectiveComplete && !objectivesComplete)
+            {
+                trashBagObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            }
+        }
     }
 
     // Collect water
@@ -185,11 +309,9 @@ public class WaterTestingManager : MonoBehaviour
         // If left mouse button is down and isPressed is false...
         if (Input.GetMouseButtonDown(0) && !isPressed) 
         {
-            isWaterCollected = true; // Set bool waterCollected to true
             isPressed = true; // Set bool isPressed to true
             startTime = Time.time; // startTime is stored
             InvokeRepeating("InvokeProgressBar", waitTime , repeatRate); // add progress to bar at repeatRate (in seconds) after waitTime (in seconds)
-            // testingInstructions.SetActive(false); // Disable water testing instructions text
         }
 
         // If left mouse button is down and isPressed is true...
@@ -197,11 +319,9 @@ public class WaterTestingManager : MonoBehaviour
         {
             endTime = Time.time; // endTime is stored
             pressDuration = endTime - startTime; // Calculate duration of each mouse button press
-            Debug.Log("Press Duration: " + pressDuration + "seconds"); // Debug.Log the press duration
+            Debug.Log("Press Duration: " + pressDuration + "seconds"); // Debug.Log
             isPressed = false; // Set bool isPressed to false
-            isWaterCollected = false; // Set bool isWaterCollected to false
-            riverScript.riverClicked = false; // Set bool riverClicked to false
-            // testingInstructions.SetActive(true); // Enable water testing instructions text
+            raycastScript.riverClicked = false; // Set bool riverClicked to false
             CancelInvoke(); // Cancel all invokes
         }
     }
@@ -214,7 +334,7 @@ public class WaterTestingManager : MonoBehaviour
 
     private void LoadToMainScene()
     {
-        SceneManager.LoadScene("Overworld Transition Testing"); // Load scene "Main Scene"
+        SceneManager.LoadScene(0); // Load scene first in build order. Should point to overworld scene
     }
 
     // Method for if water quality is poor
@@ -225,7 +345,6 @@ public class WaterTestingManager : MonoBehaviour
         {
             poorWaterQualityPanel.SetActive(true);// Enable poor water quality text
             progressBar.SetActive(false);// Disable progress bar
-            testingInstructions.SetActive(false); // Disable water testing instructions text
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isFirstWaterTestComplete = true; // Set bool isFirstWaterTestComplete to true
 
@@ -251,7 +370,6 @@ public class WaterTestingManager : MonoBehaviour
         {
             goodWaterQualityPanel.SetActive(true);// Enable poor water quality panel
             progressBar.SetActive(false);// Disable progress bar
-            testingInstructions.SetActive(false); // Disable water testing instructions text
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
             isSecondWaterTestComplete = true; // Set bool isSecondWaterTestComplete to true
@@ -313,7 +431,7 @@ public class WaterTestingManager : MonoBehaviour
         if (isFirstWaterTestComplete)
         {
             biodiversityPanel.SetActive(true); // Enable biodiversity panel
-            biodiversityPanelActive = true; // Set bool biodiversityPanel to true
+            biodiversityPanelActive = true; // Set bool biodiversityPanelActive to true
         }
     }
 }

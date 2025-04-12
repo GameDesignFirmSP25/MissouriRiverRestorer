@@ -89,7 +89,6 @@ public class SpawnManager : MonoBehaviour
             int trashInRiverIndex = Random.Range(0, trashInRiverPrefabs.Length); // trashInRiverIndex equals a number with in range of 0 to 1
             Instantiate(trashInRiverPrefabs[trashInRiverIndex], new Vector3(xPositionInRiver, yPositionInRiver,
                 Random.Range(minimumZInRiver, maximumZInRiver)), trashInRiverPrefabs[trashInRiverIndex].transform.rotation); // Instantiate trashInRiverPrefab at trashInRiverIndex at new Vector3
-            trashInRiverPrefabs[trashInRiverIndex].gameObject.tag = "Destructible"; // Set tag for all trashInRiverPrefabs within trshInRiverIndex to "Destructible"
             spawnedTrashInRiverCount++; // spawnedTrashInRiverCount equals itself plus 1
         }
     }
