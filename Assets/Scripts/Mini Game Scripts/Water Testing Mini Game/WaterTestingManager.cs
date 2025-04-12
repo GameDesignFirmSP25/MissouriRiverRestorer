@@ -106,7 +106,7 @@ public class WaterTestingManager : MonoBehaviour
     private float showPanel = 3f;
     private float progressIncrement = 0.1f;
     private float panelTimer = 0.1f;
-    private float enableTime = 3f;
+    private float enableTime = 5f;
 
     public bool isPressed = false;
     public bool isMiniGameOver = false;
@@ -114,7 +114,7 @@ public class WaterTestingManager : MonoBehaviour
     public bool firstWaterTestObjectivesVisible = false;
     public bool secondWaterTestObjectivesVisible = false;
     public bool instructionsShown = false;
-    public static bool objectivesComplete = false;
+    public bool objectivesComplete = false;
     public static bool isTrashBagObjectiveComplete = false;
     public static bool isGasCanObjectiveComplete = false;
     public static bool isTireObjectiveComplete = false;
@@ -195,7 +195,7 @@ public class WaterTestingManager : MonoBehaviour
 
         AreObjectivesComplete();
 
-        // if bool objectivesComplete is true & bool aPanelIsActive is false & bool isFirstWaterTestComplete is false...
+        // if bool objectivesComplete is true & bool aPanelIsActive is false & bool !instructionsShown is false...
         if (objectivesComplete && !raycastScript.aPanelIsActive && !instructionsShown)
         {
             Invoke("EnableTestingInstructions", enableTime); // Invoke method EnableTestingInstructions after enableTime (in seconds)
