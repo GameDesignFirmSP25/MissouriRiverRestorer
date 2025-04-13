@@ -12,18 +12,21 @@ public class AnimalGameManager : MonoBehaviour
     public GameObject startPanel;
     public GameObject startButton;
     public GameObject returnButton;
+    public GameObject pauseButton;
     //Public Variables
     public GameObject[] animalPrefabs; //Add animals to this array, tag invasive animals with the invasive tag
-    public float spawnRangeX = 25; //How far apart the animals can spawn from the top to the bottom of the screen
-    public float spawnPosZ = -60; //how far to the left or right of the camera the animals spawn
-    public float startDelay = 2; //Delay before animals start spawning after games begin
-    public float spawnInterval = 0.5f; //Time between animal spawns (spawn rate)
-    public float timeRemaining = 60f; //How long the game lasts
-    public float ScoreThreshold = 25f; //Score to meet to win
-    private bool timerRunning = false; //Game is 'active'
+    private AudioSource backgroundMusic; //Background music for the game
+    private float spawnMinX = 25; //How far apart the animals can spawn from the left to the right of the screen
+    private float spawnMaxX = -17.5f; //How far apart the animals can spawn from the top to the bottom of the screen
+    private float spawnPosZ = -60; //how far to the left or right of the camera the animals spawn
+    private float startDelay = 1; //Delay before animals start spawning after games begin
+    private float spawnInterval = 0.25f; //Time between animal spawns (spawn rate)
+    private float timeRemaining = 60f; //How long the game lasts
+    private float ScoreThreshold = 25f; //Score to meet to win
     public float Score = 0f; //tracks player score
-    public float restartTimer = 3f; //Time before game resets
+    private float restartTimer = 3f; //Time before game resets
 
+    private bool timerRunning = false; //Game is 'active'
     public static bool trappingCompleted = false; // Global variable to check if trapping is completed
 
     void Start()
@@ -31,6 +34,9 @@ public class AnimalGameManager : MonoBehaviour
         returnButton.SetActive(false);
         startButton.SetActive(true); //show start button
         startPanel.SetActive(true); //show start panel
+        pauseButton.SetActive(false); //hide pause button
+        backgroundMusic = GetComponent<AudioSource>(); //Get the background music
+        backgroundMusic.Play(); //Play the background music
     }
 
     // Update is called once per frame
@@ -62,7 +68,7 @@ public class AnimalGameManager : MonoBehaviour
     {
 
         int animalIndex = Random.Range(0, animalPrefabs.Length);
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
+        Vector3 spawnPos = new Vector3(Random.Range(spawnMinX, spawnMaxX), 0, spawnPosZ);
 
         Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
 
@@ -75,6 +81,7 @@ public class AnimalGameManager : MonoBehaviour
         startButton.SetActive(false); //hide start button
         timerRunning = true; //start timer
         startPanel.SetActive(false); //hide start panel
+        pauseButton.SetActive(true); //show pause button
     }
 
     void EndLevel()
