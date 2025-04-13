@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class NPC : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer interactSprite;
+    [SerializeField] private GameObject interactText; // Reference to the interact text object
 
     [Header("Ink JSON")]
     [SerializeField] private TextAsset TutorialIntroduction;
@@ -53,6 +54,7 @@ public class NPC : MonoBehaviour
         if (interactSprite.gameObject.activeSelf && !IsWithinInteractDistance())
         {
             interactSprite.gameObject.SetActive(false); // Deactivate the interact sprite
+            interactText.SetActive(false); // Deactivate the interact text
             isWithinInteractDistance = false; // set bool isWithinInteractDistance to false
         }
 
@@ -60,6 +62,7 @@ public class NPC : MonoBehaviour
         else if (!interactSprite.gameObject.activeSelf && IsWithinInteractDistance())
         {
             interactSprite.gameObject.SetActive(true); // Activate the interact sprite
+            interactText.SetActive(true); // Activate the interact text
             isWithinInteractDistance = true; // set bool isWithinInteractDistance to true
         }
     }
