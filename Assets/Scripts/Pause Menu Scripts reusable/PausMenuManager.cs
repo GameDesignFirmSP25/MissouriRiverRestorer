@@ -58,6 +58,7 @@ public class PausMenuManager : MonoBehaviour
     }
     public void MainMenu()
     {
+          Resume();
         SceneManager.LoadScene("Title");
     }
     public void settings()
