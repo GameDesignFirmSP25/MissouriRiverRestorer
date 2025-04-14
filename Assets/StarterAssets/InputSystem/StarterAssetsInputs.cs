@@ -35,14 +35,14 @@ namespace StarterAssets
 			// No camera movement allowed
 			if (!cursorInputForLook) return;
 
-			// Hold right mouse button to rotate
-			if (cameraLocked)
+               // Hold camera unlock trigger (Currently 'Q') to rotate
+               if (cameraLocked)
 			{
 				LookInput(Vector2.zero);
 				return;
 			}
-
-			// Rotation in pitch and yaw. Orbits the player
+               
+               // Rotation in pitch and yaw. Orbits the player
                if (!fixedHeight)
 			{
                     LookInput(value.Get<Vector2>());
@@ -57,10 +57,12 @@ namespace StarterAssets
 		}
 
 		// frees cursor when locked
+		// Note: In webGl When mapped to mouse button, a keyboard key must also be pressed to trigger cursor lock
+		// When mapped to keyboard key, there is a slight delay before cursor becomes locked
 		public void OnCameraLock(InputValue value)
 		{
 			CameraLockInput(!value.isPressed);
-		}
+          }
 
 		public void OnRotate(InputValue value)
 		{
@@ -95,7 +97,7 @@ namespace StarterAssets
 		public void CameraLockInput(bool newCameraLockState)
 		{
 			cameraLocked = newCameraLockState;
-               SetCursorState(!cameraLocked);
+			SetCursorState(!cameraLocked);
           }
 
 
@@ -120,7 +122,7 @@ namespace StarterAssets
 			SetCursorState(cursorLocked);
 		}*/
 
-		private void SetCursorState(bool newState)
+		public void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
