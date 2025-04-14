@@ -15,9 +15,13 @@ public class AnimalGameManager : MonoBehaviour
     public GameObject pauseButton;
     //Public Variables
     public GameObject[] animalPrefabs; //Add animals to this array, tag invasive animals with the invasive tag
-    private AudioSource backgroundMusic; //Background music for the game
-    private float spawnMinX = 25; //How far apart the animals can spawn from the left to the right of the screen
-    private float spawnMaxX = -17.5f; //How far apart the animals can spawn from the top to the bottom of the screen
+    public GameObject[] fishPrefabs; //Add fish to this array, tag invasive fish with the invasive tag
+    private float animalMinX = 33; //How far apart the animals can spawn from the left to the right of the screen
+    private float animalMaxX = -15; //How far apart the animals can spawn from the top to the bottom of the screen
+    private float animalYPos = 0; //How far up the animals spawn
+    private float fishMinX = 45; //How far apart the fish can spawn from the left to the right of the screen
+    private float fishMaxX = 54; //How far apart the fish can spawn from the top to the bottom of the screen
+    private float fishYPos = -7; //How far up the fish spawn
     private float spawnPosZ = -60; //how far to the left or right of the camera the animals spawn
     private float startDelay = 1; //Delay before animals start spawning after games begin
     private float spawnInterval = 0.25f; //Time between animal spawns (spawn rate)
@@ -35,8 +39,6 @@ public class AnimalGameManager : MonoBehaviour
         startButton.SetActive(true); //show start button
         startPanel.SetActive(true); //show start panel
         pauseButton.SetActive(false); //hide pause button
-        backgroundMusic = GetComponent<AudioSource>(); //Get the background music
-        backgroundMusic.Play(); //Play the background music
     }
 
     // Update is called once per frame
@@ -68,9 +70,12 @@ public class AnimalGameManager : MonoBehaviour
     {
 
         int animalIndex = Random.Range(0, animalPrefabs.Length);
-        Vector3 spawnPos = new Vector3(Random.Range(spawnMinX, spawnMaxX), 0, spawnPosZ);
+        int fishIndex = Random.Range(0, fishPrefabs.Length);
+        Vector3 animalSpawnPos = new Vector3(Random.Range(animalMinX, animalMaxX), animalYPos, spawnPosZ);
+        Vector3 fishSpawnPos = new Vector3(Random.Range(fishMinX, fishMaxX), fishYPos, spawnPosZ);
 
-        Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
+        Instantiate(animalPrefabs[animalIndex], animalSpawnPos, animalPrefabs[animalIndex].transform.rotation);
+        Instantiate(fishPrefabs[fishIndex], fishSpawnPos, fishPrefabs[fishIndex].transform.rotation);
 
     }
 

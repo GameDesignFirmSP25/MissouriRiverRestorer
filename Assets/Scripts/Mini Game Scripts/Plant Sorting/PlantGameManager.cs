@@ -27,7 +27,6 @@ public class PlantGameManager : MonoBehaviour
     private List<GameObject> spawnedPlants = new List<GameObject>(); //Track all spawned plants
     private bool gameActive = false; //Check if the game has started
     private int currentRound = 1;
-    private AudioSource backgroundMusic; //Reference to the background music
 
     public static bool plantingCompleted = false; // Global variable to check if planting is completed
 
@@ -35,8 +34,6 @@ public class PlantGameManager : MonoBehaviour
     {
         checkButton.SetActive(false);
         RestartingText.text = ""; //Hide the restarting text
-        backgroundMusic = GetComponent<AudioSource>(); //Get the background music component
-        backgroundMusic.Play(); //Play the background music
     }
 
     void Update()

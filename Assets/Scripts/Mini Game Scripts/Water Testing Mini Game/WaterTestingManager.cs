@@ -196,7 +196,7 @@ public class WaterTestingManager : MonoBehaviour
         AreObjectivesComplete();
 
         // if bool objectivesComplete is true & bool aPanelIsActive is false & bool !instructionsShown is false...
-        if (objectivesComplete && !raycastScript.aPanelIsActive && !instructionsShown)
+        if (objectivesComplete && !Raycast.aPanelIsActive && !instructionsShown)
         {
             Invoke("EnableTestingInstructions", enableTime); // Invoke method EnableTestingInstructions after enableTime (in seconds)
         }
@@ -263,9 +263,9 @@ public class WaterTestingManager : MonoBehaviour
         if (!effectsOfAluminumPanelActive && !effectsOfGasPanelActive && !effectsOfTirePanelActive && !effectsOfTrashPanelActive)
         {
             // If bool aPanelIsActive is true...
-            if (raycastScript.aPanelIsActive)
+            if (Raycast.aPanelIsActive)
             {
-                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
+                Raycast.aPanelIsActive = false; // Set bool aPanelIsActive to false
             }
         }
 
@@ -273,9 +273,9 @@ public class WaterTestingManager : MonoBehaviour
         if (!effectsOfBiodiversity1PanelActive && !effectsOfBiodiversity2PanelActive && !effectsOfBiodiversity3PanelActive)
         {
             // If bool aPanelIsActive is true...
-            if (raycastScript.aPanelIsActive)
+            if (Raycast.aPanelIsActive)
             {
-                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
+                Raycast.aPanelIsActive = false; // Set bool aPanelIsActive to false
             }
         }
     }
