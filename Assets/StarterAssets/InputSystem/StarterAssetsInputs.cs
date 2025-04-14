@@ -22,6 +22,7 @@ namespace StarterAssets
 		public bool cursorLocked = false;
 		public bool cursorInputForLook = false;
 		public bool rotationWithQE = true;
+		public bool cameraLocked = true;
 
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
@@ -31,31 +32,34 @@ namespace StarterAssets
 
 		public void OnLook(InputValue value)
 		{
+			// No camera movement allowed
 			if (!cursorInputForLook) return;
 
 			// Hold right mouse button to rotate
-			if (!Input.GetMouseButton(1))
+			if (cameraLocked)
 			{
-				SetCursorState(false);
 				LookInput(Vector2.zero);
 				return;
 			}
-			else
-			{
-                    SetCursorState(true);
-               }
 
+			// Rotation in pitch and yaw. Orbits the player
                if (!fixedHeight)
 			{
                     LookInput(value.Get<Vector2>());
                }
-			else
-			{
-				// Ignores pitch
+               // Keeps the camera at a fixed height and allows yaw rotation only
+               else
+               {
 				Vector2 lookVector = new Vector2(value.Get<Vector2>().x, 0f);
                     LookInput(lookVector);
                }
 
+		}
+
+		// frees cursor when locked
+		public void OnCameraLock(InputValue value)
+		{
+			CameraLockInput(!value.isPressed);
 		}
 
 		public void OnRotate(InputValue value)
@@ -88,7 +92,14 @@ namespace StarterAssets
 			look = newLookDirection;
 		}
 
-		public void YawInput(float newYaw)
+		public void CameraLockInput(bool newCameraLockState)
+		{
+			cameraLocked = newCameraLockState;
+               SetCursorState(!cameraLocked);
+          }
+
+
+          public void YawInput(float newYaw)
 		{
 			yaw = newYaw;
 			look = new Vector2(yaw, 0f);
@@ -104,10 +115,10 @@ namespace StarterAssets
 			sprint = newSprintState;
 		}
 
-		private void OnApplicationFocus(bool hasFocus)
+/*		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
-		}
+		}*/
 
 		private void SetCursorState(bool newState)
 		{
