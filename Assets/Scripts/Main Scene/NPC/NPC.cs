@@ -22,7 +22,7 @@ public class NPC : MonoBehaviour
 
     private Transform playerTransform;
 
-    private float interactDistance = 5f;
+    private float interactDistance = 8f;
 
     private bool isWithinInteractDistance = false;
     private static bool introPlayed = false;

@@ -30,7 +30,7 @@ public class PausMenuManager : MonoBehaviour
     }
     void OnDestroy()
     {
-                PauseBtn.onClick.RemoveListener(pause);
+        PauseBtn.onClick.RemoveListener(pause);
         ResumeBtn.onClick.RemoveListener(Resume);
         MMBtn.onClick.RemoveListener(MainMenu);
         SettingsBtn.onClick.RemoveListener(settings);
