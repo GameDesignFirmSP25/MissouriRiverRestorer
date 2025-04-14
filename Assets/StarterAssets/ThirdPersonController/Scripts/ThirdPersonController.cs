@@ -21,6 +21,9 @@ namespace StarterAssets
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
 
+          [Tooltip("Sprint speed of the character in m/s")]
+          public bool AlwaysSprint = false;
+
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -222,14 +225,23 @@ namespace StarterAssets
 
         private void Move()
         {
-            // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+               // set target speed based on move speed, sprint speed and if sprint is pressed
+               float targetSpeed;
+               if(AlwaysSprint)
+               {
+                    targetSpeed = SprintSpeed;
+               }
+               else
+               {
+                    targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
-            // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
+               }
 
-            // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+               // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
+
+               // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+               // if there is no input, set the target speed to 0
+               if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
