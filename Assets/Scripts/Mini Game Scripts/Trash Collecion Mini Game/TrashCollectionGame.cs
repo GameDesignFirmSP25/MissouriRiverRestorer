@@ -3,6 +3,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
+using Unity.Mathematics;
+
 
 public class TrashCollectionGame : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class TrashCollectionGame : MonoBehaviour
     public int GameScore;
     public bool isgameComplete = false;
     public Trashcast trashcast;
+    
     public Button StartBtn;
     public GameObject Panel;
     public GameObject StartButton;
@@ -20,6 +24,10 @@ public class TrashCollectionGame : MonoBehaviour
 
     
     public static bool trashCollected = false; // global variable to check if trash is collected
+
+    
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] float RemainingTime;
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
@@ -38,6 +46,11 @@ public class TrashCollectionGame : MonoBehaviour
 
      void Update()// Update is called once per frame
     {
+        RemainingTime -= Time.deltaTime;
+        int minutes = Mathf.FloorToInt(RemainingTime / 60);
+        int seconds = Mathf.FloorToInt(RemainingTime % 60);
+    timerText.text = string.Format("{00:00} : {1:00}", minutes, seconds);
+
         gameComplete();
     }
     public void StartGame()
