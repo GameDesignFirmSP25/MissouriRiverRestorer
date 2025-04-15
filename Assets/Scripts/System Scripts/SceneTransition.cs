@@ -16,6 +16,7 @@ public class SceneTransition : MonoBehaviour
 
      public void TransitionScene(string name)
      {
+          Cursor.lockState = CursorLockMode.None;
           if (targetSceneName == "")
           {
                Debug.Log("Scene name not set. Loading first build scene");
