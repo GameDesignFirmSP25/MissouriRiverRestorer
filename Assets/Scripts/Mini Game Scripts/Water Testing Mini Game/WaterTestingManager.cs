@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.Events;
 
-public class WaterTestingManager : MonoBehaviour
+public class WaterTestingManager : BaseMiniGameManager
 {
     [SerializeField] 
     private GameObject testingInstructionsPanel;
@@ -88,7 +89,7 @@ public class WaterTestingManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI riverbankObjectiveText;
 
-    private Slider slider;
+     private Slider slider;
     public Button StartBtn;
     public Raycast raycastScript;
     public ProgressBar progressBarScript;
@@ -441,6 +442,8 @@ public class WaterTestingManager : MonoBehaviour
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isFirstWaterTestComplete = true; // Set bool isFirstWaterTestComplete to true
+
+               TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
             // If isMiniGameOver is true and isCleanWaterPanelClicked is false...
             if (isMiniGameOver && !cleanWaterPanelScript.isCleanWaterPanelClicked)

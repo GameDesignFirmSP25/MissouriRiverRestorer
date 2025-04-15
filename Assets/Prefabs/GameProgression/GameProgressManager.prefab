@@ -46,11 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameState: 0
+  npc: {fileID: 0}
   minigames:
   - {fileID: 2605446792518893114}
   - {fileID: 7065256459620628590}
   - {fileID: 1893031333859095996}
   - {fileID: 9059815688032559700}
+  progressEventsSO:
+  - {fileID: 11400000, guid: b0876b99f97f094468a1a9bb1bdd4b0c, type: 2}
+  - {fileID: 11400000, guid: 0d9bd638f3a6de7469a84ee7ab875595, type: 2}
 --- !u!1 &6006669928560279253
 GameObject:
   m_ObjectHideFlags: 0
