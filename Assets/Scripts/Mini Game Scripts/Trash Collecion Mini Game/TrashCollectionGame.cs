@@ -47,6 +47,7 @@ public class TrashCollectionGame : MonoBehaviour
      private void OnDestroy()
      {
           StartBtn.onClick.RemoveListener(StartGame);
+
          
      }
 

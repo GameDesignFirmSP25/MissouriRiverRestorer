@@ -49,7 +49,10 @@ public class GameProgressManager : MonoBehaviour
      [SerializeField]
      private List<MiniGameData> minigames;
      [SerializeField]
-     private List<BaseProgressEventSO> progressEvents;
+     private List<ProgressEventsSO> progressEventsSO;
+     [SerializeField]
+     private List<BaseProgressEvent> progressEvents = new List<BaseProgressEvent>();
+
 
      private void Awake()
      {
@@ -68,43 +71,35 @@ public class GameProgressManager : MonoBehaviour
 
      private void Start()
      {
-          npc.FirstWaterGameTasked += OnFirstWaterTasked;
-          npc.TrashGameTasked += OnTrashTasked;
-          npc.PlantGameTasked += OnPlantTasked;
-          npc.SecondWaterGameTasked += OnSecondWaterTasked;
-          npc.AnimalGameTasked += OnAnimalTasked;
+          foreach(ProgressEventsSO PE in progressEventsSO)
+          {
+               if(PE.EventType == ProgressEventType.NPC)
+               {
+                    progressEvents.Add(new NPCProgressEvent(PE, PE._Name, npc));
+               }
+               else if(PE.EventType == ProgressEventType.MiniGame)
+               {
+                    progressEvents.Add(new MiniGameProgressEvent(PE));
+               }
+          }
+
+          foreach(BaseProgressEvent BE in progressEvents)
+          {
+               BE.ProgressEventCompleted += OnProgressEventCompleted;
+          }
      }
 
      private void OnDestroy()
      {
-          npc.FirstWaterGameTasked -= OnFirstWaterTasked;
-          npc.TrashGameTasked -= OnTrashTasked;
-          npc.PlantGameTasked -= OnPlantTasked;
-          npc.SecondWaterGameTasked -= OnSecondWaterTasked;
-          npc.AnimalGameTasked -= OnAnimalTasked;
+          foreach (BaseProgressEvent BE in progressEvents)
+          {
+               BE.ProgressEventCompleted -= OnProgressEventCompleted;
+          }
      }
 
-     private void OnFirstWaterTasked()
+     private void OnProgressEventCompleted(int score, BaseProgressEvent _event)
      {
-
-     }
-     private void OnTrashTasked()
-     {
-
+          Debug.Log("Event Complete: " + _event._Name);
      }
 
-     private void OnPlantTasked()
-     {
-
-     }
-
-     private void OnSecondWaterTasked()
-     {
-
-     }
-
-     private void OnAnimalTasked()
-     {
-          
-     }
 }

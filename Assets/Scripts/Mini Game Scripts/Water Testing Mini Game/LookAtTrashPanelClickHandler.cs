@@ -11,5 +11,6 @@ public class LookAtTrashPanelClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Look At Trash panel has been clicked!"); // Debug.Log
         isLookAtTrashPanelClicked = true; // Set bool isLookAtTrashPanelClicked to true
         WaterTestingManager.lookAtTrashPanelActive = false; // Set bool lookAtTrashPanelActive to false;
+        WaterTestingManager.aPanelIsActive = false; // Set bool aPanelActive to false;
     }
 }

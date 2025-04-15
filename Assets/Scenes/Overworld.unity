@@ -1595,34 +1595,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2605446792518893114, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: IsTasked
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2605446792518893114, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: IsStarted
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2605446792518893114, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: IsInteractable
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: npc
       value: 
       objectReference: {fileID: 982735440}
     - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: progressEvents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEvents.Array.data[0]'
+      propertyPath: 'progressEventsSO.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: b0876b99f97f094468a1a9bb1bdd4b0c, type: 2}
+      objectReference: {fileID: 11400000, guid: c9862d99747db5546acd798b843f92ef, type: 2}
     - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEvents.Array.data[1]'
+      propertyPath: 'progressEventsSO.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 0d9bd638f3a6de7469a84ee7ab875595, type: 2}
+      objectReference: {fileID: 11400000, guid: 07f8a5809b2449e458972f530cd853a4, type: 2}
     - target: {fileID: 4418391353687976784, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: m_Name
       value: GameProgressManager
