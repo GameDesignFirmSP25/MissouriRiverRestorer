@@ -38,13 +38,24 @@ public class NPC : MonoBehaviour
      public UnityAction SecondWaterGameTasked;
      public UnityAction AnimalGameTasked;
 
+     public Dictionary<string, UnityAction> actionNames;
+
 
      private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Find the player object in the scene
-    }
 
-    private void Update()
+          actionNames = new Dictionary<string, UnityAction>
+          {
+               {"FirstWaterGameTasked",  FirstWaterGameTasked},
+               {"TrashGameTasked",  TrashGameTasked},
+               {"PlantGameTasked",  PlantGameTasked},
+               {"SecondWaterGameTasked",  SecondWaterGameTasked},
+               {"AnimalGameTasked",  AnimalGameTasked},
+          };
+     }
+
+     private void Update()
     {
         if (!DialogueManager.GetInstance().dialogueIsPlaying)
         {
