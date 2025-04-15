@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class NPC : MonoBehaviour
 {
@@ -30,7 +31,15 @@ public class NPC : MonoBehaviour
     private static bool firstTransitionPlayed = false;
     private static bool secondTransitionPlayed = false;
 
-    private void Start()
+     // Events to trigger game progression.
+     public UnityAction FirstWaterGameTasked;
+     public UnityAction TrashGameTasked;
+     public UnityAction PlantGameTasked;
+     public UnityAction SecondWaterGameTasked;
+     public UnityAction AnimalGameTasked;
+
+
+     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Find the player object in the scene
     }
@@ -78,6 +87,7 @@ public class NPC : MonoBehaviour
         if (introPlayed && !WaterTestingManager.isFirstWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(WaterTestingTutorial);
+               FirstWaterGameTasked.Invoke();
         }
         
         if (introPlayed && !firstTransitionPlayed && WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
@@ -95,16 +105,19 @@ public class NPC : MonoBehaviour
         if (midpointTransitionPlayed && !TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
         {
             DialogueManager.GetInstance().StartDialogue(TrashCollectionTutorial); 
+               TrashGameTasked.Invoke();
         }
 
         if (midpointTransitionPlayed && TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
         {
             DialogueManager.GetInstance().StartDialogue(PlantingTutorial);
+               PlantGameTasked.Invoke();
         }
 
         if (TrashCollectionGame.trashCollected && PlantGameManager.plantingCompleted && !WaterTestingManager.isSecondWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(RetestWaterTutorial);
+               SecondWaterGameTasked.Invoke();
         }
 
         if (!secondTransitionPlayed && WaterTestingManager.isSecondWaterTestComplete && !AnimalGameManager.trappingCompleted)
@@ -116,6 +129,7 @@ public class NPC : MonoBehaviour
         if (!AnimalGameManager.trappingCompleted && secondTransitionPlayed)
         {
             DialogueManager.GetInstance().StartDialogue(AnimalTrappingTutorial);
+               AnimalGameTasked.Invoke();
         }
 
         if (TrashCollectionGame.trashCollected && AnimalGameManager.trappingCompleted && PlantGameManager.plantingCompleted && WaterTestingManager.isFirstWaterTestComplete && WaterTestingManager.isSecondWaterTestComplete)
