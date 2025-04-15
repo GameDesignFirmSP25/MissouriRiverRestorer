@@ -478,8 +478,10 @@ public class WaterTestingManager : BaseMiniGameManager
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
             isSecondWaterTestComplete = true; // Set bool isSecondWaterTestComplete to true
 
-            // If isMiniGameOver is true and isGreatJobPanelClicked is false...
-            if (isMiniGameOver && !greatJobPanelScript.isGreatJobPanelClicked)
+               TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
+
+               // If isMiniGameOver is true and isGreatJobPanelClicked is false...
+               if (isMiniGameOver && !greatJobPanelScript.isGreatJobPanelClicked)
             {
                 Invoke("ShowGreatJobPanel", showPanel); // Invoke method ShowCleanWaterPanel after showPanel (in seconds)
             }

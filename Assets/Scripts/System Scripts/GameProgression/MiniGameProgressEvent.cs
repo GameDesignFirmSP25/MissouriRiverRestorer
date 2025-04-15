@@ -13,6 +13,12 @@ public class MiniGameProgressEvent : BaseProgressEvent
           MiniGameManager.MiniGameComplete -= OnEventCompleted;
      }
 
+     public void SetMiniManager(BaseMiniGameManager newManager)
+     {
+          MiniGameManager = newManager;
+          MiniGameManager.MiniGameComplete += OnEventCompleted;
+     }
+
      public void OnEventCompleted(int score)
      {
           CompleteProgressEvent(score);

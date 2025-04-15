@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 /* Game progression
  * Initially dirty, must talk to waterson
@@ -14,10 +15,6 @@ using System.Linq;
  * what games have been completed
  * games score?
  * state of cleanliness
- * 
-
- * 
- * 
  * 
  */
 
@@ -42,6 +39,7 @@ public class GameProgressManager : MonoBehaviour
      static GameProgressManager instance;
 
      public GameState GameState;
+     public bool isAllEventsCompleted;
 
      public int CurrentProgressionStep;
      public MiniGameData CurrentMiniGamedData;
@@ -70,6 +68,9 @@ public class GameProgressManager : MonoBehaviour
                Debug.LogWarning("More than one GameProgressManager started. Destroying duplicate");
                Destroy(gameObject);
           }
+
+          SceneManager.sceneLoaded += OnSceneLoad;
+
      }
 
 
@@ -109,6 +110,8 @@ public class GameProgressManager : MonoBehaviour
           {
                BE.ProgressEventCompleted -= OnProgressEventCompleted;
           }
+
+          SceneManager.sceneLoaded -= OnSceneLoad;
      }
 
      private void OnProgressEventCompleted(int score, BaseProgressEvent _event)
@@ -126,6 +129,16 @@ public class GameProgressManager : MonoBehaviour
 
           // Move to the next progression step
           CurrentProgressionStep++;
+          Debug.Log("Event Complete: " + progressEvents[CurrentProgressionStep]._Name);
+
+          if(CurrentProgressionStep >= progressEvents.Count)
+          {
+               isAllEventsCompleted = true;
+               //TODO: Cleanup
+               // Trigger a game complete event
+               // Make all minigames interactable and disconnect from all progression events
+               return;
+          }
 
           // If the next progression event is a minigame progression event
           if (progressEvents[CurrentProgressionStep] is MiniGameProgressEvent)
@@ -136,5 +149,19 @@ public class GameProgressManager : MonoBehaviour
                CurrentMiniGamedData.gameObject.SetActive(true);
                CurrentMiniGamedData.IsInteractable = true;
           }
+     }
+
+     private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
+     {
+          Debug.Log("Scene Loaded: " + loadedScene.name);
+          CurrentMiniGamedData?.gameObject.SetActive(false);
+
+          if (loadedScene.name == "Overworld") return;
+          if (progressEvents[CurrentProgressionStep] is NPCProgressEvent) return;
+
+          MiniGameProgressEvent currentMiniGameProgress = progressEvents[CurrentProgressionStep] as MiniGameProgressEvent;
+          currentMiniGameProgress.SetMiniManager(FindFirstObjectByType<BaseMiniGameManager>());
+          
+          Debug.Log("Current minidata: " + currentMiniGameProgress.TargetScene);
      }
 }
