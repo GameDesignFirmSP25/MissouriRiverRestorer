@@ -2,13 +2,13 @@
 - Project name: MissouriRiverRestorer
 - Unity version: Unity 6000.0.42f1
 - Active scene:
-  - Name: Title
+  - Name: Trash Collection
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, River, GameManager, Trash, Invasive, FishTrash, AnimalTrash, LeakTrash, Trash: can, Trash: tire, Trash: gas can, Trash: trash bag, Fish, Building: Water Testing Site, Water Testing Site
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, River, GameManager, Trash, Invasive, FishTrash, AnimalTrash, LeakTrash, Trash: can, Trash: tire, Trash: gas can, Trash: trash bag, Fish, Water Testing Site, NPC, Test Tube, Mammal, Riverbank
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Water, UI
 - Active game object:
-  - Name: Start Game
-  - Tag: Untagged
-  - Layer: UI
+  - Name: Can (1)
+  - Tag: Trash
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

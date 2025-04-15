@@ -30,7 +30,7 @@ public class Trashcast : MonoBehaviour
 
 
                 }
-                if (hit.collider.CompareTag("FishTrash"))
+                /*if (hit.collider.CompareTag("FishTrash"))
                 {
                     // Destroy the clicked object
                     Destroy(hit.collider.gameObject);
@@ -59,7 +59,7 @@ public class Trashcast : MonoBehaviour
                     Debug.Log("playerScore: " + playerScore);
 
 
-                }
+                } */
             }
         }
     }
