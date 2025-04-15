@@ -891,7 +891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &149216997
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2417,6 +2417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEffectsOfAluminumPanelClicked: 0
+  gameManagerScript: {fileID: 1411706655}
 --- !u!114 &477652804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2509,7 +2510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 285, y: 45}
+  m_AnchoredPosition: {x: 365, y: 95}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &517747199
@@ -2551,7 +2552,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 420457046}
   m_HandleRect: {fileID: 0}
@@ -2801,6 +2802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEffectsOfGasPanelClicked: 0
+  gameManagerScript: {fileID: 1411706655}
 --- !u!114 &524829863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6234,13 +6236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da96ca4da33777419d628d8b7881eb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectsOfGasPanel: {fileID: 524829858}
-  effectsOfTrashPanel: {fileID: 1167187712}
-  effectsOfTirePanel: {fileID: 2106384459}
-  effectsOfAluminumPanel: {fileID: 477652799}
-  effectsOfBiodiversityPanel1: {fileID: 1079880918}
-  effectsOfBiodiversityPanel2: {fileID: 1606585175}
-  effectsOfBiodiversityPanel3: {fileID: 1176660792}
   _mainCamera: {fileID: 987259329}
   waterTestingManagerScript: {fileID: 1411706655}
   testTubeClicked: 0
@@ -6470,6 +6465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEffectsOfBiodiversity1PanelClicked: 0
+  gameManagerScript: {fileID: 1411706655}
 --- !u!1 &1099026406
 GameObject:
   m_ObjectHideFlags: 0
@@ -6889,6 +6885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEffectsOfTrashPanelClicked: 0
+  gameManagerScript: {fileID: 1411706655}
 --- !u!114 &1167187717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7234,6 +7231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEffectsOfBiodiversity3PanelClicked: 0
+  gameManagerScript: {fileID: 1411706655}
 --- !u!1 &1195048084
 GameObject:
   m_ObjectHideFlags: 0
@@ -8172,24 +8170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bfea1e5fc30564a9073ec44867422f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testingInstructionsPanel: {fileID: 606868239}
-  poorWaterQualityPanel: {fileID: 54658590}
-  goodWaterQualityPanel: {fileID: 622774974}
   progressBar: {fileID: 517747197}
-  firstIntroductionPanel: {fileID: 1109992615}
-  secondIntroductionPanel: {fileID: 884982659}
   StartButton: {fileID: 522537088}
-  cleanWaterIsEssentialPanel: {fileID: 1791100700}
-  greatJobPanel: {fileID: 149216996}
-  biodiversityPanel: {fileID: 1637999359}
-  lookAtTrashPanel: {fileID: 241609752}
-  effectsOfGasPanel: {fileID: 524829858}
-  effectsOfTrashPanel: {fileID: 1167187712}
-  effectsOfTirePanel: {fileID: 2106384459}
-  effectsOfAluminumPanel: {fileID: 477652799}
-  effectsOfBiodiversityPanel1: {fileID: 1079880918}
-  effectsOfBiodiversityPanel2: {fileID: 1606585175}
-  effectsOfBiodiversityPanel3: {fileID: 1176660792}
   firstWaterTestObjectives: {fileID: 1195048084}
   secondWaterTestObjectives: {fileID: 1967886133}
   gasCanObjectiveText: {fileID: 47031858}
@@ -8200,6 +8182,23 @@ MonoBehaviour:
   mammalObjectiveText: {fileID: 305933845}
   riverbankObjectiveText: {fileID: 385389768}
   StartBtn: {fileID: 522537090}
+  panels:
+  - {fileID: 1109992615}
+  - {fileID: 884982659}
+  - {fileID: 241609752}
+  - {fileID: 524829858}
+  - {fileID: 1167187712}
+  - {fileID: 2106384459}
+  - {fileID: 477652799}
+  - {fileID: 606868239}
+  - {fileID: 54658590}
+  - {fileID: 1791100700}
+  - {fileID: 1637999359}
+  - {fileID: 1079880918}
+  - {fileID: 1606585175}
+  - {fileID: 1176660792}
+  - {fileID: 622774974}
+  - {fileID: 149216996}
   raycastScript: {fileID: 987259332}
   progressBarScript: {fileID: 517747200}
   cleanWaterPanelScript: {fileID: 1791100705}
@@ -8217,6 +8216,7 @@ MonoBehaviour:
   secondWaterTestObjectivesVisible: 0
   instructionsShown: 0
   objectivesComplete: 0
+  gameStarted: 0
 --- !u!1 &1436269420
 GameObject:
   m_ObjectHideFlags: 0
@@ -8713,6 +8713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEffectsOfBiodiversity2PanelClicked: 0
+  gameManagerScript: {fileID: 1411706655}
 --- !u!1 &1614712245
 GameObject:
   m_ObjectHideFlags: 0
@@ -11210,6 +11211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEffectsOfTirePanelClicked: 0
+  gameManagerScript: {fileID: 1411706655}
 --- !u!114 &2106384464
 MonoBehaviour:
   m_ObjectHideFlags: 0
