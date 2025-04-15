@@ -24,14 +24,21 @@ public class TrashCollectionGame : MonoBehaviour
     public GameObject EndButton;
     public GameObject Finishpanel2;
     
-   
-    public GameObject retryButton;
-    public Button rtyBtn;
 
     
     public static bool trashCollected = false; // global variable to check if trash is collected
-    [SerializeField] float RemainingTime;
-    [SerializeField] TextMeshProUGUI playerScore;
+
+  
+
+    [Header("Bools")]
+    public static bool ObjectveScup = false;
+    public static bool ObjectvGasCan = false;
+    public static bool ObjectvPizzaSlice = false;
+    public static bool ObjectvTrashBag = false;
+    public static bool ObjectvBottle = false;
+    public static bool ObjectvSaveBird = false;
+    public static bool ObjectvSaveFish = false;
+    public static bool ObjectvSaveDeer = false;
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
@@ -54,7 +61,6 @@ public class TrashCollectionGame : MonoBehaviour
      void Update()// Update is called once per frame
     {
 
-        playerScore.text = $"{trashcast.CollectedTrash} / {GameScore}";
         if (trashcast.CollectedTrash >= GameScore && !isgameComplete)
         {
             gameCompleteScore();

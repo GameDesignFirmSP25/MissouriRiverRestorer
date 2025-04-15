@@ -1960,6 +1960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ad745d266ddcc4eafb5217a2317d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trashCollectionGame: {fileID: 0}
   playerScore: 0
   CollectedTrash: 0
 --- !u!1001 &359400774
@@ -6143,10 +6144,6 @@ MonoBehaviour:
   endbtn: {fileID: 702063488}
   EndButton: {fileID: 702063486}
   Finishpanel2: {fileID: 1222198550}
-  retryButton: {fileID: 472222521}
-  rtyBtn: {fileID: 472222523}
-  RemainingTime: 80
-  playerScore: {fileID: 1935041450}
 --- !u!1001 &1342712138
 PrefabInstance:
   m_ObjectHideFlags: 0

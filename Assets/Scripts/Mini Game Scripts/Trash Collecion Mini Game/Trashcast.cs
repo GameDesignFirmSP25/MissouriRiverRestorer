@@ -3,6 +3,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Trashcast : MonoBehaviour
 {
+    public TrashCollectionGame trashCollectionGame;
     public int playerScore;
     public int CollectedTrash;
     void Start()
@@ -31,23 +32,35 @@ public class Trashcast : MonoBehaviour
 
 
                 }
-                if (hit.collider.CompareTag("Trash: Styrofoam Cup")) 
+                if (hit.collider.CompareTag("Trash: Styrofoam Cup")&& !TrashCollectionGame.ObjectveScup) 
                 {
 
                 }
-                if (hit.collider.CompareTag("Trash: Bottle"))
+                if (hit.collider.CompareTag("Trash: Bottle") && !TrashCollectionGame.ObjectvBottle)
                 {
 
                 }
-                if (hit.collider.CompareTag("Trash: trash bag"))
+                if (hit.collider.CompareTag("Trash: trash bag")&& !TrashCollectionGame.ObjectvTrashBag)
                 {
 
                 }
-                if (hit.collider.CompareTag("Trash: Pizza Slice"))
+                if (hit.collider.CompareTag("Trash: Pizza Slice")&& !TrashCollectionGame.ObjectvPizzaSlice)
                 {
 
                 }
-                if (hit.collider.CompareTag("Trash: gas can"))
+                if (hit.collider.CompareTag("Trash: gas can")&& !TrashCollectionGame.ObjectvGasCan)
+                {
+
+                }
+                if (hit.collider.CompareTag("Save bird") && !TrashCollectionGame.ObjectvSaveBird)
+                {
+
+                }
+                if (hit.collider.CompareTag("Save fish") && !TrashCollectionGame.ObjectvSaveFish)
+                {
+
+                }
+                if (hit.collider.CompareTag("Save deer") && !TrashCollectionGame.ObjectvSaveDeer)
                 {
 
                 }
@@ -57,7 +70,7 @@ public class Trashcast : MonoBehaviour
                 {
                     CollectedTrash += playerScore;
                     Debug.Log("Trash Collected: " +CollectedTrash);
-                    playerScore = 0;
+                    
                 }
 
             }
