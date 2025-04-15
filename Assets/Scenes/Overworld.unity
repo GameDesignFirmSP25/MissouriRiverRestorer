@@ -1555,6 +1555,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1893031333859095996, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: TargetSceneName
+      value: Plant Sorting
+      objectReference: {fileID: 0}
     - target: {fileID: 2402935639416851301, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.663612
@@ -1595,6 +1599,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2605446792518893114, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: TargetSceneName
+      value: Water Testing Mini Game
+      objectReference: {fileID: 0}
     - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: npc
       value: 
@@ -1610,6 +1618,14 @@ PrefabInstance:
     - target: {fileID: 4418391353687976784, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: m_Name
       value: GameProgressManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065256459620628590, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: TargetSceneName
+      value: Trash Collection
+      objectReference: {fileID: 0}
+    - target: {fileID: 9059815688032559700, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: TargetSceneName
+      value: WildlifeTrapping
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

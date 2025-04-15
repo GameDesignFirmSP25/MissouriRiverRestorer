@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 /* Game progression
  * Initially dirty, must talk to waterson
@@ -41,6 +42,9 @@ public class GameProgressManager : MonoBehaviour
      static GameProgressManager instance;
 
      public GameState GameState;
+
+     public int CurrentProgressionStep;
+     public MiniGameData CurrentMiniGamedData;
 
      [SerializeField]
      private NPC npc;
@@ -87,6 +91,16 @@ public class GameProgressManager : MonoBehaviour
           {
                BE.ProgressEventCompleted += OnProgressEventCompleted;
           }
+
+          // Turn off all minigames at beginning
+          foreach(MiniGameData mini in minigames)
+          {
+               mini.gameObject.SetActive(false);
+          }
+
+          // Reset current progression
+          CurrentProgressionStep = 0;
+          CurrentMiniGamedData = minigames[0];
      }
 
      private void OnDestroy()
@@ -100,6 +114,27 @@ public class GameProgressManager : MonoBehaviour
      private void OnProgressEventCompleted(int score, BaseProgressEvent _event)
      {
           Debug.Log("Event Complete: " + _event._Name);
-     }
 
+          // If the current progression event is a minigame progression event
+          if (progressEvents[CurrentProgressionStep] is MiniGameProgressEvent)
+          {
+               // Close out current minigame
+               CurrentMiniGamedData.IsComplete = true;
+               CurrentMiniGamedData.gameObject.SetActive(false);
+               CurrentMiniGamedData.IsInteractable = false;
+          }
+
+          // Move to the next progression step
+          CurrentProgressionStep++;
+
+          // If the next progression event is a minigame progression event
+          if (progressEvents[CurrentProgressionStep] is MiniGameProgressEvent)
+          {
+               // Find the minigame data with the matching target scene name
+               CurrentMiniGamedData = minigames.FirstOrDefault(mg => mg.TargetSceneName == progressEvents[CurrentProgressionStep].TargetScene);
+               CurrentMiniGamedData.IsTasked = true;
+               CurrentMiniGamedData.gameObject.SetActive(true);
+               CurrentMiniGamedData.IsInteractable = true;
+          }
+     }
 }
