@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.Mathematics;
+using System;
 
 
 public class TrashCollectionGame : MonoBehaviour
@@ -28,6 +29,7 @@ public class TrashCollectionGame : MonoBehaviour
     
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float RemainingTime;
+    [SerializeField] TextMeshProUGUI playerScore;
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
@@ -49,7 +51,10 @@ public class TrashCollectionGame : MonoBehaviour
         RemainingTime -= Time.deltaTime;
         int minutes = Mathf.FloorToInt(RemainingTime / 60);
         int seconds = Mathf.FloorToInt(RemainingTime % 60);
-    timerText.text = string.Format("{00:00} : {1:00}", minutes, seconds);
+        timerText.text = string.Format("{00:00} : {1:00}", minutes, seconds);
+
+        playerScore.text = $"{trashcast.CollectedTrash} / {GameScore}";
+
 
         gameComplete();
     }
