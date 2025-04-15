@@ -49,7 +49,7 @@ public class GameProgressManager : MonoBehaviour
      [SerializeField]
      private List<MiniGameData> minigames;
      [SerializeField]
-     private List<AbstractProgressEvent> progressEvents;
+     private List<BaseProgressEventSO> progressEvents;
 
      private void Awake()
      {
