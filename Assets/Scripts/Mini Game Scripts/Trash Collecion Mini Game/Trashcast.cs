@@ -4,6 +4,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Trashcast : MonoBehaviour
 {
     public int playerScore;
+    public int CollectedTrash;
     void Start()
     {
         playerScore = 0;
@@ -29,6 +30,13 @@ public class Trashcast : MonoBehaviour
                     Debug.Log("playerScore: " + playerScore);
 
 
+                }
+
+                if (hit.collider.CompareTag("TrashReceptical"))
+                {
+                    CollectedTrash += playerScore;
+                    Debug.Log("Trash Collected: " +CollectedTrash);
+                    playerScore = 0;
                 }
                 /*if (hit.collider.CompareTag("FishTrash"))
                 {
