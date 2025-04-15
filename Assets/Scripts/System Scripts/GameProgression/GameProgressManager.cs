@@ -43,7 +43,13 @@ public class GameProgressManager : MonoBehaviour
      public GameState GameState;
 
      [SerializeField]
+     private NPC npc;
+
+     // Holds the minigame objects that 
+     [SerializeField]
      private List<MiniGameData> minigames;
+     [SerializeField]
+     private List<AbstractProgressEvent> progressEvents;
 
      private void Awake()
      {
@@ -57,5 +63,48 @@ public class GameProgressManager : MonoBehaviour
                Debug.LogWarning("More than one GameProgressManager started. Destroying duplicate");
                Destroy(gameObject);
           }
+     }
+
+
+     private void Start()
+     {
+          npc.FirstWaterGameTasked += OnFirstWaterTasked;
+          npc.TrashGameTasked += OnTrashTasked;
+          npc.PlantGameTasked += OnPlantTasked;
+          npc.SecondWaterGameTasked += OnSecondWaterTasked;
+          npc.AnimalGameTasked += OnAnimalTasked;
+     }
+
+     private void OnDestroy()
+     {
+          npc.FirstWaterGameTasked -= OnFirstWaterTasked;
+          npc.TrashGameTasked -= OnTrashTasked;
+          npc.PlantGameTasked -= OnPlantTasked;
+          npc.SecondWaterGameTasked -= OnSecondWaterTasked;
+          npc.AnimalGameTasked -= OnAnimalTasked;
+     }
+
+     private void OnFirstWaterTasked()
+     {
+
+     }
+     private void OnTrashTasked()
+     {
+
+     }
+
+     private void OnPlantTasked()
+     {
+
+     }
+
+     private void OnSecondWaterTasked()
+     {
+
+     }
+
+     private void OnAnimalTasked()
+     {
+          
      }
 }
