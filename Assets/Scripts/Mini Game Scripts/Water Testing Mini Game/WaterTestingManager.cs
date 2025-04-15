@@ -286,7 +286,7 @@ public class WaterTestingManager : MonoBehaviour
                 ActivatePanel(6); // Activate the aluminum panel if effectsOfAluminumPanelActive is true
             }
         }
-        
+
         else
         {
             if (effectsOfBiodiversity1PanelActive)

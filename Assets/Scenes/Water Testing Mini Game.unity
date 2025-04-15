@@ -6237,6 +6237,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 987259329}
+  panels:
+  - {fileID: 1079880918}
+  - {fileID: 1606585175}
+  - {fileID: 1176660792}
   waterTestingManagerScript: {fileID: 1411706655}
   testTubeClicked: 0
 --- !u!1 &1048890745 stripped
@@ -8214,6 +8218,8 @@ MonoBehaviour:
   readyToTransition: 0
   firstWaterTestObjectivesVisible: 0
   secondWaterTestObjectivesVisible: 0
+  firstWaterTestReady: 1
+  secondWaterTestReady: 0
   instructionsShown: 0
   objectivesComplete: 0
   gameStarted: 0
