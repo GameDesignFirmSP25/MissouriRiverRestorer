@@ -31,43 +31,35 @@ public class Trashcast : MonoBehaviour
 
 
                 }
+                if (hit.collider.CompareTag("Trash: Styrofoam Cup")) 
+                {
 
-                if (hit.collider.CompareTag("TrashReceptical"))
+                }
+                if (hit.collider.CompareTag("Trash: Bottle"))
+                {
+
+                }
+                if (hit.collider.CompareTag("Trash: trash bag"))
+                {
+
+                }
+                if (hit.collider.CompareTag("Trash: Pizza Slice"))
+                {
+
+                }
+                if (hit.collider.CompareTag("Trash: gas can"))
+                {
+
+                }
+
+
+                if (hit.collider.CompareTag("TrashReceptical") &&  playerScore ==  8)
                 {
                     CollectedTrash += playerScore;
                     Debug.Log("Trash Collected: " +CollectedTrash);
                     playerScore = 0;
                 }
-                /*if (hit.collider.CompareTag("FishTrash"))
-                {
-                    // Destroy the clicked object
-                    Destroy(hit.collider.gameObject);
-                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
-                    Debug.Log("playerScore: " + playerScore);
-
-
-                }
-                if (hit.collider.CompareTag("AnimalTrash"))
-                {
-                    // Destroy the clicked object
-                    Destroy(hit.collider.gameObject);
-                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
-
-                    Debug.Log("playerScore: " + playerScore);
-
-
-                }
-                if (hit.collider.CompareTag("LeakTrash"))
-                {
-                    // Destroy the clicked object
-                    Destroy(hit.collider.gameObject);
-                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
-
-                    Debug.Log("playerScore: " + playerScore);
-
-
-                } */
             }
         }
     }
