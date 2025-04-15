@@ -14,17 +14,15 @@ using System.Collections.Generic;
  * games score?
  * state of cleanliness
  * 
- * Minigame data
- * Name - Transition Area
- * Started - event raised by transition area
- * Completed - event raised by minigame manager
- * Score? - parameter passed through completed event (score type?)
- * Available - Decided by game progress manager. - Will enable/disable scene transition
+
  * 
  * 
  * 
  */
 
+/// <summary>
+/// State of game progression decided by which minigames have been completed.
+/// </summary>
 public enum GameState
 {
      Dirty,
@@ -34,6 +32,10 @@ public enum GameState
      AnimalsCollected
 }
 
+
+/// <summary>
+/// Singleton responsible for keeping track of minigame progress and directing progression.
+/// </summary>
 public class GameProgressManager : MonoBehaviour
 {
      static GameProgressManager instance;
@@ -41,7 +43,7 @@ public class GameProgressManager : MonoBehaviour
      public GameState GameState;
 
      [SerializeField]
-     private List<GameObject> transitionAreas;
+     private List<MiniGameData> minigames;
 
      private void Awake()
      {
@@ -52,6 +54,7 @@ public class GameProgressManager : MonoBehaviour
           }
           else if (instance != this)
           {
+               Debug.LogWarning("More than one GameProgressManager started. Destroying duplicate");
                Destroy(gameObject);
           }
      }

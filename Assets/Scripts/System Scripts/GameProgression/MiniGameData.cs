@@ -1,16 +1,14 @@
 using UnityEngine;
 
+/// <summary>
+/// Class for holding data related to minigames. 
+/// </summary>
 public class MiniGameData : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+     public string Name() => gameObject.name;
+     public bool IsStarted;
+     public bool IsComplete;
+     public bool IsInteractable;
+     // TODO: Decide on if and how we want to keep score of minigames
+     public int score;   
 }
