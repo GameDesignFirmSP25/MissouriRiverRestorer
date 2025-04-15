@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.Mathematics;
 using System;
+using Unity.VisualScripting;
 
 
 public class TrashCollectionGame : MonoBehaviour
@@ -23,6 +24,9 @@ public class TrashCollectionGame : MonoBehaviour
     public GameObject EndButton;
     public GameObject Finishpanel2;
     public GameObject Finishpanel1;
+    public GameObject Finishpanel3;
+    public GameObject retryButton;
+    public Button rtyBtn;
 
     
     public static bool trashCollected = false; // global variable to check if trash is collected
@@ -37,6 +41,7 @@ public class TrashCollectionGame : MonoBehaviour
         Time.timeScale = 0f;
         Finishpanel1.SetActive(false);
         Finishpanel2.SetActive(false);
+        retryButton.SetActive(false);
         EndButton.SetActive(false);
         Panel.SetActive(true);
         StartButton.SetActive(true);
@@ -46,6 +51,7 @@ public class TrashCollectionGame : MonoBehaviour
      private void OnDestroy()
      {
           StartBtn.onClick.RemoveListener(StartGame);
+         
      }
 
      void Update()// Update is called once per frame
@@ -57,8 +63,20 @@ public class TrashCollectionGame : MonoBehaviour
 
         playerScore.text = $"{trashcast.CollectedTrash} / {GameScore}";
 
-
-        gameComplete();
+        if (RemainingTime <= 0f)
+        {
+            Time.timeScale = 0f;
+            Debug.Log("time ran out!!");
+            gameCompleteTimer();
+        }
+        else
+            {
+                if(trashcast.CollectedTrash >= GameScore &&! isgameComplete)
+                {
+                    gameCompleteScore();
+                }
+            }
+        
     }
     public void StartGame()
     {
@@ -68,27 +86,29 @@ public class TrashCollectionGame : MonoBehaviour
         Panel.SetActive(false);
        
     }
-    public void gameComplete()
+    public void gameCompleteScore()
     {
-         if (trashcast.CollectedTrash >= 20 &&! isgameComplete)
-         {
-            Debug.Log("Good Enough");
-                isgameComplete = true;
-                trashCollected = true; // set the global variable to true
-                // add panel to pop up
-            EndButton.SetActive(true);// sets button active
-                Finishpanel1.SetActive(true);// sets panel active
-            endbtn.onClick.AddListener(Home);
-         }
-         if (trashcast.CollectedTrash >= GameScore &&! isgameComplete)
-            {
+                Time.timeScale = 0f;
                 Debug.Log("Trash Collected");
                 isgameComplete = true;
                 trashCollected = true; // set the global variable to true
                 // add panel to pop up
-            EndButton.SetActive(true);// sets button active
+                EndButton.SetActive(true);// sets button active
+                Finishpanel1.SetActive(true);// sets panel active
+                endbtn.onClick.AddListener(Home);
+    }
+    public void gameCompleteTimer()
+    {
+        if (trashcast.CollectedTrash >= 20 &&! isgameComplete)
+            {
+                Time.timeScale = 0f;
+                Debug.Log("Trash Collected");
+                isgameComplete = true;
+                trashCollected = true; // set the global variable to true
+                // add panel to pop up
+                EndButton.SetActive(true);// sets button active
                 Finishpanel2.SetActive(true);// sets panel active
-            endbtn.onClick.AddListener(Home);
+                endbtn.onClick.AddListener(Home);
 
             }
          else 
@@ -96,9 +116,19 @@ public class TrashCollectionGame : MonoBehaviour
             isgameComplete = false;
             trashCollected = false;
             // add panel to pop up
+            Finishpanel3.SetActive(true); // sets panel active
+            retryButton.SetActive(true);
+            rtyBtn.onClick.AddListener(retry);
+        }
+
             
-         }
+         
       
+    }
+    public void retry()
+    {
+        rtyBtn.onClick.RemoveListener(retry);
+        SceneManager.LoadScene("Trash Collection");
     }
     public void Home() 
     {
