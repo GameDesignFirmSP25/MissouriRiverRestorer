@@ -26,7 +26,7 @@ public class PausMenuManager : MonoBehaviour
         ResumeBtn.onClick.AddListener(Resume);
         MMBtn.onClick.AddListener(MainMenu);
         SettingsBtn.onClick.AddListener(settings);
-        QuitBtn.onClick.AddListener(quit);
+        QuitBtn.onClick.AddListener(PosReset);
     }
     void OnDestroy()
     {
@@ -34,7 +34,7 @@ public class PausMenuManager : MonoBehaviour
         ResumeBtn.onClick.RemoveListener(Resume);
         MMBtn.onClick.RemoveListener(MainMenu);
         SettingsBtn.onClick.RemoveListener(settings);
-        QuitBtn.onClick.RemoveListener(quit);
+        QuitBtn.onClick.RemoveListener(PosReset);
     }
     // Update is called once per frame
     void Update()
@@ -65,8 +65,8 @@ public class PausMenuManager : MonoBehaviour
     {
 
     }
-    public void quit()
+    public void PosReset()
     {
-        Application.Quit();
+    
     }
 }
