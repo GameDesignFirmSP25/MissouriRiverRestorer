@@ -97,9 +97,9 @@ public class GameProgressManager : MonoBehaviour
           }
      }
 
-     private void OnProgressEventCompleted(int score)
+     private void OnProgressEventCompleted(int score, BaseProgressEvent _event)
      {
-          Debug.Log("Event Complete");
+          Debug.Log("Event Complete: " + _event._Name);
      }
 
 }

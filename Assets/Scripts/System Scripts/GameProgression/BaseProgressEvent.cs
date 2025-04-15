@@ -24,9 +24,9 @@ public class BaseProgressEvent
      public string TargetScene;
      public ProgressEventType Type;
 
-     public event UnityAction<int> ProgressEventCompleted;
+     public event UnityAction<int, BaseProgressEvent> ProgressEventCompleted;
      public void CompleteProgressEvent(int score)
      {
-          ProgressEventCompleted?.Invoke(score);
+          ProgressEventCompleted?.Invoke(score, this);
      }
 }
