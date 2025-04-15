@@ -13,9 +13,13 @@ public class PlayerController : MonoBehaviour
 
      void Update()
     {
-        // Get input from the horizontal and vertical axes for movement
-        float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
-        float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down arrows
+          if (DialogueManager.GetInstance() != null && DialogueManager.GetInstance().dialogueIsPlaying)
+          {
+               return;
+          }
+          // Get input from the horizontal and vertical axes for movement
+          float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
+          float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down arrows
 
           // Create a movement vector
           gravity -= 9.81f * Time.deltaTime;
@@ -25,17 +29,18 @@ public class PlayerController : MonoBehaviour
           // Normalize the movement vector to maintain consistent speed diagonally
           if (move.magnitude > 1) move.Normalize();
 
-        // Move the player
-          if(move != Vector3.zero)
+          // Move the player
+          if (move != Vector3.zero)
           {
                controller.Move(move * moveSpeed * Time.deltaTime);
 
                Vector3 lookRotVector = new Vector3(move.x, 0, move.z);
-               if(lookRotVector != Vector3.zero)
+               if (lookRotVector != Vector3.zero)
                {
-                    transform.rotation = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+               transform.rotation = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
                }
           }
+         
      }
 }
 

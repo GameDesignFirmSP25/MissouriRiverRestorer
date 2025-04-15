@@ -4,6 +4,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Trashcast : MonoBehaviour
 {
     public int playerScore;
+    public int CollectedTrash;
     void Start()
     {
         playerScore = 0;
@@ -30,36 +31,35 @@ public class Trashcast : MonoBehaviour
 
 
                 }
-                if (hit.collider.CompareTag("FishTrash"))
+                if (hit.collider.CompareTag("Trash: Styrofoam Cup")) 
                 {
-                    // Destroy the clicked object
-                    Destroy(hit.collider.gameObject);
-                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
-
-                    Debug.Log("playerScore: " + playerScore);
-
 
                 }
-                if (hit.collider.CompareTag("AnimalTrash"))
+                if (hit.collider.CompareTag("Trash: Bottle"))
                 {
-                    // Destroy the clicked object
-                    Destroy(hit.collider.gameObject);
-                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
-
-                    Debug.Log("playerScore: " + playerScore);
-
 
                 }
-                if (hit.collider.CompareTag("LeakTrash"))
+                if (hit.collider.CompareTag("Trash: trash bag"))
                 {
-                    // Destroy the clicked object
-                    Destroy(hit.collider.gameObject);
-                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
-
-                    Debug.Log("playerScore: " + playerScore);
-
 
                 }
+                if (hit.collider.CompareTag("Trash: Pizza Slice"))
+                {
+
+                }
+                if (hit.collider.CompareTag("Trash: gas can"))
+                {
+
+                }
+
+
+                if (hit.collider.CompareTag("TrashReceptical") &&  playerScore ==  8)
+                {
+                    CollectedTrash += playerScore;
+                    Debug.Log("Trash Collected: " +CollectedTrash);
+                    playerScore = 0;
+                }
+
             }
         }
     }

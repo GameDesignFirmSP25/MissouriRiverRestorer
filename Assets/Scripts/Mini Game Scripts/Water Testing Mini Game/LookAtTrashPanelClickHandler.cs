@@ -9,7 +9,7 @@ public class LookAtTrashPanelClickHandler : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Look At Trash panel has been clicked!"); // Debug.Log
-        isLookAtTrashPanelClicked = true;
-        WaterTestingManager.lookAtTrashPanelActive = false;
+        isLookAtTrashPanelClicked = true; // Set bool isLookAtTrashPanelClicked to true
+        WaterTestingManager.lookAtTrashPanelActive = false; // Set bool lookAtTrashPanelActive to false;
     }
 }

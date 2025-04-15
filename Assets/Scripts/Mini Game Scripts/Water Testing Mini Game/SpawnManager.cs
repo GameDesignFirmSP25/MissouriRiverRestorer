@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] trashInRiverPrefabs;
     public GameObject[] fishPrefabs;
     public GameObject[] mammalPrefabs;
+    public GameObject testTubePrefab;
 
     private int numberOfMammalsToSpawn = 7;
     private int numberOfTrashOnGroundToSpawn = 30;
@@ -16,6 +17,8 @@ public class SpawnManager : MonoBehaviour
     private int minimumFishInRiver = 8;
     private int maximumFishInRiver = 20;
     private int spawnedFishInRiverCount = 0;
+    private int maximumTestTubesInRiver = 20;
+    private int spawnedTestTubeCount = 0;
 
     private float spawnTime = 0.05f;
     private float spawnDelay = 2.5f;
@@ -38,6 +41,7 @@ public class SpawnManager : MonoBehaviour
             SpawnTrashOnGround();
             InvokeRepeating("SpawnTrashInRiver", spawnTime, spawnDelay); // repeatedly invoke SpawnTrashInRiver()
             InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+            InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
         }
 
         if (WaterTestingManager.isFirstWaterTestComplete)
@@ -46,6 +50,7 @@ public class SpawnManager : MonoBehaviour
             numberOfMammalsToSpawn = 20;
             SpawnMammals();
             InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+            InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
         }
     }
 
@@ -54,6 +59,7 @@ public class SpawnManager : MonoBehaviour
     {
         OnTrashDestroyed();
         OnFishDestroyed();
+        OnTestTubeDestroyed();
     }
 
     // Spawn Mammals
@@ -89,8 +95,18 @@ public class SpawnManager : MonoBehaviour
             int trashInRiverIndex = Random.Range(0, trashInRiverPrefabs.Length); // trashInRiverIndex equals a number with in range of 0 to 1
             Instantiate(trashInRiverPrefabs[trashInRiverIndex], new Vector3(xPositionInRiver, yPositionInRiver,
                 Random.Range(minimumZInRiver, maximumZInRiver)), trashInRiverPrefabs[trashInRiverIndex].transform.rotation); // Instantiate trashInRiverPrefab at trashInRiverIndex at new Vector3
-            trashInRiverPrefabs[trashInRiverIndex].gameObject.tag = "Destructible"; // Set tag for all trashInRiverPrefabs within trshInRiverIndex to "Destructible"
             spawnedTrashInRiverCount++; // spawnedTrashInRiverCount equals itself plus 1
+        }
+    }
+
+    // Spawn test tube
+    private void SpawnTestTube()
+    {
+        if (spawnedTestTubeCount < maximumTestTubesInRiver) // If spawnedTestTubeCount is less than maximumTestTubesInRiver...
+        {
+            Instantiate(testTubePrefab, new Vector3(xPositionInRiver, yPositionInRiver,
+                Random.Range(minimumZInRiver, maximumZInRiver)), testTubePrefab.transform.rotation); // Instantiate testTubePrefab at new Vector3
+            spawnedTestTubeCount++; // spawnedTestTubeCount equals itself plus 1
         }
     }
 
@@ -141,6 +157,16 @@ public class SpawnManager : MonoBehaviour
         if (spawnedFishInRiverCount > 0)
         {
             spawnedFishInRiverCount--; // spawnedFishInRiverCount is equal to itself minus 1
+        }
+    }
+
+    // Method to call when test tube is destroyed
+    public void OnTestTubeDestroyed()
+    {
+        // If spawnedTestTubeCount is greater than zero...
+        if (spawnedTestTubeCount > 0)
+        {
+            spawnedTestTubeCount--; // spawnedTestTubeCount is equal to itself minus 1
         }
     }
 }

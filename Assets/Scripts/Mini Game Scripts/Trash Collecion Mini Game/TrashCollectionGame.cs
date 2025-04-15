@@ -3,6 +3,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
+using Unity.Mathematics;
+using System;
+using Unity.VisualScripting;
+
 
 public class TrashCollectionGame : MonoBehaviour
 {
@@ -10,31 +15,50 @@ public class TrashCollectionGame : MonoBehaviour
     public int GameScore;
     public bool isgameComplete = false;
     public Trashcast trashcast;
+    
     public Button StartBtn;
     public GameObject Panel;
     public GameObject StartButton;
 
     public Button endbtn;
     public GameObject EndButton;
-    public GameObject Finishpanel;
+    public GameObject Finishpanel2;
+    
+   
+    public GameObject retryButton;
+    public Button rtyBtn;
+
+    
+    public static bool trashCollected = false; // global variable to check if trash is collected
+    [SerializeField] float RemainingTime;
+    [SerializeField] TextMeshProUGUI playerScore;
+
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
         Time.timeScale = 0f;
-        Finishpanel.SetActive(false);
+        Finishpanel2.SetActive(false);
+
         EndButton.SetActive(false);
         Panel.SetActive(true);
         StartButton.SetActive(true);
-          StartBtn.onClick.AddListener(StartGame);
+        StartBtn.onClick.AddListener(StartGame);
     }
 
      private void OnDestroy()
      {
           StartBtn.onClick.RemoveListener(StartGame);
+         
      }
 
      void Update()// Update is called once per frame
     {
-        gameComplete();
+
+        playerScore.text = $"{trashcast.CollectedTrash} / {GameScore}";
+        if (trashcast.CollectedTrash >= GameScore && !isgameComplete)
+        {
+            gameCompleteScore();
+        }
+        
     }
     public void StartGame()
     {
@@ -44,19 +68,16 @@ public class TrashCollectionGame : MonoBehaviour
         Panel.SetActive(false);
        
     }
-    public void gameComplete()
+    public void gameCompleteScore()
     {
-         if (trashcast.playerScore >= GameScore &&! isgameComplete)
-            {
+                Time.timeScale = 0f;
                 Debug.Log("Trash Collected");
                 isgameComplete = true;
+                trashCollected = true; // set the global variable to true
                 // add panel to pop up
                 EndButton.SetActive(true);// sets button active
-                Finishpanel.SetActive(true);// sets panel active
-            endbtn.onClick.AddListener(Home);
-
-            }
-      
+                Finishpanel2.SetActive(true);// sets panel active
+                endbtn.onClick.AddListener(Home);
     }
     public void Home() 
     {
