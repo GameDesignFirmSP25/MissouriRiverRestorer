@@ -22,7 +22,7 @@ public class TrashCollectionGame : BaseMiniGameManager
 
     public Button endbtn;
     public GameObject EndButton;
-    public GameObject Finishpanel2;
+    public GameObject Finishpanel1;
 
     
 
@@ -69,7 +69,7 @@ public class TrashCollectionGame : BaseMiniGameManager
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
         Time.timeScale = 0f;
-        Finishpanel2.SetActive(false);
+        Finishpanel1.SetActive(false);
 
         EndButton.SetActive(false);
         Panel.SetActive(true);
@@ -110,9 +110,9 @@ public class TrashCollectionGame : BaseMiniGameManager
                 isgameComplete = true;
                 trashCollected = true; // set the global variable to true
                 // add panel to pop up
-                EndButton.SetActive(true);// sets button active
-                Finishpanel2.SetActive(true);// sets panel active
-                endbtn.onClick.AddListener(Home);
+                
+                Finishpanel1.SetActive(true);// sets panel active
+                
 
           // For Game Progression
           TriggerMiniGameCompleteEvent(0); // Can add a score pass through here
