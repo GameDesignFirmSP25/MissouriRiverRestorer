@@ -40,6 +40,16 @@ public class TrashCollectionGame : BaseMiniGameManager
     public static bool ObjectvSaveFish = false;
     public static bool ObjectvSaveDeer = false;
 
+    [Header("ObjectiveText")]
+    public TextMeshProUGUI ObjectiveScuptext;
+    public TextMeshProUGUI ObjectiveGasCantext;
+    public TextMeshProUGUI ObjectivePizzaSlicetext;
+    public TextMeshProUGUI ObjectiveTrashBagtext;
+    public TextMeshProUGUI ObjectiveBottletext;
+    public TextMeshProUGUI ObjectiveSaveBirdtext;
+    public TextMeshProUGUI ObjectiveSaveFishtext;
+    public TextMeshProUGUI ObjectiveSaveDeertext;
+
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
         Time.timeScale = 0f;
@@ -60,8 +70,8 @@ public class TrashCollectionGame : BaseMiniGameManager
 
      void Update()// Update is called once per frame
     {
-
-        if (trashcast.CollectedTrash >= GameScore && !isgameComplete)
+        strikethrough();
+        if (trashcast.playerScore >= GameScore && !isgameComplete)
         {
             gameCompleteScore();
         }
@@ -70,7 +80,7 @@ public class TrashCollectionGame : BaseMiniGameManager
     public void StartGame()
     {
         Time.timeScale = 1f;
-        GameScore = 30;
+        GameScore = 8;
         StartButton.SetActive(false);
         Panel.SetActive(false);
        
@@ -94,6 +104,49 @@ public class TrashCollectionGame : BaseMiniGameManager
         endbtn.onClick.RemoveListener(Home);
         SceneManager.LoadScene(0);
 
+    }
+    public void strikethrough()
+    {
+        if (ObjectveScup)
+        {
+            Debug.Log("Stryofoam cup Striked");
+            ObjectiveScuptext.fontStyle = FontStyles.Strikethrough;
+        }
+        if (ObjectvGasCan)
+        {
+            Debug.Log("Gas Can Striked");
+            ObjectiveGasCantext.fontStyle = FontStyles.Strikethrough;
+        }
+        if (ObjectvPizzaSlice)
+        {
+            Debug.Log("Pizza Slice Striked");
+            ObjectivePizzaSlicetext.fontStyle = FontStyles.Strikethrough;
+        }
+        if (ObjectvTrashBag)
+        {
+            Debug.Log("Trash Bag Striked");
+            ObjectiveTrashBagtext.fontStyle = FontStyles.Strikethrough;
+        }
+        if (ObjectvBottle)
+        {
+            Debug.Log("Bottle Striked");
+            ObjectiveBottletext.fontStyle = FontStyles.Strikethrough;
+        }
+        if (ObjectvSaveBird)
+        {
+            Debug.Log("Save Bird Striked");
+            ObjectiveSaveBirdtext.fontStyle = FontStyles.Strikethrough;
+        }
+        if (ObjectvSaveFish)
+        {
+            Debug.Log("Save Fish Striked");
+            ObjectiveSaveFishtext.fontStyle = FontStyles.Strikethrough;
+        }
+        if (ObjectvSaveDeer)
+        {
+            Debug.Log("Save Deer Striked");
+            ObjectiveSaveDeertext.fontStyle = FontStyles.Strikethrough;
+        }
     }
 
 }
