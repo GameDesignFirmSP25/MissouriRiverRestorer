@@ -3,17 +3,19 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-public class PlantGameManager : MonoBehaviour
+public class PlantGameManager : BaseMiniGameManager
 {
     [Header("UI Elements")]
     public TextMeshProUGUI TitleText;
     public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI RestartingText;
     public GameObject startButton;
     public GameObject returnButton;
     public GameObject checkButton; 
 
     [Header("Round Settings")]
     public float ScoreThreshold = 3f; //Max number of mistakes
+    private float restartTimer = 3f; //Time before restarting the game
     public int[] plantsPerRound = { 5, 10, 15 };     //How many plants per round
     public float[] speedsPerRound = { 1f, 2f, 3f };  //How fast they move per round
     public GameObject[] plantprefabs; //Add plants to the array and tag invasive ones (MUST HAVE RIGID BODY WITH SAME SETTINGS AS EXAMPLE PREFABS & PLANT SCRIPT)
@@ -31,6 +33,7 @@ public class PlantGameManager : MonoBehaviour
     void Start()
     {
         checkButton.SetActive(false);
+        RestartingText.text = ""; //Hide the restarting text
     }
 
     void Update()
@@ -148,17 +151,22 @@ public class PlantGameManager : MonoBehaviour
     void GameOver(bool win) //Game end through checking
     {
         checkButton.SetActive(false);
-        returnButton.SetActive(true);
         gameActive = false;
         ClearPlants();
 
         if (win)
         {
             TitleText.text = "You removed all invasive species!"; //Player won the minigame
+            plantingCompleted = true; //Set the global variable to true
+            returnButton.SetActive(true); //Show the return button
+
+               // For Game Progression
+               TriggerMiniGameCompleteEvent(0);   // Can add score as pass through
         }
         else
         {
             TitleText.text = "Invasive species remain! Try again.";//Player lost the minigame after checking
+            Restart(); //Restart
         }
     }
 
@@ -166,14 +174,13 @@ public class PlantGameManager : MonoBehaviour
     {
         ClearPlants();
         checkButton.SetActive(false);
-        returnButton.SetActive(true);
         gameActive = false;
         TitleText.text = "Removed too many good plants! Try again.";
+        Restart(); //Restart
     }
 
     public void ReturnButton()
     {
-        plantingCompleted = true; //Set the global variable to true
         SceneManager.LoadScene(0);
     }
 
@@ -185,5 +192,16 @@ public class PlantGameManager : MonoBehaviour
                 Destroy(plant);
         }
         spawnedPlants.Clear();
+    }
+
+    void Restart() //Restart
+    {
+        RestartingText.text = "Restarting in " + restartTimer.ToString() + " seconds...";
+        Invoke("ReloadScene", restartTimer); //Reload the scene after a short delay
+    }
+
+    void ReloadScene() //Reload the current scene
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }

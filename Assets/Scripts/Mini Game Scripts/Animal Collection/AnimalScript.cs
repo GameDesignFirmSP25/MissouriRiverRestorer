@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class AnimalScript : MonoBehaviour
 {
-    private float RightBoundry = 30; //how far right the animal despawns
-    public float speed = 40.0f; //how fast the animal moves
+    private float RightBoundry = 60; //how far right the animal despawns
+    private float speedMin = 15.0f; //how fast the animal moves
+    private float speedMax = 30.0f; //how fast the animal moves
     private AnimalGameManager gameManager;
 
     // Start is called before the first frame update
@@ -16,7 +17,7 @@ public class AnimalScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed); //move the animal
+        transform.Translate(Vector3.forward * Time.deltaTime * Random.Range(speedMin, speedMax)); //move the animal
 
         if (transform.position.z > RightBoundry) //check if animal is out of bounds
         {

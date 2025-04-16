@@ -99,34 +99,24 @@ public class DialogueManager : MonoBehaviour
 
     private void ContinueStory()
     {
-        //// If currentStory can continue...
-        //if (currentStory.canContinue)
-        //{
-        //    dialogueText.text = currentStory.Continue(); // Display the first line of dialogue
-        //    DisplayChoices(); // Display choices, if any, for this dialogue line
-        //}
-        //else
-        //{
-        //    EndDialogue(); // If there is no dialogue, end the dialogue
-        //}
-
+        // If currentStory can continue...
         if (currentStory.canContinue)
         {
             // set text for the current dialogue line
             if (displayLineCoroutine != null)
             {
-                StopCoroutine(displayLineCoroutine);
+                StopCoroutine(displayLineCoroutine); // Stop the current coroutine if it is running
             }
-            string nextLine = currentStory.Continue();
+            string nextLine = currentStory.Continue(); // Get the next line of dialogue from the story
 
             // handle case where the last line is an external function
             if (nextLine.Equals("") && !currentStory.canContinue)
             {
-                EndDialogue();
+                EndDialogue(); // If there is no more dialogue, end the dialogue
             }
             else
             {
-                displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
+                displayLineCoroutine = StartCoroutine(DisplayLine(nextLine)); // Start the coroutine to display the line
             }
         }
         else
@@ -205,6 +195,7 @@ public class DialogueManager : MonoBehaviour
 
     private void HideChoices()
     {
+        // For each choice in the choices array...
         foreach (GameObject choiceButton in choices)
         {
             choiceButton.SetActive(false); // Deactivate the choice text
@@ -226,7 +217,7 @@ public class DialogueManager : MonoBehaviour
         {
             currentStory.ChooseChoiceIndex(choiceIndex); // Choose the choice based on the index
             
-            Input.GetKeyDown(KeyCode.Space); // Simulate the 'E' key press
+            Input.GetKeyDown(KeyCode.Space); // Simulate key press
             ContinueStory();
         }
     }

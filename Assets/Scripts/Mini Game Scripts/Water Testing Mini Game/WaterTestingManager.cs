@@ -4,62 +4,18 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.Events;
 
-public class WaterTestingManager : MonoBehaviour
+public class WaterTestingManager : BaseMiniGameManager
 {
-    [SerializeField] 
-    private GameObject testingInstructionsPanel;
-
-    [SerializeField]
-    private GameObject poorWaterQualityPanel;
-
-    [SerializeField]
-    private GameObject goodWaterQualityPanel;
-
     [SerializeField]
     private GameObject progressBar;
 
     [SerializeField]
-    private GameObject firstIntroductionPanel;
-
-    [SerializeField]
-    private GameObject secondIntroductionPanel;
-
-    [SerializeField]
     private GameObject StartButton;
 
-    [SerializeField]
-    private GameObject cleanWaterIsEssentialPanel;
-
-    [SerializeField]
-    private GameObject greatJobPanel;
-
-    [SerializeField]
-    private GameObject biodiversityPanel;
-
-    [SerializeField]
-    private GameObject lookAtTrashPanel;
-
-    [SerializeField]
-    private GameObject effectsOfGasPanel;
-
-    [SerializeField]
-    private GameObject effectsOfTrashPanel;
-
-    [SerializeField]
-    private GameObject effectsOfTirePanel;
-
-    [SerializeField]
-    private GameObject effectsOfAluminumPanel;
-
-    [SerializeField]
-    private GameObject effectsOfBiodiversityPanel1;
-
-    [SerializeField]
-    private GameObject effectsOfBiodiversityPanel2;
-
-    [SerializeField]
-    private GameObject effectsOfBiodiversityPanel3;
+    [SerializeField] 
+    private GameObject PauseButton;
 
     [SerializeField]
     private GameObject firstWaterTestObjectives;
@@ -88,9 +44,12 @@ public class WaterTestingManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI riverbankObjectiveText;
 
-    private Slider slider;
+     private Slider slider;
     public Button StartBtn;
+
+    public GameObject[] panels = new GameObject[16]; // Array of panels to manage
     public Raycast raycastScript;
+    public PausMenuManager pauseMenuScript;
     public ProgressBar progressBarScript;
     public CleanWaterPanelClickHandler cleanWaterPanelScript;
     public GreatJobPanelClickHandler greatJobPanelScript;
@@ -106,15 +65,27 @@ public class WaterTestingManager : MonoBehaviour
     private float showPanel = 3f;
     private float progressIncrement = 0.1f;
     private float panelTimer = 0.1f;
-    private float enableTime = 5f;
+    //private float enableTime = 5f;
 
     public bool isPressed = false;
     public bool isMiniGameOver = false;
     public bool readyToTransition = false;
     public bool firstWaterTestObjectivesVisible = false;
     public bool secondWaterTestObjectivesVisible = false;
+    public bool firstWaterTestReady = true;
+
+    public bool panel3 = false;
+    public bool panel4 = false;
+    public bool panel5 = false;
+    public bool panel6 = false;
+    public bool panel11 = false;
+    public bool panel12 = false;
+    public bool panel13 = false;
+    public bool secondWaterTestReady = false;
     public bool instructionsShown = false;
     public bool objectivesComplete = false;
+    public bool gameStarted = false;
+    public static bool aPanelIsActive = false;
     public static bool isTrashBagObjectiveComplete = false;
     public static bool isGasCanObjectiveComplete = false;
     public static bool isTireObjectiveComplete = false;
@@ -141,26 +112,26 @@ public class WaterTestingManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PauseButton.SetActive(false); // Set PauseButton to not active
         progressBar = GameObject.Find("Progress Bar"); // Get Slider component on Progress Bar
         slider = progressBar.GetComponent<Slider>(); // slider is equal to the slider component
-
+        GetPanels(); // Call the GetPanels function to initialize the panels
         Cursor.visible = true; // Set Cursor to be visible
-        SwitchUI();
         Time.timeScale = 0f; // Freezes time
 
         // If isFirstWaterTestComplete is false...
         if (!isFirstWaterTestComplete)
         {
-            firstIntroductionPanel.SetActive(true); // Set set first intro panel to active
+            ActivatePanel(0); // Activate the first panel
             StartButton.SetActive(true); // Set StartButton to active
             StartBtn.onClick.AddListener(StartGame); // when panel is clicked, add listener StartGame
         }
 
-        // Else if isFirstWaterTestComplete is true...
-        else
+        // Else if bool isFirstWaterTestComplete is true & bool isSecondWaterTestComplete is false...
+        else if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
-            secondIntroductionPanel.SetActive(true); // Set second intro panel to active
-            StartButton.SetActive(true); // Set StartButton to active
+            ActivatePanel(1); // Activate the second panel
+            StartButton.SetActive(true);
             StartBtn.onClick.AddListener(StartGame); // when panel is clicked, add listener StartGame
         }
         
@@ -181,27 +152,31 @@ public class WaterTestingManager : MonoBehaviour
             if (slider.value < targetProgress)
             {
                 CollectWater(); // call CollectWater method
-                
-                if (instructionsShown)
+
+                // If bool instructionsShown and testingInstructionsActive are true...
+                if (instructionsShown && testingInstructionsActive)
                 {
                     DisableTestingInstructions(); // call DisableTestingInstructions method
                 }
             }
         }
 
-        ShowObjectives();
-
-        StrikethroughText();
-
-        AreObjectivesComplete();
-
-        // if bool objectivesComplete is true & bool aPanelIsActive is false & bool !instructionsShown is false...
-        if (objectivesComplete && !raycastScript.aPanelIsActive && !instructionsShown)
+        if (pauseMenuScript.isPaused == true)
         {
-            Invoke("EnableTestingInstructions", enableTime); // Invoke method EnableTestingInstructions after enableTime (in seconds)
+            PauseGame();
         }
 
-        IsAPanelActive();
+        if (pauseMenuScript.isPaused == false)
+        {
+            ResumeGame();
+            PauseButton.SetActive(true); // Set PauseButton to active
+        }
+
+        ShowObjectives();
+
+        ShowObjectivesPanels();
+
+        StrikethroughText();
 
         // If slider value is equal to targetProgress variable and bool isWaterQualityGood is false...
         if (slider.value == targetProgress && !isWaterQualityGood)
@@ -216,25 +191,93 @@ public class WaterTestingManager : MonoBehaviour
         }
     }
 
+    // Function to get all panels in the scene
+    void GetPanels()
+    {
+        GameObject panel1 = panels[0]; // Get the first introduction panel
+        GameObject panel2 = panels[1]; // Get the second introduction panel
+        GameObject panel3 = panels[2]; // Get the Look At Trash panel
+        GameObject panel4 = panels[3]; // Get the Effects of Gas panel
+        GameObject panel5 = panels[4]; // Get the Effects of Trash panel
+        GameObject panel6 = panels[5]; // Get the effects of Tire panel
+        GameObject panel7 = panels[6]; // Get the Effects of Aluminum panel
+        GameObject panel8 = panels[7]; // Get the Testing Instructions panel
+        GameObject panel9 = panels[8]; // Get the Poor Water Quality panel
+        GameObject panel10 = panels[9]; // Get the Clean Water is Essential panel
+        GameObject panel11 = panels[10]; // Get the Biodiversity panel
+        GameObject panel12 = panels[11]; // Get the Effects of Biodiversity1 panel
+        GameObject panel13 = panels[12]; // Get the Effects of Biodiversity2 panel
+        GameObject panel14 = panels[13]; // Get the Effects of Biodiversity3 panel
+        GameObject panel15 = panels[14]; // Get the Good Water Quality panel
+        GameObject panel16 = panels[15]; // Get the Great Job panel
+    }
+
     // Start game
     private void StartGame()
     {
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
         progressBar.SetActive(true); // Enable Progress bar
+        PauseButton.SetActive(true); // Set PauseButton to active
         Raycast.isClickable = true; // Set bool isClickable to true
+        gameStarted = true; // Set bool gameStarted to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
 
         // If isFirstWaterTestComplete is false...
         if (!isFirstWaterTestComplete)
         {
-            firstIntroductionPanel.SetActive(false); // Disable firstIntroductionPanel
+            DeactivatePanel(0); // Disable firstIntroductionPanel
         }
 
         // If isFirstWaterTestComplete is true and isSecondWaterTestComplete is false...
         if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
-            secondIntroductionPanel.SetActive(false); // Disable secondIntroductionPanel
+            DeactivatePanel(1); // Disable secondIntroductionPanel
+        }
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
+
+    //// Method to deactivate all panels
+    //public void DeactivateAllPanels()
+    //{
+    //    // Loop through each panel in the panels array
+    //    foreach (GameObject panel in panels)
+    //    {
+    //        panel.SetActive(false); // Deactivate all panels
+    //    }
+
+    //    aPanelIsActive = false; // Set the active panel flag to false
+    //}
+
+    // Method to deactivate a specific panel
+    public void DeactivatePanel(int panelIndex)
+    {
+        panels[panelIndex].SetActive(false); // Activate the specified panel
+        aPanelIsActive = false; // Set the active panel flag to false
+        Debug.Log("Panel " + panelIndex + " deactivated."); // Debug.Log
+    }
+
+    // Method to activate a specific panel
+    public void ActivatePanel(int panelIndex)
+    {
+        if (panelIndex >= 0 && panelIndex < panels.Length)
+        {
+            panels[panelIndex].SetActive(true); // Activate the specified panel
+            aPanelIsActive = true; // Set the active panel flag to true
+            Debug.Log("Panel " + panelIndex + " activated."); // Debug.Log
+        }
+        else
+        {
+            Debug.LogError("Invalid panel index: " + panelIndex); // Log an error if the index is invalid
         }
     }
 
@@ -256,32 +299,55 @@ public class WaterTestingManager : MonoBehaviour
         }
     }
 
-    // Method for checking if a panel is active
-    private void IsAPanelActive()
+    // Method for showing the correct panel
+    private void ShowObjectivesPanels()
     {
-        // If bool effectsOfAluminumPanelActive, effectsOfGasPanelActive, effectsOfTirePanelActive, and effectsOfTrashPanelActive are all false...
-        if (!effectsOfAluminumPanelActive && !effectsOfGasPanelActive && !effectsOfTirePanelActive && !effectsOfTrashPanelActive)
+        if (!isFirstWaterTestComplete && firstWaterTestObjectivesVisible)
         {
-            // If bool aPanelIsActive is true...
-            if (raycastScript.aPanelIsActive)
+            if (effectsOfTirePanelActive && !panel5)
             {
-                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
+                ActivatePanel(5); // Activate the tire panel if effectsOfTirePanelActive is true
+                panel5 = true; // Set bool effectsOfTirePanelActive to true
+            }
+            else if (effectsOfGasPanelActive && !panel3)
+            {
+                ActivatePanel(3); // Activate the gas panel if effectsOfGasPanelActive is true
+                panel3 = true; // Set bool effectsOfGasPanelActive to true
+            }
+            else if (effectsOfTrashPanelActive && !panel4)
+            {
+                ActivatePanel(4); // Activate the trash panel if effectsOfTrashPanelActive is true
+                panel4 = true; // Set bool effectsOfTrashPanelActive to true
+            }
+            else if (effectsOfAluminumPanelActive && !panel6)
+            {
+                ActivatePanel(6); // Activate the aluminum panel if effectsOfAluminumPanelActive is true
+                panel6 = true; // Set bool effectsOfAluminumPanelActive to true
             }
         }
 
-        // If bool effectsOfBiodiversityPanel1Active, effectsOfBiodiversityPanel2Active, and effectsOfBiodiversityPanel3Active are all false...
-        if (!effectsOfBiodiversity1PanelActive && !effectsOfBiodiversity2PanelActive && !effectsOfBiodiversity3PanelActive)
+        if (isFirstWaterTestComplete && !isSecondWaterTestComplete && secondWaterTestObjectivesVisible)
         {
-            // If bool aPanelIsActive is true...
-            if (raycastScript.aPanelIsActive)
+            if (effectsOfBiodiversity1PanelActive && !panel11)
             {
-                raycastScript.aPanelIsActive = false; // Set bool aPanelIsActive to false
+                ActivatePanel(11); // Activate the biodiversity panel1 if effectsOfBiodiversity1PanelActive is true
+                panel11 = true; // Set bool effectsOfBiodiversity1PanelActive to true
+            }
+            else if (effectsOfBiodiversity3PanelActive && !panel13)
+            {
+                ActivatePanel(13); // Activate the biodiversity panel3 if effectsOfBiodiversity3PanelActive is true
+                panel13 = true; // Set bool effectsOfBiodiversity3PanelActive to true
+            }
+            else if (effectsOfBiodiversity2PanelActive && !panel12)
+            {
+                ActivatePanel(12); // Activate the biodiversity panel2 if effectsOfBiodiversity2PanelActive is true
+                panel12 = true; // Set bool effectsOfBiodiversity2PanelActive to true
             }
         }
     }
 
     // Method for checking if objectives are complete
-    private void AreObjectivesComplete()
+    public void AreObjectivesComplete()
     {
         // If bool isFirstWaterTestComplete is false and bool isSecondWaterTestComplete is false...
         if (!isFirstWaterTestComplete && !isSecondWaterTestComplete)
@@ -291,6 +357,7 @@ public class WaterTestingManager : MonoBehaviour
             {
                 Debug.Log("All objectives complete!"); // Debug.Log
                 objectivesComplete = true; // Set bool objectivesComplete to true
+                ShowInstructions(); // Call ShowInstructions method
             }
         }
 
@@ -302,22 +369,27 @@ public class WaterTestingManager : MonoBehaviour
             {
                 Debug.Log("All objectives complete!"); // Debug.Log
                 objectivesComplete = true; // Set bool objectivesComplete to true
+                ShowInstructions(); // Call ShowInstructions method
             }
         }
     }
 
-    // Method for enabling testing instructions
-    private void EnableTestingInstructions()
+    // Method for showing instructions
+    public void ShowInstructions()
     {
-        testingInstructionsPanel.SetActive(true); // Enable testingInstructions
-        testingInstructionsActive = true; // Set bool testingInstructionsActive to true
-        instructionsShown = true; // Set bool instructionsShown to true
+        // if bool objectivesComplete is true & bool aPanelIsActive is false & bool !instructionsShown is false...
+        if (!instructionsShown)
+        {
+            ActivatePanel(7); // Activate testing instructions panel
+            testingInstructionsActive = true; // Set bool testingInstructionsActive to true
+            instructionsShown = true; // Set bool instructionsShown to true
+        }
     }
 
     // Method for disabling testing instructions
     private void DisableTestingInstructions()
     {
-        testingInstructionsPanel.SetActive(false); // Disable testing instructions
+        DeactivatePanel(7); // Deactivate testing instructions panel
         testingInstructionsActive = false; // Set bool testingInstructionsActive to false
     }
 
@@ -325,29 +397,6 @@ public class WaterTestingManager : MonoBehaviour
     private void OnDestroy()
     {
         StartBtn.onClick.RemoveListener(StartGame); // when panel is clicked remove listener StartGame
-    }
-
-    private void SwitchUI()
-    {
-        testingInstructionsPanel.SetActive(false); // Disable testing intsructions
-        progressBar.SetActive(false); // Disable Progress bar
-        poorWaterQualityPanel.SetActive(false); // Disable poor water quality panel
-        goodWaterQualityPanel.SetActive(false); // Disable good water quality panel
-        cleanWaterIsEssentialPanel.SetActive(false); // Disable clean water is essential panel
-        greatJobPanel.SetActive(false); // Disable great job panel
-        firstIntroductionPanel.SetActive(false); // Disable first intro panel 
-        secondIntroductionPanel.SetActive(false); // Disable first intro panel 
-        lookAtTrashPanel.SetActive(false); // Disable look at trash panel
-        biodiversityPanel.SetActive(false); // Disable biodiversity panel
-        effectsOfGasPanel.SetActive(false); // Disable affects of gas panel
-        effectsOfTrashPanel.SetActive(false); // Disable affects of trash panel
-        effectsOfTirePanel.SetActive(false); // Disable affects of tire panel
-        effectsOfAluminumPanel.SetActive(false); // Disable affects of aluminum panel
-        firstWaterTestObjectives.SetActive(false); // Disable objectives on screen
-        secondWaterTestObjectives.SetActive(false); // Disable objectives on screen
-        effectsOfBiodiversityPanel1.SetActive(false); // Disable affects of biodiversity panel 1
-        effectsOfBiodiversityPanel2.SetActive(false); // Disable affects of biodiversity panel 2
-        effectsOfBiodiversityPanel3.SetActive(false); // Disable affects of biodiversity panel 3
     }
 
     // Method to strikethrough text
@@ -437,10 +486,12 @@ public class WaterTestingManager : MonoBehaviour
         // If bool isMiniGameOver is false...
         if (!isMiniGameOver)
         {
-            poorWaterQualityPanel.SetActive(true);// Enable poor water quality text
+            ActivatePanel(8); // Activate poor water quality panel
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isFirstWaterTestComplete = true; // Set bool isFirstWaterTestComplete to true
+
+               TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
             // If isMiniGameOver is true and isCleanWaterPanelClicked is false...
             if (isMiniGameOver && !cleanWaterPanelScript.isCleanWaterPanelClicked)
@@ -462,14 +513,16 @@ public class WaterTestingManager : MonoBehaviour
         // If isMiniGameOver is false...
         if (!isMiniGameOver)
         {
-            goodWaterQualityPanel.SetActive(true);// Enable poor water quality panel
+            ActivatePanel(14); // Activate good water quality panel
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
             isSecondWaterTestComplete = true; // Set bool isSecondWaterTestComplete to true
 
-            // If isMiniGameOver is true and isGreatJobPanelClicked is false...
-            if (isMiniGameOver && !greatJobPanelScript.isGreatJobPanelClicked)
+               TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
+
+               // If isMiniGameOver is true and isGreatJobPanelClicked is false...
+               if (isMiniGameOver && !greatJobPanelScript.isGreatJobPanelClicked)
             {
                 Invoke("ShowGreatJobPanel", showPanel); // Invoke method ShowCleanWaterPanel after showPanel (in seconds)
             }
@@ -485,17 +538,17 @@ public class WaterTestingManager : MonoBehaviour
     // Method to show clean water is essential panel
     private void ShowCleanWaterPanel()
     {
-        cleanWaterIsEssentialPanel.SetActive(true); // Enable clean water is essential panel 
+        DeactivatePanel(8); // Disable poor water quality panel
         cleanWaterPanelActive = true; // Set bool cleanWaterPanelActive to true
-        poorWaterQualityPanel.SetActive(false); // Disable poor water quality panel
+        ActivatePanel(9); // Activate clean water is essential panel
     }
 
     // Method to show great job panel
     private void ShowGreatJobPanel()
     {
-        greatJobPanel.SetActive(true); // Enable great job panel
+        DeactivatePanel(14); // Disable good water quality panel
         greatJobPanelActive = true; // Set bool greatJobPanel to true
-        goodWaterQualityPanel.SetActive(false); // Disable good water quality panel
+        ActivatePanel(15); // Activate great job panel
     }
 
     // Method to end minigame
@@ -517,14 +570,14 @@ public class WaterTestingManager : MonoBehaviour
         // If bool isFirstWaterTestComplete is false...
         if (!isFirstWaterTestComplete)
         {
-            lookAtTrashPanel.SetActive(true); // Enable look at trash panel
+            ActivatePanel(2); // Activate Look At Trash Panel
             lookAtTrashPanelActive = true; // Set bool lookAtTrashPanelActive to true
         }
 
         // If isFirstWaterTestComplete is true...
         if (isFirstWaterTestComplete)
         {
-            biodiversityPanel.SetActive(true); // Enable biodiversity panel
+            ActivatePanel(10); // Activate Biodiversity panel
             biodiversityPanelActive = true; // Set bool biodiversityPanelActive to true
         }
     }

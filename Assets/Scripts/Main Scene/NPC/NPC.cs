@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class NPC : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer interactSprite;
+    [SerializeField] private GameObject interactText; // Reference to the interact text object
 
     [Header("Ink JSON")]
     [SerializeField] private TextAsset TutorialIntroduction;
@@ -21,7 +23,7 @@ public class NPC : MonoBehaviour
 
     private Transform playerTransform;
 
-    private float interactDistance = 5f;
+    private float interactDistance = 8f;
 
     private bool isWithinInteractDistance = false;
     private static bool introPlayed = false;
@@ -29,12 +31,35 @@ public class NPC : MonoBehaviour
     private static bool firstTransitionPlayed = false;
     private static bool secondTransitionPlayed = false;
 
-    private void Start()
+     // Methods to trigger game progression.
+     public void OnFirstWaterGameTasked() { Debug.Log("NPC: First Water Game Tasked!"); }
+     public void OnTrashGameTasked() { Debug.Log("NPC: Trash Game Tasked!"); }
+     public void OnPlantGameTasked() { Debug.Log("NPC: Plant Game Tasked!"); }
+     public void OnSecondWaterGameTasked() { Debug.Log("NPC: Second Water Game Tasked!"); }
+     public void OnAnimalGameTasked() { Debug.Log("NPC: Animal Game Tasked!"); }
+     public void OnFinalDialogue() { Debug.Log("NPC: Final Dialogue!"); }
+
+     // Dictionary to match names to event complete methods
+     public Dictionary<string, UnityAction> actionNames;
+     private void Awake()
+     {
+          actionNames = new Dictionary<string, UnityAction>
+          {
+               {"FirstWaterGameTasked",  OnFirstWaterGameTasked},
+               {"TrashGameTasked",  OnTrashGameTasked},
+               {"PlantGameTasked",  OnPlantGameTasked},
+               {"SecondWaterGameTasked",  OnSecondWaterGameTasked},
+               {"AnimalGameTasked",  OnAnimalGameTasked},
+               {"FinalDialogue",  OnFinalDialogue},
+          };
+     }
+
+     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Find the player object in the scene
-    }
+     }
 
-    private void Update()
+     private void Update()
     {
         if (!DialogueManager.GetInstance().dialogueIsPlaying)
         {
@@ -53,6 +78,7 @@ public class NPC : MonoBehaviour
         if (interactSprite.gameObject.activeSelf && !IsWithinInteractDistance())
         {
             interactSprite.gameObject.SetActive(false); // Deactivate the interact sprite
+            interactText.SetActive(false); // Deactivate the interact text
             isWithinInteractDistance = false; // set bool isWithinInteractDistance to false
         }
 
@@ -60,6 +86,7 @@ public class NPC : MonoBehaviour
         else if (!interactSprite.gameObject.activeSelf && IsWithinInteractDistance())
         {
             interactSprite.gameObject.SetActive(true); // Activate the interact sprite
+            interactText.SetActive(true); // Activate the interact text
             isWithinInteractDistance = true; // set bool isWithinInteractDistance to true
         }
     }
@@ -68,20 +95,26 @@ public class NPC : MonoBehaviour
     {
         if (!introPlayed)
         {
-            DialogueManager.GetInstance().StartDialogue(TutorialIntroduction); // Call the StartDialogue method from the DialogueManager class
+               // FOR TESTING: Remove before building!!!
+               actionNames["FirstWaterGameTasked"]?.Invoke();
+               DialogueManager.GetInstance().StartDialogue(TutorialIntroduction); // Call the StartDialogue method from the DialogueManager class
             Invoke("SetIntroPlayed", 0.5f); // Call the SetIntroPlayed method after 0.5 seconds
         }
 
         if (introPlayed && !WaterTestingManager.isFirstWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(WaterTestingTutorial);
-        }
-        
-        if (introPlayed && !firstTransitionPlayed && WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
+               //actionNames["FirstWaterGameTasked"]?.Invoke();
+          }
+
+          if (introPlayed && !firstTransitionPlayed && WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(AfterFirstWaterTest);
             Invoke("SetFirstTransitionPlayed", 0.5f); // Call the SetFirstTransitionPlayed method after 0.5 seconds
-        }
+
+               //DEV - REMOVE BEFORE BUILDING
+               actionNames["TrashGameTasked"]?.Invoke();
+          }
 
         if (firstTransitionPlayed && !midpointTransitionPlayed && WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
         {
@@ -91,17 +124,20 @@ public class NPC : MonoBehaviour
 
         if (midpointTransitionPlayed && !TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
         {
-            DialogueManager.GetInstance().StartDialogue(TrashCollectionTutorial); 
-        }
+            DialogueManager.GetInstance().StartDialogue(TrashCollectionTutorial);
+               //actionNames["TrashGameTasked"]?.Invoke(); // ADD THIS BACK BEFORE BUILD
+          }
 
         if (midpointTransitionPlayed && TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
         {
             DialogueManager.GetInstance().StartDialogue(PlantingTutorial);
+               actionNames["PlantGameTasked"]?.Invoke();
         }
 
         if (TrashCollectionGame.trashCollected && PlantGameManager.plantingCompleted && !WaterTestingManager.isSecondWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(RetestWaterTutorial);
+               actionNames["SecondWaterGameTasked"]?.Invoke();
         }
 
         if (!secondTransitionPlayed && WaterTestingManager.isSecondWaterTestComplete && !AnimalGameManager.trappingCompleted)
@@ -113,12 +149,14 @@ public class NPC : MonoBehaviour
         if (!AnimalGameManager.trappingCompleted && secondTransitionPlayed)
         {
             DialogueManager.GetInstance().StartDialogue(AnimalTrappingTutorial);
+               actionNames["AnimalGameTasked"]?.Invoke();
         }
 
         if (TrashCollectionGame.trashCollected && AnimalGameManager.trappingCompleted && PlantGameManager.plantingCompleted && WaterTestingManager.isFirstWaterTestComplete && WaterTestingManager.isSecondWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(Finale); // Call the StartDialogue method from the DialogueManager class
-        }
+               actionNames["FinalDialogue"]?.Invoke();
+          }
 
     }
 

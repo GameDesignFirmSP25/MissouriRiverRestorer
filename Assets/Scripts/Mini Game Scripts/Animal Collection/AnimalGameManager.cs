@@ -2,30 +2,43 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class AnimalGameManager : MonoBehaviour
+public class AnimalGameManager : BaseMiniGameManager
 {
     //UI Elements
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI TimerText;
-    public TextMeshProUGUI TitleText;
+    public TextMeshProUGUI EndText;
+    public TextMeshProUGUI RetartingText;
+    public GameObject startPanel;
     public GameObject startButton;
     public GameObject returnButton;
+    public GameObject pauseButton;
     //Public Variables
     public GameObject[] animalPrefabs; //Add animals to this array, tag invasive animals with the invasive tag
-    public float spawnRangeX = 20; //How far apart the animals can spawn from the top to the bottom of the screen
-    public float spawnPosZ = -30; //how far to the left or right of the camera the animals spawn
-    public float startDelay = 2; //Delay before animals start spawning after games begin
-    public float spawnInterval = 0.5f; //Time between animal spawns (spawn rate)
-    public float timeRemaining = 60f; //How long the game lasts
-    public float ScoreThreshold = 25f; //Score to meet to win
-    private bool timerRunning = false; //Game is 'active'
+    public GameObject[] fishPrefabs; //Add fish to this array, tag invasive fish with the invasive tag
+    private float animalMinX = 33; //How far apart the animals can spawn from the left to the right of the screen
+    private float animalMaxX = -15; //How far apart the animals can spawn from the top to the bottom of the screen
+    private float animalYPos = 0; //How far up the animals spawn
+    private float fishMinX = 45; //How far apart the fish can spawn from the left to the right of the screen
+    private float fishMaxX = 54; //How far apart the fish can spawn from the top to the bottom of the screen
+    private float fishYPos = -7; //How far up the fish spawn
+    private float spawnPosZ = -60; //how far to the left or right of the camera the animals spawn
+    private float startDelay = 1; //Delay before animals start spawning after games begin
+    private float spawnInterval = 0.25f; //Time between animal spawns (spawn rate)
+    private float timeRemaining = 60f; //How long the game lasts
+    private float ScoreThreshold = 25f; //Score to meet to win
     public float Score = 0f; //tracks player score
+    private float restartTimer = 3f; //Time before game resets
 
+    private bool timerRunning = false; //Game is 'active'
     public static bool trappingCompleted = false; // Global variable to check if trapping is completed
 
     void Start()
     {
         returnButton.SetActive(false);
+        startButton.SetActive(true); //show start button
+        startPanel.SetActive(true); //show start panel
+        pauseButton.SetActive(false); //hide pause button
     }
 
     // Update is called once per frame
@@ -45,6 +58,7 @@ public class AnimalGameManager : MonoBehaviour
                 EndLevel();
             }
         }
+        // TODO: This shouls be a one time event, not continuous calls in Udpate()
         if (Score >= ScoreThreshold) //end game if score is at threshold
         {
             timerRunning = false;
@@ -57,9 +71,12 @@ public class AnimalGameManager : MonoBehaviour
     {
 
         int animalIndex = Random.Range(0, animalPrefabs.Length);
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
+        int fishIndex = Random.Range(0, fishPrefabs.Length);
+        Vector3 animalSpawnPos = new Vector3(Random.Range(animalMinX, animalMaxX), animalYPos, spawnPosZ);
+        Vector3 fishSpawnPos = new Vector3(Random.Range(fishMinX, fishMaxX), fishYPos, spawnPosZ);
 
-        Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
+        Instantiate(animalPrefabs[animalIndex], animalSpawnPos, animalPrefabs[animalIndex].transform.rotation);
+        Instantiate(fishPrefabs[fishIndex], fishSpawnPos, fishPrefabs[fishIndex].transform.rotation);
 
     }
 
@@ -69,28 +86,47 @@ public class AnimalGameManager : MonoBehaviour
         ScoreText.text = "Score: " + Score.ToString() + "/" + ScoreThreshold.ToString();
         startButton.SetActive(false); //hide start button
         timerRunning = true; //start timer
-        TitleText.text = ""; //hide title text
+        startPanel.SetActive(false); //hide start panel
+        pauseButton.SetActive(true); //show pause button
     }
 
     void EndLevel()
     {
         CancelInvoke("SpawnRandomAnimal"); //stop spawning animals
-        returnButton.SetActive(true);
-
+        
         if (Score < ScoreThreshold) //determine if the player won or lost
         {
-            TitleText.text = "You Lose!";
+            EndText.text = "You Lose!";
+            Invoke("RestartScene", restartTimer); //reset game after 2 seconds
         }
         else
         {
-            TitleText.text = "You Win!";
-        }
+          // Need this to escape repeated calls during update
+          if (trappingCompleted == false)
+          {
+               EndText.text = "You Win!";
+               returnButton.SetActive(true);
 
-        trappingCompleted = true; //set global variable to true
+               // For Game Progression
+               TriggerMiniGameCompleteEvent(0);   // Can add score pass through
+               trappingCompleted = true; //set global variable to true
+          }
+        }  
     }
 
     public void ReturnButton()
     {
         SceneManager.LoadScene(0); //load main scene
+    }
+
+    public void RestartScene()
+    {
+        RetartingText.text = "Restarting in " + restartTimer.ToString() + " seconds...";
+        Invoke("Reload", restartTimer); //reload the game scene after x seconds
+    }
+
+    public void Reload()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name); //load the game scene
     }
 }

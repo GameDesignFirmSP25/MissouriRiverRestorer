@@ -13,32 +13,34 @@ public class PlayerController : MonoBehaviour
 
      void Update()
     {
-        if (!DialogueManager.GetInstance().dialogueIsPlaying)
-        {
-            // Get input from the horizontal and vertical axes for movement
-            float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
-            float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down arrows
+          if (DialogueManager.GetInstance() != null && DialogueManager.GetInstance().dialogueIsPlaying)
+          {
+               return;
+          }
+          // Get input from the horizontal and vertical axes for movement
+          float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
+          float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down arrows
 
-            // Create a movement vector
-            gravity -= 9.81f * Time.deltaTime;
-            if (controller.isGrounded) gravity = 0;
-            Vector3 move = new Vector3(moveX, gravity, moveZ);
+          // Create a movement vector
+          gravity -= 9.81f * Time.deltaTime;
+          if (controller.isGrounded) gravity = 0;
+          Vector3 move = new Vector3(moveX, gravity, moveZ);
 
-            // Normalize the movement vector to maintain consistent speed diagonally
-            if (move.magnitude > 1) move.Normalize();
+          // Normalize the movement vector to maintain consistent speed diagonally
+          if (move.magnitude > 1) move.Normalize();
 
-            // Move the player
-            if (move != Vector3.zero)
-            {
-                controller.Move(move * moveSpeed * Time.deltaTime);
+          // Move the player
+          if (move != Vector3.zero)
+          {
+               controller.Move(move * moveSpeed * Time.deltaTime);
 
-                Vector3 lookRotVector = new Vector3(move.x, 0, move.z);
-                if (lookRotVector != Vector3.zero)
-                {
-                    transform.rotation = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
-                }
-            }
-        } 
+               Vector3 lookRotVector = new Vector3(move.x, 0, move.z);
+               if (lookRotVector != Vector3.zero)
+               {
+               transform.rotation = Quaternion.LookRotation(new Vector3(move.x, 0, move.z));
+               }
+          }
+         
      }
 }
 
