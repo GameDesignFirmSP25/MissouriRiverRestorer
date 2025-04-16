@@ -129,7 +129,7 @@ public class GameProgressManager : MonoBehaviour
 
           // Move to the next progression step
           CurrentProgressionStep++;
-          Debug.Log("Event Complete: " + progressEvents[CurrentProgressionStep]._Name);
+          Debug.Log("Next Event: " + progressEvents[CurrentProgressionStep]._Name);
 
           if(CurrentProgressionStep >= progressEvents.Count)
           {
@@ -154,14 +154,32 @@ public class GameProgressManager : MonoBehaviour
      private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
      {
           Debug.Log("Scene Loaded: " + loadedScene.name);
-          CurrentMiniGamedData?.gameObject.SetActive(false);
 
-          if (loadedScene.name == "Overworld") return;
-          if (progressEvents[CurrentProgressionStep] is NPCProgressEvent) return;
+          if(progressEvents.Count == 0) return;
 
-          MiniGameProgressEvent currentMiniGameProgress = progressEvents[CurrentProgressionStep] as MiniGameProgressEvent;
-          currentMiniGameProgress.SetMiniManager(FindFirstObjectByType<BaseMiniGameManager>());
+          //TODO Need to remove the transition areas when appropriates
+          //;
           
-          Debug.Log("Current minidata: " + currentMiniGameProgress.TargetScene);
+          if (progressEvents[CurrentProgressionStep] is NPCProgressEvent)
+          {
+               CurrentMiniGamedData?.gameObject.SetActive(false);
+               npc = FindFirstObjectByType<NPC>();
+               NPCProgressEvent currentNPCEvent = progressEvents[CurrentProgressionStep] as NPCProgressEvent;
+               currentNPCEvent.SetNPC(npc);
+               return;
+          }
+
+          if (loadedScene.name != "Overworld")
+          {
+               CurrentMiniGamedData?.gameObject.SetActive(false);
+               MiniGameProgressEvent currentMiniGameProgress = progressEvents[CurrentProgressionStep] as MiniGameProgressEvent;
+               currentMiniGameProgress.SetMiniManager(FindFirstObjectByType<BaseMiniGameManager>());
+
+               Debug.Log("Current minidata: " + currentMiniGameProgress.TargetScene);
+               return;
+          }
+
+          // Loaded overworld, but current progress event is still MiniGame
+          CurrentMiniGamedData?.gameObject.SetActive(true);
      }
 }

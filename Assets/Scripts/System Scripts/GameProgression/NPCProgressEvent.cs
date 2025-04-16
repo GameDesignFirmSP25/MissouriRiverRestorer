@@ -1,4 +1,5 @@
-
+using System.Linq;
+using System.Collections.Generic;
 
 public class NPCProgressEvent : BaseProgressEvent
 {
@@ -22,6 +23,15 @@ public class NPCProgressEvent : BaseProgressEvent
      ~NPCProgressEvent()
      {
           npc.actionNames[TargetNPCActionName] -= OnEventCompleted;
+     }
+
+     public void SetNPC(NPC newNPC)
+     {
+          npc = newNPC;
+
+          // Remove any dangling refernces before resetting
+          npc.actionNames[TargetNPCActionName] = null;
+          npc.actionNames[TargetNPCActionName] += OnEventCompleted;
      }
 
      public void OnEventCompleted()

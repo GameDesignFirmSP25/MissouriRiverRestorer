@@ -94,7 +94,6 @@ public class NPC : MonoBehaviour
         if (!introPlayed)
         {
                // FOR TESTING: Remove before building!!!
-               actionNames["TrashGameTasked"]?.Invoke();
                actionNames["FirstWaterGameTasked"]?.Invoke();
                DialogueManager.GetInstance().StartDialogue(TutorialIntroduction); // Call the StartDialogue method from the DialogueManager class
             Invoke("SetIntroPlayed", 0.5f); // Call the SetIntroPlayed method after 0.5 seconds
@@ -110,7 +109,10 @@ public class NPC : MonoBehaviour
         {
             DialogueManager.GetInstance().StartDialogue(AfterFirstWaterTest);
             Invoke("SetFirstTransitionPlayed", 0.5f); // Call the SetFirstTransitionPlayed method after 0.5 seconds
-        }
+
+               //DEV - REMOVE BEFORE BUILDING
+               actionNames["TrashGameTasked"]?.Invoke();
+          }
 
         if (firstTransitionPlayed && !midpointTransitionPlayed && WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
         {
@@ -121,8 +123,8 @@ public class NPC : MonoBehaviour
         if (midpointTransitionPlayed && !TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
         {
             DialogueManager.GetInstance().StartDialogue(TrashCollectionTutorial);
-               
-        }
+               //actionNames["TrashGameTasked"]?.Invoke(); // ADD THIS BACK BEFORE BUILD
+          }
 
         if (midpointTransitionPlayed && TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
         {
