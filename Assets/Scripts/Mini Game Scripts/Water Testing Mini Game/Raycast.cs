@@ -11,8 +11,6 @@ public class Raycast : MonoBehaviour
     private Ray ray;
     private RaycastHit hit;
 
-    public GameObject[] panels; // Array of panels to be activated or deactivated
-
     public WaterTestingManager waterTestingManagerScript;
 
     public bool testTubeClicked;
@@ -117,7 +115,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfBiodiversity1PanelActive = true; // Set bool effectsOfFishPanelActive to true
             WaterTestingManager.isFishObjectiveComplete = true; // Set bool isFishObjectiveComplete to true
-            panels[0].SetActive(true); // Activate the first panel
         }
     }
 
@@ -130,7 +127,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfBiodiversity3PanelActive = true; // Set bool effectsOfMammalPanelActive to true
             WaterTestingManager.isMammalObjectiveComplete = true; // Set bool isMammalObjectiveComplete to true
-            panels[3].SetActive(true); // Activate the third panel
         }
     }
 
@@ -143,7 +139,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfBiodiversity2PanelActive = true; // Set bool effectsOfRiverbankPanelActive to true
             WaterTestingManager.isRiverbankObjectiveComplete = true; // Set bool isRiverbankObjectiveComplete to true
-            panels[2].SetActive(true); // Activate the second panel
         }
     }
 

@@ -18,6 +18,9 @@ public class PausMenuManager : MonoBehaviour
     public Button QuitBtn;
 
     public GameObject QuitButton;
+
+    public bool isPaused = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,13 +49,15 @@ public class PausMenuManager : MonoBehaviour
     {
         Time.timeScale = 0f;
 
+        isPaused = true;
+
         PauseUiPanel.SetActive(true);
     }
     public void Resume()
     {
         Time.timeScale = 1f;
 
-      
+        isPaused = false;
        
         PauseUiPanel.SetActive(false);
     }

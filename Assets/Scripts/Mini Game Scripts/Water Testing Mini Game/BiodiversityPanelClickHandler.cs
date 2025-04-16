@@ -10,6 +10,7 @@ public class BiodiversityPanelClickHandler : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("Biodiversity Panel Clicked!"); // Debug.Log
         isBiodiversityPanelClicked = true; // Set bool isbiodiversityPanelClicked to true
-        WaterTestingManager.biodiversityPanelActive = false; // Set bool biodiversityPanelActive to true
+        WaterTestingManager.biodiversityPanelActive = false; // Set bool biodiversityPanelActive to false
+        WaterTestingManager.aPanelIsActive = false; // Set bool aPanelActive to false;
     }
 }

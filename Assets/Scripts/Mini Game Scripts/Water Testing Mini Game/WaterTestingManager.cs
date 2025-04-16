@@ -44,6 +44,7 @@ public class WaterTestingManager : MonoBehaviour
     public Button StartBtn;
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
     public Raycast raycastScript;
+    public PausMenuManager pauseMenuScript;
     public ProgressBar progressBarScript;
     public CleanWaterPanelClickHandler cleanWaterPanelScript;
     public GreatJobPanelClickHandler greatJobPanelScript;
@@ -148,6 +149,16 @@ public class WaterTestingManager : MonoBehaviour
             }
         }
 
+        if (pauseMenuScript.isPaused == true)
+        {
+            PauseGame();
+        }
+
+        if (pauseMenuScript.isPaused == false)
+        {
+            ResumeGame();
+        }
+
         ShowObjectives();
 
         ShowObjectivesPanels();
@@ -209,6 +220,16 @@ public class WaterTestingManager : MonoBehaviour
         {
             DeactivatePanel(1); // Disable secondIntroductionPanel
         }
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
 
     //// Method to deactivate all panels
@@ -287,19 +308,22 @@ public class WaterTestingManager : MonoBehaviour
             }
         }
 
-        else
+        if (isFirstWaterTestComplete && !isSecondWaterTestComplete && secondWaterTestObjectivesVisible)
         {
             if (effectsOfBiodiversity1PanelActive)
             {
-                ActivatePanel(11); // Activate the biodiversity panel1 if effectsOfBiodiversity1PanelActive is true
+                Debug.Log("Effects of biodiversity1 panel active"); // Debug.Log
+                //ActivatePanel(11); // Activate the biodiversity panel1 if effectsOfBiodiversity1PanelActive is true
             }
             else if (effectsOfBiodiversity3PanelActive)
             {
-                ActivatePanel(13); // Activate the biodiversity panel3 if effectsOfBiodiversity3PanelActive is true
+                Debug.Log("Effects of biodiversity3 panel active"); // Debug.Log
+                //ActivatePanel(13); // Activate the biodiversity panel3 if effectsOfBiodiversity3PanelActive is true
             }
             else if (effectsOfBiodiversity2PanelActive)
             {
-                ActivatePanel(12); // Activate the biodiversity panel2 if effectsOfBiodiversity2PanelActive is true
+                Debug.Log("Effects of biodiversity2 panel active"); // Debug.Log
+                //ActivatePanel(12); // Activate the biodiversity panel2 if effectsOfBiodiversity2PanelActive is true
             }
         }
     }
