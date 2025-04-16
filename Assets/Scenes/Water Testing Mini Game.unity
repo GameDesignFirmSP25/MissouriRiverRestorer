@@ -872,6 +872,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1326145318}
   m_SourcePrefab: {fileID: 100100000, guid: f3f99bf1ba5037f469f20f04219364cd, type: 3}
+--- !u!1 &139048185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8820705859388480633, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
+  m_PrefabInstance: {fileID: 1103456630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &149216996
 GameObject:
   m_ObjectHideFlags: 0
@@ -6662,6 +6667,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 107422016}
     m_Modifications:
+    - target: {fileID: 552860528426089385, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 552860528426089385, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 552860528426089385, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 139048185}
+    - target: {fileID: 552860528426089385, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 552860528426089385, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 552860528426089385, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 552860528426089385, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: MMBtn
       value: 
@@ -6797,7 +6830,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
   m_PrefabInstance: {fileID: 1103456630}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 139048185}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d00502a1bb908e94db0bd3c0e492c530, type: 3}
@@ -8269,6 +8302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 517747197}
   StartButton: {fileID: 522537088}
+  PauseButton: {fileID: 139048185}
   firstWaterTestObjectives: {fileID: 1195048084}
   secondWaterTestObjectives: {fileID: 1967886133}
   gasCanObjectiveText: {fileID: 47031858}
@@ -8313,6 +8347,13 @@ MonoBehaviour:
   firstWaterTestObjectivesVisible: 0
   secondWaterTestObjectivesVisible: 0
   firstWaterTestReady: 1
+  panel3: 0
+  panel4: 0
+  panel5: 0
+  panel6: 0
+  panel11: 0
+  panel12: 0
+  panel13: 0
   secondWaterTestReady: 0
   instructionsShown: 0
   objectivesComplete: 0
