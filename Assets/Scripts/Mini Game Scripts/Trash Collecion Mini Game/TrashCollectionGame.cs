@@ -9,7 +9,7 @@ using System;
 using Unity.VisualScripting;
 
 
-public class TrashCollectionGame : MonoBehaviour
+public class TrashCollectionGame : BaseMiniGameManager
 {
     
     public int GameScore;
@@ -85,6 +85,9 @@ public class TrashCollectionGame : MonoBehaviour
                 EndButton.SetActive(true);// sets button active
                 Finishpanel2.SetActive(true);// sets panel active
                 endbtn.onClick.AddListener(Home);
+
+          // For Game Progression
+          TriggerMiniGameCompleteEvent(0); // Can add a score pass through here
     }
     public void Home() 
     {
