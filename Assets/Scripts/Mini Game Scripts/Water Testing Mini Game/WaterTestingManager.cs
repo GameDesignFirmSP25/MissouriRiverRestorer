@@ -13,6 +13,9 @@ public class WaterTestingManager : MonoBehaviour
     [SerializeField]
     private GameObject StartButton;
 
+    [SerializeField] 
+    private GameObject PauseButton;
+
     [SerializeField]
     private GameObject firstWaterTestObjectives;
 
@@ -42,6 +45,7 @@ public class WaterTestingManager : MonoBehaviour
 
     private Slider slider;
     public Button StartBtn;
+
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
     public Raycast raycastScript;
     public PausMenuManager pauseMenuScript;
@@ -157,6 +161,7 @@ public class WaterTestingManager : MonoBehaviour
         if (pauseMenuScript.isPaused == false)
         {
             ResumeGame();
+            PauseButton.SetActive(true); // Set PauseButton to active
         }
 
         ShowObjectives();
