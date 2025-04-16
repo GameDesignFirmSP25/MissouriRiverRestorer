@@ -2204,12 +2204,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240915314}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.8, y: 1, z: 4.06}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 27.65, y: -5.66, z: 4.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1043546878}
+  m_Father: {fileID: 1184170530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &240915316
 CapsuleCollider:
@@ -2315,11 +2315,11 @@ Transform:
   m_GameObject: {fileID: 252730499}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7164857, y: -0, z: -0, w: 0.69760185}
-  m_LocalPosition: {x: 0, y: -5.83, z: 1.26}
+  m_LocalPosition: {x: 0, y: -5.83, z: 1.2599998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1697004548}
+  m_Father: {fileID: 1192959577}
   m_LocalEulerAnglesHint: {x: 91.53, y: 0, z: 0}
 --- !u!136 &252730501
 CapsuleCollider:
@@ -3199,39 +3199,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97e7c221f987e9440a12cec465388fe3, type: 3}
   m_PrefabInstance: {fileID: 371892254}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &373389097
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 373389098}
-  m_Layer: 0
-  m_Name: Save fish
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &373389098
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373389097}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2054247560}
-  - {fileID: 597468723}
-  m_Father: {fileID: 468393401}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &378117842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3606,9 +3573,9 @@ Transform:
   - {fileID: 10836591}
   - {fileID: 1825953531}
   - {fileID: 497528813}
-  - {fileID: 373389098}
-  - {fileID: 1697004548}
-  - {fileID: 1043546878}
+  - {fileID: 1782872402}
+  - {fileID: 1192959577}
+  - {fileID: 1184170530}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &474817581
@@ -4215,11 +4182,11 @@ Transform:
   m_GameObject: {fileID: 597468722}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.68084997, w: 0.73242295}
-  m_LocalPosition: {x: 42.54, y: -7.25, z: -8.23}
+  m_LocalPosition: {x: 42.54, y: -7.25, z: -6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 373389098}
+  m_Father: {fileID: 1782872402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -85.82}
 --- !u!136 &597468724
 CapsuleCollider:
@@ -5189,9 +5156,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Great work Picking up trash I hope you learned a little bit more on how
-    trash affects the river, Plants, and animals!! Take the trash collected over
-    to the recepticle in the center of the map. Gotta dispose of it properly!!
+  m_text: 'Great work Picking up trash I hope you learned a little bit more on how
+    trash affects the river, Plants, and animals!! '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7115,39 +7081,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 91046569790d2dd41a244ffd22fa2d9d, type: 3}
   m_PrefabInstance: {fileID: 1035561564}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1043546877
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1043546878}
-  m_Layer: 0
-  m_Name: Save Bird
-  m_TagString: Save bird
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1043546878
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1043546877}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.85, y: -6.66, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1569553801}
-  - {fileID: 240915315}
-  m_Father: {fileID: 468393401}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1064595259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7694,6 +7627,72 @@ Transform:
   - {fileID: 1261706496}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1184170529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184170530}
+  m_Layer: 0
+  m_Name: Save Bird
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1184170530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184170529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1569553801}
+  - {fileID: 240915315}
+  m_Father: {fileID: 468393401}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1192959576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1192959577}
+  m_Layer: 0
+  m_Name: Save Deer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1192959577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192959576}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 252730500}
+  - {fileID: 1241546756}
+  m_Father: {fileID: 468393401}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1199172404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8152,12 +8151,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241546755}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -6.11, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1697004548}
+  m_Father: {fileID: 1192959577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1241546757
 BoxCollider:
@@ -10101,8 +10100,8 @@ GameObject:
   - component: {fileID: 1569553803}
   - component: {fileID: 1569553805}
   m_Layer: 0
-  m_Name: Plane
-  m_TagString: Untagged
+  m_Name: Bird trapping item
+  m_TagString: Save bird
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10116,11 +10115,11 @@ Transform:
   m_GameObject: {fileID: 1569553800}
   serializedVersion: 2
   m_LocalRotation: {x: -0.1444444, y: -0.014547775, z: 0.099146806, w: 0.9844258}
-  m_LocalPosition: {x: 19.27, y: 1.58, z: 3.9}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 27.12, y: -5.08, z: 3.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1043546878}
+  m_Father: {fileID: 1184170530}
   m_LocalEulerAnglesHint: {x: -16.35, y: -3.423, z: 11.994}
 --- !u!23 &1569553803
 MeshRenderer:
@@ -10174,7 +10173,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569553800}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &1569553805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10486,39 +10485,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97e7c221f987e9440a12cec465388fe3, type: 3}
   m_PrefabInstance: {fileID: 1663563927}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1697004547
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1697004548}
-  m_Layer: 0
-  m_Name: Save Deer
-  m_TagString: Save deer
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1697004548
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697004547}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 252730500}
-  - {fileID: 1241546756}
-  m_Father: {fileID: 468393401}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1723083422
 GameObject:
   m_ObjectHideFlags: 0
@@ -10995,6 +10961,39 @@ Transform:
   - {fileID: 66238940}
   m_Father: {fileID: 662749366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1782872401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1782872402}
+  m_Layer: 0
+  m_Name: Save fish
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1782872402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782872401}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2054247560}
+  - {fileID: 597468723}
+  m_Father: {fileID: 468393401}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1825953530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11005,23 +11004,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8dd9f228be6025e499de443fde5cb94f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.58
+      value: 36.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd9f228be6025e499de443fde5cb94f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.11
+      value: -6.23
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd9f228be6025e499de443fde5cb94f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.23
+      value: 7.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd9f228be6025e499de443fde5cb94f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9886449
+      value: 0.9991861
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd9f228be6025e499de443fde5cb94f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.15027082
+      value: 0.04033978
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd9f228be6025e499de443fde5cb94f, type: 3}
       propertyPath: m_LocalRotation.y
@@ -11033,7 +11032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd9f228be6025e499de443fde5cb94f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -17.285
+      value: 4.624
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd9f228be6025e499de443fde5cb94f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -12259,7 +12258,7 @@ GameObject:
   - component: {fileID: 2054247562}
   - component: {fileID: 2054247564}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Fish Trapping item
   m_TagString: Save fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12274,11 +12273,11 @@ Transform:
   m_GameObject: {fileID: 2054247559}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.3, y: -7.24, z: -8.48}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 42.3, y: -6.8, z: -6.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 373389098}
+  m_Father: {fileID: 1782872402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2054247562
 MeshRenderer:
@@ -12332,7 +12331,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054247559}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &2054247564
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12352,8 +12351,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 2.175171, z: 10}
-  m_Center: {x: 0, y: -0.47, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2060024972
 GameObject:
   m_ObjectHideFlags: 0
