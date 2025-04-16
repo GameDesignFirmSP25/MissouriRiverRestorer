@@ -23,12 +23,38 @@ public class TrashCollectionGame : BaseMiniGameManager
     public Button endbtn;
     public GameObject EndButton;
     public GameObject Finishpanel2;
+
     
 
     
     public static bool trashCollected = false; // global variable to check if trash is collected
 
-  
+    [Header("Objective Panels")]
+    public GameObject objectiveScupPanel;
+    public GameObject objectiveGasCanPanel;
+    public GameObject objectivePizzaSlicePanel;
+    public GameObject objectiveTrashBagPanel;
+    public GameObject objectiveBottlePanel;
+    public GameObject objectiveSaveBirdPanel;
+    public GameObject objectiveSaveFishPanel;
+    public GameObject objectiveSaveDeerPanel;
+    [Header("Objective text")]
+    [SerializeField]
+    TextMeshProUGUI objectiveScupText;
+    [SerializeField]
+    TextMeshProUGUI objectiveGasCanText;
+    [SerializeField]
+    TextMeshProUGUI objectivePizzaSliceText;
+    [SerializeField]
+    TextMeshProUGUI objectiveTrashBagText;
+    [SerializeField]
+    TextMeshProUGUI objectiveBottleText;
+    [SerializeField]
+    TextMeshProUGUI objectiveSaveBirdText;
+    [SerializeField]
+    TextMeshProUGUI objectiveSaveFishText;
+    [SerializeField]
+    TextMeshProUGUI objectiveSaveDeerText;
 
     [Header("Bools")]
     public static bool ObjectveScup = false;

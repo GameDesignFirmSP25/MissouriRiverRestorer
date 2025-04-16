@@ -97,9 +97,12 @@ public class WaterTestingManager : BaseMiniGameManager
     public static bool isFirstWaterTestComplete = false;
     public static bool isSecondWaterTestComplete = false;
 
+    public GameObject PauseUI;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PauseUI.SetActive(false); // Set PauseUI to not active
         progressBar = GameObject.Find("Progress Bar"); // Get Slider component on Progress Bar
         slider = progressBar.GetComponent<Slider>(); // slider is equal to the slider component
         GetPanels(); // Call the GetPanels function to initialize the panels
