@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BiodiversityEffects1PanelClickHandler : MonoBehaviour
+public class BiodiversityEffects1PanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
     public bool isEffectsOfBiodiversity1PanelClicked = false; // Bool to check if the panel is clicked
 

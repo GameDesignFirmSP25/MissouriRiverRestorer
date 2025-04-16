@@ -14,6 +14,9 @@ public class WaterTestingManager : BaseMiniGameManager
     [SerializeField]
     private GameObject StartButton;
 
+    [SerializeField] 
+    private GameObject PauseButton;
+
     [SerializeField]
     private GameObject firstWaterTestObjectives;
 
@@ -43,8 +46,10 @@ public class WaterTestingManager : BaseMiniGameManager
 
      private Slider slider;
     public Button StartBtn;
+
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
     public Raycast raycastScript;
+    public PausMenuManager pauseMenuScript;
     public ProgressBar progressBarScript;
     public CleanWaterPanelClickHandler cleanWaterPanelScript;
     public GreatJobPanelClickHandler greatJobPanelScript;
@@ -69,6 +74,13 @@ public class WaterTestingManager : BaseMiniGameManager
     public bool secondWaterTestObjectivesVisible = false;
     public bool firstWaterTestReady = true;
 
+    public bool panel3 = false;
+    public bool panel4 = false;
+    public bool panel5 = false;
+    public bool panel6 = false;
+    public bool panel11 = false;
+    public bool panel12 = false;
+    public bool panel13 = false;
     public bool secondWaterTestReady = false;
     public bool instructionsShown = false;
     public bool objectivesComplete = false;
@@ -100,11 +112,11 @@ public class WaterTestingManager : BaseMiniGameManager
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PauseButton.SetActive(false); // Set PauseButton to not active
         progressBar = GameObject.Find("Progress Bar"); // Get Slider component on Progress Bar
         slider = progressBar.GetComponent<Slider>(); // slider is equal to the slider component
         GetPanels(); // Call the GetPanels function to initialize the panels
         Cursor.visible = true; // Set Cursor to be visible
-        //SwitchUI();
         Time.timeScale = 0f; // Freezes time
 
         // If isFirstWaterTestComplete is false...
@@ -147,6 +159,17 @@ public class WaterTestingManager : BaseMiniGameManager
                     DisableTestingInstructions(); // call DisableTestingInstructions method
                 }
             }
+        }
+
+        if (pauseMenuScript.isPaused == true)
+        {
+            PauseGame();
+        }
+
+        if (pauseMenuScript.isPaused == false)
+        {
+            ResumeGame();
+            PauseButton.SetActive(true); // Set PauseButton to active
         }
 
         ShowObjectives();
@@ -195,6 +218,7 @@ public class WaterTestingManager : BaseMiniGameManager
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
         progressBar.SetActive(true); // Enable Progress bar
+        PauseButton.SetActive(true); // Set PauseButton to active
         Raycast.isClickable = true; // Set bool isClickable to true
         gameStarted = true; // Set bool gameStarted to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
@@ -210,6 +234,16 @@ public class WaterTestingManager : BaseMiniGameManager
         {
             DeactivatePanel(1); // Disable secondIntroductionPanel
         }
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
 
     //// Method to deactivate all panels
@@ -270,37 +304,44 @@ public class WaterTestingManager : BaseMiniGameManager
     {
         if (!isFirstWaterTestComplete && firstWaterTestObjectivesVisible)
         {
-            if (effectsOfTirePanelActive)
+            if (effectsOfTirePanelActive && !panel5)
             {
                 ActivatePanel(5); // Activate the tire panel if effectsOfTirePanelActive is true
+                panel5 = true; // Set bool effectsOfTirePanelActive to true
             }
-            else if (effectsOfGasPanelActive)
+            else if (effectsOfGasPanelActive && !panel3)
             {
                 ActivatePanel(3); // Activate the gas panel if effectsOfGasPanelActive is true
+                panel3 = true; // Set bool effectsOfGasPanelActive to true
             }
-            else if (effectsOfTrashPanelActive)
+            else if (effectsOfTrashPanelActive && !panel4)
             {
                 ActivatePanel(4); // Activate the trash panel if effectsOfTrashPanelActive is true
+                panel4 = true; // Set bool effectsOfTrashPanelActive to true
             }
-            else if (effectsOfAluminumPanelActive)
+            else if (effectsOfAluminumPanelActive && !panel6)
             {
                 ActivatePanel(6); // Activate the aluminum panel if effectsOfAluminumPanelActive is true
+                panel6 = true; // Set bool effectsOfAluminumPanelActive to true
             }
         }
 
-        else
+        if (isFirstWaterTestComplete && !isSecondWaterTestComplete && secondWaterTestObjectivesVisible)
         {
-            if (effectsOfBiodiversity1PanelActive)
+            if (effectsOfBiodiversity1PanelActive && !panel11)
             {
                 ActivatePanel(11); // Activate the biodiversity panel1 if effectsOfBiodiversity1PanelActive is true
+                panel11 = true; // Set bool effectsOfBiodiversity1PanelActive to true
             }
-            else if (effectsOfBiodiversity3PanelActive)
+            else if (effectsOfBiodiversity3PanelActive && !panel13)
             {
                 ActivatePanel(13); // Activate the biodiversity panel3 if effectsOfBiodiversity3PanelActive is true
+                panel13 = true; // Set bool effectsOfBiodiversity3PanelActive to true
             }
-            else if (effectsOfBiodiversity2PanelActive)
+            else if (effectsOfBiodiversity2PanelActive && !panel12)
             {
                 ActivatePanel(12); // Activate the biodiversity panel2 if effectsOfBiodiversity2PanelActive is true
+                panel12 = true; // Set bool effectsOfBiodiversity2PanelActive to true
             }
         }
     }
