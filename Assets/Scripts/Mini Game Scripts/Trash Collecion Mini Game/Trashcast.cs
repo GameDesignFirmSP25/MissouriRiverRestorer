@@ -34,35 +34,59 @@ public class Trashcast : MonoBehaviour
                 }
                 if (hit.collider.CompareTag("Trash: Styrofoam Cup")&& !TrashCollectionGame.ObjectveScup) 
                 {
+                    Destroy(hit.collider.gameObject);
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
                 if (hit.collider.CompareTag("Trash: Bottle") && !TrashCollectionGame.ObjectvBottle)
                 {
+                    Destroy(hit.collider.gameObject);
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
                 if (hit.collider.CompareTag("Trash: trash bag")&& !TrashCollectionGame.ObjectvTrashBag)
                 {
+                    Destroy(hit.collider.gameObject);
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
                 if (hit.collider.CompareTag("Trash: Pizza Slice")&& !TrashCollectionGame.ObjectvPizzaSlice)
                 {
+                    Destroy(hit.collider.gameObject);
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
                 if (hit.collider.CompareTag("Trash: gas can")&& !TrashCollectionGame.ObjectvGasCan)
                 {
+                    Destroy(hit.collider.gameObject);
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
                 if (hit.collider.CompareTag("Save bird") && !TrashCollectionGame.ObjectvSaveBird)
                 {
+                    Destroy(hit.collider.gameObject);
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
                 if (hit.collider.CompareTag("Save fish") && !TrashCollectionGame.ObjectvSaveFish)
                 {
+                    Destroy(hit.collider.gameObject);
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
                 if (hit.collider.CompareTag("Save deer") && !TrashCollectionGame.ObjectvSaveDeer)
                 {
+                    Destroy(hit.collider.gameObject);
+                    playerScore++; // add section for if player score == amount of game objects in scene to pull up pop up
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
 
 

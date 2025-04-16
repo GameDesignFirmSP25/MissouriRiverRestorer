@@ -75,6 +75,10 @@ public class TrashCollectionGame : BaseMiniGameManager
         Panel.SetActive(true);
         StartButton.SetActive(true);
         StartBtn.onClick.AddListener(StartGame);
+        if (trashcast.CollectedTrash >= GameScore && !isgameComplete)
+        {
+            gameCompleteScore();
+        }
     }
 
      private void OnDestroy()
@@ -87,20 +91,18 @@ public class TrashCollectionGame : BaseMiniGameManager
      void Update()// Update is called once per frame
     {
 
-        if (trashcast.CollectedTrash >= GameScore && !isgameComplete)
-        {
-            gameCompleteScore();
-        }
+
         
     }
     public void StartGame()
     {
         Time.timeScale = 1f;
-        GameScore = 30;
+        GameScore = 8;
         StartButton.SetActive(false);
         Panel.SetActive(false);
        
     }
+
     public void gameCompleteScore()
     {
                 Time.timeScale = 0f;
