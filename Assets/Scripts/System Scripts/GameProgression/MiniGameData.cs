@@ -6,7 +6,6 @@ using UnityEngine.Events;
 /// </summary>
 public class MiniGameData : MonoBehaviour
 {
-     public string Name() => gameObject.name;
      public string TargetSceneName;
      public bool IsTasked;         // Talk to waterson to receive task
      public bool IsInteractable;   // After talking to waterson, game object become interactable

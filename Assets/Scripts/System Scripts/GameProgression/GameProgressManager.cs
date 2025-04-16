@@ -24,10 +24,10 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
      Dirty,
-     TrashRemoved,
-     PlantsSorted,
-     ClearWater,
-     AnimalsCollected
+     AfterTrashGame,
+     AfterPlantGame,
+     AfterSecondWaterTest,
+     AfterAnimalGame
 }
 
 
@@ -125,6 +125,9 @@ public class GameProgressManager : MonoBehaviour
                CurrentMiniGamedData.IsComplete = true;
                CurrentMiniGamedData.gameObject.SetActive(false);
                CurrentMiniGamedData.IsInteractable = false;
+
+               // Maps game state to Correct enum. Assumes alternating events of NPC and Minigame
+               GameState = (GameState)(((CurrentProgressionStep + 1) / 2) - 1);
           }
 
           // Move to the next progression step
@@ -166,6 +169,7 @@ public class GameProgressManager : MonoBehaviour
      private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
      {
           Debug.Log("Scene Loaded: " + loadedScene.name);
+          if (isAllEventsCompleted) return;  // Don't need to do anything for progression at this point
 
           if(progressEvents.Count == 0) return;
           
@@ -175,6 +179,9 @@ public class GameProgressManager : MonoBehaviour
                npc = FindFirstObjectByType<NPC>();
                NPCProgressEvent currentNPCEvent = progressEvents[CurrentProgressionStep] as NPCProgressEvent;
                currentNPCEvent.SetNPC(npc);
+
+               // TODO: Setup environmental changes
+
                return;
           }
 
