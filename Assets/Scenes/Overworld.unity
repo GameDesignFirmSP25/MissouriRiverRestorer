@@ -1547,6 +1547,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87c514f715f461449bcdb5ab59281633, type: 3}
+--- !u!1001 &4530827876622397904
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1985465771082973985, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_Name
+      value: DynamicEnvironments
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097058173917821993, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
 --- !u!1001 &6707816734123914166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,10 +1612,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1893031333859095996, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: TargetSceneName
-      value: Plant Sorting
-      objectReference: {fileID: 0}
     - target: {fileID: 2402935639416851301, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.663612
@@ -1599,73 +1652,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2605446792518893114, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: TargetSceneName
-      value: Water Testing Mini Game
-      objectReference: {fileID: 0}
     - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: npc
       value: 
       objectReference: {fileID: 982735440}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: progressEventsSO.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: c9862d99747db5546acd798b843f92ef, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 07f8a5809b2449e458972f530cd853a4, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 7aa2df137e618b240b21dd3bc6ca6115, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[3]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 3bf8090ea518cb242920db090a7c1061, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[4]'
-      value: 
-      objectReference: {fileID: 11400000, guid: f348ff07d314e414597beb035882e05c, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[5]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 402a3a5a3d98c4f4489b16350e09cd5c, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[6]'
-      value: 
-      objectReference: {fileID: 11400000, guid: d33568a62e3bc24488a6dbd16266b32e, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[7]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 6651467f33871d74da0c006eb8c0aaeb, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[8]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 0f4cae0a7b1e72d409f53bc4830f8501, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[9]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 047283cdc6001f144aa51b7c25343a01, type: 2}
-    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: 'progressEventsSO.Array.data[10]'
-      value: 
-      objectReference: {fileID: 11400000, guid: d638137ccd9121f4ab8f0860ed14d877, type: 2}
     - target: {fileID: 4418391353687976784, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: m_Name
       value: GameProgressManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7065256459620628590, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: TargetSceneName
-      value: Trash Collection
-      objectReference: {fileID: 0}
-    - target: {fileID: 9059815688032559700, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
-      propertyPath: TargetSceneName
-      value: Wildlife Trapping
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1745,3 +1738,4 @@ SceneRoots:
   - {fileID: 2177356740763617539}
   - {fileID: 1902270723013436215}
   - {fileID: 6707816734123914166}
+  - {fileID: 4530827876622397904}

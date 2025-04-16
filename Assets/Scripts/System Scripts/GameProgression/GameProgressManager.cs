@@ -36,7 +36,7 @@ public enum GameState
 /// </summary>
 public class GameProgressManager : MonoBehaviour
 {
-     static GameProgressManager instance;
+     public static GameProgressManager instance;
 
      public GameState GameState;
      public bool isAllEventsCompleted;
