@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-public class PlantGameManager : MonoBehaviour
+public class PlantGameManager : BaseMiniGameManager
 {
     [Header("UI Elements")]
     public TextMeshProUGUI TitleText;
@@ -159,6 +159,9 @@ public class PlantGameManager : MonoBehaviour
             TitleText.text = "You removed all invasive species!"; //Player won the minigame
             plantingCompleted = true; //Set the global variable to true
             returnButton.SetActive(true); //Show the return button
+
+               // For Game Progression
+               TriggerMiniGameCompleteEvent(0);   // Can add score as pass through
         }
         else
         {

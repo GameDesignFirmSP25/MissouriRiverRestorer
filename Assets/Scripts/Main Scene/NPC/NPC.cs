@@ -37,6 +37,7 @@ public class NPC : MonoBehaviour
      public void OnPlantGameTasked() { Debug.Log("NPC: Plant Game Tasked!"); }
      public void OnSecondWaterGameTasked() { Debug.Log("NPC: Second Water Game Tasked!"); }
      public void OnAnimalGameTasked() { Debug.Log("NPC: Animal Game Tasked!"); }
+     public void OnFinalDialogue() { Debug.Log("NPC: Final Dialogue!"); }
 
      // Dictionary to match names to event complete methods
      public Dictionary<string, UnityAction> actionNames;
@@ -49,6 +50,7 @@ public class NPC : MonoBehaviour
                {"PlantGameTasked",  OnPlantGameTasked},
                {"SecondWaterGameTasked",  OnSecondWaterGameTasked},
                {"AnimalGameTasked",  OnAnimalGameTasked},
+               {"FinalDialogue",  OnFinalDialogue},
           };
      }
 
@@ -153,7 +155,8 @@ public class NPC : MonoBehaviour
         if (TrashCollectionGame.trashCollected && AnimalGameManager.trappingCompleted && PlantGameManager.plantingCompleted && WaterTestingManager.isFirstWaterTestComplete && WaterTestingManager.isSecondWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(Finale); // Call the StartDialogue method from the DialogueManager class
-        }
+               actionNames["FinalDialogue"]?.Invoke();
+          }
 
     }
 

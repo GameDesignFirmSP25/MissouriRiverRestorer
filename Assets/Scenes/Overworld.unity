@@ -1609,7 +1609,7 @@ PrefabInstance:
       objectReference: {fileID: 982735440}
     - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: progressEventsSO.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: 'progressEventsSO.Array.data[0]'
@@ -1651,6 +1651,10 @@ PrefabInstance:
       propertyPath: 'progressEventsSO.Array.data[9]'
       value: 
       objectReference: {fileID: 11400000, guid: 047283cdc6001f144aa51b7c25343a01, type: 2}
+    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: 'progressEventsSO.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d638137ccd9121f4ab8f0860ed14d877, type: 2}
     - target: {fileID: 4418391353687976784, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: m_Name
       value: GameProgressManager
@@ -1661,7 +1665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9059815688032559700, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: TargetSceneName
-      value: WildlifeTrapping
+      value: Wildlife Trapping
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
