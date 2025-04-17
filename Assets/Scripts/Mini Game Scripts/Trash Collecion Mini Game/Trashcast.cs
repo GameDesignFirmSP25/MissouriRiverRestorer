@@ -73,6 +73,7 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
 
+                    Debug.Log("playerScore: " + playerScore);
                 }
                 if (hit.collider.CompareTag("Trash: trash bag")&& !TrashCollectionGame.ObjectvTrashBag)
                 {
