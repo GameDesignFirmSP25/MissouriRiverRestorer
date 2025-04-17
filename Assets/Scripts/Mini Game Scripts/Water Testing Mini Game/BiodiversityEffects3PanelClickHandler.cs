@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BiodiversityEffects3PanelClickHandler : MonoBehaviour
+public class BiodiversityEffects3PanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
     public bool isEffectsOfBiodiversity3PanelClicked = false;
 

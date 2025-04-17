@@ -24,10 +24,10 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
      Dirty,
-     TrashRemoved,
-     PlantsSorted,
-     ClearWater,
-     AnimalsCollected
+     AfterTrashGame,
+     AfterPlantGame,
+     AfterSecondWaterTest,
+     AfterAnimalGame
 }
 
 
@@ -36,7 +36,7 @@ public enum GameState
 /// </summary>
 public class GameProgressManager : MonoBehaviour
 {
-     static GameProgressManager instance;
+     public static GameProgressManager instance;
 
      public GameState GameState;
      public bool isAllEventsCompleted;
@@ -125,26 +125,41 @@ public class GameProgressManager : MonoBehaviour
                CurrentMiniGamedData.IsComplete = true;
                CurrentMiniGamedData.gameObject.SetActive(false);
                CurrentMiniGamedData.IsInteractable = false;
+
+               // Maps game state to Correct enum. Assumes alternating events of NPC and Minigame
+               GameState = (GameState)(((CurrentProgressionStep + 1) / 2) - 1);
           }
 
           // Move to the next progression step
           CurrentProgressionStep++;
-          Debug.Log("Next Event: " + progressEvents[CurrentProgressionStep]._Name);
-
           if(CurrentProgressionStep >= progressEvents.Count)
           {
                isAllEventsCompleted = true;
-               //TODO: Cleanup
-               // Trigger a game complete event
+               Debug.Log("All Events Complete!");
                // Make all minigames interactable and disconnect from all progression events
+               EnableAllWithoutProgress();
+
+               // Trigger a game complete event? IS it needed?
+               // TODO:
+               // End Game Test?
+               // End Game UI
+               // ALlow free play
+               // Track scores?
                return;
           }
+
+          Debug.Log("Next Event: " + progressEvents[CurrentProgressionStep]._Name);
 
           // If the next progression event is a minigame progression event
           if (progressEvents[CurrentProgressionStep] is MiniGameProgressEvent)
           {
                // Find the minigame data with the matching target scene name
                CurrentMiniGamedData = minigames.FirstOrDefault(mg => mg.TargetSceneName == progressEvents[CurrentProgressionStep].TargetScene);
+               if(CurrentMiniGamedData == null)
+               {
+                    Debug.LogError("Could Not Find matching minigame data target scene name for progress event: " + progressEvents[CurrentProgressionStep].TargetScene);
+                    return;
+               }
                CurrentMiniGamedData.IsTasked = true;
                CurrentMiniGamedData.gameObject.SetActive(true);
                CurrentMiniGamedData.IsInteractable = true;
@@ -154,11 +169,9 @@ public class GameProgressManager : MonoBehaviour
      private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
      {
           Debug.Log("Scene Loaded: " + loadedScene.name);
+          if (isAllEventsCompleted) return;  // Don't need to do anything for progression at this point
 
           if(progressEvents.Count == 0) return;
-
-          //TODO Need to remove the transition areas when appropriates
-          //;
           
           if (progressEvents[CurrentProgressionStep] is NPCProgressEvent)
           {
@@ -166,6 +179,9 @@ public class GameProgressManager : MonoBehaviour
                npc = FindFirstObjectByType<NPC>();
                NPCProgressEvent currentNPCEvent = progressEvents[CurrentProgressionStep] as NPCProgressEvent;
                currentNPCEvent.SetNPC(npc);
+
+               // TODO: Setup environmental changes
+
                return;
           }
 
@@ -179,7 +195,22 @@ public class GameProgressManager : MonoBehaviour
                return;
           }
 
-          // Loaded overworld, but current progress event is still MiniGame
-          CurrentMiniGamedData?.gameObject.SetActive(true);
+          if(loadedScene.name != "Overworld" && progressEvents[CurrentProgressionStep] is MiniGameProgressEvent)
+          {
+               CurrentMiniGamedData?.gameObject.SetActive(true);
+          }
+     }
+
+     private void EnableAllWithoutProgress()
+     {
+          foreach (BaseProgressEvent BE in progressEvents)
+          {
+               BE.ProgressEventCompleted -= OnProgressEventCompleted;
+          }
+
+          foreach (MiniGameData mini in minigames)
+          {
+               mini.gameObject.SetActive(true);
+          }
      }
 }

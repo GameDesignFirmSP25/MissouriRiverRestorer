@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class AnimalGameManager : MonoBehaviour
+public class AnimalGameManager : BaseMiniGameManager
 {
     //UI Elements
     public TextMeshProUGUI ScoreText;
@@ -58,6 +58,7 @@ public class AnimalGameManager : MonoBehaviour
                 EndLevel();
             }
         }
+        // TODO: This shouls be a one time event, not continuous calls in Udpate()
         if (Score >= ScoreThreshold) //end game if score is at threshold
         {
             timerRunning = false;
@@ -100,9 +101,16 @@ public class AnimalGameManager : MonoBehaviour
         }
         else
         {
-            EndText.text = "You Win!";
-            returnButton.SetActive(true);
-            trappingCompleted = true; //set global variable to true
+          // Need this to escape repeated calls during update
+          if (trappingCompleted == false)
+          {
+               EndText.text = "You Win!";
+               returnButton.SetActive(true);
+
+               // For Game Progression
+               TriggerMiniGameCompleteEvent(0);   // Can add score pass through
+               trappingCompleted = true; //set global variable to true
+          }
         }  
     }
 

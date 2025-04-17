@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameState: 0
+  isAllEventsCompleted: 0
+  CurrentProgressionStep: 0
+  CurrentMiniGamedData: {fileID: 0}
   npc: {fileID: 0}
   minigames:
   - {fileID: 2605446792518893114}
@@ -53,8 +56,17 @@ MonoBehaviour:
   - {fileID: 1893031333859095996}
   - {fileID: 9059815688032559700}
   progressEventsSO:
-  - {fileID: 11400000, guid: b0876b99f97f094468a1a9bb1bdd4b0c, type: 2}
-  - {fileID: 11400000, guid: 0d9bd638f3a6de7469a84ee7ab875595, type: 2}
+  - {fileID: 11400000, guid: c9862d99747db5546acd798b843f92ef, type: 2}
+  - {fileID: 11400000, guid: 07f8a5809b2449e458972f530cd853a4, type: 2}
+  - {fileID: 11400000, guid: 7aa2df137e618b240b21dd3bc6ca6115, type: 2}
+  - {fileID: 11400000, guid: 3bf8090ea518cb242920db090a7c1061, type: 2}
+  - {fileID: 11400000, guid: f348ff07d314e414597beb035882e05c, type: 2}
+  - {fileID: 11400000, guid: 402a3a5a3d98c4f4489b16350e09cd5c, type: 2}
+  - {fileID: 11400000, guid: d33568a62e3bc24488a6dbd16266b32e, type: 2}
+  - {fileID: 11400000, guid: 6651467f33871d74da0c006eb8c0aaeb, type: 2}
+  - {fileID: 11400000, guid: 0f4cae0a7b1e72d409f53bc4830f8501, type: 2}
+  - {fileID: 11400000, guid: 047283cdc6001f144aa51b7c25343a01, type: 2}
+  - {fileID: 11400000, guid: d638137ccd9121f4ab8f0860ed14d877, type: 2}
 --- !u!1 &6006669928560279253
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +173,10 @@ PrefabInstance:
     - target: {fileID: 3955883096696414197, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631836180400157818, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
+      propertyPath: TargetSceneName
+      value: Trash Collection
       objectReference: {fileID: 0}
     - target: {fileID: 7994531708045008370, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
       propertyPath: targetSceneName
@@ -271,6 +287,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4631836180400157818, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
+      propertyPath: TargetSceneName
+      value: Wildlife Trapping
+      objectReference: {fileID: 0}
     - target: {fileID: 7994531708045008370, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
       propertyPath: targetSceneName
       value: Wildlife Trapping
@@ -380,6 +400,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4631836180400157818, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
+      propertyPath: TargetSceneName
+      value: Plant Sorting
+      objectReference: {fileID: 0}
     - target: {fileID: 7994531708045008370, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
       propertyPath: targetSceneName
       value: Plant Sorting
@@ -460,6 +484,10 @@ PrefabInstance:
     - target: {fileID: 3955883096696414197, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631836180400157818, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
+      propertyPath: TargetSceneName
+      value: Water Testing Mini Game
       objectReference: {fileID: 0}
     - target: {fileID: 7463904673264627514, guid: 8dfc0ce2841374b43a3c13519885f581, type: 3}
       propertyPath: m_TagString
