@@ -4,14 +4,21 @@ using UnityEngine;
 
 public static class SFXLibrary
 {                                     
-    //only add new sound tags to the end of the list to avoid index swoopling around
+    //once data is already created, only add new sound tags to the end of the list to avoid index swoopling
 
     public enum SFXType { 
         Default, 
 
-        Footstep_Grass, Footstep_Wet, Footstep_Dirt, Footstep_Rocks,
+        Step_Grass, 
+        Step_Wet, 
+        Step_Dirt, 
+        Step_Rocks, 
+        Step_Brush,
+        Step_Sand,
 
-        Dig, Plant,
+        Plant_Dig,
+        Plant_Plant,
+        Plant_Pat,
 
         Planted_Correct, Planted_Incorrect,
         Grab_Correct, Grab_Incorrect,
@@ -23,10 +30,12 @@ public static class SFXLibrary
 
         Score_Up, Score_Down,
         Menu_Open, Menu_Close, Menu_Navigation,
+
         Notbook_Fill25, Notebook_Fill50, Notebook_Fill75, Notebook_Fill100, 
         Notebook_Open, Notebook_Close, Notebook_PageFlip, 
-        Stamp, Drawing, 
-        UI_Select, 
+        Notebook_Stamp, Notebook_Drawing, 
+
+        UI_Button, UI_Hover,
         PickUp_Trash,
     }
 

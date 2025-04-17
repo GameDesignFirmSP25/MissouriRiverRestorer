@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eae993590ee5f054ba364d6899276da4, type: 3}
-  m_Name: SFX_Empty
+  m_Name: Notebook_Sketch
   m_EditorClassIdentifier: 
   type: 0
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: ee1631405e993c04c979112f634ff640, type: 3}
+  - {fileID: 8300000, guid: 2c523676a3c733740a1aa5c96a38d773, type: 3}
   outputMixerGroup: {fileID: 1997003956336563998, guid: ea25a6fb74033c640b2e4711beb21078, type: 2}
   basePitch: 1
   pitchModPercent: 0.1
