@@ -477,7 +477,7 @@ public class WaterTestingManager : BaseMiniGameManager
 
     private void LoadToMainScene()
     {
-        SceneManager.LoadScene(0); // Load scene first in build order. Should point to overworld scene
+        SceneManager.LoadScene("Overworld"); // Load Overworld
     }
 
     // Method for if water quality is poor
