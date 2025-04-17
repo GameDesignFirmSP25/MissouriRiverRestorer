@@ -78,6 +78,7 @@ public class TrashCollectionGame : BaseMiniGameManager
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
+       
         Time.timeScale = 0f;
         Finishpanel1.SetActive(false);
 
@@ -100,12 +101,11 @@ public class TrashCollectionGame : BaseMiniGameManager
 
      void Update()// Update is called once per frame
     {
-        strikethrough();
+        
         if (trashcast.playerScore >= GameScore && !isgameComplete)
         {
             gameCompleteScore();
         }
-        
     }
     public void StartGame()
     {
@@ -125,10 +125,11 @@ public class TrashCollectionGame : BaseMiniGameManager
                 // add panel to pop up
                 
                 Finishpanel1.SetActive(true);// sets panel active
-                
+        EndButton.SetActive(true);
 
-          // For Game Progression
-          TriggerMiniGameCompleteEvent(0); // Can add a score pass through here
+
+        // For Game Progression
+        TriggerMiniGameCompleteEvent(0); // Can add a score pass through here
     }
     public void Home() 
     {
