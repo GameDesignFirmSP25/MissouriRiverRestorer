@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
+	// TODO: Clean up unused controls
 	public class StarterAssetsInputs : MonoBehaviour
 	{
 		[Header("Character Input Values")]
@@ -74,12 +75,12 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
-			JumpInput(value.isPressed);
+			//JumpInput(value.isPressed);
 		}
 
 		public void OnSprint(InputValue value)
 		{
-			SprintInput(value.isPressed);
+			//SprintInput(value.isPressed);
 		}
 #endif
 
@@ -96,8 +97,8 @@ namespace StarterAssets
 
 		public void CameraLockInput(bool newCameraLockState)
 		{
-			cameraLocked = newCameraLockState;
-			SetCursorState(!cameraLocked);
+			//cameraLocked = newCameraLockState;
+			//SetCursorState(!cameraLocked);
           }
 
 

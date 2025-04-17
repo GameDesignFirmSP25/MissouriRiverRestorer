@@ -181,7 +181,7 @@ public class PlantGameManager : BaseMiniGameManager
 
     public void ReturnButton()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Overworld");
     }
 
     void ClearPlants() //clear plants from scene

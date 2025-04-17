@@ -166,26 +166,50 @@ public class GameProgressManager : MonoBehaviour
           }
      }
 
+     // TODO: Cleanup logic
      private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
      {
           Debug.Log("Scene Loaded: " + loadedScene.name);
-          if (isAllEventsCompleted) return;  // Don't need to do anything for progression at this point
+
+          //TODO: make function for checking the scene name and which miinigames should be active
+
+          // Turn off minigames when not in overworld
+          if (loadedScene.name != "Overworld")
+          {
+               foreach (MiniGameData mg in minigames)
+               {
+                    mg.gameObject.SetActive(false);
+               }
+          }
+
+          // Turn all minigames back on, nothing else to do for progression
+          if (isAllEventsCompleted)
+          {
+               if (loadedScene.name == "Overworld")
+               {
+                    foreach (MiniGameData mg in minigames)
+                    {
+                         mg.gameObject.SetActive(true);
+                    }
+               }
+               return;
+          }
 
           if(progressEvents.Count == 0) return;
           
-          if (progressEvents[CurrentProgressionStep] is NPCProgressEvent)
+
+
+          if (loadedScene.name == "Overworld" && progressEvents[CurrentProgressionStep] is NPCProgressEvent)
           {
                CurrentMiniGamedData?.gameObject.SetActive(false);
                npc = FindFirstObjectByType<NPC>();
                NPCProgressEvent currentNPCEvent = progressEvents[CurrentProgressionStep] as NPCProgressEvent;
                currentNPCEvent.SetNPC(npc);
 
-               // TODO: Setup environmental changes
-
                return;
           }
 
-          if (loadedScene.name != "Overworld")
+          if (isSceneMiniGame(loadedScene))
           {
                CurrentMiniGamedData?.gameObject.SetActive(false);
                MiniGameProgressEvent currentMiniGameProgress = progressEvents[CurrentProgressionStep] as MiniGameProgressEvent;
@@ -195,7 +219,7 @@ public class GameProgressManager : MonoBehaviour
                return;
           }
 
-          if(loadedScene.name != "Overworld" && progressEvents[CurrentProgressionStep] is MiniGameProgressEvent)
+          if(loadedScene.name == "Overworld" && progressEvents[CurrentProgressionStep] is MiniGameProgressEvent)
           {
                CurrentMiniGamedData?.gameObject.SetActive(true);
           }
@@ -212,5 +236,10 @@ public class GameProgressManager : MonoBehaviour
           {
                mini.gameObject.SetActive(true);
           }
+     }
+
+     private bool isSceneMiniGame(Scene scene)
+     {
+          return scene.name != "Overworld" && scene.name != "Title" && scene.name != "Guidebook";
      }
 }

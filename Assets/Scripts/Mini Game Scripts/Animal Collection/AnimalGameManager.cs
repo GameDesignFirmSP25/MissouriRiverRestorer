@@ -116,7 +116,7 @@ public class AnimalGameManager : BaseMiniGameManager
 
     public void ReturnButton()
     {
-        SceneManager.LoadScene(0); //load main scene
+        SceneManager.LoadScene("Overworld"); //load main scene
     }
 
     public void RestartScene()
