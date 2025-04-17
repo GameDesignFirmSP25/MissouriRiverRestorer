@@ -13,6 +13,8 @@ public class GuidebookScript : MonoBehaviour
     public int index;
     public Image currentPage;
     public Canvas CanvasPage;
+    //public AudioClip backAudio;
+    //private AudioSource audioSrc;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +22,10 @@ public class GuidebookScript : MonoBehaviour
         index = 0;
         //currentPage = CanvasPage.GetComponentInChildren<Image>();
         currentPage = GameObject.Find("page").GetComponent<Image>();
+        //audioSrc = GetComponent<AudioSource>();
+        //audioSrc.clip = backAudio;
+        //audioSrc.loop = true;
+        //audioSrc.Play();
     }
 
     public void RightArrow()
