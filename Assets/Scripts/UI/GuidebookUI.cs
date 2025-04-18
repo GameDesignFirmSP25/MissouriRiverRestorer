@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
 
-public class GuidebookButton : MonoBehaviour
+public class GuidebookUI : MonoBehaviour
 {
      public Button BookButton;
-     public GameObject GuidebookUI;
+     public GameObject GuidebookButton;
+     public DynamicGuidebook Guidebook;
+     public GameObject GuidebookCanvas;
      public StarterAssetsInputs PlayerInput;
 
      private bool isGuidebookOpen;
@@ -18,17 +20,18 @@ public class GuidebookButton : MonoBehaviour
           }
      }
 
-     public void OnBookButton()
+     public void OnBookButton(int page = 0)
      {
           if(isGuidebookOpen)
           {
-               GuidebookUI.SetActive(false);
+               GuidebookCanvas.SetActive(false);
                //return player control
                PlayerInput.controlsLocked = false;
           }
           else
           {
-               GuidebookUI.SetActive(true);
+               GuidebookCanvas.SetActive(true);
+               Guidebook.LoadPage(page);
                PlayerInput.controlsLocked = true;
 
           }

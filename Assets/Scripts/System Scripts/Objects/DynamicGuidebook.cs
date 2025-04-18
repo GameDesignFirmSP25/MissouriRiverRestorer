@@ -16,8 +16,8 @@ public class DynamicGuidebook : MonoBehaviour
      public TMP_Text PageTitle;
      public TMP_Text PageSubTitle;
      public TMP_Text Description;
-     public GameObject PrefabParent;
-     public GameObject Prefab;
+     public GameObject ModelParent;
+     public GameObject Model;
     public Canvas CanvasPage;
 
      private Vector3 baseOffet = new Vector3(-0.5f, 0, 1);
@@ -55,10 +55,10 @@ public class DynamicGuidebook : MonoBehaviour
      private void Update()
      {
           offset = objectManager.ObjectList[index].ModelOffset + baseOffet;
-          PrefabParent.transform.position = Camera.main.transform.position + Camera.main.transform.forward * offset.z 
+          ModelParent.transform.position = Camera.main.transform.position + Camera.main.transform.forward * offset.z 
                                                                            + Camera.main.transform.right * offset.x 
                                                                            + Camera.main.transform.up * offset.y;
-          PrefabParent.gameObject.transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed);
+          ModelParent.gameObject.transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed);
      }
 
      public void RightArrow()
@@ -80,18 +80,20 @@ public class DynamicGuidebook : MonoBehaviour
           LoadPage(index);
      }
 
-     private void LoadPage(int page)
+     public void LoadPage(int page)
      {
+          index = page;
+
           Image.sprite = objectManager.ObjectList[index].Image;
           PageTitle.text = objectManager.ObjectList[index].Name;
           PageSubTitle.text = "\"" + objectManager.ObjectList[index].LatinName + "\"";
           Description.text = objectManager.ObjectList[index].Description.text;
 
-          Destroy(Prefab);
-          Prefab = Instantiate(objectManager.ObjectList[index].Model);
+          Destroy(Model);
+          Model = Instantiate(objectManager.ObjectList[index].Model);
 
-          Prefab.transform.parent = PrefabParent.gameObject.transform;
-          Prefab.transform.position = PrefabParent.transform.position;
-          Prefab.transform.rotation = PrefabParent.transform.rotation;
+          Model.transform.parent = ModelParent.gameObject.transform;
+          Model.transform.position = ModelParent.transform.position;
+          Model.transform.rotation = ModelParent.transform.rotation;
      }
 }
