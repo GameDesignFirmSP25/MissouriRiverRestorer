@@ -25,9 +25,16 @@ namespace StarterAssets
 		public bool rotationWithQE = true;
 		public bool cameraLocked = true;
 
+		public bool controlsLocked = false;
+
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
+			if (controlsLocked)
+			{
+				MoveInput(Vector2.zero);
+				return;
+			}
 			MoveInput(value.Get<Vector2>());
 		}
 
