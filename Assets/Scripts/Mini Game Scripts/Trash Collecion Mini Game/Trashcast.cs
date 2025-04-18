@@ -51,6 +51,7 @@ public class Trashcast : MonoBehaviour
 
                 if (hit.collider.CompareTag("Trash: Styrofoam Cup")&& !TrashCollectionGame.ObjectveScup) 
                 {
+                    Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Stryofoam cup clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
                     playerScore++; // adds score for styrofoam cup
@@ -60,9 +61,11 @@ public class Trashcast : MonoBehaviour
                     ObjectiveScupPanelText.SetActive(true); // set the panel text to active
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
+                    trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
                 if (hit.collider.CompareTag("Trash: Bottle") && !TrashCollectionGame.ObjectvBottle)
                 {
+                    Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Bottle clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
                     playerScore++; // adds score for bottle 
@@ -73,9 +76,12 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
 
+                    Debug.Log("playerScore: " + playerScore);
+                    trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
                 if (hit.collider.CompareTag("Trash: trash bag")&& !TrashCollectionGame.ObjectvTrashBag)
                 {
+                    Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Trash bag clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
                     playerScore++; // adds score for trash bag
@@ -85,9 +91,11 @@ public class Trashcast : MonoBehaviour
                     ObjectiveTrashBagPanelText.SetActive(true); // set the panel text to active
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
+                    trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
                 if (hit.collider.CompareTag("Trash: Pizza Slice")&& !TrashCollectionGame.ObjectvPizzaSlice)
                 {
+                    Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Pizza slice clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
                     playerScore++; // adds score for pizza slice
@@ -97,9 +105,11 @@ public class Trashcast : MonoBehaviour
                     ObjectivePizzaSlicePanelText.SetActive(true); // set the panel text to active
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
+                    trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
                 if (hit.collider.CompareTag("Trash: gas can")&& !TrashCollectionGame.ObjectvGasCan)
                 {
+                    Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Gas can clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
                     playerScore++; // adds score for gas can
@@ -109,9 +119,11 @@ public class Trashcast : MonoBehaviour
                     ObjectiveGasCanPanelText.SetActive(true); // set the panel text to active
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
+                    trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
                 if (hit.collider.CompareTag("Save bird") && !TrashCollectionGame.ObjectvSaveBird)
                 {
+                    Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Save bird clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
                     playerScore++; // adds score for save bird
@@ -121,9 +133,11 @@ public class Trashcast : MonoBehaviour
                     ObjectiveSaveBirdPanelText.SetActive(true); // set the panel text to active
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
+                    trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
                 if (hit.collider.CompareTag("Save fish") && !TrashCollectionGame.ObjectvSaveFish)
                 {
+                    Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Save fish clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
                     playerScore++; // adds score for save fish
@@ -133,9 +147,11 @@ public class Trashcast : MonoBehaviour
                     ObjectiveSaveFishPanelText.SetActive(true); // set the panel text to active
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
+                    trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
                 if (hit.collider.CompareTag("Save deer") && !TrashCollectionGame.ObjectvSaveDeer)
                 {
+                    Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Save deer clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
                     playerScore++; // adds score for save deer
@@ -145,12 +161,14 @@ public class Trashcast : MonoBehaviour
                     ObjectiveSaveDeerPanelText.SetActive(true); // set the panel text to active
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
+                    trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
             }
         }
     }
     public void CloseObjectivePanel()
     {
+        Time.timeScale = 1f; // set the time scale to normal
         GameObject Objectivepanels = GameObject.FindGameObjectWithTag("Objective Panels");
         GameObject ObjectivepanelsText = GameObject.FindGameObjectWithTag("Objective Panels TXT");
         Objectivepanels.SetActive(false); // set the panel to inactive

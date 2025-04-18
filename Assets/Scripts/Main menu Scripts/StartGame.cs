@@ -24,7 +24,7 @@ public class StartGame : MonoBehaviour
     void StartGameButton()
     {
         Debug.Log("Button CLicked");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Overworld");
     }
     void Exit()
     {
