@@ -10,10 +10,15 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
     public GameObject[] birdPrefabs; // Array of bird prefabs to spawn
     public GameObject[] reptileAmphibianPrefabs; // Array of reptile/amphibian prefabs to spawn
     public GameObject[] insectPrefabs; // Array of insect prefabs to spawn
+    public GameObject nativeFishPrefab;
+
+    [Header("Waypoints")]
+    public Transform spawnArea; // Transform representing the area where fish can spawn
+    public GameObject[] fishWaypoints; // Array of waypoints for fish movement
 
     [Header("Integer Variables")]
     private int numberOfMammalsToSpawn = 7;
-    private int numberOfFishToSpawn = 20;
+    private int numberOfFishToSpawn = 8;
     private int numberOfBirdsToSpawn = 7;
     private int numberOfReptilesAmphibiansToSpawn = 7;
     private int numberOfInsectsToSpawn = 7;
@@ -22,15 +27,17 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
     [Header("Float Variables")]
     private float spawnTime = 0.05f;
     private float spawnDelay = 2.5f;
-    private float minimumXOnGround = -285f;
-    private float maximumXOnGround = 240f;
-    private float yPositionOnGround = 0f;
-    private float minimumZOnGround = -20f;
-    private float maximumZOnGround = 226f;
-    private float xPositionInRiver = -282f;
-    private float yPositionInRiver = -20f;
-    private float minimumZInRiver = -126.5f;
-    private float maximumZInRiver = -61.5f;
+    private float radius = 150f;
+    private float minimumXOnGround = -10f;
+    private float maximumXOnGround = 30f;
+    private float yPositionOnGround = 3f;
+    private float minimumZOnGround = -70f;
+    private float maximumZOnGround = 130f;
+    //private float minimumXInRiver = -282f;
+    //private float maximumXInRiver = -282f;
+    private float yPositionInRiver = -1.5f;
+    //private float minimumZInRiver = -126.5f;
+    //private float maximumZInRiver = -61.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,7 +52,7 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // Spawns mammals at random positions on the ground
@@ -67,8 +74,7 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
         if (spawnedFish < numberOfFishToSpawn)
         {
             int fishIndex = Random.Range(0, fishPrefabs.Length); // fishIndex equals a number with in range of 0 to 3
-            Instantiate(fishPrefabs[fishIndex], new Vector3(xPositionInRiver, yPositionInRiver, Random.Range(minimumZInRiver, maximumZInRiver)),
-                fishPrefabs[fishIndex].transform.rotation); // Instantiate fishPrefab at fishIndex at new Vector3
+            Instantiate(fishPrefabs[fishIndex], RandomFishPosition(), RandomFishRotation()); // Instantiate fishPrefab at fishIndex at new Vector3
             spawnedFish++; // spawnedFish equals itself plus 1
         }
     }
@@ -98,7 +104,7 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
     }
 
     // Spawns insects at random positions on the ground
-    private void SpawnInsects() 
+    private void SpawnInsects()
     {
         // For, i equals 0, i is less than numberOfTrashOnGroundToSpawn; when called i is equal to itself plus 1
         for (int i = 0; i < numberOfInsectsToSpawn; i++)
@@ -107,5 +113,33 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
             Instantiate(insectPrefabs[insectIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
                 yPositionOnGround, Random.Range(minimumZOnGround, maximumZOnGround)), insectPrefabs[insectIndex].transform.rotation); // Instantiate insectPrefab at insectIndex at new Vector3
         }
+    }
+
+    // Method to generate a random position for fish in the river
+    public Vector3 RandomFishPosition()
+    {
+        // Generate a random position for fish in the river
+        //Vector3 randomPosition = new Vector3(Random.Range(minimumXInRiver, maximumXInRiver), yPositionInRiver, Random.Range(minimumZInRiver, maximumZInRiver));
+        Vector3 randomPosition = spawnArea.position + Random.insideUnitSphere * radius; // Generate a random position within the spawn area
+        randomPosition = transform.TransformPoint(randomPosition * 0.5f); // Transform the random position
+        randomPosition.y = yPositionInRiver; // Set the y position of the random position
+        return randomPosition;
+    }
+
+    //Method to get Random Rotation on fish
+    public Quaternion RandomFishRotation()
+    {
+        // Generate a random rotation for fish
+        Quaternion randomRotation = Quaternion.Euler(Random.Range(-20, 20), Random.Range(0, 360), 0);
+        return randomRotation;
+    }
+
+    // Method to generate random waypoint
+
+    public Vector3 RandomFishWaypoint()
+    {
+        int waypointIndex = Random.Range(0, (fishWaypoints.Length - 1)); // Generate a random waypoint index
+        Vector3 randomWaypoint = fishWaypoints[waypointIndex].transform.position; // Transform the random waypoint
+        return randomWaypoint;
     }
 }

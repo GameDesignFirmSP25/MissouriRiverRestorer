@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9204569488920223658}
   - component: {fileID: 3543387029231074454}
   - component: {fileID: 8663005261733133227}
-  - component: {fileID: 5038756699914376069}
+  - component: {fileID: 549981881193359718}
   m_Layer: 0
   m_Name: Fish_ Silver Carp
   m_TagString: Invasive
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -7, z: -17.1}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -107,11 +107,11 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5038756699914376069
+--- !u!114 &549981881193359718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 39395927322805066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121628fc4cbd22c41804e1939ac9f434, type: 3}
+  m_Script: {fileID: 11500000, guid: ef88d8050a946444c9f3903a860a43df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetReachedDistance: 1
