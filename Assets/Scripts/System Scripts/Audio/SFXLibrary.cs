@@ -15,6 +15,8 @@ public static class SFXLibrary
         Step_Rocks, 
         Step_Brush,
         Step_Sand,
+        Step_Water,
+        Step_Concrete,
 
         Plant_Dig,
         Plant_Plant,
@@ -26,17 +28,36 @@ public static class SFXLibrary
         Water_Collect, Water_TestGood, Water_TestBad, 
         RemoveFromWater_Generic, RemoveFromWater_Trash,
 
-        ClothesRustling, Shore, Brush,
+        ClothesRustling, 
+        Shore, Brush,
 
         Score_Up, Score_Down,
         Menu_Open, Menu_Close, Menu_Navigation,
+        UI_Button, UI_Hover,
 
         Notbook_Fill25, Notebook_Fill50, Notebook_Fill75, Notebook_Fill100, 
         Notebook_Open, Notebook_Close, Notebook_PageFlip, 
         Notebook_Stamp, Notebook_Drawing, 
 
-        UI_Button, UI_Hover,
-        PickUp_Trash,
+        PickUp_Trash, PickUp_Recycle,
+
+        Invasive,
+
+        Butterfly,
+        Dragonfly,
+        Deer,
+        Raccoon,
+        Muskrat,
+        Beaver,
+        Snake,
+        SnappingTurtle, MapTurtle,
+        Eagle,
+        Starling,
+        Fish
+        /*** DO NOT CHANGE ANYTHING ABOVE THIS LINE****/
+        // Instead add new things at the bottom of the list \/ \/ \/
+
+
     }
 
     public static Dictionary<SFXType, SFXSO> sfxDictionary = new Dictionary<SFXType, SFXSO>();

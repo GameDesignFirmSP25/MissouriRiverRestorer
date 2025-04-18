@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eae993590ee5f054ba364d6899276da4, type: 3}
-  m_Name: Step_Dirt
+  m_Name: Step_Sand
   m_EditorClassIdentifier: 
-  type: 3
+  type: 6
   clips:
-  - {fileID: 8300000, guid: 23b29708b46620a4382e9c27596f7179, type: 3}
-  - {fileID: 8300000, guid: d60d92b1309286c4db1fc7a87be34851, type: 3}
+  - {fileID: 8300000, guid: f502f61d91ee40e49980223cf329688b, type: 3}
+  - {fileID: 8300000, guid: f357cc8a40db6064ba3a96e789e5a328, type: 3}
+  - {fileID: 8300000, guid: f2e40a04e8cd1024e935ce70901b55b5, type: 3}
   outputMixerGroup: {fileID: 1997003956336563998, guid: ea25a6fb74033c640b2e4711beb21078, type: 2}
   basePitch: 1
   pitchModPercent: 0.1
