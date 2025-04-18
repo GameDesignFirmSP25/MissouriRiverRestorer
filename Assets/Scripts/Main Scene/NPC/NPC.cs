@@ -8,7 +8,6 @@ public class NPC : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer interactSprite;
     [SerializeField] private GameObject interactText; // Reference to the interact text object
-    [SerializeField] private Transform player; // Reference to the player object
 
     [Header("Ink JSON")]
     [SerializeField] private TextAsset TutorialIntroduction;
@@ -62,14 +61,6 @@ public class NPC : MonoBehaviour
 
      private void Update()
     {
-        // Smoothly rotate the NPC to look at the player
-        if (player != null)
-        {
-            Vector3 direction = (player.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Adjust the speed (5f) as needed
-        }
-
         if (!DialogueManager.GetInstance().dialogueIsPlaying)
         {
             if (isWithinInteractDistance) // Check if the player is within a distance of 2 units from the NPC

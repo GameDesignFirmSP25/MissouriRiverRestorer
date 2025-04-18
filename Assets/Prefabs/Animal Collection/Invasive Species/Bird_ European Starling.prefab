@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 3543387029231074454}
   - component: {fileID: 8663005261733133227}
   - component: {fileID: 1266666555216936391}
-  - component: {fileID: 3415297836933822041}
-  - component: {fileID: 6662981611437649732}
   m_Layer: 0
   m_Name: Bird_ European Starling
   m_TagString: Invasive
@@ -125,43 +123,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485f11ebb2a7c2c418092143bd70ac63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
-  isWaiting: 1
-  isWalking: 0
---- !u!195 &3415297836933822041
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39395927322805066}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &6662981611437649732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39395927322805066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 485f11ebb2a7c2c418092143bd70ac63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0
-  isWaiting: 1
-  isWalking: 0

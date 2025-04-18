@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 1446022908911998061}
   - component: {fileID: 5542770256790917674}
   - component: {fileID: 2117197994102887974}
-  - component: {fileID: 5298872297515081844}
-  - component: {fileID: 8068165680200060438}
   m_Layer: 0
   m_Name: Reptile- Amphibian_ Garter Snake
   m_TagString: Native
@@ -112,40 +110,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &5298872297515081844
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275288261641237766}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &8068165680200060438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275288261641237766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 485f11ebb2a7c2c418092143bd70ac63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0
-  isWaiting: 1
-  isWalking: 0

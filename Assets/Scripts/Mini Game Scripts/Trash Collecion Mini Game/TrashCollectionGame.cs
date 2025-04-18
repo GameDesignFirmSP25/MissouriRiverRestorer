@@ -101,25 +101,11 @@ public class TrashCollectionGame : BaseMiniGameManager
 
      void Update()// Update is called once per frame
     {
-        if (IsAnyObjectivePanelOpen())
-        {
-            return; // Do not execute the rest of the Update method if any objective panel is open
-        }
-        if (trashcast.playerScore >= GameScore && !isgameComplete )
+        
+        if (trashcast.playerScore >= GameScore && !isgameComplete)
         {
             gameCompleteScore();
         }
-    }
-    private bool IsAnyObjectivePanelOpen()
-    {
-        return objectiveScupPanel.activeSelf ||
-               objectiveGasCanPanel.activeSelf ||
-               objectivePizzaSlicePanel.activeSelf ||
-               objectiveTrashBagPanel.activeSelf ||
-               objectiveBottlePanel.activeSelf ||
-               objectiveSaveBirdPanel.activeSelf ||
-               objectiveSaveFishPanel.activeSelf ||
-               objectiveSaveDeerPanel.activeSelf;
     }
     public void StartGame()
     {
