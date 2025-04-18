@@ -125,7 +125,7 @@ public class TrashCollectionGame : BaseMiniGameManager
                 // add panel to pop up
                 
                 Finishpanel1.SetActive(true);// sets panel active
-        EndButton.SetActive(true);
+                EndButton.SetActive(true);
 
 
         // For Game Progression
