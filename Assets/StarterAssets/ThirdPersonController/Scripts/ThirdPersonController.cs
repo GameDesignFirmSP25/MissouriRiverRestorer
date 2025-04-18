@@ -227,7 +227,10 @@ namespace StarterAssets
         {
                // set target speed based on move speed, sprint speed and if sprint is pressed
                float targetSpeed;
-               if(AlwaysSprint)
+               if (_input.controlsLocked) {
+                    targetSpeed = 0;
+               }
+               else if (AlwaysSprint)
                {
                     targetSpeed = SprintSpeed;
                }

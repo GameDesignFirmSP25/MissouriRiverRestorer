@@ -10,7 +10,6 @@ public class DynamicGuidebook : MonoBehaviour
 
     public Button rightbutton;
     public Button leftbutton;
-    public Sprite[] guideimage = new Sprite[2];
     public int index;
     public Image Image;
      public TMP_Text PageTitle;
@@ -19,6 +18,7 @@ public class DynamicGuidebook : MonoBehaviour
      public GameObject ModelParent;
      public GameObject Model;
     public Canvas CanvasPage;
+     public GuidebookUI GBUI;
 
      private Vector3 baseOffet = new Vector3(-0.5f, 0, 1);
      private Vector3 offset = new Vector3();
@@ -80,9 +80,24 @@ public class DynamicGuidebook : MonoBehaviour
           LoadPage(index);
      }
 
+     private void LoadUndiscovered()
+     {
+          Image.sprite = objectManager.BlankObject.Image;
+          PageTitle.text = objectManager.BlankObject.Name;
+          PageSubTitle.text = "";
+          Description.text = objectManager.BlankObject.Description.text;
+          Destroy(Model);
+     }
+
      public void LoadPage(int page)
      {
           index = page;
+
+          if (objectManager.ObjectList[index].isScanned == false)
+          {
+               LoadUndiscovered();
+               return;
+          }
 
           Image.sprite = objectManager.ObjectList[index].Image;
           PageTitle.text = objectManager.ObjectList[index].Name;

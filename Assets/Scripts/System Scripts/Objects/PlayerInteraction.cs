@@ -19,9 +19,20 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         CheckDistance();
          Spherecast();
          Interaction();
     }
+
+     private void CheckDistance()
+     {
+          if(CurrentInteractionObject == null) return;
+          if(Vector3.Distance(transform.position, CurrentInteractionObject.transform.position) > maxDistance)
+          {
+               CurrentInteractionObject.OutRange();
+               CurrentInteractionObject = null;
+          }
+     }
 
      private void Spherecast()
      {
@@ -49,8 +60,10 @@ public class PlayerInteraction : MonoBehaviour
 
           if(Input.GetKeyDown(KeyCode.E)) 
           {
+               // Set object found to unlock the page before loading
+               ObjectManager.instance.SetObjectFound(CurrentInteractionObject.data.Name);
                // load correct page
-               GBUI.OnBookButton(ObjectManager.instance.GetIndexByName(CurrentInteractionObject.data.Name));
+               DynamicGuidebook.instance.GBUI.OnBookButton(ObjectManager.instance.GetIndexByName(CurrentInteractionObject.data.Name));
           }
      }
 }

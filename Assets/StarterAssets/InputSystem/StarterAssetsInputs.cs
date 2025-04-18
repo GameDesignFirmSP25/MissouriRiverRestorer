@@ -30,7 +30,11 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
-			if (controlsLocked) return;
+			if (controlsLocked)
+			{
+				MoveInput(Vector2.zero);
+				return;
+			}
 			MoveInput(value.Get<Vector2>());
 		}
 

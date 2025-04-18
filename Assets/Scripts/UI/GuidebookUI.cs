@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
+using UnityEngine.SceneManagement;
 
 public class GuidebookUI : MonoBehaviour
 {
@@ -11,6 +12,16 @@ public class GuidebookUI : MonoBehaviour
      public StarterAssetsInputs PlayerInput;
 
      private bool isGuidebookOpen;
+
+     private void Awake()
+     {
+          SceneManager.sceneLoaded += OnSceneLoad;
+     }
+
+     private void OnDestroy()
+     {
+          SceneManager.sceneLoaded -= OnSceneLoad;
+     }
 
      private void Update()
      {
@@ -26,15 +37,22 @@ public class GuidebookUI : MonoBehaviour
           {
                GuidebookCanvas.SetActive(false);
                //return player control
-               PlayerInput.controlsLocked = false;
+               if (PlayerInput != null)
+                    PlayerInput.controlsLocked = false;
           }
           else
           {
                GuidebookCanvas.SetActive(true);
                Guidebook.LoadPage(page);
-               PlayerInput.controlsLocked = true;
+               if (PlayerInput != null)
+                    PlayerInput.controlsLocked = true;
 
           }
           isGuidebookOpen = !isGuidebookOpen;
+     }
+
+     private void OnSceneLoad(Scene loadedScene, LoadSceneMode loadMode)
+     {
+          PlayerInput = FindFirstObjectByType<StarterAssetsInputs>();
      }
 }
