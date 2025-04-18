@@ -1207,6 +1207,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102495272}
   m_CullTransparentMesh: 1
+--- !u!1 &173036646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 23138285856399275, guid: cda244ec42204d2418748480df27a1e3, type: 3}
+  m_PrefabInstance: {fileID: 4256942405277864224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &173036650
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173036646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8460842472296288008, guid: 45496da6836796f45a726d2257a239d3, type: 3}
 --- !u!1001 &190835952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2354,6 +2381,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3220307165879212793, guid: a0a4f18c270cf7541b8300f32edb0530, type: 3}
   m_PrefabInstance: {fileID: 77814435}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &650540469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4455402898218329599, guid: cda244ec42204d2418748480df27a1e3, type: 3}
+  m_PrefabInstance: {fileID: 4256942405277864224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &650540473
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650540469}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 571175114513115251, guid: 64dd4395d53e16e40ba144352c8fdc76, type: 3}
 --- !u!1 &671304870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3639,6 +3693,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5238919115643754664, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
   m_PrefabInstance: {fileID: 190835952}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1471897752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9159443381421628449, guid: cda244ec42204d2418748480df27a1e3, type: 3}
+  m_PrefabInstance: {fileID: 4256942405277864224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1471897756
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471897752}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2537749959709245499, guid: 97e7c221f987e9440a12cec465388fe3, type: 3}
 --- !u!1 &1479062957
 GameObject:
   m_ObjectHideFlags: 0
@@ -5699,7 +5780,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 23138285856399275, guid: cda244ec42204d2418748480df27a1e3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 173036650}
+    - targetCorrespondingSourceObject: {fileID: 9159443381421628449, guid: cda244ec42204d2418748480df27a1e3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1471897756}
+    - targetCorrespondingSourceObject: {fileID: 4455402898218329599, guid: cda244ec42204d2418748480df27a1e3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 650540473}
   m_SourcePrefab: {fileID: 100100000, guid: cda244ec42204d2418748480df27a1e3, type: 3}
 --- !u!1001 &7186473484489634559
 PrefabInstance:
