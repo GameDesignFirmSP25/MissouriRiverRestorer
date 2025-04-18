@@ -594,20 +594,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "37c8231c711548d193edf28e4611f32a"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "bffa058c1e434aea8fc3e60166884323"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "43c1afd407c64db2a2b0cfbf0a40688e"
                 },
                 "m_SlotId": 0
@@ -958,6 +944,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "98bf5d9fcc904dc1ade774ee8038e544"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "b353bd8e0a72496db5100314ae340f16"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "9965701e8f364b59873df55f9752e814"
                 },
                 "m_SlotId": 2
@@ -1107,20 +1107,6 @@
                     "m_Id": "22d4fd65bd534dd3ab17c09540dab983"
                 },
                 "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "c96d0c6b48da4284a886aa95f9244941"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "b353bd8e0a72496db5100314ae340f16"
-                },
-                "m_SlotId": 1
             }
         },
         {
@@ -2750,7 +2736,7 @@
     "m_ObjectId": "2957bf9dddf24cce9960e42e2350f96e",
     "m_Title": "Main Texture",
     "m_Position": {
-        "x": 77.60009765625,
+        "x": 77.5999755859375,
         "y": -227.19989013671876
     }
 }
@@ -3093,10 +3079,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1851.2000732421875,
-            "y": -221.6000213623047,
-            "width": 212.8001708984375,
-            "height": 336.00006103515627
+            "x": 1546.3997802734375,
+            "y": -233.59999084472657,
+            "width": 212.800048828125,
+            "height": 336.0
         }
     },
     "m_Slots": [
@@ -6839,9 +6825,9 @@
             "w": 0.0
         },
         {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
             "w": 1.0
         }
     ],
