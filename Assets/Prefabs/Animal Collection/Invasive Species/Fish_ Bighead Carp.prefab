@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9204569488920223658}
   - component: {fileID: 3543387029231074454}
   - component: {fileID: 8663005261733133227}
-  - component: {fileID: 5038756699914376069}
+  - component: {fileID: 1648303782601114934}
   m_Layer: 0
   m_Name: Fish_ Bighead Carp
   m_TagString: Invasive
@@ -103,15 +103,15 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5038756699914376069
+--- !u!114 &1648303782601114934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 39395927322805066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121628fc4cbd22c41804e1939ac9f434, type: 3}
+  m_Script: {fileID: 11500000, guid: ef88d8050a946444c9f3903a860a43df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetReachedDistance: 1
