@@ -8,17 +8,19 @@ public class NPC : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer interactSprite;
     [SerializeField] private GameObject interactText; // Reference to the interact text object
+    [SerializeField] private Transform player; // Reference to the player object
 
     [Header("Ink JSON")]
     [SerializeField] private TextAsset TutorialIntroduction;
-    [SerializeField] private TextAsset WaterTestingTutorial;
+    //[SerializeField] private TextAsset WaterTestingTutorial;
     [SerializeField] private TextAsset AfterFirstWaterTest;
     [SerializeField] private TextAsset MidpointTransition;
-    [SerializeField] private TextAsset TrashCollectionTutorial;
+    //[SerializeField] private TextAsset TrashCollectionTutorial;
+    [SerializeField] private TextAsset AfterTrashCollection;
     [SerializeField] private TextAsset PlantingTutorial;
+    [SerializeField] private TextAsset AnimalTrappingTutorial;
     [SerializeField] private TextAsset RetestWaterTutorial;
     [SerializeField] private TextAsset AfterSecondWaterTest;
-    [SerializeField] private TextAsset AnimalTrappingTutorial;
     [SerializeField] private TextAsset Finale;
 
     private Transform playerTransform;
@@ -30,9 +32,10 @@ public class NPC : MonoBehaviour
     private static bool midpointTransitionPlayed = false;
     private static bool firstTransitionPlayed = false;
     private static bool secondTransitionPlayed = false;
+    private static bool thirdTransitionPlayed = false; 
 
-     // Methods to trigger game progression.
-     public void OnFirstWaterGameTasked() { Debug.Log("NPC: First Water Game Tasked!"); }
+    // Methods to trigger game progression.
+    public void OnFirstWaterGameTasked() { Debug.Log("NPC: First Water Game Tasked!"); }
      public void OnTrashGameTasked() { Debug.Log("NPC: Trash Game Tasked!"); }
      public void OnPlantGameTasked() { Debug.Log("NPC: Plant Game Tasked!"); }
      public void OnSecondWaterGameTasked() { Debug.Log("NPC: Second Water Game Tasked!"); }
@@ -61,6 +64,14 @@ public class NPC : MonoBehaviour
 
      private void Update()
     {
+        // Smoothly rotate the NPC to look at the player
+        if (player != null)
+        {
+            Vector3 direction = (player.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Adjust the speed (5f) as needed
+        }
+
         if (!DialogueManager.GetInstance().dialogueIsPlaying)
         {
             if (isWithinInteractDistance) // Check if the player is within a distance of 2 units from the NPC
@@ -101,20 +112,20 @@ public class NPC : MonoBehaviour
             Invoke("SetIntroPlayed", 0.5f); // Call the SetIntroPlayed method after 0.5 seconds
         }
 
-        if (introPlayed && !WaterTestingManager.isFirstWaterTestComplete)
-        {
-            DialogueManager.GetInstance().StartDialogue(WaterTestingTutorial);
-               //actionNames["FirstWaterGameTasked"]?.Invoke();
-          }
+        //if (introPlayed && !WaterTestingManager.isFirstWaterTestComplete)
+        //{
+        //    DialogueManager.GetInstance().StartDialogue(WaterTestingTutorial);
+        //       //actionNames["FirstWaterGameTasked"]?.Invoke();
+        //}
 
-          if (introPlayed && !firstTransitionPlayed && WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
-        {
+         if (introPlayed && !firstTransitionPlayed && WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
+         {
             DialogueManager.GetInstance().StartDialogue(AfterFirstWaterTest);
             Invoke("SetFirstTransitionPlayed", 0.5f); // Call the SetFirstTransitionPlayed method after 0.5 seconds
 
                //DEV - REMOVE BEFORE BUILDING
                actionNames["TrashGameTasked"]?.Invoke();
-          }
+         }
 
         if (firstTransitionPlayed && !midpointTransitionPlayed && WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
         {
@@ -122,35 +133,43 @@ public class NPC : MonoBehaviour
             Invoke("SetMidpointTransitionPlayed", 0.5f); // Call the SetMidpointTransitionPlayed method after 0.5 seconds
         }
 
-        if (midpointTransitionPlayed && !TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
-        {
-            DialogueManager.GetInstance().StartDialogue(TrashCollectionTutorial);
-               //actionNames["TrashGameTasked"]?.Invoke(); // ADD THIS BACK BEFORE BUILD
-          }
+        //if (midpointTransitionPlayed && !TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
+        //{
+        //    DialogueManager.GetInstance().StartDialogue(TrashCollectionTutorial);
+        //       //actionNames["TrashGameTasked"]?.Invoke(); // ADD THIS BACK BEFORE BUILD
+        //}
 
-        if (midpointTransitionPlayed && TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted)
+        if (midpointTransitionPlayed && !TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted && !secondTransitionPlayed)
+        {
+            DialogueManager.GetInstance().StartDialogue(AfterTrashCollection);
+            Invoke("SecondTransition", 0.5f); // Call the SecondTransition method after 0.5 seconds
+        }
+
+        if (midpointTransitionPlayed && TrashCollectionGame.trashCollected && !PlantGameManager.plantingCompleted && secondTransitionPlayed)
         {
             DialogueManager.GetInstance().StartDialogue(PlantingTutorial);
                actionNames["PlantGameTasked"]?.Invoke();
         }
 
-        if (TrashCollectionGame.trashCollected && PlantGameManager.plantingCompleted && !WaterTestingManager.isSecondWaterTestComplete)
+        if (!AnimalGameManager.trappingCompleted && thirdTransitionPlayed && PlantGameManager.plantingCompleted)
+        {
+            DialogueManager.GetInstance().StartDialogue(AnimalTrappingTutorial);
+            actionNames["AnimalGameTasked"]?.Invoke();
+        }
+
+        if (TrashCollectionGame.trashCollected && AnimalGameManager.trappingCompleted && !WaterTestingManager.isSecondWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(RetestWaterTutorial);
                actionNames["SecondWaterGameTasked"]?.Invoke();
         }
 
-        if (!secondTransitionPlayed && WaterTestingManager.isSecondWaterTestComplete && !AnimalGameManager.trappingCompleted)
+        if (!thirdTransitionPlayed && WaterTestingManager.isSecondWaterTestComplete)
         {
             DialogueManager.GetInstance().StartDialogue(AfterSecondWaterTest);
             Invoke("SecondTransition", 0.5f); // Call the SecondTestComplete method after 0.5 seconds
         }
 
-        if (!AnimalGameManager.trappingCompleted && secondTransitionPlayed)
-        {
-            DialogueManager.GetInstance().StartDialogue(AnimalTrappingTutorial);
-               actionNames["AnimalGameTasked"]?.Invoke();
-        }
+        
 
         if (TrashCollectionGame.trashCollected && AnimalGameManager.trappingCompleted && PlantGameManager.plantingCompleted && WaterTestingManager.isFirstWaterTestComplete && WaterTestingManager.isSecondWaterTestComplete)
         {
@@ -179,6 +198,11 @@ public class NPC : MonoBehaviour
     {
         secondTransitionPlayed = true; // Set secondTransitionPlayed to true
     }
+
+    private void ThirdTransition()
+    {
+        thirdTransitionPlayed = true; // Set thirdTransitionPlayed to true
+    }   
 
     private bool IsWithinInteractDistance()
     {

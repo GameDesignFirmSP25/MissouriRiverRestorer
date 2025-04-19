@@ -19,17 +19,21 @@ public class DialogueManager : MonoBehaviour
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
 
+    [Header("Input Settings")]
+    [SerializeField] private KeyCode skipKey = KeyCode.Space;
+
+    [Header("Booleans")]
+    [SerializeField] private bool canSkip = true;
+    public bool dialogueIsPlaying { get; private set; }
+    private bool canContinueToNextLine = false;
+
+    [Header("UI Elements")]
     private TextMeshProUGUI[] choicesText;
 
+    [Header("References")]
     private Story currentStory;
-
     private Coroutine displayLineCoroutine;
-
     private static DialogueManager instance;
-
-    public bool dialogueIsPlaying { get; private set; }
-
-    private bool canContinueToNextLine = false; 
 
     private void Awake()
     {
@@ -39,12 +43,13 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Found more than one Dialogue Manager in the scene"); // Debug.Log a warning if more than one Dialogue Manager is found
         }
 
-        instance = this;
+        instance = this; // Set the instance to this DialogueManager instance
     }
 
+    // Returns the instance of DialogueManager
     public static DialogueManager GetInstance()
     {
-        return instance;
+        return instance; // Return the instance of DialogueManager
     }
 
     private void Start()
@@ -77,19 +82,20 @@ public class DialogueManager : MonoBehaviour
         // If 
         if (canContinueToNextLine && currentStory.currentChoices.Count == 0 && (Input.GetKeyDown(KeyCode.E)))
         {
-            ContinueStory();
+            ContinueStory(); // Call the method to continue the story
         }
     }
 
+    // Method to start the dialogue with a given ink JSON file
     public void StartDialogue(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text); // Create a new Story object with the provided ink JSON
         dialogueIsPlaying = true; // Set bool dialogueIsPlaying to true
         dialogueBox.SetActive(true); // Show the dialogue box
-
         ContinueStory(); // Call the method to continue the story
     }
 
+    // Method to end the dialogue
     private void EndDialogue()
     {
         dialogueIsPlaying = false; // Set bool dialogueIsPlaying to false
@@ -97,6 +103,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = ""; // Clear the dialogue text
     }
 
+    //Method to continue the story
     private void ContinueStory()
     {
         // If currentStory can continue...
@@ -127,24 +134,21 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator DisplayLine(string line)
     {
-        // set the text to the full line, but set the visible characters to 0
-        dialogueText.text = line;
-        dialogueText.maxVisibleCharacters = 0;
-        // hide items while text is typing
-        HideChoices();
-
+        dialogueText.text = line; // Set the dialogue text to the current line
+        dialogueText.maxVisibleCharacters = 0; // Reset the max visible characters to 0 to start the typing animation 
+        HideChoices(); // Hide the choices UI elements
         canContinueToNextLine = false; // Set bool canContinueToNextLine to false
-
         bool isAddingRichTextTag = false; // Set bool isAddingRichTextTag to false
 
         // display each letter one at a time
         foreach (char letter in line.ToCharArray())
         {
-            // if the submit button is pressed, finish up displaying the line right away
-            if (Input.GetKeyDown(KeyCode.Space))
+            // If bool canSkiop is true and the skip key is pressed...
+            if (canSkip && Input.GetKeyDown(skipKey))
             {
-                dialogueText.maxVisibleCharacters = line.Length; // Set max visible characters to the length of the line
-                break;
+                Debug.Log("Typing animation skipped."); // Log the skip action
+                dialogueText.maxVisibleCharacters = line.Length; // Display the full line
+                break; // Exit the loop
             }
 
             // check for rich text tag, if found, add it without waiting
@@ -155,7 +159,7 @@ public class DialogueManager : MonoBehaviour
                 // If the letter is a closing tag, set isAddingRichTextTag to false
                 if (letter == '>')
                 {
-                    isAddingRichTextTag = false;
+                    isAddingRichTextTag = false; // Set bool isAddingRichTextTag to false   
                 }
             }
             // if not rich text, add the next letter and wait a small time
@@ -201,7 +205,7 @@ public class DialogueManager : MonoBehaviour
             choiceButton.SetActive(false); // Deactivate the choice text
         }
     }
-
+    // Method to select the first choice in the choices array
     private IEnumerator SelectFirstChoice()
     {
         // Event System requires we clear it first, then wait for at least a frame before we set the current selected GameObject
@@ -210,6 +214,7 @@ public class DialogueManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject); // Select the first choice
     }
 
+    // Method to make a choice based on the index of the choice
     public void MakeChoice(int choiceIndex)
     {
         // If canContinueToNextLine is true...
@@ -218,7 +223,7 @@ public class DialogueManager : MonoBehaviour
             currentStory.ChooseChoiceIndex(choiceIndex); // Choose the choice based on the index
             
             Input.GetKeyDown(KeyCode.Space); // Simulate key press
-            ContinueStory();
+            ContinueStory(); // Continue the story after making the choice
         }
     }
 }

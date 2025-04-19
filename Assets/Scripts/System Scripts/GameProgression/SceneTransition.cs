@@ -20,8 +20,8 @@ public class SceneTransition : MonoBehaviour
           Cursor.lockState = CursorLockMode.None;
           if (targetSceneName == "")
           {
-               Debug.Log("Scene name not set. Loading first build scene");
-               SceneManager.LoadScene(0);
+               Debug.Log("Scene name not set. Loading Overworld");
+               SceneManager.LoadScene("Overworld");
           }
           else
           {

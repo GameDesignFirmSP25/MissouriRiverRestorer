@@ -22,13 +22,39 @@ public class TrashCollectionGame : BaseMiniGameManager
 
     public Button endbtn;
     public GameObject EndButton;
-    public GameObject Finishpanel2;
+    public GameObject Finishpanel1;
+
     
 
     
     public static bool trashCollected = false; // global variable to check if trash is collected
 
-  
+    [Header("Objective Panels")]
+    public GameObject objectiveScupPanel;
+    public GameObject objectiveGasCanPanel;
+    public GameObject objectivePizzaSlicePanel;
+    public GameObject objectiveTrashBagPanel;
+    public GameObject objectiveBottlePanel;
+    public GameObject objectiveSaveBirdPanel;
+    public GameObject objectiveSaveFishPanel;
+    public GameObject objectiveSaveDeerPanel;
+    [Header("Objective text")]
+    [SerializeField]
+    TextMeshProUGUI objectiveScupText;
+    [SerializeField]
+    TextMeshProUGUI objectiveGasCanText;
+    [SerializeField]
+    TextMeshProUGUI objectivePizzaSliceText;
+    [SerializeField]
+    TextMeshProUGUI objectiveTrashBagText;
+    [SerializeField]
+    TextMeshProUGUI objectiveBottleText;
+    [SerializeField]
+    TextMeshProUGUI objectiveSaveBirdText;
+    [SerializeField]
+    TextMeshProUGUI objectiveSaveFishText;
+    [SerializeField]
+    TextMeshProUGUI objectiveSaveDeerText;
 
     [Header("Bools")]
     public static bool ObjectveScup = false;
@@ -52,13 +78,18 @@ public class TrashCollectionGame : BaseMiniGameManager
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
+       
         Time.timeScale = 0f;
-        Finishpanel2.SetActive(false);
+        Finishpanel1.SetActive(false);
 
         EndButton.SetActive(false);
         Panel.SetActive(true);
         StartButton.SetActive(true);
         StartBtn.onClick.AddListener(StartGame);
+        if (trashcast.CollectedTrash >= GameScore && !isgameComplete)
+        {
+            gameCompleteScore();
+        }
     }
 
      private void OnDestroy()
@@ -70,12 +101,25 @@ public class TrashCollectionGame : BaseMiniGameManager
 
      void Update()// Update is called once per frame
     {
-        strikethrough();
-        if (trashcast.playerScore >= GameScore && !isgameComplete)
+        if (IsAnyObjectivePanelOpen())
+        {
+            return; // Do not execute the rest of the Update method if any objective panel is open
+        }
+        if (trashcast.playerScore >= GameScore && !isgameComplete )
         {
             gameCompleteScore();
         }
-        
+    }
+    private bool IsAnyObjectivePanelOpen()
+    {
+        return objectiveScupPanel.activeSelf ||
+               objectiveGasCanPanel.activeSelf ||
+               objectivePizzaSlicePanel.activeSelf ||
+               objectiveTrashBagPanel.activeSelf ||
+               objectiveBottlePanel.activeSelf ||
+               objectiveSaveBirdPanel.activeSelf ||
+               objectiveSaveFishPanel.activeSelf ||
+               objectiveSaveDeerPanel.activeSelf;
     }
     public void StartGame()
     {
@@ -85,6 +129,7 @@ public class TrashCollectionGame : BaseMiniGameManager
         Panel.SetActive(false);
        
     }
+
     public void gameCompleteScore()
     {
                 Time.timeScale = 0f;
@@ -92,17 +137,18 @@ public class TrashCollectionGame : BaseMiniGameManager
                 isgameComplete = true;
                 trashCollected = true; // set the global variable to true
                 // add panel to pop up
-                EndButton.SetActive(true);// sets button active
-                Finishpanel2.SetActive(true);// sets panel active
-                endbtn.onClick.AddListener(Home);
+                
+                Finishpanel1.SetActive(true);// sets panel active
+                EndButton.SetActive(true);
 
-          // For Game Progression
-          TriggerMiniGameCompleteEvent(0); // Can add a score pass through here
+
+        // For Game Progression
+        TriggerMiniGameCompleteEvent(0); // Can add a score pass through here
     }
     public void Home() 
     {
         endbtn.onClick.RemoveListener(Home);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Overworld");
 
     }
     public void strikethrough()

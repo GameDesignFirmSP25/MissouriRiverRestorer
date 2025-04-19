@@ -8,6 +8,7 @@ using UnityEngine.Events;
 
 public class WaterTestingManager : BaseMiniGameManager
 {
+    [Header("UI Elements")]
     [SerializeField]
     private GameObject progressBar;
 
@@ -44,10 +45,11 @@ public class WaterTestingManager : BaseMiniGameManager
     [SerializeField]
     TextMeshProUGUI riverbankObjectiveText;
 
-     private Slider slider;
+    private Slider slider;
     public Button StartBtn;
-
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
+
+    [Header("Scripts")]
     public Raycast raycastScript;
     public PausMenuManager pauseMenuScript;
     public ProgressBar progressBarScript;
@@ -60,20 +62,20 @@ public class WaterTestingManager : BaseMiniGameManager
     public TireEffectsPanelClickHandler tireEffectsPanelScript;
     public AluminumEffectsPanelClickHandler aluminumEffectsPanelScript;
 
+    [Header("Float Variables")]
     private float targetProgress = 1f;
     private float loadingTime = 0f;
     private float showPanel = 3f;
     private float progressIncrement = 0.1f;
     private float panelTimer = 0.1f;
-    //private float enableTime = 5f;
 
+    [Header("Booleans")]
     public bool isPressed = false;
     public bool isMiniGameOver = false;
     public bool readyToTransition = false;
     public bool firstWaterTestObjectivesVisible = false;
     public bool secondWaterTestObjectivesVisible = false;
     public bool firstWaterTestReady = true;
-
     public bool panel3 = false;
     public bool panel4 = false;
     public bool panel5 = false;
@@ -85,6 +87,9 @@ public class WaterTestingManager : BaseMiniGameManager
     public bool instructionsShown = false;
     public bool objectivesComplete = false;
     public bool gameStarted = false;
+    public bool pauseButtonClicked = false;
+
+    [Header("Global Variables")]
     public static bool aPanelIsActive = false;
     public static bool isTrashBagObjectiveComplete = false;
     public static bool isGasCanObjectiveComplete = false;
@@ -109,15 +114,15 @@ public class WaterTestingManager : BaseMiniGameManager
     public static bool isFirstWaterTestComplete = false;
     public static bool isSecondWaterTestComplete = false;
 
+    public GameObject PauseUI;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PauseButton.SetActive(false); // Set PauseButton to not active
-        progressBar = GameObject.Find("Progress Bar"); // Get Slider component on Progress Bar
-        slider = progressBar.GetComponent<Slider>(); // slider is equal to the slider component
+        Time.timeScale = 0f; // Freezes time
+        GetProgressBar(); // Call the GetProgressBar function to initialize the progress bar
         GetPanels(); // Call the GetPanels function to initialize the panels
         Cursor.visible = true; // Set Cursor to be visible
-        Time.timeScale = 0f; // Freezes time
 
         // If isFirstWaterTestComplete is false...
         if (!isFirstWaterTestComplete)
@@ -161,14 +166,18 @@ public class WaterTestingManager : BaseMiniGameManager
             }
         }
 
-        if (pauseMenuScript.isPaused == true)
+        if (pauseMenuScript.isPaused == true && !pauseButtonClicked)
         {
             PauseGame();
+            pauseButtonClicked = true; // Set bool pauseButtonClicked to true
+            Invoke("ResetPauseBool", 0.1f); // Invoke ResetPauseBool method after 0.1 seconds
         }
 
-        if (pauseMenuScript.isPaused == false)
+        if (pauseMenuScript.isPaused == false && !pauseButtonClicked && gameStarted)
         {
             ResumeGame();
+            pauseButtonClicked = true; // Set bool pauseButtonClicked to true
+            Invoke("ResetPauseBool", 0.1f); // Invoke ResetPauseBool method after 0.1 seconds
             PauseButton.SetActive(true); // Set PauseButton to active
         }
 
@@ -189,6 +198,13 @@ public class WaterTestingManager : BaseMiniGameManager
         {
             GoodWaterQuality();
         }
+    }
+
+    // Function to get the progress bar
+    void GetProgressBar()
+    {
+        progressBar = GameObject.Find("Progress Bar"); // Get Slider component on Progress Bar
+        slider = progressBar.GetComponent<Slider>(); // slider is equal to the slider component
     }
 
     // Function to get all panels in the scene
@@ -218,7 +234,6 @@ public class WaterTestingManager : BaseMiniGameManager
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
         progressBar.SetActive(true); // Enable Progress bar
-        PauseButton.SetActive(true); // Set PauseButton to active
         Raycast.isClickable = true; // Set bool isClickable to true
         gameStarted = true; // Set bool gameStarted to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
@@ -244,6 +259,11 @@ public class WaterTestingManager : BaseMiniGameManager
     void ResumeGame()
     {
         Time.timeScale = 1f;
+    }
+
+    void ResetPauseBool()
+    {
+        pauseButtonClicked = false; // Set bool pauseButtonClicked to false
     }
 
     //// Method to deactivate all panels
@@ -477,7 +497,7 @@ public class WaterTestingManager : BaseMiniGameManager
 
     private void LoadToMainScene()
     {
-        SceneManager.LoadScene(0); // Load scene first in build order. Should point to overworld scene
+        SceneManager.LoadScene("Overworld"); // Load Overworld
     }
 
     // Method for if water quality is poor
