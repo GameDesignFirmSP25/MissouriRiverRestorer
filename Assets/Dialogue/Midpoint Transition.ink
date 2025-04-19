@@ -1,3 +1,4 @@
+
 Dr. Waterson: "I would say our next course of action is addressing all of that litter."
 Dr. Waterson: “I know that all these dead plants are an eyesore, but we’ll deal with them later.”
 

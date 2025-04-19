@@ -21,9 +21,9 @@ Dr. Waterson: “Take a look at the riverbank, won’t you?”
 Player: “The riverbank?”
 Player: “What for?"
 
-Dr. Waterson: “Well, it's in complete disarray. It’s a sorry sight, isn’t it?”
+Dr. Waterson: “Well, it's in complete disarray. A sorry sight, isn’t it?”
 
-Player: “Yeah, it’s awful... those dead plants–and where did all the animals go?”
+Player: “Oh yeah, it’s awful... those dead plants–and where did all the animals go?”
 
 Dr. Waterson: “The ecosystem of the river has deteriorated and they’ve moved onto greener pastures.”
 Dr. Waterson: “Or perhaps ‘bluer streams’ would be more appropriate. Ohohoho!”
