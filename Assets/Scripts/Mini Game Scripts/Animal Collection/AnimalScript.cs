@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AnimalScript : MonoBehaviour
 {
-    //private float RightBoundry = 60; //how far right the animal despawns
-    //private float speedMin = 15.0f; //how fast the animal moves
-    //private float speedMax = 30.0f; //how fast the animal moves
     private AnimalGameManager gameManager;
 
     private NavMeshAgent agent;
@@ -23,9 +22,8 @@ public class AnimalScript : MonoBehaviour
 
     void Start()
     {
-        // Get the NavMeshAgent component
-        agent = GetComponent<NavMeshAgent>();
-        timer = wanderTimer;
+        agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component from the game object
+        timer = wanderTimer; // Set timer to wanderTimer
 
         // If agent is null...
         if (agent == null)
@@ -51,17 +49,18 @@ public class AnimalScript : MonoBehaviour
         }
     }
 
+    // Static method to get a random position on the NavMesh within a sphere around the origin
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
-        Vector3 randDirection = Random.insideUnitSphere * dist;
+        Vector3 randDirection = Random.insideUnitSphere * dist; // Get a random direction within a sphere of radius dist
 
-        randDirection += origin;
+        randDirection += origin; // Add the origin to the random direction to get a new position
 
-        NavMeshHit navHit;
+        NavMeshHit navHit; // Create a NavMeshHit variable to store the hit information
 
-        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask); // Sample the NavMesh at the random position to find a valid point on the NavMesh
 
-        return navHit.position;
+        return navHit.position; // Return the position of the NavMesh hit
     }
 
     // Controls animal movement
@@ -84,22 +83,22 @@ public class AnimalScript : MonoBehaviour
         }
     }
 
-    void OnMouseDown() //when the player clicks an animal with mouse
-    {
-        if (gameObject.tag == "Invasive") //A 'bad' animal is clicked
-        {
-            gameManager.Score += 1;
-        }
-        else //A 'good' animal is clicked
-        {
-            gameManager.Score -= 2;
+    //void OnMouseDown() //when the player clicks an animal with mouse
+    //{
+    //    if (gameObject.tag == "Invasive") //A 'bad' animal is clicked
+    //    {
+    //        gameManager.Score += 1;
+    //    }
+    //    else //A 'good' animal is clicked
+    //    {
+    //        gameManager.Score -= 2;
 
-            if (gameManager.Score < 0)
-            {
-                gameManager.Score = 0;
-            }
-        }
+    //        if (gameManager.Score < 0)
+    //        {
+    //            gameManager.Score = 0;
+    //        }
+    //    }
 
-        Destroy(gameObject);
-    }
+    //    Destroy(gameObject);
+    //}
 }
