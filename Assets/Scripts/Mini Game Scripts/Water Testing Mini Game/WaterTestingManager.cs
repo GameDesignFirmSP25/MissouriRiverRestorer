@@ -8,6 +8,7 @@ using UnityEngine.Events;
 
 public class WaterTestingManager : BaseMiniGameManager
 {
+    [Header("UI Elements")]
     [SerializeField]
     private GameObject progressBar;
 
@@ -44,9 +45,11 @@ public class WaterTestingManager : BaseMiniGameManager
     [SerializeField]
     TextMeshProUGUI riverbankObjectiveText;
 
-     private Slider slider;
+    private Slider slider;
     public Button StartBtn;
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
+
+    [Header("Scripts")]
     public Raycast raycastScript;
     public PausMenuManager pauseMenuScript;
     public ProgressBar progressBarScript;
@@ -84,6 +87,7 @@ public class WaterTestingManager : BaseMiniGameManager
     public bool instructionsShown = false;
     public bool objectivesComplete = false;
     public bool gameStarted = false;
+    public bool pauseButtonClicked = false;
 
     [Header("Global Variables")]
     public static bool aPanelIsActive = false;
@@ -162,14 +166,18 @@ public class WaterTestingManager : BaseMiniGameManager
             }
         }
 
-        if (pauseMenuScript.isPaused == true)
+        if (pauseMenuScript.isPaused == true && !pauseButtonClicked)
         {
             PauseGame();
+            pauseButtonClicked = true; // Set bool pauseButtonClicked to true
+            Invoke("ResetPauseBool", 0.1f); // Invoke ResetPauseBool method after 0.1 seconds
         }
 
-        if (pauseMenuScript.isPaused == false)
+        if (pauseMenuScript.isPaused == false && !pauseButtonClicked && gameStarted)
         {
             ResumeGame();
+            pauseButtonClicked = true; // Set bool pauseButtonClicked to true
+            Invoke("ResetPauseBool", 0.1f); // Invoke ResetPauseBool method after 0.1 seconds
             PauseButton.SetActive(true); // Set PauseButton to active
         }
 
@@ -251,6 +259,11 @@ public class WaterTestingManager : BaseMiniGameManager
     void ResumeGame()
     {
         Time.timeScale = 1f;
+    }
+
+    void ResetPauseBool()
+    {
+        pauseButtonClicked = false; // Set bool pauseButtonClicked to false
     }
 
     //// Method to deactivate all panels

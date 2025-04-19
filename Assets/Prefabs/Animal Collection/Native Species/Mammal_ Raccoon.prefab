@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2117197994102887974}
   - component: {fileID: 7485957881203953072}
   - component: {fileID: 4886706907462833372}
-  - component: {fileID: 9147917744234429793}
   m_Layer: 0
   m_Name: Mammal_ Raccoon
   m_TagString: Native
@@ -150,19 +149,3 @@ MonoBehaviour:
   radius: 0
   isWaiting: 1
   isWalking: 0
---- !u!208 &9147917744234429793
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275288261641237766}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1, y: 1, z: 1}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
