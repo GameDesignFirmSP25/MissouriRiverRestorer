@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 
 public class AnimalCollectionSpawnManager : MonoBehaviour
 {
@@ -12,7 +13,12 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
     public GameObject[] nativeBirdPrefabs; // Array of bird prefabs to spawn
     public GameObject[] reptileAmphibianPrefabs; // Array of reptile/amphibian prefabs to spawn
     public GameObject[] insectPrefabs; // Array of insect prefabs to spawn
-    
+
+    [Header("Fish List")]
+    public List<GameObject> fishList = new List<GameObject>(); // List to store fish objects
+
+    [Header("Singleton")]
+    public static AnimalCollectionSpawnManager Instance { get; private set; } // Singleton instance
 
     [Header("Waypoints")]
     public Transform spawnArea;
@@ -23,11 +29,11 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
     private int numberOfInvasiveFishToSpawn = 8;
     private int numberOfNativeFishToSpawn = 20;
     //private int numberOfInvasiveBirdsToSpawn = 10;
-    private int numberOfNativeBirdsToSpawn = 8;
+    private int numberOfNativeBirdsToSpawn = 20;
     private int numberOfReptilesAmphibiansToSpawn = 7;
     private int numberOfInsectsToSpawn = 15;
     private int spawnedInvasiveFish = 0;
-    private static int spawnedNativeFish = 0;
+    private static int spawnedNativeFish = 20;
 
     [Header("Float Variables")]
     private float spawnTime = 0.05f;
@@ -38,15 +44,29 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
     private float yPositionOnGround = 3f;
     private float minimumZOnGround = -80f;
     private float maximumZOnGround = 130f;
-    private float yPositionInRiver = -2.5f;
+    private float yPositionInRiver = -2.0f;
+
+    private void Awake()
+    {
+        // Ensure this is a singleton
+        // If an instance is null...
+        if (Instance == null)
+        {
+            Instance = this; // Set this instance as the singleton
+        }
+        else
+        {
+            Destroy(gameObject); // If an instance already exists, destroy this one to enforce singleton pattern
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SpawnMammals(); // Call the SpawnMammals method to spawn mammals
-        SpawnBirds(); // Call the SpawnBirds method to spawn birds
-        SpawnReptilesAmphibians(); // Call the SpawnReptilesAmphibians method to spawn reptiles/amphibians
-        SpawnInsects(); // Call the SpawnInsects method to spawn insects
+        //SpawnMammals(); // Call the SpawnMammals method to spawn mammals
+        //SpawnBirds(); // Call the SpawnBirds method to spawn birds
+        //SpawnReptilesAmphibians(); // Call the SpawnReptilesAmphibians method to spawn reptiles/amphibians
+        //SpawnInsects(); // Call the SpawnInsects method to spawn insects
         InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // Repeatedly invoke SpawnFish at specified intervals
     }
 
@@ -80,11 +100,12 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
         }
 
         // If spawnedNativeFish is less than numberOfNativeFishToSpawn...
-        if (spawnedNativeFish < numberOfNativeFishToSpawn)
+        if (FishAiScript.spawnNewFish && spawnedNativeFish < numberOfNativeFishToSpawn)
         {
             int fishIndex = Random.Range(0, nativeFishPrefabs.Length); // fishIndex equals a number with in range of 0 to 1
-            Instantiate(nativeFishPrefabs[fishIndex], RandomFishPositionInRiver(), RandomRotation()); // Instantiate nativeFishPrefab at fishIndex at new Vector3
-            IncrementSpawnedNativeFish(); // Increment the count of spawned native fish
+            AddToFishList(Instantiate(nativeFishPrefabs[fishIndex], RandomFishPositionInRiver(), RandomRotation())); // Instantiate nativeFishPrefab at fishIndex at new Vector3 & add the new fish to the fish list
+            FishAiScript.spawnNewFish = false; // Reset the flag to false after spawning a new fish
+            IncrementSpawnedNativeFish(); // Increment the count of spawned native fish   
         }
     }
 
@@ -184,6 +205,22 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Attempted to decrement spawnedNativeFish below zero."); // Log a warning if trying to decrement below zero
+        }
+    }
+
+    // Method to add a new fish to the list
+    public void AddToFishList(GameObject fish)
+    {
+        // If fish is not null...
+        if (fish != null)
+        {
+            fish.tag = "Native"; // Set the tag of the new fish to "Native"
+            fishList.Add(fish); // Add the fish to the list
+            Debug.Log($"New fish instantiated at {fish.transform.position} and added to list: {fish.name}"); // Debug.Log
+        }
+        else
+        {
+            Debug.LogWarning("Attempted to add a null fish to the list."); // Debug.Log
         }
     }
 }

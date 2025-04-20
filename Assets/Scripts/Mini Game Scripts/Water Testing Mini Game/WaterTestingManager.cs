@@ -266,18 +266,6 @@ public class WaterTestingManager : BaseMiniGameManager
         pauseButtonClicked = false; // Set bool pauseButtonClicked to false
     }
 
-    //// Method to deactivate all panels
-    //public void DeactivateAllPanels()
-    //{
-    //    // Loop through each panel in the panels array
-    //    foreach (GameObject panel in panels)
-    //    {
-    //        panel.SetActive(false); // Deactivate all panels
-    //    }
-
-    //    aPanelIsActive = false; // Set the active panel flag to false
-    //}
-
     // Method to deactivate a specific panel
     public void DeactivatePanel(int panelIndex)
     {

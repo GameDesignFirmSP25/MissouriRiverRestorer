@@ -21,14 +21,14 @@ public class FishInvasiveAi : MonoBehaviour
 
     void Start()
     {
-        // If AnimalGameManager,Instance or fishList is not null...
-        if (AnimalGameManager.Instance != null && AnimalGameManager.Instance.fishList != null)
+        // If AnimalCollectionSpawnManager.Instance or fishList is not null...
+        if (AnimalCollectionSpawnManager.Instance != null && AnimalCollectionSpawnManager.Instance.fishList != null)
         {
-            cachedTargets = new List<GameObject>(AnimalGameManager.Instance.fishList); // Initialize cachedTargets with the fishList from AnimalGameManager
+            cachedTargets = new List<GameObject>(AnimalCollectionSpawnManager.Instance.fishList); // Initialize cachedTargets with the fishList from AnimalGameManager
         }
         else
         {
-            Debug.LogError("AnimalGameManager.Instance or fishList is null. Cannot initialize targets."); // Debug.Log
+            Debug.LogError("AnimalCollectionSpawnManager.Instance or fishList is null. Cannot initialize targets."); // Debug.Log
             return; // Return to avoid null reference exception
         }
 
@@ -48,9 +48,9 @@ public class FishInvasiveAi : MonoBehaviour
     void Update()
     {
         // If AnimalGameManager,Instance or fishList is null...
-        if (AnimalGameManager.Instance == null || AnimalGameManager.Instance.fishList == null)
+        if (AnimalCollectionSpawnManager.Instance == null || AnimalCollectionSpawnManager.Instance.fishList == null)
         {
-            Debug.LogError("AnimalGameManager.Instance or fishList is null during Update."); // Debug.Log
+            Debug.LogError("AnimalCollectionSpawnManager.Instance or fishList is null during Update."); // Debug.Log
             return; // Return to avoid null reference exception
         }
 
@@ -77,7 +77,7 @@ public class FishInvasiveAi : MonoBehaviour
         if (HasListChanged())
         {
             Debug.Log("The targets list has changed."); // Debug.Log
-            cachedTargets = new List<GameObject>(AnimalGameManager.Instance.fishList); // Update cachedTargets with the new fishList
+            cachedTargets = new List<GameObject>(AnimalCollectionSpawnManager.Instance.fishList); // Update cachedTargets with the new fishList
         }
     }
 
@@ -132,7 +132,7 @@ public class FishInvasiveAi : MonoBehaviour
     // Method to check if the list of targets has changed
     private bool HasListChanged()
     {
-        int currentHash = CalculateListHash(AnimalGameManager.Instance.fishList); // Calculate the hash of the current fishList
+        int currentHash = CalculateListHash(AnimalCollectionSpawnManager.Instance.fishList); // Calculate the hash of the current fishList
 
         // If cachedHash is not equal to currentHash...
         if (cachedHash != currentHash)
