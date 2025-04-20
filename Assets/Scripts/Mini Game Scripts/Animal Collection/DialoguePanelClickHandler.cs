@@ -3,8 +3,8 @@ using UnityEngine.EventSystems;
 
 public class DialoguePanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
-    public bool isDialoguePanelClicked = false; // Variable to track if the dialogue panel has been clicked
-   
+    public static bool isDialoguePanelClicked = false; // Variable to track if the dialogue panel has been clicked
+
     // Method called when the panel is clicked
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -12,4 +12,3 @@ public class DialoguePanelClickHandler : MonoBehaviour, IPointerClickHandler
         isDialoguePanelClicked = true; // Set the boolean to true
     }
 }
-

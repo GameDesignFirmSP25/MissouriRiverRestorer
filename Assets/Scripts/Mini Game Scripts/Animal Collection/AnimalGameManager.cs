@@ -1,12 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Collections;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using Unity.Cinemachine;
+using UnityEditor.Experimental.GraphView;
 
 public class AnimalGameManager : BaseMiniGameManager
 {
@@ -24,53 +19,50 @@ public class AnimalGameManager : BaseMiniGameManager
     TextMeshProUGUI objectiveText3;
 
     [SerializeField]
+    TextMeshProUGUI objectiveSubtext1;
+
+    [SerializeField]
+    TextMeshProUGUI objectiveSubtext2;
+
+    [SerializeField]
+    TextMeshProUGUI objectiveSubtext3;
+
+    [SerializeField]
+    TextMeshProUGUI objectiveSubtext4;
+
+    [SerializeField]
+    TextMeshProUGUI objectiveSubtext5;
+
+    [SerializeField]
+    TextMeshProUGUI objectiveSubtext6;
+
+    [SerializeField]
     TextMeshProUGUI ScoreText;
 
     [SerializeField]
     TextMeshProUGUI EndText;
 
-    [SerializeField]
-    GameObject dialoguePanel;
-
-    [SerializeField]
-    GameObject asianCarpText;
-
-    [SerializeField]
-    GameObject easternStarlingText;
-
-    [SerializeField]
-    GameObject whiteTailedDeerText;
-
-    [SerializeField]
-    GameObject baldEagleText;
-
-    [SerializeField]
-    GameObject beaverText;
-
-    [SerializeField]
-    GameObject RacconText;
-
-    [SerializeField]
-    GameObject MuskeratText;
-
-    [SerializeField]
-    GameObject snappingTurtleText;
-
-    [SerializeField]
-    GameObject commonGarterSnakeText;
-
-    [SerializeField]
-    GameObject northernMapTurtleText;
-
-    [SerializeField]
-    GameObject bandedPennantDragonflyText;
-
-    [SerializeField]
-    GameObject paintedLadyButterflyText;
-
     [Header("Game Objects")]
     [SerializeField]
     GameObject startPanel;
+
+    [SerializeField]
+    GameObject objectiveSubText1;
+
+    [SerializeField]
+    GameObject objectiveSubText2;
+
+    [SerializeField]
+    GameObject objectiveSubText3;
+
+    [SerializeField]
+    GameObject objectiveSubText4;
+
+    [SerializeField]
+    GameObject objectiveSubText5;
+
+    [SerializeField]
+    GameObject objectiveSubText6;
 
     [SerializeField]
     GameObject startButton;
@@ -81,78 +73,50 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     GameObject pauseButton;
 
+    public GameObject[] dialoguePanels = new GameObject[12];
+
     [Header("Float Variables")]
     private float ScoreThreshold = 25f;
     public float Score = 0f;
+    private float resetDelay = 0.1f; // Delay to reset dialogue panel click handler
 
     [Header("Booleans")]
     public static bool trappingCompleted = false; // Global variable to check if trapping is completed
-    public bool easternStarlingClicked = false;
-    public bool whiteTailedDeerClicked = false;
-    public bool dialogueIsActive = false;
-
-    [Header("Singleton")]
-    public static AnimalGameManager Instance { get; private set; } // Singleton instance
-
-    [Header("Fish List")]
-    public List<GameObject> fishList = new List<GameObject>(); // List to store fish objects
-
-    [Header("Target Objects")]
-    [SerializeField] 
-    private string[] easternStarlingNames;
-
-    [SerializeField] 
-    private string[] whiteTailedDeerNames;
-
-    [Header("Cinemachine")]
-    [SerializeField]
-    private CinemachineVirtualCameraBase virtualCamera; // Reference to the Cinemachine virtual camera
-
-    [Header("Scripts")]
-    DialoguePanelClickHandler dialoguePanelClickHandler; // Reference to the dialogue panel click handler
+    public static bool dialogueIsActive = false;
+    public static bool paintedLadyButterflyPanelActive = false;
+    public static bool easternStarlingPanelActive = false; 
+    public static bool whiteTailedDeerPanelActive = false;
+    public static bool bandedPennantDragonflyPanelActive = false; 
+    public static bool garterSnakePanelActive = false; 
+    public static bool baldEaglePanelActive = false;
+    public static bool muskratPanelActive = false;
+    public static bool snappingTurtlePanelActive = false;
+    public static bool beaverPanelActive = false; 
+    public static bool raccoonPanelActive = false; 
+    public static bool asianCarpPanelActive = false; 
+    public static bool northernMapTurtlePanelActive = false;
+    private bool hasResetDialogueState = false; // Flag to prevent multiple resets of dialogue state
+    private bool objective1Active = false;
+    private bool objective2Active = false;
+    private bool objective3Active = false;
 
 
-    private void Awake()
-    {
-        // Ensure this is a singleton
-        // If an instance is null...
-        if (Instance == null)
-        {
-            Instance = this; // Set this instance as the singleton
-        }
-        else
-        {
-            Destroy(gameObject); // If an instance already exists, destroy this one to enforce singleton pattern
-        }
-    }
+    [Header("Raycast Variables")]
+    private Ray ray;
+    private RaycastHit hit;
+
+    [Header("Script References")]
+    public LowerBankZoneTrigger lowerBankZoneTrigger;
+    public MidBankZoneTrigger midBankZoneTrigger;
+    public UpperBankZoneTrigger upperBankZoneTrigger;
 
     void Start()
     {
         // Initialize UI elements
-        dialoguePanel.SetActive(false); //hide dialogue panel
-        objectivesPanel.SetActive(false); //hide objectives panel
-        returnButton.SetActive(false); //hide return button
-        startButton.SetActive(true); //show start button
-        startPanel.SetActive(true); //show start panel
-        pauseButton.SetActive(false); //hide pause button
+        InitializeUI();
+        GetPanels();
         DisableText(); // Disable all text objects at the start
         Time.timeScale = 0; // Freeze time at start of game
-
-        // Set list of eastern starling names
-        easternStarlingNames = new string[]
-        {
-            "Eastern Starling", "Eastern Starling (1)", "Eastern Starling (2)",
-            "Eastern Starling (3)", "Eastern Starling (4)", "Eastern Starling (5)",
-            "Eastern Starling (6)", "Eastern Starling (7)", "Eastern Starling (8)",
-            "Eastern Starling (9)", "Eastern Starling (10)"
-        };
-
-        // Set list of white-tailed deer names
-        whiteTailedDeerNames = new string[]
-        {
-            "White-tailed Deer", "White-tailed Deer (1)", "White-tailed Deer (2)",
-            "White-tailed Deer (3)"
-        };
     }
 
     // Update is called once per frame
@@ -166,51 +130,35 @@ public class AnimalGameManager : BaseMiniGameManager
             EndLevel(); // End the level
         }
 
-        // If dialogue is active and the dialogue panel is open...
-        if (dialoguePanelClickHandler.isDialoguePanelClicked)
+        if (LowerBankZoneTrigger.lowerBankEntered && !objective1Active)
         {
-            dialoguePanel.SetActive(false); // Hide dialogue panel
-            DisableText(); // Disable all text objects
-            dialogueIsActive = false; // Set dialogue inactive
+            LowerBankEntered();
         }
 
-    }
-
-    private void LateUpdate()
-    {
-        // Check for mouse click
-        if (Input.GetMouseButtonDown(0))
+        if (MidBankZoneTrigger.midBankEntered && !objective2Active)
         {
+            MidBankEntered();
+        }
 
-            if (virtualCamera != null && virtualCamera.Priority > 0)
-            {
-                Vector3 cameraPosition = virtualCamera.State.RawPosition + virtualCamera.State.PositionCorrection; // Get the camera position
-                Vector3 cameraForward = (virtualCamera.State.RawOrientation * virtualCamera.State.OrientationCorrection) * Vector3.forward; // Get the camera forward direction
-                Debug.DrawRay(cameraPosition, cameraForward * 10, Color.red, 2f); // Draw a ray in the scene view for debugging
+        if (UpperBankZoneTrigger.upperBankEntered && !objective3Active)
+        {
+            UpperBankEntered();
+        }
 
-                Ray ray = new Ray(cameraPosition, cameraForward);
+        AnimalClicked();
 
-                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
-                {
-                    // If the clicked GameObject's name matches the target name for eastern starling...
-                    if (System.Array.Exists(easternStarlingNames, name => name == hit.collider.gameObject.name))
-                    {
-                        HandleEasternStarlingClick(hit.collider.gameObject); // Handle the click on the eastern starling GameObject
-                    }
-                    // Check if the clicked GameObject's name matches any white-tailed deer name
-                    else if (System.Array.Exists(whiteTailedDeerNames, name => name == hit.collider.gameObject.name))
-                    {
-                        HandleWhiteTailedDeerClick(hit.collider.gameObject);
-                    }
-                }
-
-            }
+        // If dialogue is active and the dialogue panel is open...
+        if (DialoguePanelClickHandler.isDialoguePanelClicked && !hasResetDialogueState)
+        {
+            Debug.Log("Dialogue panel clicked. Hiding panel.");
+            DialoguePanelClickHandler.isDialoguePanelClicked = false; // Reset dialogue panel click handler
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
         }
     }
 
     public void StartButton() //triggers on start button press
     {
-        ScoreText.text = "Score: " + Score.ToString() + "/" + ScoreThreshold.ToString();
         objectivesPanel.SetActive(true); //show objectives panel
         startButton.SetActive(false); //hide start button
         startPanel.SetActive(false); //hide start panel
@@ -218,21 +166,78 @@ public class AnimalGameManager : BaseMiniGameManager
         Time.timeScale = 1; // Unfreeze time
     }
 
+    public void InitializeUI()
+    {
+        objectivesPanel.SetActive(false); //hide objectives panel
+        returnButton.SetActive(false); //hide return button
+        startButton.SetActive(true); //show start button
+        startPanel.SetActive(true); //show start panel
+        pauseButton.SetActive(false); //hide pause button
+    }
+
+    private void GetPanels()
+    {
+        GameObject panel1 = dialoguePanels[0]; // Get the Asian Carp panel
+        GameObject panel2 = dialoguePanels[1]; // Get the Eastern Starling panel
+        GameObject panel3 = dialoguePanels[2]; // Get the White-Tailed Deer panel
+        GameObject panel4 = dialoguePanels[3]; // Get the Bald Eagle panel
+        GameObject panel5 = dialoguePanels[4]; // Get the Beaver panel
+        GameObject panel6 = dialoguePanels[5]; // Get the Raccoon panel
+        GameObject panel7 = dialoguePanels[6]; // Get the Muskerat panel
+        GameObject panel8 = dialoguePanels[7]; // Get the Snapping Turtle panel
+        GameObject panel9 = dialoguePanels[8]; // Get the Garter Snake panel
+        GameObject panel10 = dialoguePanels[9]; // Get the Northern Map Turtle panel
+        GameObject panel11 = dialoguePanels[10]; // Get the Banded Pennant Dragonfly panel
+        GameObject panel12 = dialoguePanels[11]; // Get the Painted Lady Butterfly panel
+    }
+
     // Method to disable all text objects
     public void DisableText()
     {
-        easternStarlingText.SetActive(false); //hide eastern starling text
-        whiteTailedDeerText.SetActive(false); //hide white-tailed deer text
-        baldEagleText.SetActive(false); //hide bald eagle text
-        beaverText.SetActive(false); //hide beaver text
-        RacconText.SetActive(false); //hide raccon text
-        MuskeratText.SetActive(false); //hide muskrat text
-        snappingTurtleText.SetActive(false); //hide snapping turtle text
-        commonGarterSnakeText.SetActive(false); //hide common garter snake text
-        northernMapTurtleText.SetActive(false); //hide northern map turtle text
-        bandedPennantDragonflyText.SetActive(false); //hide banded pennant dragonfly text
-        paintedLadyButterflyText.SetActive(false); //hide painted lady butterfly text
+        DeactivateAllPanels(); // Deactivate all dialogue panels
+        objectiveSubtext1.gameObject.SetActive(false); //hide objective subtext 1
+        objectiveSubtext2.gameObject.SetActive(false); //hide objective subtext 2
+        objectiveSubtext3.gameObject.SetActive(false); //hide objective subtext 3
+        objectiveSubtext4.gameObject.SetActive(false); //hide objective subtext 4
+        objectiveSubtext5.gameObject.SetActive(false); //hide objective subtext 5
+        objectiveSubtext6.gameObject.SetActive(false); //hide objective subtext 6
     }
+
+    // Method to activate specific panel in index
+    public void ActivatePanel(int dialoguePanelIndex)
+    {
+        if (dialoguePanelIndex >= 0 && dialoguePanelIndex < dialoguePanels.Length)
+        {
+            dialoguePanels[dialoguePanelIndex].SetActive(true); // Activate the specified panel
+            dialogueIsActive = true; // Set the active panel flag to true
+            Debug.Log("Panel " + dialoguePanelIndex + " activated."); // Debug.Log
+        }
+        else
+        {
+            Debug.LogError("Invalid panel index: " + dialoguePanelIndex); // Log an error if the index is invalid
+        }
+    }
+
+    // Method to deactivate a specific panel
+    public void DeactivatePanel(int dialoguePanelIndex)
+    {
+        dialoguePanels[dialoguePanelIndex].SetActive(false); // Activate the specified panel
+        dialogueIsActive = false; // Set the active panel flag to false
+        Debug.Log("Panel " + dialoguePanelIndex + " deactivated."); // Debug.Log
+    }
+
+    // Method to deactivate all panels
+    public void DeactivateAllPanels()
+    {
+        // Loop through each dialoguePanel in the dialoguePanels array
+        foreach (GameObject dialoguePanel in dialoguePanels)
+        {
+            dialoguePanel.SetActive(false); // Deactivate all panels
+        }
+
+        dialogueIsActive = false; // Set the active panel flag to false
+    }
+
     void EndLevel()
     {
         // If bool trappingCompleted is false
@@ -253,52 +258,197 @@ public class AnimalGameManager : BaseMiniGameManager
         SceneManager.LoadScene("Overworld"); //load main scene
     }
 
-    // Method to add a new fish to the list
-    public void AddToFishList(GameObject fish)
+    private void AnimalClicked()
     {
-        // If fish is not null...
-        if (fish != null)
+        // If eastern starling is clicked and dialogue is not active...
+        if (RaycastScript.easternStarlingClicked && !dialogueIsActive)
         {
-            fishList.Add(fish); // Add the fish to the list
-            Debug.Log($"Fish added to list: {fish.name}"); // Debug.Log
+            EasternStarlingClicked(); // Handle eastern starling click
         }
-        else
+
+        // If white-tailed deer is clicked and dialogue is not active...
+        if (RaycastScript.whiteTailedDeerClicked && !dialogueIsActive)
         {
-            Debug.LogWarning("Attempted to add a null fish to the list."); // Debug.Log
+            WhiteTailedDeerClicked(); // Handle white-tailed deer click
+        }
+
+        // If banded pennant dragonfly is clicked and dialogue is not active...
+        if (RaycastScript.bandedPennantDragonflyClicked && !dialogueIsActive)
+        {
+            BandedPennantDragonflyClicked(); // Handle banded pennant dragonfly click
+        }
+
+        // If common garter snake is clicked and dialogue is not active...
+        if (RaycastScript.garterSnakeClicked && !dialogueIsActive)
+        {
+            CommonGarterSnakeClicked(); // Handle common garter snake click
+        }
+
+        // If bald eagle is clicked and dialogue is not active...
+        if (RaycastScript.baldEagleClicked && !dialogueIsActive)
+        {
+            BaldEagleClicked(); // Handle bald eagle click
+        }
+
+        if (RaycastScript.paintedLadyButterflyClicked && !dialogueIsActive)
+        {
+            PaintedLadyButterflyClicked();
+        }
+        
+        if (RaycastScript.muskeratClicked && !dialogueIsActive) // If muskrat is clicked and dialogue is not active
+        {
+            MuskeratClicked();
+        }
+
+        if (RaycastScript.snappingTurtleClicked && !dialogueIsActive) // If snapping turtle is clicked and dialogue is not active
+        {
+            SnappingTurtleClicked();
+        }
+
+        if (RaycastScript.beaverClicked && !dialogueIsActive) // If beaver is clicked and dialogue is not active
+        {
+            BeaverClicked();
+        }
+
+        if (!RaycastScript.raccoonClicked && !dialogueIsActive) // If raccoon is clicked and dialogue is not active
+        {
+            RaccoonClicked();
+        }
+
+        if (RaycastScript.northernMapTurtleClicked && !dialogueIsActive) // If northern map turtle is clicked and dialogue is not active
+        {
+            NorthernMapTurtleClicked();
+        }
+
+        if (RaycastScript.asianCarpClicked && !dialogueIsActive) // If asian carp is clicked and dialogue is not active
+        {
+            AsianCarpClicked();
         }
     }
 
     // Handle clicks on eastern starling
-    private void HandleEasternStarlingClick(GameObject clickedObject)
+    private void EasternStarlingClicked()
     {
-        if (!easternStarlingClicked)
-        {
-            Debug.Log($"GameObject {clickedObject.name} was clicked!");
-            dialoguePanel.SetActive(true); // Show dialogue panel
-            easternStarlingText.SetActive(true); // Show eastern starling text
-            easternStarlingClicked = true; // Mark as clicked
-            dialogueIsActive = true; // Set dialogue active
-        }
-        else
-        {
-            Debug.Log("Eastern Starling has already been clicked.");
-        }
+        ActivatePanel(1);
+        dialogueIsActive = true; // Set dialogue active
     }
 
     // Handle clicks on white-tailed deer
-    private void HandleWhiteTailedDeerClick(GameObject clickedObject)
+    private void WhiteTailedDeerClicked()
     {
-        if (!whiteTailedDeerClicked)
-        {
-            Debug.Log($"GameObject {clickedObject.name} was clicked!");
-            dialoguePanel.SetActive(true); // Show dialogue panel
-            whiteTailedDeerText.SetActive(true); // Show white-tailed deer text
-            whiteTailedDeerClicked = true; // Mark as clicked
-            dialogueIsActive = true; // Set dialogue active
-        }
-        else
-        {
-            Debug.Log("White-tailed Deer has already been clicked.");
-        }
+        ActivatePanel(2);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on banded pennant dragonfly
+    private void BandedPennantDragonflyClicked()
+    {
+        ActivatePanel(10);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on garter snake
+    private void CommonGarterSnakeClicked()
+    {
+        ActivatePanel(8);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on bald eagle
+    private void BaldEagleClicked()
+    {
+        ActivatePanel(3);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on muskrat
+    private void MuskeratClicked()
+    {
+        ActivatePanel(6);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on snapping turtle
+    private void SnappingTurtleClicked()
+    {
+        ActivatePanel(7);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on beaver
+    private void BeaverClicked()
+    {
+        ActivatePanel(4);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on raccoon
+    private void RaccoonClicked()
+    {
+        ActivatePanel(5);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on northern map turtle
+    private void NorthernMapTurtleClicked()
+    {
+        ActivatePanel(9);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on asian carp
+    private void AsianCarpClicked()
+    {
+        ActivatePanel(0);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Handle clicks on painted lady butterfly
+    private void PaintedLadyButterflyClicked()
+    {
+        ActivatePanel(11);
+        dialogueIsActive = true; // Set dialogue active
+    }
+
+    // Method to reset dialogue state
+    private void ResetDialogueState()
+    {
+        Debug.Log("Resetting dialogue state..."); // Debug.Log
+        DisableText(); // Disable all text objects
+        dialogueIsActive = false; // Set dialogue inactive
+        hasResetDialogueState = false; // Reset the flag to allow future dialogue interactions
+    }
+
+    // Set subtext for objective 1
+    private void LowerBankEntered()
+    {
+        Debug.Log("Player is exploring the lower bank."); //Debug.Log
+        objective1Active = true; // Set bool objective1Active to true
+        objectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
+        objectiveSubtext1.text = "Interact with fauna."; //set objective subtext 1 text
+        objectiveSubtext2.gameObject.SetActive(true); //show objective subtext 2
+        objectiveSubtext2.text = "Find invasive species."; //set objective subtext 2 text
+    }
+
+    // Set subtext for objective 2
+    private void MidBankEntered()
+    {
+        Debug.Log("Player is exploring the Mid Bank!"); //Debug.Log
+        objective2Active = true; // Set bool objective2Active to true
+        objectiveSubtext3.gameObject.SetActive(true); //show objective subtext 3
+        objectiveSubtext3.text = "Interact with fauna."; //set objective subtext 3 text
+        objectiveSubtext4.gameObject.SetActive(true); //show objective subtext 4
+        objectiveSubtext4.text = "Find invasive species."; //set objective subtext 4 text
+    }
+
+    // Set subtext for oibjective 3
+    private void UpperBankEntered()
+    {
+        Debug.Log("Player is exploring the Upper Bank!"); //Debug.Log
+        objective3Active = true; // Set bool objective3Active to true
+        objectiveSubtext5.gameObject.SetActive(true); //show objective subtext 5
+        objectiveSubtext5.text = "Interact with fauna."; //set objective subtext 5 text
+        objectiveSubtext6.gameObject.SetActive(true); //show objective subtext 6
+        objectiveSubtext6.text = "Find invasive species."; //set objective subtext 6 text
     }
 }

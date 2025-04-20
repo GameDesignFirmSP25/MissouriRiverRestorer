@@ -53,6 +53,10 @@ PrefabInstance:
       value: Bald Eagle
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3bb246b01f97cd4429af852acd031da0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3bb246b01f97cd4429af852acd031da0, type: 3}
       propertyPath: m_TagString
       value: Native
       objectReference: {fileID: 0}
@@ -63,6 +67,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3bb246b01f97cd4429af852acd031da0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7767811600107047872}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3bb246b01f97cd4429af852acd031da0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1431591956190008229}
   m_SourcePrefab: {fileID: 100100000, guid: 3bb246b01f97cd4429af852acd031da0, type: 3}
 --- !u!1 &203211521017250461 stripped
 GameObject:
@@ -91,3 +98,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &1431591956190008229
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203211521017250461}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.57, y: 2.76, z: 2.96}
+  m_Center: {x: 0, y: -0.67, z: -0.03}

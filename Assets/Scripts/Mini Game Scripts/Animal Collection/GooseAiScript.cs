@@ -17,21 +17,27 @@ public class GooseAiScript : MonoBehaviour
     private float speed;
     private float speedMin = 5.0f;
     private float speedMax = 20.0f;
+    private float yPosition = -1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        targetPosition = new GameObject[10];
+        targetPosition = new GameObject[15];
         targetPosition[0] = GameObject.Find("Waypoint 1");
         targetPosition[1] = GameObject.Find("Waypoint 2");
         targetPosition[2] = GameObject.Find("Waypoint 3");
         targetPosition[3] = GameObject.Find("Waypoint 4");
         targetPosition[4] = GameObject.Find("Waypoint 5");
-        targetPosition[0] = GameObject.Find("Waypoint 6");
-        targetPosition[1] = GameObject.Find("Waypoint 7");
-        targetPosition[2] = GameObject.Find("Waypoint 8");
-        targetPosition[3] = GameObject.Find("Waypoint 9");
-        targetPosition[4] = GameObject.Find("Waypoint 10");
+        targetPosition[5] = GameObject.Find("Waypoint 6");
+        targetPosition[6] = GameObject.Find("Waypoint 7");
+        targetPosition[7] = GameObject.Find("Waypoint 8");
+        targetPosition[8] = GameObject.Find("Waypoint 9");
+        targetPosition[9] = GameObject.Find("Waypoint 10");
+        targetPosition[10] = GameObject.Find("Waypoint 11");
+        targetPosition[11] = GameObject.Find("Waypoint 12");
+        targetPosition[12] = GameObject.Find("Waypoint 13");
+        targetPosition[13] = GameObject.Find("Waypoint 14");
+        targetPosition[14] = GameObject.Find("Waypoint 15");
 
         //spawnArea = GameObject.Find("SpawnArea")?.transform;
     }
@@ -54,6 +60,10 @@ public class GooseAiScript : MonoBehaviour
             // If target is not null...
             if (target != null)
             {
+                Vector3 targetPosition = target.transform.position; // Get the current position
+                targetPosition.y = yPosition; // Set the y position to yPosition
+                target.transform.position = targetPosition; // Assign the modified position back
+
                 newTarget = target.transform; // Set newTarget to the transform of the target GameObject
                 isMoving = true; // Set bool isMoving to true
             }
@@ -65,6 +75,9 @@ public class GooseAiScript : MonoBehaviour
             RotateGoose(); // Call the method to rotate the goose towards the target position
             speed = Random.Range(speedMin, speedMax); //set the speed of the goose
             transform.position = Vector3.MoveTowards(transform.position, newTarget.position, speed * Time.deltaTime); // Move the goose towards the target position
+            Vector3 newPosition = transform.position; // Get the current position of the goose
+            newPosition.y = yPosition; // Set the y position to yPosition
+            transform.position = newPosition; // Update the position of the goose with the new y value
 
             // If the goose has reached the target position...
             if (transform.position == newTarget.position)
