@@ -10,6 +10,7 @@ public class MidBankZoneTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             midBankEntered = true;
+            Debug.Log("Mid Bank Zone Triggered");
         }
     }
 }

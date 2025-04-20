@@ -3,12 +3,11 @@ using UnityEngine.EventSystems;
 
 public class BandedPennantDragonflyClickHandler : MonoBehaviour, IPointerClickHandler
 {
-    public bool bandedPennantDragonflyClicked = false;
+    public static bool isBandedPennantDragonflyPanelClicked = false;
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Banded Pennant Dragonfly panel clicked. Hiding panel...");
-        bandedPennantDragonflyClicked = true;
-        AnimalGameManager.dialogueIsActive = false;
+        isBandedPennantDragonflyPanelClicked = true;
         AnimalGameManager.bandedPennantDragonflyPanelActive = false;
     }
 }

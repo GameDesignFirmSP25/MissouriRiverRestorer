@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEditor.Experimental.GraphView;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AnimalGameManager : BaseMiniGameManager
 {
@@ -109,21 +111,32 @@ public class AnimalGameManager : BaseMiniGameManager
     public LowerBankZoneTrigger lowerBankZoneTrigger;
     public MidBankZoneTrigger midBankZoneTrigger;
     public UpperBankZoneTrigger upperBankZoneTrigger;
+    public GarterSnakeClickHandler garterSnakeClickHandler;
+    public WhiteTailedDeerClickHandler whiteTailedDeerClickHandler;
+    public RaccoonClickHandler raccoonClickHandler;
+    public NorthernMapTurtleClickHandler northernMapTurtleClickHandler;
+    public MuskeratClickHandler muskeratClickHandler;
+    public PaintedLadyButterflyClickHandler paintedLadyButterflyClickHandler;
+    public AsianCarpClickHandler asianCarpClickHandler;
+    public BandedPennantDragonflyClickHandler bandedPennantDragonflyClickHandler;
+    public BaldEagleClickHandler baldEagleClickHandler;
+    public BeaverClickHandler beaverClickHandler;
+    public SnappingTurtleClickHandler snappingTurtleClickHandler;
+    public EasternStarlingClickHandler easternStarlingClickHandler;
+
 
     void Start()
     {
-        // Initialize UI elements
-        InitializeUI();
-        GetPanels();
-        DisableText(); // Disable all text objects at the start
+        InitializeUI(); // Initialize UI elements
+        GetPanels(); // Get dialogue panels
+        DeactivateAllPanels(); // Deactivate all dialogue panels
+        DisableObjectives(); // Disable all objective subtexts
         Time.timeScale = 0; // Freeze time at start of game
     }
 
     // Update is called once per frame
     void Update()
-    {
-        ScoreText.text = "Score: " + Score.ToString() + "/" + ScoreThreshold.ToString(); //update score text 
-        
+    {   
         // TODO: This shouls be a one time event, not continuous calls in Udpate()
         if (Score >= ScoreThreshold) //end game if score is at threshold
         {
@@ -147,14 +160,7 @@ public class AnimalGameManager : BaseMiniGameManager
 
         AnimalClicked();
 
-        // If dialogue is active and the dialogue panel is open...
-        if (DialoguePanelClickHandler.isDialoguePanelClicked && !hasResetDialogueState)
-        {
-            Debug.Log("Dialogue panel clicked. Hiding panel.");
-            DialoguePanelClickHandler.isDialoguePanelClicked = false; // Reset dialogue panel click handler
-            ResetDialogueState();
-            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
-        }
+        PanelClicked(); // Check if any dialogue panel is clicked
     }
 
     public void StartButton() //triggers on start button press
@@ -192,9 +198,8 @@ public class AnimalGameManager : BaseMiniGameManager
     }
 
     // Method to disable all text objects
-    public void DisableText()
+    public void DisableObjectives()
     {
-        DeactivateAllPanels(); // Deactivate all dialogue panels
         objectiveSubtext1.gameObject.SetActive(false); //hide objective subtext 1
         objectiveSubtext2.gameObject.SetActive(false); //hide objective subtext 2
         objectiveSubtext3.gameObject.SetActive(false); //hide objective subtext 3
@@ -310,7 +315,7 @@ public class AnimalGameManager : BaseMiniGameManager
             BeaverClicked();
         }
 
-        if (!RaycastScript.raccoonClicked && !dialogueIsActive) // If raccoon is clicked and dialogue is not active
+        if (RaycastScript.raccoonClicked && !dialogueIsActive) // If raccoon is clicked and dialogue is not active
         {
             RaccoonClicked();
         }
@@ -326,10 +331,77 @@ public class AnimalGameManager : BaseMiniGameManager
         }
     }
 
+    // Method to check if any dialogue panel is clicked
+    private void PanelClicked()
+    {
+        // If dialogue is active and the dialogue panel is open...
+        if (GarterSnakeClickHandler.isGarterSnakePanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (WhiteTailedDeerClickHandler.isWhiteTailedDeerPanelClicked && !hasResetDialogueState)
+        {  
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (NorthernMapTurtleClickHandler.isNorthernMapTurtlePanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (RaccoonClickHandler.isRaccoonPanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (MuskeratClickHandler.isMuskeratPanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (PaintedLadyButterflyClickHandler.isPaintedLadyButterflyPanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (AsianCarpClickHandler.isAsianCarpPanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (BandedPennantDragonflyClickHandler.isBandedPennantDragonflyPanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (BaldEagleClickHandler.isBaldEaglePanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (BeaverClickHandler.isBeaverPanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (SnappingTurtleClickHandler.isSnappingTurtlePanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+        if (EasternStarlingClickHandler.isEasternStarlingPanelClicked && !hasResetDialogueState)
+        {
+            ResetDialogueState();
+            hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+    }
+
     // Handle clicks on eastern starling
     private void EasternStarlingClicked()
     {
         ActivatePanel(1);
+        RaycastScript.easternStarlingClicked = false; // Reset the click handler for eastern starling
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -337,6 +409,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void WhiteTailedDeerClicked()
     {
         ActivatePanel(2);
+        RaycastScript.whiteTailedDeerClicked = false; // Reset the click handler for white-tailed deer
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -344,6 +417,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void BandedPennantDragonflyClicked()
     {
         ActivatePanel(10);
+        RaycastScript.bandedPennantDragonflyClicked = false; // Reset the click handler for banded pennant dragonfly
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -351,6 +425,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void CommonGarterSnakeClicked()
     {
         ActivatePanel(8);
+        RaycastScript.garterSnakeClicked = false; // Reset the click handler for common garter snake
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -358,6 +433,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void BaldEagleClicked()
     {
         ActivatePanel(3);
+        RaycastScript.baldEagleClicked = false; // Reset the click handler for bald eagle
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -365,6 +441,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void MuskeratClicked()
     {
         ActivatePanel(6);
+        RaycastScript.muskeratClicked = false; // Reset the click handler for muskrat
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -372,6 +449,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void SnappingTurtleClicked()
     {
         ActivatePanel(7);
+        RaycastScript.snappingTurtleClicked = false; // Reset the click handler for snapping turtle
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -379,6 +457,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void BeaverClicked()
     {
         ActivatePanel(4);
+        RaycastScript.beaverClicked = false; // Reset the click handler for beaver
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -386,6 +465,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void RaccoonClicked()
     {
         ActivatePanel(5);
+        RaycastScript.raccoonClicked = false; // Reset the click handler for raccoon
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -393,6 +473,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void NorthernMapTurtleClicked()
     {
         ActivatePanel(9);
+        RaycastScript.northernMapTurtleClicked = false; // Reset the click handler for northern map turtle
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -400,6 +481,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void AsianCarpClicked()
     {
         ActivatePanel(0);
+        RaycastScript.asianCarpClicked = false; // Reset the click handler for asian carp
         dialogueIsActive = true; // Set dialogue active
     }
 
@@ -407,14 +489,15 @@ public class AnimalGameManager : BaseMiniGameManager
     private void PaintedLadyButterflyClicked()
     {
         ActivatePanel(11);
+        RaycastScript.paintedLadyButterflyClicked = false; // Reset the click handler for painted lady butterfly
         dialogueIsActive = true; // Set dialogue active
     }
 
     // Method to reset dialogue state
-    private void ResetDialogueState()
+    public void ResetDialogueState()
     {
         Debug.Log("Resetting dialogue state..."); // Debug.Log
-        DisableText(); // Disable all text objects
+        DeactivateAllPanels(); // Deactivate all dialogue panels
         dialogueIsActive = false; // Set dialogue inactive
         hasResetDialogueState = false; // Reset the flag to allow future dialogue interactions
     }

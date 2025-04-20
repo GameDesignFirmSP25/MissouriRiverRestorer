@@ -10,6 +10,7 @@ public class UpperBankZoneTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             upperBankEntered = true;
+            Debug.Log("Upper Bank Zone Triggered");
         }
     }
 }

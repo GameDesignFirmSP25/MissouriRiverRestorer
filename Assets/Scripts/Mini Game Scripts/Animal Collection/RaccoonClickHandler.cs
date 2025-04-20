@@ -3,13 +3,12 @@ using UnityEngine.EventSystems;
 
 public class RaccoonClickHandler : MonoBehaviour, IPointerClickHandler
 {
-    public bool raccoonClicked = false;
+    public static bool isRaccoonPanelClicked = false;
     // This method is called when the user clicks on the GameObject this script is attached to
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Raccoon panel clicked. Hiding panel...");
-        raccoonClicked = true;
-        AnimalGameManager.dialogueIsActive = false;
+        isRaccoonPanelClicked = true;
         AnimalGameManager.raccoonPanelActive = false;
     }
 }

@@ -1,16 +1,15 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SnappingTurtleClickHaandler : MonoBehaviour, IPointerClickHandler
+public class SnappingTurtleClickHandler : MonoBehaviour, IPointerClickHandler
 {
-    public bool snappingTurtleClicked = false;
+    public static bool isSnappingTurtlePanelClicked = false;
 
     // This method is called when the object is clicked
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Snapping Turtle panel is clicked. Hiding panel...");
-        snappingTurtleClicked = true;
-        AnimalGameManager.dialogueIsActive = false;
+        isSnappingTurtlePanelClicked = true;
         AnimalGameManager.snappingTurtlePanelActive = false;
     }
 }

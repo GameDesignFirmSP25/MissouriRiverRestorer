@@ -3,13 +3,12 @@ using UnityEngine.EventSystems;
 
 public class BeaverClickHandler : MonoBehaviour, IPointerClickHandler
 {
-    public bool beaverClicked = false;
+    public static bool isBeaverPanelClicked = false;
     // This method is called when the user clicks on the GameObject this script is attached to
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Beaver panel clicked. Hiding panel...");
-        beaverClicked = true;
-        AnimalGameManager.dialogueIsActive = false;
+        isBeaverPanelClicked = true;
         AnimalGameManager.beaverPanelActive = false;
     }
 }

@@ -10,6 +10,7 @@ public class LowerBankZoneTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             lowerBankEntered = true;
+            Debug.Log("Lower Bank Zone Triggered");
         }
     }
 }

@@ -65,6 +65,18 @@ public class RaycastScript : MonoBehaviour
     public static bool muskeratClicked = false;
     public static bool snappingTurtleClicked = false;
     public static bool northernMapTurtleClicked = false;
+    public bool wasEasternStarlingPreviouslyClicked = false;
+    public bool wasWhiteTailedDeerPreviouslyClicked = false;
+    public bool wasBandedPennantDragonflyPreviouslyClicked = false;
+    public bool wasGarterSnakePreviouslyClicked = false;
+    public bool wasBaldEaglePreviouslyClicked = false;
+    public bool wasPaintedLadyButterflyPreviouslyClicked = false;
+    public bool wasAsianCarpPreviouslyClicked = false;
+    public bool wasBeaverPreviouslyClicked = false;
+    public bool wasRaccoonPreviouslyClicked = false;
+    public bool wasMuskratPreviouslyClicked = false;
+    public bool wasSnappingTurtlePreviouslyClicked = false;
+    public bool wasNorthernMapTurtlePreviouslyClicked = false;
 
     [Header("Layers to Hit")]
     public LayerMask layersToHit;
@@ -236,10 +248,12 @@ public class RaycastScript : MonoBehaviour
     private void HandleEasternStarlingClick(GameObject clickedObject)
     {
         // If bool easternStarlingClicked is false...
-        if (!easternStarlingClicked)
+        if (!easternStarlingClicked && !wasEasternStarlingPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             easternStarlingClicked = true; // Set bool easternStarlingClicked to true
+            wasEasternStarlingPreviouslyClicked = true; // Set bool wasEasternStarlingPreviouslyClicked to true
+
         }
         else
         {
@@ -251,10 +265,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleWhiteTailedDeerClick(GameObject clickedObject)
     {
         // If bool whiteTailedDeerClicked is false...
-        if (!whiteTailedDeerClicked)
+        if (!whiteTailedDeerClicked && !wasWhiteTailedDeerPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             whiteTailedDeerClicked = true; // Set bool whiteTailedDeerClicked to true
+            wasWhiteTailedDeerPreviouslyClicked = true; // Set bool wasWhiteTailedDeerPreviouslyClicked to true
         }
         else
         {
@@ -266,10 +281,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleBandedPennantDragonflyClick(GameObject clickedObject)
     {
         // If bool bandedPennantDragonflyClicked is false...
-        if (!bandedPennantDragonflyClicked)
+        if (!bandedPennantDragonflyClicked && !wasBandedPennantDragonflyPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             bandedPennantDragonflyClicked = true; // Set bool bandedPennantDragonflyClicked to true
+            wasBandedPennantDragonflyPreviouslyClicked = true; // Set bool wasBandedPennantDragonflyPreviouslyClicked to true
         }
         else
         {
@@ -281,10 +297,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleGarterSnakeClick(GameObject clickedObject)
     {
         // If bool garterSnakeClicked is false...
-        if (!garterSnakeClicked)
+        if (!garterSnakeClicked && !wasGarterSnakePreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             garterSnakeClicked = true; // Set bool garterSnakeClicked to true
+            wasGarterSnakePreviouslyClicked = true; // Set bool wasGarterSnakePreviouslyClicked to true
         }
         else
         {
@@ -296,10 +313,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleBaldEagleClick(GameObject clickedObject)
     {
         // If bool baldEagleClicked is false...
-        if (!baldEagleClicked)
+        if (!baldEagleClicked && !wasBaldEaglePreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             baldEagleClicked = true; // Set bool baldEagleClicked to true
+            wasBaldEaglePreviouslyClicked = true; // Set bool wasBaldEaglePreviouslyClicked to true
         }
         else
         {
@@ -311,10 +329,11 @@ public class RaycastScript : MonoBehaviour
     private void HandlePaintedLadyButterflyClick(GameObject clickedObject)
     {
         // If bool baldEagleClicked is false...
-        if (!paintedLadyButterflyClicked)
+        if (!paintedLadyButterflyClicked && !wasPaintedLadyButterflyPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             paintedLadyButterflyClicked = true; // Set bool baldEagleClicked to true
+            wasPaintedLadyButterflyPreviouslyClicked = true; // Set bool wasPaintedLadyButterflyPreviouslyClicked to true
         }
         else
         {
@@ -326,10 +345,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleAsianCarpClick(GameObject clickedObject)
     {
         // If bool asianCarpClicked is false...
-        if (!asianCarpClicked)
+        if (!asianCarpClicked && !wasAsianCarpPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             asianCarpClicked = true; // Set bool asianCarpClicked to true
+            wasAsianCarpPreviouslyClicked = true; // Set bool wasAsianCarpPreviouslyClicked to true
         }
         else
         {
@@ -341,10 +361,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleBeaverClick(GameObject clickedObject)
     {
         // If bool beaverClicked is false...
-        if (!beaverClicked)
+        if (!beaverClicked && !wasBeaverPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             beaverClicked = true; // Set bool beaverClicked to true
+            wasBeaverPreviouslyClicked = true; // Set bool wasBeaverPreviouslyClicked to true
         }
         else
         {
@@ -356,10 +377,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleRaccoonClick(GameObject clickedObject)
     {
         // If bool raccoonClicked is false...
-        if (!raccoonClicked)
+        if (!raccoonClicked && !wasRaccoonPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             raccoonClicked = true; // Set bool raccoonClicked to true
+            wasRaccoonPreviouslyClicked = true; // Set bool wasRaccoonPreviouslyClicked to true
         }
         else
         {
@@ -371,10 +393,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleMuskratClick(GameObject clickedObject)
     {
         // If bool muskeratClicked is false...
-        if (!muskeratClicked)
+        if (!muskeratClicked && !wasMuskratPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             muskeratClicked = true; // Set bool muskeratClicked to true
+            wasMuskratPreviouslyClicked = true; // Set bool wasMuskratPreviouslyClicked to true
         }
         else
         {
@@ -386,10 +409,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleSnappingTurtleClick(GameObject clickedObject)
     {
         // If bool snappingTurtleClicked is false...
-        if (!snappingTurtleClicked)
+        if (!snappingTurtleClicked && !wasSnappingTurtlePreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             snappingTurtleClicked = true; // Set bool snappingTurtleClicked to true
+            wasSnappingTurtlePreviouslyClicked = true; // Set bool wasSnappingTurtlePreviouslyClicked to true
         }
         else
         {
@@ -401,10 +425,11 @@ public class RaycastScript : MonoBehaviour
     private void HandleNorthernMapTurtleClick(GameObject clickedObject)
     {
         // If bool northernMapTurtleClicked is false...
-        if (!northernMapTurtleClicked)
+        if (!northernMapTurtleClicked && !wasNorthernMapTurtlePreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             northernMapTurtleClicked = true; // Set bool northernMapTurtleClicked to true
+            wasNorthernMapTurtlePreviouslyClicked = true; // Set bool wasNorthernMapTurtlePreviouslyClicked to true
         }
         else
         {
