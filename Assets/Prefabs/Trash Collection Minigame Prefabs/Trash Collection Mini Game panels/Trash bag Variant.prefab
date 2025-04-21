@@ -10,9 +10,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7607659999413784683, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_text
-      value: 'Insert Trash Bag Text
-
-'
+      value: Just because all of your trash is collected in one place does not mean
+        it has been disposed of properly. Be sure to take it with you when you leave
+        or place it in a trash receptacle.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607659999413784683, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
+      propertyPath: m_margin.y
+      value: -129.92242
       objectReference: {fileID: 0}
     - target: {fileID: 8638212771710686224, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_Pivot.x
