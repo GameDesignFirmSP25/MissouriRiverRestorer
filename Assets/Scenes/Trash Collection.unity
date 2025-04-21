@@ -9906,7 +9906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47446f92f54dd148a085b37cedd889a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameScore: 30
+  GameScore: 8
   isgameComplete: 0
   trashcast: {fileID: 330585550}
   StartBtn: {fileID: 1278074327}
@@ -15182,6 +15182,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2450908861058099225, guid: 2d8848142df938a47a8fe251c6b1e7d5, type: 3}
+      propertyPath: CollectedTrash
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2450908861058099225, guid: 2d8848142df938a47a8fe251c6b1e7d5, type: 3}
       propertyPath: ObjectiveScupPanel
       value: 

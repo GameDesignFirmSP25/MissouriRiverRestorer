@@ -78,7 +78,7 @@ public class TrashCollectionGame : BaseMiniGameManager
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
-       
+        GameScore = 8;
         Time.timeScale = 0f;
         Finishpanel1.SetActive(false);
 
