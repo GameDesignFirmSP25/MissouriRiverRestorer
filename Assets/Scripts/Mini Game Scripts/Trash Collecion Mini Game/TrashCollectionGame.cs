@@ -105,7 +105,7 @@ public class TrashCollectionGame : BaseMiniGameManager
         {
             return; // Do not execute the rest of the Update method if any objective panel is open
         }
-        if (trashcast.playerScore >= GameScore && !isgameComplete )
+        if (trashcast.CollectedTrash >= GameScore && !isgameComplete )
         {
             gameCompleteScore();
         }
