@@ -5,8 +5,7 @@ public class TreeEventZone : MonoBehaviour
 {
     public bool isTreeEventActive = false; // Flag to check if the tree event is active
     public static bool treeEventTriggered = false; // Static flag to indicate if the tree event has been triggered
-    public UnityEvent onTreeEventStart; // Unity event to call when the tree event starts
-
+    //public UnityEvent onTreeEventStart; // Unity event to call when the tree event starts
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,7 +16,7 @@ public class TreeEventZone : MonoBehaviour
             {
                 isTreeEventActive = true;
                 treeEventTriggered = true; // Set the static flag to true
-                onTreeEventStart.Invoke(); // Invoke the Unity event
+                //onTreeEventStart.Invoke(); // Invoke the Unity event
                 Debug.Log("Tree event triggered.");
             }
             else

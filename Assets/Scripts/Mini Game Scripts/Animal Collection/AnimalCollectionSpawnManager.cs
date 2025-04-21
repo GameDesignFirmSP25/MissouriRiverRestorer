@@ -91,20 +91,21 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
     // Method that spawns fish at random positions in the river
     private void SpawnFish()
     {
-        // If spawnedInvasiveFish is less than numberOfInvasiveFishToSpawn...
-        if (spawnedInvasiveFish < numberOfInvasiveFishToSpawn)
-        {
-            int fishIndex = Random.Range(0, invasiveFishPrefabs.Length); // fishIndex equals a number with in range of 0 to 1
-            Instantiate(invasiveFishPrefabs[fishIndex], RandomFishPositionInRiver(), RandomRotation()); // Instantiate invasiveFishPrefab at fishIndex at new Vector3
-            spawnedInvasiveFish++; // spawnedFish equals itself plus 1
-        }
+        //// If spawnedInvasiveFish is less than numberOfInvasiveFishToSpawn...
+        //if (spawnedInvasiveFish < numberOfInvasiveFishToSpawn)
+        //{
+        //    int fishIndex = Random.Range(0, invasiveFishPrefabs.Length); // fishIndex equals a number with in range of 0 to 1
+        //    Instantiate(invasiveFishPrefabs[fishIndex], RandomFishPositionInRiver(), RandomRotation()); // Instantiate invasiveFishPrefab at fishIndex at new Vector3
+        //    spawnedInvasiveFish++; // spawnedFish equals itself plus 1
+        //}
 
         // If spawnedNativeFish is less than numberOfNativeFishToSpawn...
-        if (FishAiScript.spawnNewFish && spawnedNativeFish < numberOfNativeFishToSpawn)
+        if (FishInvasiveAi.spawnNewFish && spawnedNativeFish < numberOfNativeFishToSpawn)
         {
+            Debug.Log("SpawnFish() called.");
             int fishIndex = Random.Range(0, nativeFishPrefabs.Length); // fishIndex equals a number with in range of 0 to 1
             AddToFishList(Instantiate(nativeFishPrefabs[fishIndex], RandomFishPositionInRiver(), RandomRotation())); // Instantiate nativeFishPrefab at fishIndex at new Vector3 & add the new fish to the fish list
-            FishAiScript.spawnNewFish = false; // Reset the flag to false after spawning a new fish
+            FishInvasiveAi.spawnNewFish = false; // Reset the flag to false after spawning a new fish
             IncrementSpawnedNativeFish(); // Increment the count of spawned native fish   
         }
     }

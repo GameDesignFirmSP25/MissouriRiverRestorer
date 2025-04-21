@@ -78,15 +78,17 @@ public class FishAiScript : MonoBehaviour
         { 
             RotateFish(); // Call RotateFish method to rotate the fish towards the target position
             speed = Random.Range(speedMin, speedMax); //set the speed of the fish
-            transform.position = Vector3.MoveTowards(transform.position, newTarget.position, speed * Time.deltaTime); // Move the fish towards the target position at the specified speed
-            Vector3 newPosition = transform.position; // Get the current position of the fish
-            newPosition.y = yPosition; // Set the y position to yPosition
-            transform.position = newPosition; // Update the position of the fish with the new y value
+            Vector3 targetPosition = newTarget.position; // Get the target position from newTarget
+            targetPosition.y = yPosition; // Set the y position to yPosition
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); // Move the fish towards the target position
+
+            Debug.Log($"Fish moving towards {newTarget.name}. Current position: {transform.position}, Target position: {targetPosition}");
 
             // If the fish has reached the target position...
-            if (transform.position == newTarget.position)
+            if (Vector3.Distance(transform.position, newTarget.position) < 0.5f)
             {
                 isMoving = false; // Set bool isMoving to false
+                Debug.Log("Fish reached the target.");
             }
         }
     }
@@ -98,6 +100,7 @@ public class FishAiScript : MonoBehaviour
         if (newTarget != null)
         {
             Vector3 direction = newTarget.position - transform.position; // Calculate the direction vector from the fish to the target position
+            direction.y = 0; // Set the y component to 0 to keep the fish level
             Quaternion targetRotation = Quaternion.LookRotation(direction); // Create a rotation that looks in the direction of the target position
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime); // Smoothly rotate the fish towards the target position
         }

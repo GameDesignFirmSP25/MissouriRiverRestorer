@@ -74,10 +74,12 @@ public class GooseAiScript : MonoBehaviour
         {
             RotateGoose(); // Call the method to rotate the goose towards the target position
             speed = Random.Range(speedMin, speedMax); //set the speed of the goose
+            Vector3 targetPosition = newTarget.position; // Get the position of the target
+            targetPosition.y = yPosition; // Set the y position to yPosition
             transform.position = Vector3.MoveTowards(transform.position, newTarget.position, speed * Time.deltaTime); // Move the goose towards the target position
-            Vector3 newPosition = transform.position; // Get the current position of the goose
-            newPosition.y = yPosition; // Set the y position to yPosition
-            transform.position = newPosition; // Update the position of the goose with the new y value
+            //Vector3 newPosition = transform.position; // Get the current position of the goose
+            //newPosition.y = yPosition; // Set the y position to yPosition
+            //transform.position = newPosition; // Update the position of the goose with the new y value
 
             // If the goose has reached the target position...
             if (transform.position == newTarget.position)
@@ -94,6 +96,7 @@ public class GooseAiScript : MonoBehaviour
         if (newTarget != null)
         {
             Vector3 direction = newTarget.position - transform.position; // Calculate the direction vector from the goose to the target position
+            direction.y = 0; // Set the y component to 0 to prevent tilting
             Quaternion targetRotation = Quaternion.LookRotation(direction); // Create a rotation that looks in the direction of the target position
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime); // Smoothly rotate the goose towards the target position
         }

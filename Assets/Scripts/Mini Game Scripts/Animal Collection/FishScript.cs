@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
-using System.Collections.Generic;
 
-public class AnimalScript : MonoBehaviour
+public class FishScript : MonoBehaviour
 {
     private AnimalGameManager gameManager;
 
@@ -12,10 +10,10 @@ public class AnimalScript : MonoBehaviour
 
     public float radius;
     private float timer;
-    private float waitTime = 10f;
+    private float waitTime = 7f;
     private float waitCounter = 0f;
     private float wanderRadius = 40f;
-    private float wanderTimer = 10f;
+    private float wanderTimer = 15f;
 
     public bool isWaiting = true;
     public bool isWalking = false;
@@ -46,7 +44,7 @@ public class AnimalScript : MonoBehaviour
             timer = 0; // Set timer to 0
             isWalking = true; // Set bool isWalking to true
             isWaiting = false; // Set bool isWaiting to false
-            AnimalMovement();
+            FishMovement();
         }
     }
 
@@ -64,8 +62,8 @@ public class AnimalScript : MonoBehaviour
         return navHit.position; // Return the position of the NavMesh hit
     }
 
-    // Controls animal movement
-    private void AnimalMovement()
+    // Controls fish movement
+    private void FishMovement()
     {
         // If bool isWalking is true...
         if (isWalking)
@@ -83,5 +81,4 @@ public class AnimalScript : MonoBehaviour
             isWaiting = false; // Set bool isWaiting to false
         }
     }
-
 }
