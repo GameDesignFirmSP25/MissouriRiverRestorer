@@ -94,6 +94,11 @@ public class DynamicGuidebook : MonoBehaviour
           PageSubTitle.text = "";
           Description.text = objectManager.BlankObject.Description.text;
           Destroy(Model);
+          Model = Instantiate(objectManager.BlankObject.Model);
+
+          Model.transform.parent = ModelParent.gameObject.transform;
+          Model.transform.position = ModelParent.transform.position;
+          Model.transform.rotation = ModelParent.transform.rotation;
      }
 
      public void LoadPage(int page)
