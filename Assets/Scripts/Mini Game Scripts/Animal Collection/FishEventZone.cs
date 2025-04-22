@@ -3,9 +3,8 @@ using UnityEngine.Events;
 
 public class FishEventZone : MonoBehaviour
 {
-    public bool isFishEventActive = false; // Flag to check if the fish event is active
-    public static bool fishEventTriggered = false; // Static flag to indicate if the fish event has been triggered
-    //public UnityEvent onFishEventStart; // Unity event to call when the fish event starts
+    public bool isFishEventActive = false; 
+    public static bool fishEventTriggered = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,8 +14,7 @@ public class FishEventZone : MonoBehaviour
             if (!isFishEventActive)
             {
                 isFishEventActive = true;
-                fishEventTriggered = true; // Set the static flag to true
-                //onFishEventStart.Invoke(); // Invoke the Unity event
+                fishEventTriggered = true;
                 Debug.Log("Fish event triggered.");
             }
             else

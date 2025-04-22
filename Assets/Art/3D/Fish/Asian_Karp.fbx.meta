@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: deada96d99bade448877b9725f5c886a
+guid: d3b51a71da5f5af46872c7dc83d381d0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,7 +7,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Palette
+      name: Material
+    second: {fileID: 2100000, guid: 33c03a4b1f158164aae331d65b92ffdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 33c03a4b1f158164aae331d65b92ffdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 33c03a4b1f158164aae331d65b92ffdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 33c03a4b1f158164aae331d65b92ffdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
     second: {fileID: 2100000, guid: 33c03a4b1f158164aae331d65b92ffdd, type: 2}
   materials:
     materialImportMode: 2
@@ -37,10 +57,10 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: Swim
-      takeName: Armature|ArmatureAction.002
-      internalID: 6093225430303232669
+      takeName: Armature|ArmatureAction
+      internalID: 4781951162920444690
       firstFrame: 0
-      lastFrame: 136
+      lastFrame: 89
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

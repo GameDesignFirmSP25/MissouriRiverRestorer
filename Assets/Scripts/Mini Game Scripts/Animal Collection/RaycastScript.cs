@@ -34,7 +34,7 @@ public class RaycastScript : MonoBehaviour
     private string[] raccoonNames;
 
     [SerializeField]
-    private string[] muskeratNames;
+    private string[] muskratNames;
 
     [SerializeField]
     private string[] snappingTurtleNames;
@@ -62,7 +62,7 @@ public class RaycastScript : MonoBehaviour
     public static bool asianCarpClicked = false;
     public static bool beaverClicked = false;
     public static bool raccoonClicked = false;
-    public static bool muskeratClicked = false;
+    public static bool muskratClicked = false;
     public static bool snappingTurtleClicked = false;
     public static bool northernMapTurtleClicked = false;
     public bool wasEasternStarlingPreviouslyClicked = false;
@@ -97,7 +97,9 @@ public class RaycastScript : MonoBehaviour
         whiteTailedDeerNames = new string[]
         {
             "White-Tailed Deer", "White-Tailed Deer (1)", "White-Tailed Deer (2)",
-            "White-Tailed Deer (3)"
+            "White-Tailed Deer (3)", "White-Tailed Deer (4)", "White-Tailed Deer (Buck)",
+            "White-Tailed Deer (Buck) (1)", "White-Tailed Deer (Buck) (2)", "White-Tailed Deer (Buck) (3)",
+            "White-Tailed Deer (Buck) (4)"
         };
 
         // Set list of banded pennant dragonfly names
@@ -126,14 +128,16 @@ public class RaycastScript : MonoBehaviour
         paintedLadyButterflyNames = new string[]
         {
             "Painted Lady Butterfly", "Painted Lady Butterfly (1)", "Painted Lady Butterfly (2)",
-            "Painted Lady Butterfly (3)"
+            "Painted Lady Butterfly (3)", "Painted Lady Butterfly (4)", "Painted Lady Butterfly (5)",
+            "Painted Lady Butterfly (6)"
         };
 
         // Set list of asian carp names
         asianCarpNames = new string[]
         {
             "Asian Carp", "Asian Carp (1)", "Asian Carp (2)",
-            "Asian Carp (3)", "Asian Carp (4)"
+            "Asian Carp (3)", "Asian Carp (4)", "Asian Carp (5)",
+            "Asian Carp (6)", "Asian Carp (7)", "Asian Carp (8)"
         };
 
         // Set list of beaver names
@@ -151,7 +155,7 @@ public class RaycastScript : MonoBehaviour
         };
 
         // Set list of muskrat names
-        muskeratNames = new string[]
+        muskratNames = new string[]
         {
             "Muskrat", "Muskrat (1)", "Muskrat (2)",
             "Muskrat (3)"
@@ -229,7 +233,7 @@ public class RaycastScript : MonoBehaviour
             {
                 HandleRaccoonClick(hit.collider.gameObject); // Handle the click on the raccoon GameObject 
             }
-            else if (System.Array.Exists(muskeratNames, name => name == hit.collider.gameObject.name))
+            else if (System.Array.Exists(muskratNames, name => name == hit.collider.gameObject.name))
             {
                 HandleMuskratClick(hit.collider.gameObject); // Handle the click on the muskrat GameObject 
             }
@@ -393,10 +397,10 @@ public class RaycastScript : MonoBehaviour
     private void HandleMuskratClick(GameObject clickedObject)
     {
         // If bool muskeratClicked is false...
-        if (!muskeratClicked && !wasMuskratPreviouslyClicked)
+        if (!muskratClicked && !wasMuskratPreviouslyClicked)
         {
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
-            muskeratClicked = true; // Set bool muskeratClicked to true
+            muskratClicked = true; // Set bool muskeratClicked to true
             wasMuskratPreviouslyClicked = true; // Set bool wasMuskratPreviouslyClicked to true
         }
         else

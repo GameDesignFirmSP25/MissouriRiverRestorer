@@ -67,8 +67,8 @@ public class AnimalAi : MonoBehaviour
         // If bool isWalking is true...
         if (isWalking)
         {
-            isWalking = false; // Set bool isWalking to true
-            isWaiting = true; // Set bool isWaiting to false
+            isWalking = false; // Set bool isWalking to false
+            isWaiting = true; // Set bool isWaiting to true
         }
 
         // If bool isWalking is true...

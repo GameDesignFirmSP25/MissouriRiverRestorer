@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MuskeratClickHandler : MonoBehaviour, IPointerClickHandler
+public class MuskratClickHandler : MonoBehaviour, IPointerClickHandler
 {
-    public static bool isMuskeratPanelClicked = false;
+    public static bool isMuskratPanelClicked = false;
     // This method is called when the user clicks on the GameObject this script is attached to
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Muskrat panel clicked. Hiding panel...");
-        isMuskeratPanelClicked = true;
+        isMuskratPanelClicked = true;
         AnimalGameManager.muskratPanelActive = false;
     }
 }

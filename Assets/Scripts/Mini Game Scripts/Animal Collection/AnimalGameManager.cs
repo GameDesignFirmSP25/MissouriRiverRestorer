@@ -9,9 +9,6 @@ public class AnimalGameManager : BaseMiniGameManager
 {
     [Header("UI Elements")]
     [SerializeField]
-    GameObject objectivesPanel;
-
-    [SerializeField]
     TextMeshProUGUI objectiveText1;
 
     [SerializeField]
@@ -39,14 +36,29 @@ public class AnimalGameManager : BaseMiniGameManager
     TextMeshProUGUI objectiveSubtext6;
 
     [SerializeField]
-    TextMeshProUGUI ScoreText;
+    TextMeshProUGUI objectiveSubtext7;
 
     [SerializeField]
     TextMeshProUGUI EndText;
 
+    [SerializeField]
+    TextMeshProUGUI eventZoneText;
+
     [Header("Game Objects")]
     [SerializeField]
     GameObject startPanel;
+
+    [SerializeField]
+    GameObject objectivesPanel;
+
+    [SerializeField]
+    GameObject endOfGamePanel;
+
+    [SerializeField]
+    GameObject eventZonePanel;
+
+    [SerializeField]
+    GameObject eventZoneText1;
 
     [SerializeField]
     GameObject objectiveSubText1;
@@ -67,6 +79,9 @@ public class AnimalGameManager : BaseMiniGameManager
     GameObject objectiveSubText6;
 
     [SerializeField]
+    GameObject objectiveSubText7;
+
+    [SerializeField]
     GameObject startButton;
 
     [SerializeField]
@@ -75,12 +90,26 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     GameObject pauseButton;
 
-    public GameObject[] dialoguePanels = new GameObject[12];
+    [SerializeField]
+    GameObject eventZones;
 
-    [Header("Float Variables")]
-    private float ScoreThreshold = 25f;
-    public float Score = 0f;
-    private float resetDelay = 0.1f; // Delay to reset dialogue panel click handler
+    [Header("Arrays and Lists")]
+    public GameObject[] dialoguePanels = new GameObject[12];
+    public List<string> animalNames = new List<string>
+    {
+        "Asian Carp",
+        "Eastern Starling",
+        "White-Tailed Deer",
+        "Bald Eagle",
+        "Beaver",
+        "Raccoon",
+        "Muskrat",
+        "Snapping Turtle",
+        "Common Garter Snake",
+        "Northern Map Turtle",
+        "Banded Pennant Dragonfly",
+        "Painted Lady Butterfly"
+    };
 
     [Header("Booleans")]
     public static bool trappingCompleted = false; // Global variable to check if trapping is completed
@@ -97,33 +126,35 @@ public class AnimalGameManager : BaseMiniGameManager
     public static bool raccoonPanelActive = false; 
     public static bool asianCarpPanelActive = false; 
     public static bool northernMapTurtlePanelActive = false;
-    private bool hasResetDialogueState = false; // Flag to prevent multiple resets of dialogue state
+    public static bool endOfGamePanelActive = false;
+    public static bool eventZonePanelActive = false;
+    private bool hasResetDialogueState = false;
     private bool objective1Active = false;
     private bool objective2Active = false;
     private bool objective3Active = false;
-
+    public bool objectivesComplete = false;
+    public bool deerEventZoneComplete = false;
+    public bool birdEventZoneComplete = false;
+    public bool fishEventZoneComplete = false;
+    public bool isAsianCarpFound = false;
+    public bool isBaldEagleFound = false;
+    public bool isBandedPennantDragonflyFound = false;
+    public bool isBeaverFound = false;
+    public bool isCommonGarterSnakeFound = false;
+    public bool isEasternStarlingFound = false;
+    public bool isMuskratFound = false;
+    public bool isNorthernMapTurtleFound = false;
+    public bool isPaintedLadyButterflyFound = false;
+    public bool isRaccoonFound = false;
+    public bool isSnappingTurtleFound = false;
+    public bool isWhiteTailedDeerFound = false;
 
     [Header("Raycast Variables")]
     private Ray ray;
     private RaycastHit hit;
 
     [Header("Script References")]
-    public LowerBankZoneTrigger lowerBankZoneTrigger;
-    public MidBankZoneTrigger midBankZoneTrigger;
-    public UpperBankZoneTrigger upperBankZoneTrigger;
-    public GarterSnakeClickHandler garterSnakeClickHandler;
-    public WhiteTailedDeerClickHandler whiteTailedDeerClickHandler;
-    public RaccoonClickHandler raccoonClickHandler;
-    public NorthernMapTurtleClickHandler northernMapTurtleClickHandler;
-    public MuskeratClickHandler muskeratClickHandler;
-    public PaintedLadyButterflyClickHandler paintedLadyButterflyClickHandler;
-    public AsianCarpClickHandler asianCarpClickHandler;
-    public BandedPennantDragonflyClickHandler bandedPennantDragonflyClickHandler;
-    public BaldEagleClickHandler baldEagleClickHandler;
-    public BeaverClickHandler beaverClickHandler;
-    public SnappingTurtleClickHandler snappingTurtleClickHandler;
-    public EasternStarlingClickHandler easternStarlingClickHandler;
-
+    private RaycastScript raycastScript; // Reference to the RaycastScript
 
     void Start()
     {
@@ -131,18 +162,13 @@ public class AnimalGameManager : BaseMiniGameManager
         GetPanels(); // Get dialogue panels
         DeactivateAllPanels(); // Deactivate all dialogue panels
         DisableObjectives(); // Disable all objective subtexts
+        DisableEventZones(); // Diasble event trigger zones
         Time.timeScale = 0; // Freeze time at start of game
     }
 
     // Update is called once per frame
     void Update()
     {   
-        // TODO: This shouls be a one time event, not continuous calls in Udpate()
-        if (Score >= ScoreThreshold) //end game if score is at threshold
-        {
-            EndLevel(); // End the level
-        }
-
         if (LowerBankZoneTrigger.lowerBankEntered && !objective1Active)
         {
             LowerBankEntered();
@@ -161,6 +187,23 @@ public class AnimalGameManager : BaseMiniGameManager
         AnimalClicked();
 
         PanelClicked(); // Check if any dialogue panel is clicked
+
+        if (animalNames.Count == 10)
+        {
+            EnableEventZones();
+        }
+        else
+        {
+            return;
+        }
+
+        DeerEventZoneEntered();
+
+        BirdEventZoneEntered();
+
+        FishEventZoneEntered();
+
+        ObjectivesComplete(); // Check if all objectives are complete
     }
 
     public void StartButton() //triggers on start button press
@@ -179,6 +222,8 @@ public class AnimalGameManager : BaseMiniGameManager
         startButton.SetActive(true); //show start button
         startPanel.SetActive(true); //show start panel
         pauseButton.SetActive(false); //hide pause button
+        endOfGamePanel.SetActive(false); //hide end of game panel
+        eventZonePanel.SetActive(false); //hide event zones
     }
 
     private void GetPanels()
@@ -206,6 +251,13 @@ public class AnimalGameManager : BaseMiniGameManager
         objectiveSubtext4.gameObject.SetActive(false); //hide objective subtext 4
         objectiveSubtext5.gameObject.SetActive(false); //hide objective subtext 5
         objectiveSubtext6.gameObject.SetActive(false); //hide objective subtext 6
+        objectiveSubtext7.gameObject.SetActive(false); //hide objective subtext 7
+    }
+
+    // Method to disable event zones
+    public void DisableEventZones()
+    {
+        eventZones.gameObject.SetActive(false); // Disable event zones
     }
 
     // Method to activate specific panel in index
@@ -295,37 +347,44 @@ public class AnimalGameManager : BaseMiniGameManager
             BaldEagleClicked(); // Handle bald eagle click
         }
 
+        // If painted lady butterfly is clicked and dialogue is not active...
         if (RaycastScript.paintedLadyButterflyClicked && !dialogueIsActive)
         {
             PaintedLadyButterflyClicked();
         }
-        
-        if (RaycastScript.muskeratClicked && !dialogueIsActive) // If muskrat is clicked and dialogue is not active
+
+        // If muskrat is clicked and dialogue is not active...
+        if (RaycastScript.muskratClicked && !dialogueIsActive) 
         {
-            MuskeratClicked();
+            MuskratClicked();
         }
 
-        if (RaycastScript.snappingTurtleClicked && !dialogueIsActive) // If snapping turtle is clicked and dialogue is not active
+        // If snapping turtle is clicked and dialogue is not active...
+        if (RaycastScript.snappingTurtleClicked && !dialogueIsActive)
         {
             SnappingTurtleClicked();
         }
 
-        if (RaycastScript.beaverClicked && !dialogueIsActive) // If beaver is clicked and dialogue is not active
+        // If beaver is clicked and dialogue is not active...
+        if (RaycastScript.beaverClicked && !dialogueIsActive) 
         {
             BeaverClicked();
         }
 
-        if (RaycastScript.raccoonClicked && !dialogueIsActive) // If raccoon is clicked and dialogue is not active
+        // If raccoon is clicked and dialogue is not active...
+        if (RaycastScript.raccoonClicked && !dialogueIsActive) 
         {
             RaccoonClicked();
         }
 
-        if (RaycastScript.northernMapTurtleClicked && !dialogueIsActive) // If northern map turtle is clicked and dialogue is not active
+        // If northern map turtle is clicked and dialogue is not active...
+        if (RaycastScript.northernMapTurtleClicked && !dialogueIsActive) 
         {
             NorthernMapTurtleClicked();
         }
 
-        if (RaycastScript.asianCarpClicked && !dialogueIsActive) // If asian carp is clicked and dialogue is not active
+        // If asian carp is clicked and dialogue is not active...
+        if (RaycastScript.asianCarpClicked && !dialogueIsActive) 
         {
             AsianCarpClicked();
         }
@@ -355,7 +414,7 @@ public class AnimalGameManager : BaseMiniGameManager
             ResetDialogueState();
             hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
         }
-        if (MuskeratClickHandler.isMuskeratPanelClicked && !hasResetDialogueState)
+        if (MuskratClickHandler.isMuskratPanelClicked && !hasResetDialogueState)
         {
             ResetDialogueState();
             hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
@@ -403,6 +462,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(1);
         RaycastScript.easternStarlingClicked = false; // Reset the click handler for eastern starling
         dialogueIsActive = true; // Set dialogue active
+        isEasternStarlingFound = true; // Set the flag for eastern starling found
+        animalNames.Remove("Eastern Starling"); // Remove eastern starling from the list of animal names
     }
 
     // Handle clicks on white-tailed deer
@@ -411,6 +472,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(2);
         RaycastScript.whiteTailedDeerClicked = false; // Reset the click handler for white-tailed deer
         dialogueIsActive = true; // Set dialogue active
+        isWhiteTailedDeerFound = true; // Set the flag for white-tailed deer found
+        animalNames.Remove("White-Tailed Deer"); // Remove white-tailed deer from the list of animal names
     }
 
     // Handle clicks on banded pennant dragonfly
@@ -419,6 +482,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(10);
         RaycastScript.bandedPennantDragonflyClicked = false; // Reset the click handler for banded pennant dragonfly
         dialogueIsActive = true; // Set dialogue active
+        isBandedPennantDragonflyFound = true; // Set the flag for banded pennant dragonfly found
+        animalNames.Remove("Banded Pennant Dragonfly"); // Remove banded pennant dragonfly from the list of animal names
     }
 
     // Handle clicks on garter snake
@@ -427,6 +492,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(8);
         RaycastScript.garterSnakeClicked = false; // Reset the click handler for common garter snake
         dialogueIsActive = true; // Set dialogue active
+        isCommonGarterSnakeFound = true; // Set the flag for common garter snake found
+        animalNames.Remove("Common Garter Snake"); // Remove common garter snake from the list of animal names
     }
 
     // Handle clicks on bald eagle
@@ -435,14 +502,18 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(3);
         RaycastScript.baldEagleClicked = false; // Reset the click handler for bald eagle
         dialogueIsActive = true; // Set dialogue active
+        isBaldEagleFound = true; // Set the flag for bald eagle found
+        animalNames.Remove("Bald Eagle"); // Remove bald eagle from the list of animal names
     }
 
     // Handle clicks on muskrat
-    private void MuskeratClicked()
+    private void MuskratClicked()
     {
         ActivatePanel(6);
-        RaycastScript.muskeratClicked = false; // Reset the click handler for muskrat
+        RaycastScript.muskratClicked = false; // Reset the click handler for muskrat
         dialogueIsActive = true; // Set dialogue active
+        isMuskratFound = true; // Set the flag for muskrat found
+        animalNames.Remove("Muskrat"); // Remove muskrat from the list of animal names
     }
 
     // Handle clicks on snapping turtle
@@ -451,6 +522,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(7);
         RaycastScript.snappingTurtleClicked = false; // Reset the click handler for snapping turtle
         dialogueIsActive = true; // Set dialogue active
+        isSnappingTurtleFound = true; // Set the flag for snapping turtle found
+        animalNames.Remove("Snapping Turtle"); // Remove snapping turtle from the list of animal names
     }
 
     // Handle clicks on beaver
@@ -459,6 +532,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(4);
         RaycastScript.beaverClicked = false; // Reset the click handler for beaver
         dialogueIsActive = true; // Set dialogue active
+        isBeaverFound = true; // Set the flag for beaver found
+        animalNames.Remove("Beaver"); // Remove beaver from the list of animal names
     }
 
     // Handle clicks on raccoon
@@ -467,6 +542,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(5);
         RaycastScript.raccoonClicked = false; // Reset the click handler for raccoon
         dialogueIsActive = true; // Set dialogue active
+        isRaccoonFound = true; // Set the flag for raccoon found
+        animalNames.Remove("Raccoon"); // Remove raccoon from the list of animal names
     }
 
     // Handle clicks on northern map turtle
@@ -475,6 +552,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(9);
         RaycastScript.northernMapTurtleClicked = false; // Reset the click handler for northern map turtle
         dialogueIsActive = true; // Set dialogue active
+        isNorthernMapTurtleFound = true; // Set the flag for northern map turtle found
+        animalNames.Remove("Northern Map Turtle"); // Remove northern map turtle from the list of animal names
     }
 
     // Handle clicks on asian carp
@@ -483,6 +562,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(0);
         RaycastScript.asianCarpClicked = false; // Reset the click handler for asian carp
         dialogueIsActive = true; // Set dialogue active
+        isAsianCarpFound = true; // Set the flag for asian carp found
+        animalNames.Remove("Asian Carp"); // Remove asian carp from the list of animal names
     }
 
     // Handle clicks on painted lady butterfly
@@ -491,6 +572,8 @@ public class AnimalGameManager : BaseMiniGameManager
         ActivatePanel(11);
         RaycastScript.paintedLadyButterflyClicked = false; // Reset the click handler for painted lady butterfly
         dialogueIsActive = true; // Set dialogue active
+        isPaintedLadyButterflyFound = true; // Set the flag for painted lady butterfly found
+        animalNames.Remove("Painted Lady Butterfly"); // Remove painted lady butterfly from the list of animal names
     }
 
     // Method to reset dialogue state
@@ -508,9 +591,9 @@ public class AnimalGameManager : BaseMiniGameManager
         Debug.Log("Player is exploring the lower bank."); //Debug.Log
         objective1Active = true; // Set bool objective1Active to true
         objectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
-        objectiveSubtext1.text = "Interact with fauna."; //set objective subtext 1 text
+        objectiveSubtext1.text = "*Interact with flora."; //set objective subtext 1 text
         objectiveSubtext2.gameObject.SetActive(true); //show objective subtext 2
-        objectiveSubtext2.text = "Find invasive species."; //set objective subtext 2 text
+        objectiveSubtext2.text = "*Find and interact with Asian Carp."; //set objective subtext 2 text
     }
 
     // Set subtext for objective 2
@@ -519,9 +602,9 @@ public class AnimalGameManager : BaseMiniGameManager
         Debug.Log("Player is exploring the Mid Bank!"); //Debug.Log
         objective2Active = true; // Set bool objective2Active to true
         objectiveSubtext3.gameObject.SetActive(true); //show objective subtext 3
-        objectiveSubtext3.text = "Interact with fauna."; //set objective subtext 3 text
+        objectiveSubtext3.text = "*Interact with flora."; //set objective subtext 3 text
         objectiveSubtext4.gameObject.SetActive(true); //show objective subtext 4
-        objectiveSubtext4.text = "Find invasive species."; //set objective subtext 4 text
+        objectiveSubtext4.text = "*Find and interact with White-Tailed Deer."; //set objective subtext 4 text
     }
 
     // Set subtext for oibjective 3
@@ -530,8 +613,63 @@ public class AnimalGameManager : BaseMiniGameManager
         Debug.Log("Player is exploring the Upper Bank!"); //Debug.Log
         objective3Active = true; // Set bool objective3Active to true
         objectiveSubtext5.gameObject.SetActive(true); //show objective subtext 5
-        objectiveSubtext5.text = "Interact with fauna."; //set objective subtext 5 text
+        objectiveSubtext5.text = "*Interact with flora."; //set objective subtext 5 text
         objectiveSubtext6.gameObject.SetActive(true); //show objective subtext 6
-        objectiveSubtext6.text = "Find invasive species."; //set objective subtext 6 text
+        objectiveSubtext6.text = "*Find and interact with Bradford Pear Tree."; //set objective subtext 6 text
+        objectiveSubtext7.gameObject.SetActive(true); //show objective subtext 7
+        objectiveSubtext7.text = "*Find and interact with European Starling."; //set objective subtext 7 text
+    }
+
+    // Method to enable event zones
+    public void EnableEventZones()
+    {
+        eventZones.gameObject.SetActive(true); // Enable event zones
+    }
+
+    //  Method to called when deer event zone is entered
+    public void DeerEventZoneEntered()
+    {
+        Debug.Log("Start deer event."); // Debug.Log
+        eventZonePanel.SetActive(true); // Show event zone panel
+        eventZonePanelActive = true; // Set event zone panel active
+        eventZoneText.text = "Oh no! There are too many White-Tailed deer here. Look at how they have destroyed the plants. We must drive them off."; // Set event zone text
+    }
+
+    // Method to called when bird event zone is entered
+    public void BirdEventZoneEntered()
+    {
+        Debug.Log("Start bird event."); // Debug.Log
+        eventZonePanel.SetActive(true); // Show event zone panel
+        eventZonePanelActive = true; // Set event zone panel active
+        eventZoneText.text = "Check out those European Starling. They seem to have taken over those trees driving away native birds. Hurry and shoo them away."; // Set event zone text
+    }
+
+    // Method to called when fish event zone is entered
+    public void FishEventZoneEntered()
+    {
+        Debug.Log("Start fish event."); // Debug.Log
+        eventZonePanel.SetActive(true); // Show event zone panel
+        eventZonePanelActive = true; // Set event zone panel active
+        eventZoneText.text = "Look at the river. There seems to be a disturbance. Large Asian Carp are attacking the native fish. Quickly catch them so we can relocate them."; // Set event zone text
+    }
+
+    // Method to check if all objectives are complete
+    private void ObjectivesComplete()
+    {
+        if (raycastScript.wasEasternStarlingPreviouslyClicked && raycastScript.wasWhiteTailedDeerPreviouslyClicked && raycastScript.wasBandedPennantDragonflyPreviouslyClicked &&
+            raycastScript.wasGarterSnakePreviouslyClicked && raycastScript.wasBaldEaglePreviouslyClicked && raycastScript.wasPaintedLadyButterflyPreviouslyClicked && 
+            raycastScript.wasMuskratPreviouslyClicked && raycastScript.wasSnappingTurtlePreviouslyClicked && raycastScript.wasBeaverPreviouslyClicked && raycastScript.wasRaccoonPreviouslyClicked && 
+            raycastScript.wasNorthernMapTurtlePreviouslyClicked && raycastScript.wasAsianCarpPreviouslyClicked && deerEventZoneComplete && fishEventZoneComplete && birdEventZoneComplete)
+        {
+            objectivesComplete = true; // Set objectivesComplete to true if all objectives are met
+        }
+        // If all objectives are active and trapping is not completed...
+        if (objectivesComplete && !trappingCompleted)
+        {
+            Debug.Log("All objectives are complete!"); // Debug.Log
+            endOfGamePanel.SetActive(true); // Show end of game panel
+            endOfGamePanelActive = true; // Set end of game panel active
+            DisableEventZones(); // Disable event zones
+        }
     }
 }
