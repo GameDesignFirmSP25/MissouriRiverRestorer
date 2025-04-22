@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEditor.Experimental.GraphView;
-using System.Collections;
 using System.Collections.Generic;
 
 public class AnimalGameManager : BaseMiniGameManager
