@@ -25,13 +25,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394099356583802604}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2005638942948518326}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 4.047}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 5.409916, y: 0, z: 3.9628525, w: 0}
+  m_margin: {x: 5.409916, y: 0, z: 3.9628525, w: 0.049545288}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -295,12 +295,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactSprite: {fileID: 5185009819119086433}
   interactText: {fileID: 394099356583802604}
-  player: {fileID: 0}
   TutorialIntroduction: {fileID: 4900000, guid: 1a6f30e9a7750e142af0f9f2e2e58b3a, type: 3}
   AfterFirstWaterTest: {fileID: 4900000, guid: 817ab58ba9c1ace45a984c4cae4d9271, type: 3}
   AfterTrashCollection: {fileID: 4900000, guid: 41b87aba1673b60419c60e850723606f, type: 3}
   RetestWaterTutorial: {fileID: 4900000, guid: 30f37ffc02619754dae33d8bf501aa73, type: 3}
   AfterSecondWaterTest: {fileID: 4900000, guid: 531708c8e8d221c4f95d761e3610a6f7, type: 3}
+  playerTransform: {fileID: 0}
 --- !u!1 &5821300805938463336
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,13 +327,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5821300805938463336}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 2.746, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2005638942948518326}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!212 &5185009819119086433
 SpriteRenderer:
   m_ObjectHideFlags: 0
