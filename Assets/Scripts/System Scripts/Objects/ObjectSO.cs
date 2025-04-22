@@ -13,6 +13,7 @@ public class ObjectSO : ScriptableObject
      public string Name;
      public string LatinName;
      public bool isScanned = false;
+     public bool isInvasive = false;
      //public int PageNumber;
 
      public TextAsset Description;

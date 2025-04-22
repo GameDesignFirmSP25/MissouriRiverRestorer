@@ -13,12 +13,18 @@ public class DynamicGuidebook : MonoBehaviour
     public int index;
     public Image Image;
      public TMP_Text PageTitle;
-     public TMP_Text PageSubTitle;
+     //public TMP_Text PageSubTitle;
      public TMP_Text Description;
      public GameObject ModelParent;
      public GameObject Model;
     public Canvas CanvasPage;
      public GuidebookUI GBUI;
+     public Image NativeOrInvasiveStamp;
+
+     [SerializeField]
+     private Sprite NativeStamp;
+     [SerializeField]
+     private Sprite InvasiveStamp;
 
      private Vector3 baseOffet = new Vector3(-0.5f, 0, 1);
      private Vector3 offset = new Vector3();
@@ -99,7 +105,7 @@ public class DynamicGuidebook : MonoBehaviour
      {
           Image.sprite = objectManager.BlankObject.Image;
           PageTitle.text = objectManager.BlankObject.Name;
-          PageSubTitle.text = "";
+          //PageSubTitle.text = "";
           Description.text = objectManager.BlankObject.Description.text;
           Destroy(Model);
           Model = Instantiate(objectManager.BlankObject.Model);
@@ -107,6 +113,8 @@ public class DynamicGuidebook : MonoBehaviour
           Model.transform.parent = ModelParent.gameObject.transform;
           Model.transform.position = ModelParent.transform.position;
           Model.transform.rotation = ModelParent.transform.rotation;
+
+          NativeOrInvasiveStamp.gameObject.SetActive(false);
      }
 
      public void LoadPage(int page)
@@ -121,7 +129,7 @@ public class DynamicGuidebook : MonoBehaviour
 
           Image.sprite = objectManager.ObjectList[index].Image;
           PageTitle.text = objectManager.ObjectList[index].Name;
-          PageSubTitle.text = "\"" + objectManager.ObjectList[index].LatinName + "\"";
+          //PageSubTitle.text = "\"" + objectManager.ObjectList[index].LatinName + "\"";
           Description.text = objectManager.ObjectList[index].Description.text;
 
           Destroy(Model);
@@ -130,5 +138,8 @@ public class DynamicGuidebook : MonoBehaviour
           Model.transform.parent = ModelParent.gameObject.transform;
           Model.transform.position = ModelParent.transform.position;
           Model.transform.rotation = ModelParent.transform.rotation;
+
+          NativeOrInvasiveStamp.gameObject.SetActive(true);
+          NativeOrInvasiveStamp.sprite = objectManager.ObjectList[index].isInvasive ? InvasiveStamp : NativeStamp;
      }
 }
