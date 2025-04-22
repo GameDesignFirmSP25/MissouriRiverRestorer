@@ -21,8 +21,9 @@ public class NPC : MonoBehaviour
     // [SerializeField] private TextAsset AnimalTrappingTutorial;
     [SerializeField] private TextAsset RetestWaterTutorial;
     [SerializeField] private TextAsset AfterSecondWaterTest;
-    // [SerializeField] private TextAsset Finale;
+     // [SerializeField] private TextAsset Finale;
 
+     [SerializeField]
     private Transform playerTransform;
 
     private float interactDistance = 8f;
@@ -58,7 +59,7 @@ public class NPC : MonoBehaviour
 
      private void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Find the player object in the scene
+        //playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Find the player object in the scene
      }
 
      private void Update()
@@ -76,7 +77,7 @@ public class NPC : MonoBehaviour
             if (isWithinInteractDistance) // Check if the player is within a distance of 2 units from the NPC
             {
                 // Check if the 'E' key is pressed
-                if (Keyboard.current.eKey.wasPressedThisFrame)
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     // Interact
                     Interact(); // Call the interact method
@@ -166,8 +167,18 @@ public class NPC : MonoBehaviour
 
     private bool IsWithinInteractDistance()
     {
-        if (Vector3.Distance(playerTransform.position, transform.position) < interactDistance) // Check if the player is within a distance of 2 units from the NPC
+          // Debugging
+/*          Debug.Log("interact distance: " + interactDistance + "\n"
+               + "Distance: " + Vector3.Distance(playerTransform.position, transform.position));
+
+          Debug.Log("player position: " + playerTransform.position.ToString());
+          Debug.Log("NPC position: " + transform.position.ToString());*/
+
+
+          if (Vector3.Distance(playerTransform.position, transform.position) < interactDistance) // Check if the player is within a distance of 2 units from the NPC
         {
+               //Debugging
+               //Debug.Log("Within Distance");
             return true; // Return true if within distance
         }
         else
