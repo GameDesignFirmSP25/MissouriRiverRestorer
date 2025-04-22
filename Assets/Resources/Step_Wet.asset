@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Step_Wet
   m_EditorClassIdentifier: 
   type: 7
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: a379dccd61e86ed46b579de9589ec1af, type: 3}
+  - {fileID: 8300000, guid: 463e7aba43febb74a9274682cc89be9f, type: 3}
+  - {fileID: 8300000, guid: ad6316a7e40f9b249b984f93683f3371, type: 3}
   outputMixerGroup: {fileID: 1997003956336563998, guid: ea25a6fb74033c640b2e4711beb21078, type: 2}
   basePitch: 1
   pitchModPercent: 0.1
