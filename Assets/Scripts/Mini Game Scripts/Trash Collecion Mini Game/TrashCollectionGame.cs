@@ -148,7 +148,8 @@ public class TrashCollectionGame : BaseMiniGameManager
     public void Home() 
     {
         endbtn.onClick.RemoveListener(Home);
-        SceneManager.LoadScene("Overworld");
+          Time.timeScale = 1f;
+          SceneManager.LoadScene("Overworld");
 
     }
     public void strikethrough()
