@@ -672,4 +672,15 @@ public class AnimalGameManager : BaseMiniGameManager
             DisableEventZones(); // Disable event zones
         }
     }
+
+     // For dev use. Skips game
+     public void DebugCompleteGame()
+     {
+          Debug.Log("All objectives are complete!"); // Debug.Log
+          endOfGamePanel.SetActive(true); // Show end of game panel
+          endOfGamePanelActive = true; // Set end of game panel active
+          DisableEventZones(); // Disable event zones
+          TriggerMiniGameCompleteEvent(0);
+          SceneManager.LoadScene("Overworld");
+     }
 }
