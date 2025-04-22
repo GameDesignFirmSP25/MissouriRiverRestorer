@@ -137,6 +137,7 @@ public class NPC : MonoBehaviour
         {
             DialogueManager.GetInstance().StartDialogue(AfterSecondWaterTest);
             Invoke("SecondTransition", 0.5f); // Call the SecondTestComplete method after 0.5 seconds
+            actionNames["FinalDialogue"]?.Invoke();
         }
 
     }

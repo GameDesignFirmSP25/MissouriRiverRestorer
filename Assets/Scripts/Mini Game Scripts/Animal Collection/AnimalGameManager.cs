@@ -679,6 +679,7 @@ public class AnimalGameManager : BaseMiniGameManager
           endOfGamePanelActive = true; // Set end of game panel active
           DisableEventZones(); // Disable event zones
           TriggerMiniGameCompleteEvent(0);
+          trappingCompleted = true; //set global variable to true
           SceneManager.LoadScene("Overworld");
      }
 }
