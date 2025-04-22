@@ -11,7 +11,7 @@ public class GuidebookUI : MonoBehaviour
      public GameObject GuidebookCanvas;
      public StarterAssetsInputs PlayerInput;
 
-     private bool isGuidebookOpen;
+     public bool isGuidebookOpen;
 
      private void Awake()
      {

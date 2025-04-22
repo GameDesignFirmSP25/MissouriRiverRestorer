@@ -54,9 +54,16 @@ public class DynamicGuidebook : MonoBehaviour
 
      private void Update()
      {
+          ModelUpdate();
+     }
+
+     private void ModelUpdate()
+     {
+          if (!GBUI.isGuidebookOpen) return;
+
           offset = objectManager.ObjectList[index].ModelOffset + baseOffet;
-          ModelParent.transform.position = Camera.main.transform.position + Camera.main.transform.forward * offset.z 
-                                                                           + Camera.main.transform.right * offset.x 
+          ModelParent.transform.position = Camera.main.transform.position + Camera.main.transform.forward * offset.z
+                                                                           + Camera.main.transform.right * offset.x
                                                                            + Camera.main.transform.up * offset.y;
           ModelParent.gameObject.transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed);
      }
