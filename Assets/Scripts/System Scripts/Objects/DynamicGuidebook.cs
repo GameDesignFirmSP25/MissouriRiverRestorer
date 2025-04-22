@@ -61,7 +61,15 @@ public class DynamicGuidebook : MonoBehaviour
      {
           if (!GBUI.isGuidebookOpen) return;
 
-          offset = objectManager.ObjectList[index].ModelOffset + baseOffet;
+          if(objectManager.ObjectList[index].isScanned)
+          {
+               offset = objectManager.ObjectList[index].ModelOffset + baseOffet;
+          }
+          else
+          {
+               offset = objectManager.BlankObject.ModelOffset + baseOffet;
+          }
+
           ModelParent.transform.position = Camera.main.transform.position + Camera.main.transform.forward * offset.z
                                                                            + Camera.main.transform.right * offset.x
                                                                            + Camera.main.transform.up * offset.y;
