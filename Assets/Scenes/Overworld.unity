@@ -1395,6 +1395,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 41899719484797434, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 87ab1f423b78d124188f487386b6eaaa, type: 2}
+    - target: {fileID: 2243602532471270336, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 87f10ca306b1b9a42b7507dd585448b5, type: 2}
     - target: {fileID: 2402935639416851301, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.663612
@@ -1443,6 +1451,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameProgressManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5093684213772203950, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 283d2885818268540a6f2616fcc891df, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
