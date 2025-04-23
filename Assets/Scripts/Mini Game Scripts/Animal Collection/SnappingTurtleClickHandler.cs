@@ -11,6 +11,7 @@ public class SnappingTurtleClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Snapping Turtle panel is clicked. Hiding panel...");
         isSnappingTurtlePanelClicked = true;
         AnimalGameManager.snappingTurtlePanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }
 

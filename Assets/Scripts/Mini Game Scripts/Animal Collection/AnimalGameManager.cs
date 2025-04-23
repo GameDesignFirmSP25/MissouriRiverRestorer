@@ -1,7 +1,10 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using System.Runtime.CompilerServices;
 
 public class AnimalGameManager : BaseMiniGameManager
 {
@@ -41,6 +44,8 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [SerializeField]
     TextMeshProUGUI eventZoneText;
+
+    private Slider slider;
 
     [Header("Game Objects")]
     [SerializeField]
@@ -89,7 +94,16 @@ public class AnimalGameManager : BaseMiniGameManager
     GameObject pauseButton;
 
     [SerializeField]
-    GameObject eventZones;
+    GameObject clickCounter;
+
+    [SerializeField]
+    GameObject deerEventZone;
+
+    [SerializeField]
+    GameObject birdEventZone;
+
+    [SerializeField]
+    GameObject fishEventZone;
 
     [Header("Arrays and Lists")]
     public GameObject[] dialoguePanels = new GameObject[12];
@@ -109,6 +123,10 @@ public class AnimalGameManager : BaseMiniGameManager
         "Painted Lady Butterfly"
     };
 
+    [Header("Float Variables")]
+    private float targetProgress = 1f;
+    private float progressIncrement = 0.2f;
+
     [Header("Booleans")]
     public static bool trappingCompleted = false; // Global variable to check if trapping is completed
     public static bool dialogueIsActive = false;
@@ -127,10 +145,17 @@ public class AnimalGameManager : BaseMiniGameManager
     public static bool endOfGamePanelActive = false;
     public static bool eventZonePanelActive = false;
     private bool hasResetDialogueState = false;
+    private bool hasResetEventPanelState = false;
     private bool objective1Active = false;
     private bool objective2Active = false;
     private bool objective3Active = false;
     public bool objectivesComplete = false;
+    public bool deerEventActive = false;
+    public bool birdEventActive = false;
+    public bool fishEventActive = false;
+    public bool deerEventObjectiveSet = false;
+    public bool birdEventObjectiveSet = false;
+    public bool fishEventObjectiveSet = false;
     public bool deerEventZoneComplete = false;
     public bool birdEventZoneComplete = false;
     public bool fishEventZoneComplete = false;
@@ -146,16 +171,18 @@ public class AnimalGameManager : BaseMiniGameManager
     public bool isRaccoonFound = false;
     public bool isSnappingTurtleFound = false;
     public bool isWhiteTailedDeerFound = false;
+    public bool isPressed = false;
 
     [Header("Raycast Variables")]
     private Ray ray;
     private RaycastHit hit;
 
     [Header("Script References")]
-    private RaycastScript raycastScript; // Reference to the RaycastScript
+    public ClickCounter clickCounterScript;
 
     void Start()
     {
+        GetClickCounter(); // Get click counter and slider component
         InitializeUI(); // Initialize UI elements
         GetPanels(); // Get dialogue panels
         DeactivateAllPanels(); // Deactivate all dialogue panels
@@ -184,9 +211,9 @@ public class AnimalGameManager : BaseMiniGameManager
 
         AnimalClicked();
 
-        PanelClicked(); // Check if any dialogue panel is clicked
+        DialoguePanelClicked(); // Check if any dialogue panel is clicked
 
-        if (animalNames.Count == 10)
+        if (animalNames.Count <= 10)
         {
             EnableEventZones();
         }
@@ -195,11 +222,73 @@ public class AnimalGameManager : BaseMiniGameManager
             return;
         }
 
-        DeerEventZoneEntered();
+        if (DeerEventZone.deerEventTriggered && !deerEventZoneComplete)
+        {
+            Debug.Log("Deer event zone condition met. Triggering DeerEventZone.");
+            DeerEventZoneEntered();
+        }
+        else
+        {
+            if (!DeerEventZone.deerEventTriggered)
+            {
+                Debug.Log("Deer Event not triggered yet.");
+            }
+            if (deerEventZoneComplete)
+            {
+                Debug.Log("Deer Event zone already completed.");
+            }
+        }
 
-        BirdEventZoneEntered();
+        if (BirdEventZone.birdEventTriggered && !birdEventZoneComplete)
+        {
+            Debug.Log("Bird event zone condition met. Triggering BirdEventZone.");
+            BirdEventZoneEntered();
+        }
+        else
+        {
+            if (!BirdEventZone.birdEventTriggered)
+            {
+                Debug.Log("Bird Event not triggered yet.");
+            }
+            if (birdEventZoneComplete)
+            {
+                Debug.Log("Bird Event zone already completed.");
+            }
+        }
 
-        FishEventZoneEntered();
+        if (FishEventZone.fishEventTriggered && !fishEventZoneComplete)
+        {
+            Debug.Log("Fish event zone condition met. Triggering FishEventZone.");
+            FishEventZoneEntered();
+        }
+        else
+        {
+            if (!FishEventZone.fishEventTriggered)
+            {
+                Debug.Log("Fish Event not triggered yet.");
+            }
+            if (fishEventZoneComplete)
+            {
+                Debug.Log("Fish Event zone already completed.");
+            }
+        }
+
+        EventPanelClicked();
+
+        if (deerEventActive && !eventZonePanelActive && deerEventObjectiveSet)
+        {
+            GetAnimalClicks();
+        }
+
+        if (birdEventActive && !eventZonePanelActive && birdEventObjectiveSet) 
+        {
+            GetAnimalClicks();
+        }
+
+        if (fishEventActive && !eventZonePanelActive && fishEventObjectiveSet)
+        {
+            GetAnimalClicks();
+        }
 
         ObjectivesComplete(); // Check if all objectives are complete
     }
@@ -222,6 +311,7 @@ public class AnimalGameManager : BaseMiniGameManager
         pauseButton.SetActive(false); //hide pause button
         endOfGamePanel.SetActive(false); //hide end of game panel
         eventZonePanel.SetActive(false); //hide event zones
+        clickCounter.SetActive(false);
     }
 
     private void GetPanels()
@@ -240,6 +330,78 @@ public class AnimalGameManager : BaseMiniGameManager
         GameObject panel12 = dialoguePanels[11]; // Get the Painted Lady Butterfly panel
     }
 
+    // Method to get click counter
+    private void GetClickCounter()
+    {
+        clickCounter = GameObject.FindGameObjectWithTag("Click Counter");
+        slider = clickCounter.GetComponent<Slider>();
+    }
+    
+    private void CheckForAnimalClicks()
+    {
+        // If left mouse button is down and isPressed is false...
+        if (Input.GetMouseButtonDown(0) && !isPressed)
+        {
+            isPressed = true; // Set bool isPressed to true
+            InvokeClickCounter(); // Call method InvokeProgressBar
+            Debug.Log("Animal clicked..."); // Debug.Log
+        }
+
+        // If left mouse button is down and isPressed is true...
+        if (Input.GetMouseButtonUp(0) && isPressed)
+        {
+            isPressed = false; // Set bool isPressed to false
+            RaycastScript.eventAnimalClicked = false; // Set bool testTubeClicked to false
+        }
+    }
+
+    private void InvokeClickCounter()
+    {
+        Debug.Log("Click counted.");
+        clickCounterScript.IncrementProgress(progressIncrement);
+    }
+
+    private void GetAnimalClicks()
+    {
+        clickCounter.SetActive(true);
+
+        if (RaycastScript.eventAnimalClicked)
+        {
+            if (slider.value < targetProgress)
+            {
+                Debug.Log("Checking for animal clicks.");
+                CheckForAnimalClicks();
+            }
+        }
+
+        if (slider.value == targetProgress)
+        {
+            if (!deerEventZoneComplete && deerEventActive && !birdEventActive && !fishEventActive)
+            {
+                deerEventZoneComplete = true;
+                clickCounter.SetActive(false);
+                deerEventActive = false;
+                deerEventZone.gameObject.SetActive(false);
+            }
+
+            if (!birdEventZoneComplete && birdEventActive && !deerEventActive && !fishEventActive)
+            {
+                birdEventZoneComplete = true;
+                clickCounter.SetActive(false);
+                birdEventActive = false;
+                birdEventZone.gameObject.SetActive(false);
+            }
+
+            if (!fishEventZoneComplete && fishEventActive && !deerEventActive && !birdEventActive)
+            {
+                fishEventZoneComplete = true;
+                clickCounter.SetActive(false);
+                fishEventActive = false;
+                fishEventZone.gameObject.SetActive(false);
+            }
+        }
+    }
+
     // Method to disable all text objects
     public void DisableObjectives()
     {
@@ -252,10 +414,20 @@ public class AnimalGameManager : BaseMiniGameManager
         objectiveSubtext7.gameObject.SetActive(false); //hide objective subtext 7
     }
 
+    // Method to enable event zones
+    public void EnableEventZones()
+    {
+        deerEventZone.gameObject.SetActive(true); // Enable deer event zone
+        birdEventZone.gameObject.SetActive(true);
+        fishEventZone.gameObject.SetActive(true);
+    }
+
     // Method to disable event zones
     public void DisableEventZones()
     {
-        eventZones.gameObject.SetActive(false); // Disable event zones
+        deerEventZone.gameObject.SetActive(false); // Disable deer event zone
+        birdEventZone.gameObject.SetActive(false);
+        fishEventZone.gameObject.SetActive(false);
     }
 
     // Method to activate specific panel in index
@@ -389,7 +561,7 @@ public class AnimalGameManager : BaseMiniGameManager
     }
 
     // Method to check if any dialogue panel is clicked
-    private void PanelClicked()
+    private void DialoguePanelClicked()
     {
         // If dialogue is active and the dialogue panel is open...
         if (GarterSnakeClickHandler.isGarterSnakePanelClicked && !hasResetDialogueState)
@@ -451,6 +623,16 @@ public class AnimalGameManager : BaseMiniGameManager
         {
             ResetDialogueState();
             hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
+        }
+    }
+
+    // Method to check if event panell is clicked
+    private void EventPanelClicked()
+    {
+        if (EventZonePanelClickHandler.isEventZonePanelClicked && !hasResetEventPanelState)
+        {
+            ResetEventPanelState();
+            hasResetEventPanelState = true;
         }
     }
 
@@ -583,6 +765,18 @@ public class AnimalGameManager : BaseMiniGameManager
         hasResetDialogueState = false; // Reset the flag to allow future dialogue interactions
     }
 
+    // Method to reset event zone panel state
+    public void ResetEventPanelState()
+    {
+        Debug.Log("Resetting event panel state...");
+        eventZonePanel.SetActive(false);
+        eventZonePanelActive = false;
+        hasResetEventPanelState = false;
+        EventZonePanelClickHandler.isEventZonePanelClicked = false;
+        Time.timeScale = 1;
+        Debug.Log($"eventZonePanelActive: {eventZonePanelActive}, hasResetEventPanelState: {hasResetEventPanelState}, isEventZonePanelClicked: {EventZonePanelClickHandler.isEventZonePanelClicked}");
+    }
+
     // Set subtext for objective 1
     private void LowerBankEntered()
     {
@@ -618,56 +812,73 @@ public class AnimalGameManager : BaseMiniGameManager
         objectiveSubtext7.text = "*Find and interact with European Starling."; //set objective subtext 7 text
     }
 
-    // Method to enable event zones
-    public void EnableEventZones()
-    {
-        eventZones.gameObject.SetActive(true); // Enable event zones
-    }
-
     //  Method to called when deer event zone is entered
     public void DeerEventZoneEntered()
     {
-        Debug.Log("Start deer event."); // Debug.Log
-        eventZonePanel.SetActive(true); // Show event zone panel
-        eventZonePanelActive = true; // Set event zone panel active
-        eventZoneText.text = "Oh no! There are too many White-Tailed deer here. Look at how they have destroyed the plants. We must drive them off."; // Set event zone text
+        Debug.Log($"dialogueIsactive: {dialogueIsActive}"); // Debug.Log to check if dialogue is active
+        if (!dialogueIsActive && !eventZonePanelActive && !deerEventObjectiveSet)
+        {
+            Debug.Log("Start deer event."); // Debug.Log
+            eventZonePanel.SetActive(true); // Show event zone panel
+            eventZonePanelActive = true; // Set event zone panel active
+            eventZoneText.text = "Oh no! There are too many White-Tailed deer here. Look at how they have destroyed the plants. We must drive them off."; // Set event zone text
+            objectivesPanel.SetActive(false); // Hide objectives panel
+            deerEventActive = true; // Set deer event active
+            deerEventObjectiveSet = true;
+            Time.timeScale = 0f;
+        }  
     }
 
     // Method to called when bird event zone is entered
     public void BirdEventZoneEntered()
     {
-        Debug.Log("Start bird event."); // Debug.Log
-        eventZonePanel.SetActive(true); // Show event zone panel
-        eventZonePanelActive = true; // Set event zone panel active
-        eventZoneText.text = "Check out those European Starling. They seem to have taken over those trees driving away native birds. Hurry and shoo them away."; // Set event zone text
+        Debug.Log($"dialogueIsactive: {dialogueIsActive}"); // Debug.Log to check if dialogue is active
+        if (!dialogueIsActive && !eventZonePanelActive && !birdEventObjectiveSet)
+        {
+            Debug.Log("Start bird event."); // Debug.Log
+            eventZonePanel.SetActive(true); // Show event zone panel
+            eventZonePanelActive = true; // Set event zone panel active
+            eventZoneText.text = "Check out those European Starling. They seem to have taken over those trees driving away native birds. Hurry and shoo them away."; // Set event zone text
+            objectivesPanel.SetActive(false); // Hide objectives panel
+            birdEventActive = true; // Set bird event active
+            birdEventObjectiveSet = true;
+            Time.timeScale = 0f;
+        } 
     }
 
     // Method to called when fish event zone is entered
     public void FishEventZoneEntered()
     {
-        Debug.Log("Start fish event."); // Debug.Log
-        eventZonePanel.SetActive(true); // Show event zone panel
-        eventZonePanelActive = true; // Set event zone panel active
-        eventZoneText.text = "Look at the river. There seems to be a disturbance. Large Asian Carp are attacking the native fish. Quickly catch them so we can relocate them."; // Set event zone text
+        Debug.Log($"dialogueIsactive: {dialogueIsActive}"); // Debug.Log to check if dialogue is active
+        if (!dialogueIsActive && !eventZonePanelActive && !fishEventObjectiveSet)
+        {
+            Debug.Log("Start fish event."); // Debug.Log
+            eventZonePanel.SetActive(true); // Show event zone panel
+            eventZonePanelActive = true; // Set event zone panel active
+            eventZoneText.text = "Look at the river. There seems to be a disturbance. Large Asian Carp are attacking the native fish. Quickly catch them so we can relocate them."; // Set event zone text
+            objectivesPanel.SetActive(false); // Hide objectives panel
+            fishEventActive = true; // Set fish event active
+            fishEventObjectiveSet = true;
+            Time.timeScale = 0f;
+        }
     }
 
     // Method to check if all objectives are complete
     private void ObjectivesComplete()
     {
-        if (raycastScript.wasEasternStarlingPreviouslyClicked && raycastScript.wasWhiteTailedDeerPreviouslyClicked && raycastScript.wasBandedPennantDragonflyPreviouslyClicked &&
-            raycastScript.wasGarterSnakePreviouslyClicked && raycastScript.wasBaldEaglePreviouslyClicked && raycastScript.wasPaintedLadyButterflyPreviouslyClicked && 
-            raycastScript.wasMuskratPreviouslyClicked && raycastScript.wasSnappingTurtlePreviouslyClicked && raycastScript.wasBeaverPreviouslyClicked && raycastScript.wasRaccoonPreviouslyClicked && 
-            raycastScript.wasNorthernMapTurtlePreviouslyClicked && raycastScript.wasAsianCarpPreviouslyClicked && deerEventZoneComplete && fishEventZoneComplete && birdEventZoneComplete)
-        {
-            objectivesComplete = true; // Set objectivesComplete to true if all objectives are met
-        }
+        if (isAsianCarpFound && isBaldEagleFound && isBandedPennantDragonflyFound && isBeaverFound && isCommonGarterSnakeFound
+            && isEasternStarlingFound && isBeaverFound && isMuskratFound && isNorthernMapTurtleFound && isPaintedLadyButterflyFound
+            && isRaccoonFound && isSnappingTurtleFound && isWhiteTailedDeerFound && deerEventZoneComplete && fishEventZoneComplete && birdEventZoneComplete)
+            { 
+                objectivesComplete = true; // Set objectivesComplete to true if all objectives are met
+            }
         // If all objectives are active and trapping is not completed...
         if (objectivesComplete && !trappingCompleted)
         {
             Debug.Log("All objectives are complete!"); // Debug.Log
             endOfGamePanel.SetActive(true); // Show end of game panel
             endOfGamePanelActive = true; // Set end of game panel active
-            DisableEventZones(); // Disable event zones
+            //DisableEventZones(); // Disable event zones
         }
     }
 
@@ -677,7 +888,7 @@ public class AnimalGameManager : BaseMiniGameManager
           Debug.Log("All objectives are complete!"); // Debug.Log
           endOfGamePanel.SetActive(true); // Show end of game panel
           endOfGamePanelActive = true; // Set end of game panel active
-          DisableEventZones(); // Disable event zones
+          //DisableEventZones(); // Disable event zones
           TriggerMiniGameCompleteEvent(0);
           trappingCompleted = true; //set global variable to true
           SceneManager.LoadScene("Overworld");

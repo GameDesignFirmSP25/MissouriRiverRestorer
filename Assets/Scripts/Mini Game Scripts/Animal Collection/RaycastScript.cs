@@ -65,21 +65,23 @@ public class RaycastScript : MonoBehaviour
     public static bool muskratClicked = false;
     public static bool snappingTurtleClicked = false;
     public static bool northernMapTurtleClicked = false;
-    public bool wasEasternStarlingPreviouslyClicked = false;
-    public bool wasWhiteTailedDeerPreviouslyClicked = false;
-    public bool wasBandedPennantDragonflyPreviouslyClicked = false;
-    public bool wasGarterSnakePreviouslyClicked = false;
-    public bool wasBaldEaglePreviouslyClicked = false;
-    public bool wasPaintedLadyButterflyPreviouslyClicked = false;
-    public bool wasAsianCarpPreviouslyClicked = false;
-    public bool wasBeaverPreviouslyClicked = false;
-    public bool wasRaccoonPreviouslyClicked = false;
-    public bool wasMuskratPreviouslyClicked = false;
-    public bool wasSnappingTurtlePreviouslyClicked = false;
-    public bool wasNorthernMapTurtlePreviouslyClicked = false;
+    public static bool wasEasternStarlingPreviouslyClicked = false;
+    public static bool wasWhiteTailedDeerPreviouslyClicked = false;
+    public static bool wasBandedPennantDragonflyPreviouslyClicked = false;
+    public static bool wasGarterSnakePreviouslyClicked = false;
+    public static bool wasBaldEaglePreviouslyClicked = false;
+    public static bool wasPaintedLadyButterflyPreviouslyClicked = false;
+    public static bool wasAsianCarpPreviouslyClicked = false;
+    public static bool wasBeaverPreviouslyClicked = false;
+    public static bool wasRaccoonPreviouslyClicked = false;
+    public static bool wasMuskratPreviouslyClicked = false;
+    public static bool wasSnappingTurtlePreviouslyClicked = false;
+    public static bool wasNorthernMapTurtlePreviouslyClicked = false;
+    public static bool eventAnimalClicked = false;
 
     [Header("Layers to Hit")]
-    public LayerMask layersToHit;
+    public LayerMask clickable;
+    public LayerMask animalEventClicks;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -172,7 +174,7 @@ public class RaycastScript : MonoBehaviour
         northernMapTurtleNames = new string[]
         {
             "Northern Map Turtle", "Northern Map Turtle (1)", "Northern Map Turtle (2)",
-            "Northern Map Turtle (3)"
+            "Northern Map Turtle (3)", "Northern Map Turtle (4)"
         };
     }
 
@@ -190,7 +192,7 @@ public class RaycastScript : MonoBehaviour
     void CastRay()
     {
         ray = _mainCamera.ScreenPointToRay(Input.mousePosition); // Create a ray from the camera to the mouse position
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layersToHit)) // Perform the raycast
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickable)) // Perform the raycast
         {
             //            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red); // Draw the ray for debugging purposes
 
@@ -246,6 +248,11 @@ public class RaycastScript : MonoBehaviour
                 HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
             }
         }
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, animalEventClicks)) 
+        {
+            EventAnimalClicked();
+        } 
     }
 
     // Handle clicks on eastern starling
@@ -439,5 +446,12 @@ public class RaycastScript : MonoBehaviour
         {
             Debug.Log("Northern Map Turtle has already been clicked."); // Debug.Log
         }
+    }
+
+    // Handles clicks on event animals
+    private void EventAnimalClicked()
+    {
+        Debug.Log("Event animal clicked.");
+        eventAnimalClicked = true;
     }
 }

@@ -9,5 +9,6 @@ public class AsianCarpClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Asian Carp panel clicked. Hiding panel...");
         isAsianCarpPanelClicked = true;
         AnimalGameManager.asianCarpPanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }

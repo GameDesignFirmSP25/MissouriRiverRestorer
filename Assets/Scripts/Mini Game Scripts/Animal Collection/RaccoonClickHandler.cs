@@ -10,5 +10,6 @@ public class RaccoonClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Raccoon panel clicked. Hiding panel...");
         isRaccoonPanelClicked = true;
         AnimalGameManager.raccoonPanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }

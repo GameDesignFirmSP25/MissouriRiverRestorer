@@ -10,5 +10,6 @@ public class PaintedLadyButterflyClickHandler : MonoBehaviour, IPointerClickHand
         Debug.Log("Painted Lady Butterfly panel clicked. Hiding panel...");
         isPaintedLadyButterflyPanelClicked = true;
         AnimalGameManager.paintedLadyButterflyPanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }

@@ -12,6 +12,7 @@ public class GarterSnakeClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Garter Snake panel clicked. Hiding panel...");
         isGarterSnakePanelClicked = true;
         AnimalGameManager.garterSnakePanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }
 

@@ -10,5 +10,6 @@ public class WhiteTailedDeerClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("White Tailed Deer panel clicked. Hiding panel...");
         isWhiteTailedDeerPanelClicked = true;
         AnimalGameManager.whiteTailedDeerPanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }

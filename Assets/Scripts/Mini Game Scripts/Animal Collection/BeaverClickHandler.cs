@@ -10,5 +10,6 @@ public class BeaverClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Beaver panel clicked. Hiding panel...");
         isBeaverPanelClicked = true;
         AnimalGameManager.beaverPanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }

@@ -11,6 +11,7 @@ public class NorthernMapTurtleClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Northern Map Turtle panel clicked. Hiding panel...");
         isNorthernMapTurtlePanelClicked = true;
         AnimalGameManager.northernMapTurtlePanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
     
 }

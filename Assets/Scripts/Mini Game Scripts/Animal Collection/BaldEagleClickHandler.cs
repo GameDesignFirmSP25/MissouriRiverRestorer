@@ -10,5 +10,6 @@ public class BaldEagleClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Bald Eagle panel clicked. Hiding panel...");
         isBaldEaglePanelClicked = true;
         AnimalGameManager.baldEaglePanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }

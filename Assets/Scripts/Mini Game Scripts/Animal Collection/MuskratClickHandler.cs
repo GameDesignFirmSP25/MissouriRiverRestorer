@@ -10,6 +10,7 @@ public class MuskratClickHandler : MonoBehaviour, IPointerClickHandler
         Debug.Log("Muskrat panel clicked. Hiding panel...");
         isMuskratPanelClicked = true;
         AnimalGameManager.muskratPanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }
 

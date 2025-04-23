@@ -9,5 +9,6 @@ public class BandedPennantDragonflyClickHandler : MonoBehaviour, IPointerClickHa
         Debug.Log("Banded Pennant Dragonfly panel clicked. Hiding panel...");
         isBandedPennantDragonflyPanelClicked = true;
         AnimalGameManager.bandedPennantDragonflyPanelActive = false;
+        AnimalGameManager.dialogueIsActive = false;
     }
 }
