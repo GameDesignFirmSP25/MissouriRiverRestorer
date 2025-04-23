@@ -108,11 +108,12 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GradientLerp: 1
+    - _HueShiftAmount: 0
     - _Metallic: 0
     - _NormalSize: -3.48
-    - _NormalStrength: 3.6
+    - _NormalStrength: 4.71
     - _OcclusionStrength: 1
-    - _OneColorOutline: 1
+    - _OneColorOutline: 0
     - _Outline: 5.75
     - _OutlineRecession: 6.89
     - _OutlineSize: 0
@@ -120,6 +121,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Saturation: 1.1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -130,13 +132,15 @@ Material:
     - _TextureNormal: 0
     - _ToonRampContrast: 0.32
     - _UseNormal: 0
-    - _VoronoiAngle: 0
+    - _VoronoiAngle: -0.12
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MultiplyColor: {r: 1, g: 1, b: 1, a: 1}
+    - _NormalTiling: {r: 1, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}

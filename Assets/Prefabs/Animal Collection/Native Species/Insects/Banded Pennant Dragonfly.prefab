@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Banded Pennant Dragonfly
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
+      propertyPath: m_TagString
+      value: Native
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77,6 +85,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4805247197649014841}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1121128553726344230}
   m_SourcePrefab: {fileID: 100100000, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
 --- !u!1 &521402880604807212 stripped
 GameObject:
@@ -114,7 +125,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 521402880604807212}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1.5
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -124,7 +135,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 48
+  m_BaseOffset: 13
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &4805247197649014841
@@ -142,3 +153,24 @@ MonoBehaviour:
   radius: 0
   isWaiting: 1
   isWalking: 0
+--- !u!65 &1121128553726344230
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521402880604807212}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 2, z: 5}
+  m_Center: {x: 0, y: 1, z: -0.5}

@@ -78,7 +78,7 @@ public class TrashCollectionGame : BaseMiniGameManager
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
-       
+        GameScore = 8;
         Time.timeScale = 0f;
         Finishpanel1.SetActive(false);
 
@@ -105,7 +105,7 @@ public class TrashCollectionGame : BaseMiniGameManager
         {
             return; // Do not execute the rest of the Update method if any objective panel is open
         }
-        if (trashcast.playerScore >= GameScore && !isgameComplete )
+        if (trashcast.CollectedTrash >= GameScore && !isgameComplete )
         {
             gameCompleteScore();
         }
@@ -148,7 +148,8 @@ public class TrashCollectionGame : BaseMiniGameManager
     public void Home() 
     {
         endbtn.onClick.RemoveListener(Home);
-        SceneManager.LoadScene("Overworld");
+          Time.timeScale = 1f;
+          SceneManager.LoadScene("Overworld");
 
     }
     public void strikethrough()

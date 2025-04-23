@@ -54,8 +54,8 @@ public class Trashcast : MonoBehaviour
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Stryofoam cup clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
-                    playerScore++; // adds score for styrofoam cup
-                    Debug.Log("playerScore: " + playerScore);
+                    CollectedTrash++; // adds score for styrofoam cup
+                    Debug.Log("playerScore: " + CollectedTrash);
                     TrashCollectionGame.ObjectveScup = true; // set the bool to true
                     ObjectiveScupPanel.SetActive(true); // set the panel to active
                     ObjectiveScupPanelText.SetActive(true); // set the panel text to active
@@ -68,15 +68,15 @@ public class Trashcast : MonoBehaviour
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Bottle clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
-                    playerScore++; // adds score for bottle 
-                    Debug.Log("playerScore: " + playerScore);
+                    CollectedTrash++; // adds score for bottle 
+                    Debug.Log("playerScore: " + CollectedTrash);
                     TrashCollectionGame.ObjectvBottle = true; // set the bool to true
                     ObjectiveBottlePanel.SetActive(true); // set the panel to active
                     ObjectiveBottlePanelText.SetActive(true); // set the panel text to active
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
 
-                    Debug.Log("playerScore: " + playerScore);
+                    Debug.Log("playerScore: " + CollectedTrash);
                     trashCollectionGame.strikethrough(); // call the strikethrough function
                 }
                 if (hit.collider.CompareTag("Trash: trash bag")&& !TrashCollectionGame.ObjectvTrashBag)
@@ -84,8 +84,8 @@ public class Trashcast : MonoBehaviour
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Trash bag clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
-                    playerScore++; // adds score for trash bag
-                    Debug.Log("playerScore: " + playerScore);
+                    CollectedTrash++; // adds score for trash bag
+                    Debug.Log("playerScore: " + CollectedTrash);
                     TrashCollectionGame.ObjectvTrashBag = true; // set the bool to true
                     ObjectiveTrashBagPanel.SetActive(true); // set the panel to active
                     ObjectiveTrashBagPanelText.SetActive(true); // set the panel text to active
@@ -98,8 +98,8 @@ public class Trashcast : MonoBehaviour
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Pizza slice clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
-                    playerScore++; // adds score for pizza slice
-                    Debug.Log("playerScore: " + playerScore);
+                    CollectedTrash++; // adds score for pizza slice
+                    Debug.Log("playerScore: " + CollectedTrash);
                     TrashCollectionGame.ObjectvPizzaSlice = true; // set the bool to true
                     ObjectivePizzaSlicePanel.SetActive(true); // set the panel to active
                     ObjectivePizzaSlicePanelText.SetActive(true); // set the panel text to active
@@ -112,8 +112,8 @@ public class Trashcast : MonoBehaviour
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Gas can clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
-                    playerScore++; // adds score for gas can
-                    Debug.Log("playerScore: " + playerScore);
+                    CollectedTrash++; // adds score for gas can
+                    Debug.Log("playerScore: " + CollectedTrash);
                     TrashCollectionGame.ObjectvGasCan = true; // set the bool to true
                     ObjectiveGasCanPanel.SetActive(true); // set the panel to active
                     ObjectiveGasCanPanelText.SetActive(true); // set the panel text to active
@@ -126,8 +126,8 @@ public class Trashcast : MonoBehaviour
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Save bird clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
-                    playerScore++; // adds score for save bird
-                    Debug.Log("playerScore: " + playerScore);
+                    CollectedTrash++; // adds score for save bird
+                    Debug.Log("playerScore: " + CollectedTrash);
                     TrashCollectionGame.ObjectvSaveBird = true; // set the bool to true
                     ObjectiveSaveBirdPanel.SetActive(true); // set the panel to active
                     ObjectiveSaveBirdPanelText.SetActive(true); // set the panel text to active
@@ -140,8 +140,8 @@ public class Trashcast : MonoBehaviour
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Save fish clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
-                    playerScore++; // adds score for save fish
-                    Debug.Log("playerScore: " + playerScore);
+                    CollectedTrash++; // adds score for save fish
+                    Debug.Log("playerScore: " + CollectedTrash);
                     TrashCollectionGame.ObjectvSaveFish = true; // set the bool to true
                     ObjectiveSaveFishPanel.SetActive(true); // set the panel to active
                     ObjectiveSaveFishPanelText.SetActive(true); // set the panel text to active
@@ -154,7 +154,7 @@ public class Trashcast : MonoBehaviour
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Save deer clicked");
                     Destroy(hit.collider.gameObject);// takes trash object off of the screen
-                    playerScore++; // adds score for save deer
+                    CollectedTrash++; // adds score for save deer
                     Debug.Log("playerScore: " + playerScore);
                     TrashCollectionGame.ObjectvSaveDeer = true; // set the bool to true
                     ObjectiveSaveDeerPanel.SetActive(true); // set the panel to active

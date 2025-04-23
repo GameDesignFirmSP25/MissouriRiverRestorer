@@ -1,0 +1,457 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using System.Collections;
+using System.Collections.Generic;
+
+public class RaycastScript : MonoBehaviour
+{
+    [Header("Target Objects")]
+    [SerializeField]
+    private string[] easternStarlingNames;
+
+    [SerializeField]
+    private string[] whiteTailedDeerNames;
+
+    [SerializeField]
+    private string[] bandedPennantDragonflyNames;
+
+    [SerializeField]
+    private string[] garterSnakeNames;
+
+    [SerializeField]
+    private string[] baldEagleNames;
+
+    [SerializeField]
+    private string[] paintedLadyButterflyNames;
+
+    [SerializeField]
+    private string[] asianCarpNames;
+
+    [SerializeField]
+    private string[] beaverNames;
+
+    [SerializeField]
+    private string[] raccoonNames;
+
+    [SerializeField]
+    private string[] muskratNames;
+
+    [SerializeField]
+    private string[] snappingTurtleNames;
+
+    [SerializeField]
+    private string[] northernMapTurtleNames;
+
+    [Header("Camera")]
+    public Camera _mainCamera;
+
+    [Header("Raycast Variables")]
+    private Ray ray;
+    private RaycastHit hit;
+
+    [Header("Script References")]
+    public AnimalGameManager animalGameManagerScript;
+
+    [Header("Booleans")]
+    public static bool easternStarlingClicked = false;
+    public static bool whiteTailedDeerClicked = false;
+    public static bool bandedPennantDragonflyClicked = false;
+    public static bool garterSnakeClicked = false;
+    public static bool baldEagleClicked = false;
+    public static bool paintedLadyButterflyClicked = false;
+    public static bool asianCarpClicked = false;
+    public static bool beaverClicked = false;
+    public static bool raccoonClicked = false;
+    public static bool muskratClicked = false;
+    public static bool snappingTurtleClicked = false;
+    public static bool northernMapTurtleClicked = false;
+    public static bool wasEasternStarlingPreviouslyClicked = false;
+    public static bool wasWhiteTailedDeerPreviouslyClicked = false;
+    public static bool wasBandedPennantDragonflyPreviouslyClicked = false;
+    public static bool wasGarterSnakePreviouslyClicked = false;
+    public static bool wasBaldEaglePreviouslyClicked = false;
+    public static bool wasPaintedLadyButterflyPreviouslyClicked = false;
+    public static bool wasAsianCarpPreviouslyClicked = false;
+    public static bool wasBeaverPreviouslyClicked = false;
+    public static bool wasRaccoonPreviouslyClicked = false;
+    public static bool wasMuskratPreviouslyClicked = false;
+    public static bool wasSnappingTurtlePreviouslyClicked = false;
+    public static bool wasNorthernMapTurtlePreviouslyClicked = false;
+    public static bool eventAnimalClicked = false;
+
+    [Header("Layers to Hit")]
+    public LayerMask clickable;
+    public LayerMask animalEventClicks;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        // Set list of eastern starling names
+        easternStarlingNames = new string[]
+        {
+            "Eastern Starling", "Eastern Starling (1)", "Eastern Starling (2)",
+            "Eastern Starling (3)", "Eastern Starling (4)", "Eastern Starling (5)",
+            "Eastern Starling (6)", "Eastern Starling (7)", "Eastern Starling (8)",
+            "Eastern Starling (9)", "Eastern Starling (10)"
+        };
+
+        // Set list of white-tailed deer names
+        whiteTailedDeerNames = new string[]
+        {
+            "White-Tailed Deer", "White-Tailed Deer (1)", "White-Tailed Deer (2)",
+            "White-Tailed Deer (3)", "White-Tailed Deer (4)", "White-Tailed Deer (Buck)",
+            "White-Tailed Deer (Buck) (1)", "White-Tailed Deer (Buck) (2)", "White-Tailed Deer (Buck) (3)",
+            "White-Tailed Deer (Buck) (4)"
+        };
+
+        // Set list of banded pennant dragonfly names
+        bandedPennantDragonflyNames = new string[]
+        {
+            "Banded Pennant Dragonfly", "Banded Pennant Dragonfly (1)", "Banded Pennant Dragonfly (2)",
+            "Banded Pennant Dragonfly (3)", "Banded Pennant Dragonfly (4)", "Banded Pennant Dragonfly (5)",
+            "Banded Pennant Dragonfly (6)"
+        };
+
+        // Set list of garter snake names
+        garterSnakeNames = new string[]
+        {
+            "Garter Snake", "Garter Snake (1)", "Garter Snake (2)",
+            "Garter Snake (3)", "Garter Snake (4)", "Garter Snake (5)"
+        };
+
+        // Set list of bald eagle names
+        baldEagleNames = new string[]
+        {
+            "Bald Eagle", "Bald Eagle (1)", "Bald Eagle (2)",
+            "Bald Eagle (3)"
+        };
+
+        // Set list of painted lady butterfly names
+        paintedLadyButterflyNames = new string[]
+        {
+            "Painted Lady Butterfly", "Painted Lady Butterfly (1)", "Painted Lady Butterfly (2)",
+            "Painted Lady Butterfly (3)", "Painted Lady Butterfly (4)", "Painted Lady Butterfly (5)",
+            "Painted Lady Butterfly (6)"
+        };
+
+        // Set list of asian carp names
+        asianCarpNames = new string[]
+        {
+            "Asian Carp", "Asian Carp (1)", "Asian Carp (2)",
+            "Asian Carp (3)", "Asian Carp (4)", "Asian Carp (5)",
+            "Asian Carp (6)", "Asian Carp (7)", "Asian Carp (8)"
+        };
+
+        // Set list of beaver names
+        beaverNames = new string[]
+        {
+            "Beaver", "Beaver (1)", "Beaver (2)",
+            "Beaver (3)"
+        };
+
+        // Set list of raccoon names
+        raccoonNames = new string[]
+        {
+            "Raccoon", "Raccoon (1)", "Raccoon (2)",
+            "Raccoon (3)"
+        };
+
+        // Set list of muskrat names
+        muskratNames = new string[]
+        {
+            "Muskrat", "Muskrat (1)", "Muskrat (2)",
+            "Muskrat (3)"
+        };
+
+        // Set list of snapping turtle names
+        snappingTurtleNames = new string[]
+        {
+            "Snapping Turtle", "Snapping Turtle (1)", "Snapping Turtle (2)",
+            "Snapping Turtle (3)"
+        };
+
+        // Set list of northern map turtle names
+        northernMapTurtleNames = new string[]
+        {
+            "Northern Map Turtle", "Northern Map Turtle (1)", "Northern Map Turtle (2)",
+            "Northern Map Turtle (3)", "Northern Map Turtle (4)"
+        };
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Detect left mouse click.
+        if (Input.GetMouseButtonDown(0))
+        {
+            CastRay(); // Call the CastRay function
+        }
+    }
+
+    // Method to cast a ray from the camera to the mouse position
+    void CastRay()
+    {
+        ray = _mainCamera.ScreenPointToRay(Input.mousePosition); // Create a ray from the camera to the mouse position
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickable)) // Perform the raycast
+        {
+            //            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red); // Draw the ray for debugging purposes
+
+            // If the clicked GameObject's name matches the target name for eastern starling...
+            if (System.Array.Exists(easternStarlingNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleEasternStarlingClick(hit.collider.gameObject); // Handle the click on the eastern starling GameObject
+            }
+            // Check if the clicked GameObject's name matches any white-tailed deer name
+            else if (System.Array.Exists(whiteTailedDeerNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleWhiteTailedDeerClick(hit.collider.gameObject); // Handle the click on the white-tailed deer GameObject
+            }
+            // Check if the clicked GameObject's name matches any banded pennant dragonfly name
+            else if (System.Array.Exists(bandedPennantDragonflyNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleBandedPennantDragonflyClick(hit.collider.gameObject); // Handle the click on the banded pennant dragonfly GameObject
+            }
+            else if (System.Array.Exists(garterSnakeNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleGarterSnakeClick(hit.collider.gameObject); // Handle the click on the garter snake GameObject
+            } 
+            else if (System.Array.Exists(baldEagleNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleBaldEagleClick(hit.collider.gameObject); // Handle the click on the bald eagle GameObject 
+            }
+            else if (System.Array.Exists(paintedLadyButterflyNames, name => name == hit.collider.gameObject.name))
+            {
+                HandlePaintedLadyButterflyClick(hit.collider.gameObject); // Handle the click on the painted lady butterfly GameObject 
+            }
+            else if (System.Array.Exists(asianCarpNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleAsianCarpClick(hit.collider.gameObject); // Handle the click on the asian carp GameObject 
+            }
+            else if (System.Array.Exists(beaverNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleBeaverClick(hit.collider.gameObject); // Handle the click on the beaver GameObject 
+            }
+            else if (System.Array.Exists(raccoonNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleRaccoonClick(hit.collider.gameObject); // Handle the click on the raccoon GameObject 
+            }
+            else if (System.Array.Exists(muskratNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleMuskratClick(hit.collider.gameObject); // Handle the click on the muskrat GameObject 
+            }
+            else if (System.Array.Exists(snappingTurtleNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleSnappingTurtleClick(hit.collider.gameObject); // Handle the click on the snapping turtle GameObject 
+            }
+            else if (System.Array.Exists(northernMapTurtleNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
+            }
+        }
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, animalEventClicks)) 
+        {
+            EventAnimalClicked();
+        } 
+    }
+
+    // Handle clicks on eastern starling
+    private void HandleEasternStarlingClick(GameObject clickedObject)
+    {
+        // If bool easternStarlingClicked is false...
+        if (!easternStarlingClicked && !wasEasternStarlingPreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            easternStarlingClicked = true; // Set bool easternStarlingClicked to true
+            wasEasternStarlingPreviouslyClicked = true; // Set bool wasEasternStarlingPreviouslyClicked to true
+
+        }
+        else
+        {
+            Debug.Log("Eastern Starling has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handle clicks on white-tailed deer
+    private void HandleWhiteTailedDeerClick(GameObject clickedObject)
+    {
+        // If bool whiteTailedDeerClicked is false...
+        if (!whiteTailedDeerClicked && !wasWhiteTailedDeerPreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            whiteTailedDeerClicked = true; // Set bool whiteTailedDeerClicked to true
+            wasWhiteTailedDeerPreviouslyClicked = true; // Set bool wasWhiteTailedDeerPreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("White-tailed Deer has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on banded pennant dragonfly
+    private void HandleBandedPennantDragonflyClick(GameObject clickedObject)
+    {
+        // If bool bandedPennantDragonflyClicked is false...
+        if (!bandedPennantDragonflyClicked && !wasBandedPennantDragonflyPreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            bandedPennantDragonflyClicked = true; // Set bool bandedPennantDragonflyClicked to true
+            wasBandedPennantDragonflyPreviouslyClicked = true; // Set bool wasBandedPennantDragonflyPreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Banded Pennant Dragonfly has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on garter snake
+    private void HandleGarterSnakeClick(GameObject clickedObject)
+    {
+        // If bool garterSnakeClicked is false...
+        if (!garterSnakeClicked && !wasGarterSnakePreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            garterSnakeClicked = true; // Set bool garterSnakeClicked to true
+            wasGarterSnakePreviouslyClicked = true; // Set bool wasGarterSnakePreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Garter Snake has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on bald eagle
+    private void HandleBaldEagleClick(GameObject clickedObject)
+    {
+        // If bool baldEagleClicked is false...
+        if (!baldEagleClicked && !wasBaldEaglePreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            baldEagleClicked = true; // Set bool baldEagleClicked to true
+            wasBaldEaglePreviouslyClicked = true; // Set bool wasBaldEaglePreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Bald Eagle has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on bald eagle
+    private void HandlePaintedLadyButterflyClick(GameObject clickedObject)
+    {
+        // If bool baldEagleClicked is false...
+        if (!paintedLadyButterflyClicked && !wasPaintedLadyButterflyPreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            paintedLadyButterflyClicked = true; // Set bool baldEagleClicked to true
+            wasPaintedLadyButterflyPreviouslyClicked = true; // Set bool wasPaintedLadyButterflyPreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Painted Lady Butterfly has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on asian carp
+    private void HandleAsianCarpClick(GameObject clickedObject)
+    {
+        // If bool asianCarpClicked is false...
+        if (!asianCarpClicked && !wasAsianCarpPreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            asianCarpClicked = true; // Set bool asianCarpClicked to true
+            wasAsianCarpPreviouslyClicked = true; // Set bool wasAsianCarpPreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Asian Carp has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on beaver
+    private void HandleBeaverClick(GameObject clickedObject)
+    {
+        // If bool beaverClicked is false...
+        if (!beaverClicked && !wasBeaverPreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            beaverClicked = true; // Set bool beaverClicked to true
+            wasBeaverPreviouslyClicked = true; // Set bool wasBeaverPreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Beaver has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on raccoon
+    private void HandleRaccoonClick(GameObject clickedObject)
+    {
+        // If bool raccoonClicked is false...
+        if (!raccoonClicked && !wasRaccoonPreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            raccoonClicked = true; // Set bool raccoonClicked to true
+            wasRaccoonPreviouslyClicked = true; // Set bool wasRaccoonPreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Raccoon has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on muskrat
+    private void HandleMuskratClick(GameObject clickedObject)
+    {
+        // If bool muskeratClicked is false...
+        if (!muskratClicked && !wasMuskratPreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            muskratClicked = true; // Set bool muskeratClicked to true
+            wasMuskratPreviouslyClicked = true; // Set bool wasMuskratPreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Muskrat has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on snapping turtle
+    private void HandleSnappingTurtleClick(GameObject clickedObject)
+    {
+        // If bool snappingTurtleClicked is false...
+        if (!snappingTurtleClicked && !wasSnappingTurtlePreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            snappingTurtleClicked = true; // Set bool snappingTurtleClicked to true
+            wasSnappingTurtlePreviouslyClicked = true; // Set bool wasSnappingTurtlePreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Snapping Turtle has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on northern map turtle
+    private void HandleNorthernMapTurtleClick(GameObject clickedObject)
+    {
+        // If bool northernMapTurtleClicked is false...
+        if (!northernMapTurtleClicked && !wasNorthernMapTurtlePreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            northernMapTurtleClicked = true; // Set bool northernMapTurtleClicked to true
+            wasNorthernMapTurtlePreviouslyClicked = true; // Set bool wasNorthernMapTurtlePreviouslyClicked to true
+        }
+        else
+        {
+            Debug.Log("Northern Map Turtle has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles clicks on event animals
+    private void EventAnimalClicked()
+    {
+        Debug.Log("Event animal clicked.");
+        eventAnimalClicked = true;
+    }
+}
