@@ -27,7 +27,7 @@ public class QuizController : MonoBehaviour
     public void SetAnswer1(float answer)
     {
         answers[0] = answer;
-        Debug.Log("Answer Recorded");
+        //Debug.Log("Answer Recorded");
     }
     public void SetAnswer2(float answer)
     {
@@ -109,7 +109,7 @@ public class QuizController : MonoBehaviour
         }
 
         scoreText.SetText(scoreFinal + "/10");
-        Debug.Log(scoreFinal);
+        //Debug.Log(scoreFinal);
 
     }
     public void QuitGame()

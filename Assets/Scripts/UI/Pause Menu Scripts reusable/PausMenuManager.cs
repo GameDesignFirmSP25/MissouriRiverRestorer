@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class PausMenuManager : MonoBehaviour
 {
@@ -73,5 +74,12 @@ public class PausMenuManager : MonoBehaviour
     public void PosReset()
     {
     
+    }
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#endif
+        Application.Quit();
     }
 }
