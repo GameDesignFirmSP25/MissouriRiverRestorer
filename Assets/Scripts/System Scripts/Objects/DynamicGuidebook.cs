@@ -70,16 +70,19 @@ public class DynamicGuidebook : MonoBehaviour
           if(objectManager.ObjectList[index].isScanned)
           {
                offset = objectManager.ObjectList[index].ModelOffset + baseOffet;
+               ModelParent.transform.localScale = objectManager.ObjectList[index].ModelScale;
           }
           else
           {
                offset = objectManager.BlankObject.ModelOffset + baseOffet;
+               ModelParent.transform.localScale = objectManager.BlankObject.ModelScale;
           }
 
           ModelParent.transform.position = Camera.main.transform.position + Camera.main.transform.forward * offset.z
                                                                            + Camera.main.transform.right * offset.x
                                                                            + Camera.main.transform.up * offset.y;
-          ModelParent.gameObject.transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed);
+          
+          ModelParent.gameObject.transform.Rotate(ModelParent.transform.up, Time.deltaTime * rotationSpeed);
      }
 
      public void RightArrow()
