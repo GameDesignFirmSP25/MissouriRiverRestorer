@@ -42,6 +42,9 @@ public class RaycastScript : MonoBehaviour
     [SerializeField]
     private string[] northernMapTurtleNames;
 
+    [SerializeField]
+    private string[] bradfordPearTreeNames;
+
     [Header("Camera")]
     public Camera _mainCamera;
 
@@ -65,6 +68,7 @@ public class RaycastScript : MonoBehaviour
     public static bool muskratClicked = false;
     public static bool snappingTurtleClicked = false;
     public static bool northernMapTurtleClicked = false;
+    public static bool bradfordPearTreeClicked = false;
     public static bool wasEasternStarlingPreviouslyClicked = false;
     public static bool wasWhiteTailedDeerPreviouslyClicked = false;
     public static bool wasBandedPennantDragonflyPreviouslyClicked = false;
@@ -77,6 +81,7 @@ public class RaycastScript : MonoBehaviour
     public static bool wasMuskratPreviouslyClicked = false;
     public static bool wasSnappingTurtlePreviouslyClicked = false;
     public static bool wasNorthernMapTurtlePreviouslyClicked = false;
+    public static bool wasBradfordPearTreePreviouslyClicked = false;
     public static bool eventAnimalClicked = false;
 
     [Header("Layers to Hit")]
@@ -89,10 +94,9 @@ public class RaycastScript : MonoBehaviour
         // Set list of eastern starling names
         easternStarlingNames = new string[]
         {
-            "Eastern Starling", "Eastern Starling (1)", "Eastern Starling (2)",
-            "Eastern Starling (3)", "Eastern Starling (4)", "Eastern Starling (5)",
-            "Eastern Starling (6)", "Eastern Starling (7)", "Eastern Starling (8)",
-            "Eastern Starling (9)", "Eastern Starling (10)"
+            "European (Eastern) Starling", "European (Eastern) Starling (1)", "European (Eastern) Starling (2)",
+            "European (Eastern) Starling (3)", "European (Eastern) Starling (4)", "European (Eastern) Starling (5)",
+            "European (Eastern) Starling (6)", "European (Eastern) Starling (7)"
         };
 
         // Set list of white-tailed deer names
@@ -153,21 +157,22 @@ public class RaycastScript : MonoBehaviour
         raccoonNames = new string[]
         {
             "Raccoon", "Raccoon (1)", "Raccoon (2)",
-            "Raccoon (3)"
+            "Raccoon (3)", "Raccoon (4)", "Raccoon (5)"
         };
 
         // Set list of muskrat names
         muskratNames = new string[]
         {
             "Muskrat", "Muskrat (1)", "Muskrat (2)",
-            "Muskrat (3)"
+            "Muskrat (3)", "Muskrat (4)", "Muskrat (5)",
+            "Muskrat (6)"
         };
 
         // Set list of snapping turtle names
         snappingTurtleNames = new string[]
         {
             "Snapping Turtle", "Snapping Turtle (1)", "Snapping Turtle (2)",
-            "Snapping Turtle (3)"
+            "Snapping Turtle (3)", "Snapping Turtle (4)"
         };
 
         // Set list of northern map turtle names
@@ -175,6 +180,13 @@ public class RaycastScript : MonoBehaviour
         {
             "Northern Map Turtle", "Northern Map Turtle (1)", "Northern Map Turtle (2)",
             "Northern Map Turtle (3)", "Northern Map Turtle (4)"
+        };
+
+        // Set list of Bradford Pear Tree names
+        bradfordPearTreeNames = new string[]
+        {
+            "Bradford Pear Tree", "Bradford Pear Tree (1)", "Bradford Pear Tree (2)",
+            "Bradford Pear Tree (3)", "Bradford Pear Tree (4)", "Bradford Pear Tree (5)"
         };
     }
 
@@ -246,6 +258,10 @@ public class RaycastScript : MonoBehaviour
             else if (System.Array.Exists(northernMapTurtleNames, name => name == hit.collider.gameObject.name))
             {
                 HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
+            }
+            else if (System.Array.Exists(bradfordPearTreeNames, name => name == hit.collider.gameObject.name))
+            {
+                HandleBradfordPearTreeClick(hit.collider.gameObject); // Handle the click on the bradford pear tree GameObject 
             }
         }
 
@@ -445,6 +461,17 @@ public class RaycastScript : MonoBehaviour
         else
         {
             Debug.Log("Northern Map Turtle has already been clicked."); // Debug.Log
+        }
+    }
+
+    // Handles click on bradford pear tree
+    private void HandleBradfordPearTreeClick(GameObject clickedObject)
+    {
+        if (!bradfordPearTreeClicked && !wasBradfordPearTreePreviouslyClicked)
+        {
+            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
+            bradfordPearTreeClicked = true;
+            wasBradfordPearTreePreviouslyClicked = true;
         }
     }
 
