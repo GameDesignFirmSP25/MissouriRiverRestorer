@@ -1,8 +1,7 @@
 using UnityEngine;
-using System.Collections;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public class DynamicGuidebook : MonoBehaviour
 {
@@ -32,6 +31,7 @@ public class DynamicGuidebook : MonoBehaviour
      public float rotationSpeed = 30;
 
      public ObjectManager objectManager;
+     private ObjectSO currentObj = null;
 
      private void Awake()
      {
@@ -66,23 +66,15 @@ public class DynamicGuidebook : MonoBehaviour
 
      private void ModelUpdate()
      {
-          if (!GBUI.isGuidebookOpen) return;
+          if (!GBUI.isGuidebookOpen || Model == null) return;
 
-          if(objectManager.ObjectList[index].isScanned)
-          {
-               offset = objectManager.ObjectList[index].ModelOffset + baseOffet;
-               ModelParent.transform.localScale = objectManager.ObjectList[index].ModelScale;
-          }
-          else
-          {
-               offset = objectManager.BlankObject.ModelOffset + baseOffet;
-               ModelParent.transform.localScale = objectManager.BlankObject.ModelScale;
-          }
-
+          offset = currentObj.ModelOffset;
           ModelParent.transform.position = Camera.main.transform.position + Camera.main.transform.forward * offset.z
                                                                            + Camera.main.transform.right * offset.x
                                                                            + Camera.main.transform.up * offset.y;
-          
+
+ 
+          Model.transform.localScale = Vector3.one * currentObj.ModelScale;
           ModelParent.gameObject.transform.Rotate(ModelParent.transform.up, Time.deltaTime * rotationSpeed);
      }
 
@@ -107,17 +99,8 @@ public class DynamicGuidebook : MonoBehaviour
 
      private void LoadUndiscovered()
      {
-          Image.sprite = objectManager.BlankObject.Image;
-          PageTitle.text = objectManager.BlankObject.Name;
-          //PageSubTitle.text = "";
-          Description.text = objectManager.BlankObject.Description.text;
-          Destroy(Model);
-          Model = Instantiate(objectManager.BlankObject.Model);
-
-          Model.transform.parent = ModelParent.gameObject.transform;
-          Model.transform.position = ModelParent.transform.position;
-          Model.transform.rotation = ModelParent.transform.rotation;
-
+          objectManager.BlankObject.isScanned = false;           //redundancy in case someone changes this in editor
+          LoadObjectSO(objectManager.BlankObject);
           NativeOrInvasiveStamp.gameObject.SetActive(false);
      }
 
@@ -132,19 +115,31 @@ public class DynamicGuidebook : MonoBehaviour
                return;
           }
 
-          Image.sprite = objectManager.ObjectList[index].Image;
-          PageTitle.text = objectManager.ObjectList[index].Name;
+          LoadObjectSO(objectManager.ObjectList[index]);
+     }
+
+     private void LoadObjectSO(ObjectSO newObj)
+     {
+          currentObj = newObj;
+
+          Image.sprite = newObj.Image;
+          PageTitle.text = newObj.Name;
           //PageSubTitle.text = "\"" + objectManager.ObjectList[index].LatinName + "\"";
-          Description.text = objectManager.ObjectList[index].Description.text;
+          Description.text = newObj.Description.text;
+
+          NativeOrInvasiveStamp.gameObject.SetActive(true);
+          NativeOrInvasiveStamp.sprite = newObj.isInvasive ? InvasiveStamp : NativeStamp;
 
           Destroy(Model);
-          Model = Instantiate(objectManager.ObjectList[index].Model);
+          if(newObj.Model == null)
+          {
+               Debug.LogWarning("Model not assigned for object: " + newObj.name);
+               return;
+          }
+          Model = Instantiate(newObj.Model);
 
           Model.transform.parent = ModelParent.gameObject.transform;
           Model.transform.position = ModelParent.transform.position;
           Model.transform.rotation = ModelParent.transform.rotation;
-
-          NativeOrInvasiveStamp.gameObject.SetActive(true);
-          NativeOrInvasiveStamp.sprite = objectManager.ObjectList[index].isInvasive ? InvasiveStamp : NativeStamp;
      }
 }
