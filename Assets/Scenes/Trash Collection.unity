@@ -764,10 +764,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 95467874}
     m_Modifications:
-    - target: {fileID: 3220307165879212793, guid: a0a4f18c270cf7541b8300f32edb0530, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8109775897077740625, guid: a0a4f18c270cf7541b8300f32edb0530, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -794,11 +790,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8109775897077740625, guid: a0a4f18c270cf7541b8300f32edb0530, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 8109775897077740625, guid: a0a4f18c270cf7541b8300f32edb0530, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 8109775897077740625, guid: a0a4f18c270cf7541b8300f32edb0530, type: 3}
       propertyPath: m_LocalPosition.x
@@ -851,10 +847,6 @@ PrefabInstance:
     - target: {fileID: 9151188977348517279, guid: a0a4f18c270cf7541b8300f32edb0530, type: 3}
       propertyPath: m_Name
       value: Save Bird Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151188977348517279, guid: a0a4f18c270cf7541b8300f32edb0530, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -969,10 +961,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 95467874}
     m_Modifications:
-    - target: {fileID: 3229133187829248652, guid: 750cc9e8aee1d9541afea7b0e744fc68, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8136682907781258276, guid: 750cc9e8aee1d9541afea7b0e744fc68, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -999,11 +987,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8136682907781258276, guid: 750cc9e8aee1d9541afea7b0e744fc68, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 8136682907781258276, guid: 750cc9e8aee1d9541afea7b0e744fc68, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 8136682907781258276, guid: 750cc9e8aee1d9541afea7b0e744fc68, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1056,10 +1044,6 @@ PrefabInstance:
     - target: {fileID: 9124141298914735594, guid: 750cc9e8aee1d9541afea7b0e744fc68, type: 3}
       propertyPath: m_Name
       value: Save Deer Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 9124141298914735594, guid: 750cc9e8aee1d9541afea7b0e744fc68, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1552,7 +1536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &102495273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2164,6 +2148,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 95467874}
     m_Modifications:
+    - target: {fileID: 792015181454242427, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 792015181454242427, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
+      propertyPath: m_margin.x
+      value: -195.66646
+      objectReference: {fileID: 0}
+    - target: {fileID: 792015181454242427, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
+      propertyPath: m_margin.y
+      value: -166.09656
+      objectReference: {fileID: 0}
+    - target: {fileID: 792015181454242427, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
+      propertyPath: m_margin.z
+      value: -348.42535
+      objectReference: {fileID: 0}
+    - target: {fileID: 792015181454242427, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1481406468422170112, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2190,11 +2194,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1481406468422170112, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 1481406468422170112, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 1481406468422170112, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2254,7 +2258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5238919115643754664, guid: 76586859b58ae17469b5f7889c55823a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4317,11 +4321,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3529873446964783561, guid: 319a581435d886c40abc9f7bb6792d0c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 3529873446964783561, guid: 319a581435d886c40abc9f7bb6792d0c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3529873446964783561, guid: 319a581435d886c40abc9f7bb6792d0c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4374,14 +4378,6 @@ PrefabInstance:
     - target: {fileID: 4506021745830428679, guid: 319a581435d886c40abc9f7bb6792d0c, type: 3}
       propertyPath: m_Name
       value: Gas Can Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4506021745830428679, guid: 319a581435d886c40abc9f7bb6792d0c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838448401688332129, guid: 319a581435d886c40abc9f7bb6792d0c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11679,11 +11675,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3010777932472144705, guid: 388e912502e17594088df63ec517393c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 3010777932472144705, guid: 388e912502e17594088df63ec517393c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3010777932472144705, guid: 388e912502e17594088df63ec517393c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11731,10 +11727,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3010777932472144705, guid: 388e912502e17594088df63ec517393c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8499151128894750185, guid: 388e912502e17594088df63ec517393c, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -11859,11 +11851,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4755421965947306339, guid: d7a0efcfdba3617469a0ce38c5c5c449, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 4755421965947306339, guid: d7a0efcfdba3617469a0ce38c5c5c449, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 4755421965947306339, guid: d7a0efcfdba3617469a0ce38c5c5c449, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11921,6 +11913,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6884994327587456280, guid: d7a0efcfdba3617469a0ce38c5c5c449, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6884994327587456280, guid: d7a0efcfdba3617469a0ce38c5c5c449, type: 3}
+      propertyPath: m_margin.x
+      value: -192.49109
+      objectReference: {fileID: 0}
+    - target: {fileID: 6884994327587456280, guid: d7a0efcfdba3617469a0ce38c5c5c449, type: 3}
+      propertyPath: m_margin.y
+      value: -230.1826
+      objectReference: {fileID: 0}
+    - target: {fileID: 6884994327587456280, guid: d7a0efcfdba3617469a0ce38c5c5c449, type: 3}
+      propertyPath: m_margin.z
+      value: -348.19858
+      objectReference: {fileID: 0}
+    - target: {fileID: 6884994327587456280, guid: d7a0efcfdba3617469a0ce38c5c5c449, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11955,17 +11967,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 95467874}
     m_Modifications:
-    - target: {fileID: 2854052955126098995, guid: 8b6174e951fbe9b488d19db6c792102b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8490687893969693525, guid: 8b6174e951fbe9b488d19db6c792102b, type: 3}
       propertyPath: m_Name
       value: Bottle Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490687893969693525, guid: 8b6174e951fbe9b488d19db6c792102b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8908331661494977179, guid: 8b6174e951fbe9b488d19db6c792102b, type: 3}
       propertyPath: m_Pivot.x
@@ -11993,11 +11997,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8908331661494977179, guid: 8b6174e951fbe9b488d19db6c792102b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1950
       objectReference: {fileID: 0}
     - target: {fileID: 8908331661494977179, guid: 8b6174e951fbe9b488d19db6c792102b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 8908331661494977179, guid: 8b6174e951fbe9b488d19db6c792102b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12107,11 +12111,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3883137690166698657, guid: 8c0dab4995348c74eaabc6a34591b190, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 3883137690166698657, guid: 8c0dab4995348c74eaabc6a34591b190, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3883137690166698657, guid: 8c0dab4995348c74eaabc6a34591b190, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12164,14 +12168,6 @@ PrefabInstance:
     - target: {fileID: 4294066735953398639, guid: 8c0dab4995348c74eaabc6a34591b190, type: 3}
       propertyPath: m_Name
       value: Pizza Slice Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4294066735953398639, guid: 8c0dab4995348c74eaabc6a34591b190, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7627073980123761673, guid: 8c0dab4995348c74eaabc6a34591b190, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

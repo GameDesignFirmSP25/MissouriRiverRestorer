@@ -8,14 +8,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 788530748676025618, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -170
+      objectReference: {fileID: 0}
     - target: {fileID: 928822591514422497, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: ffda561c019dc394886659487966c6a9, type: 3}
     - target: {fileID: 7607659999413784683, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_text
       value: "Get them into some fresh water here. Pollutants in the river enter
         through a fish\u2019s gills and slowly poisons them from the inside."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607659999413784683, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607659999413784683, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
+      propertyPath: m_margin.x
+      value: -194.68538
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607659999413784683, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
+      propertyPath: m_margin.y
+      value: -204.71964
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607659999413784683, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
+      propertyPath: m_margin.z
+      value: -346.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607659999413784683, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8638212771710686224, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_Pivot.x
@@ -43,11 +67,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8638212771710686224, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 944
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 8638212771710686224, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 532
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 8638212771710686224, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_LocalPosition.x
@@ -83,7 +107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8638212771710686224, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -95
       objectReference: {fileID: 0}
     - target: {fileID: 8638212771710686224, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -100,6 +124,10 @@ PrefabInstance:
     - target: {fileID: 8760947589937708510, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
       propertyPath: m_Name
       value: Save fish Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8760947589937708510, guid: 5b957f788a2e46f40ba6bc3833a12822, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
