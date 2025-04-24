@@ -21,4 +21,5 @@ public class ObjectSO : ScriptableObject
      public Sprite Image;
      public GameObject Model;
      public Vector3 ModelOffset;
+     public Vector3 ModelScale = Vector3.one;
 }
