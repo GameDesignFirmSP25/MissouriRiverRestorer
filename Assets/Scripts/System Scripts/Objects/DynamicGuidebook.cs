@@ -13,6 +13,7 @@ public class DynamicGuidebook : MonoBehaviour
     public int index;
     public Image Image;
      public TMP_Text PageTitle;
+     public TMP_Text PageNumber;
      //public TMP_Text PageSubTitle;
      public TMP_Text Description;
      public GameObject ModelParent;
@@ -123,7 +124,8 @@ public class DynamicGuidebook : MonoBehaviour
      public void LoadPage(int page)
      {
           index = page;
-
+          PageNumber.text = page.ToString();
+     
           if (objectManager.ObjectList[index].isScanned == false)
           {
                LoadUndiscovered();
