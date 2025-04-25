@@ -9,6 +9,7 @@ public class GuidebookUI : MonoBehaviour
      public GameObject GuidebookButton;
      public DynamicGuidebook Guidebook;
      public GameObject GuidebookCanvas;
+     public GameObject ModelCanvas;
      public StarterAssetsInputs PlayerInput;
 
      public bool isGuidebookOpen;
@@ -36,6 +37,7 @@ public class GuidebookUI : MonoBehaviour
           if(isGuidebookOpen)
           {
                GuidebookCanvas.SetActive(false);
+               ModelCanvas.SetActive(false);
                //return player control
                if (PlayerInput != null)
                     PlayerInput.controlsLocked = false;
@@ -43,6 +45,7 @@ public class GuidebookUI : MonoBehaviour
           else
           {
                GuidebookCanvas.SetActive(true);
+               ModelCanvas.SetActive(true);
                Guidebook.LoadPage(page);
                if (PlayerInput != null)
                     PlayerInput.controlsLocked = true;
