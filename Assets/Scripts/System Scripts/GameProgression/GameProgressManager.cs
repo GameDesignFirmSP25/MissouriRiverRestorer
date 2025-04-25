@@ -181,7 +181,9 @@ public class GameProgressManager : MonoBehaviour
                {
                     foreach (MiniGameData mg in minigames)
                     {
-                         mg.gameObject.SetActive(true);
+                         // TODO: get minigames replayable in post-game
+                         // Then set this back to true
+                         mg.gameObject.SetActive(false);
                     }
                }
                return;
@@ -226,7 +228,9 @@ public class GameProgressManager : MonoBehaviour
 
           foreach (MiniGameData mini in minigames)
           {
-               mini.gameObject.SetActive(true);
+               // TODO: get minigames replayable in post-game
+               // Then set this back to true
+               mini.gameObject.SetActive(false);
           }
      }
 
