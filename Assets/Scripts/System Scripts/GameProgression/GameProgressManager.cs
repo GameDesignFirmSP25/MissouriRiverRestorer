@@ -22,6 +22,8 @@ public class GameProgressManager : MonoBehaviour
 {
      public static GameProgressManager instance;
 
+     public GameObject QuizButton;
+
      public GameState GameState;
      public bool isAllEventsCompleted;
 
@@ -54,7 +56,7 @@ public class GameProgressManager : MonoBehaviour
           }
 
           SceneManager.sceneLoaded += OnSceneLoad;
-
+          QuizButton.SetActive(false);
      }
 
 
@@ -122,13 +124,8 @@ public class GameProgressManager : MonoBehaviour
                Debug.Log("All Events Complete!");
                // Make all minigames interactable and disconnect from all progression events
                EnableAllWithoutProgress();
+               QuizButton.SetActive(true);
 
-               // Trigger a game complete event? IS it needed?
-               // TODO:
-               // End Game Test?
-               // End Game UI
-               // ALlow free play
-               // Track scores?
                return;
           }
 
