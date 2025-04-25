@@ -109,6 +109,7 @@ public class TrashCollectionGame : BaseMiniGameManager
         {
             gameCompleteScore();
         }
+       
     }
     private bool IsAnyObjectivePanelOpen()
     {
