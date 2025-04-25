@@ -2554,6 +2554,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1947812641}
     m_Modifications:
+    - target: {fileID: 659288827036543968, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -172
+      objectReference: {fileID: 0}
     - target: {fileID: 6875202772747318030, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2634,12 +2638,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6976536737702639823, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 8415966729292464517, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
       propertyPath: m_Name
       value: Pause UI panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8415966729292464517, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3915912915459946447, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
@@ -2675,22 +2688,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 243399969}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243399973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &243399975 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3915912915459946447, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
-  m_PrefabInstance: {fileID: 243399969}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &243399976 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 356568901183889071, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
-  m_PrefabInstance: {fileID: 243399969}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243399975}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -14202,7 +14199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1947812638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15589,7 +15586,7 @@ PrefabInstance:
     - target: {fileID: 1839622759336802584, guid: d52a0e6d91e764544b0d83def03c73c0, type: 3}
       propertyPath: MMBtn
       value: 
-      objectReference: {fileID: 243399976}
+      objectReference: {fileID: 0}
     - target: {fileID: 1839622759336802584, guid: d52a0e6d91e764544b0d83def03c73c0, type: 3}
       propertyPath: QuitBtn
       value: 
@@ -15601,7 +15598,7 @@ PrefabInstance:
     - target: {fileID: 1839622759336802584, guid: d52a0e6d91e764544b0d83def03c73c0, type: 3}
       propertyPath: MenuButton
       value: 
-      objectReference: {fileID: 243399975}
+      objectReference: {fileID: 0}
     - target: {fileID: 1839622759336802584, guid: d52a0e6d91e764544b0d83def03c73c0, type: 3}
       propertyPath: QuitButton
       value: 
@@ -16280,27 +16277,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2279705460671060334, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 6.2677903
       objectReference: {fileID: 0}
     - target: {fileID: 2279705460671060334, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 3.205929
       objectReference: {fileID: 0}
     - target: {fileID: 2279705460671060334, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
       propertyPath: m_Size.z
-      value: 1
+      value: 4.0711727
       objectReference: {fileID: 0}
     - target: {fileID: 2279705460671060334, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
       propertyPath: m_Center.x
-      value: 0
+      value: -0.14357759
       objectReference: {fileID: 0}
     - target: {fileID: 2279705460671060334, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
       propertyPath: m_Center.y
-      value: -0.00000035762787
+      value: -0.5428282
       objectReference: {fileID: 0}
     - target: {fileID: 2279705460671060334, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
       propertyPath: m_Center.z
-      value: 0.00000071525574
+      value: 1.5356051
       objectReference: {fileID: 0}
     - target: {fileID: 3108454416924179338, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
       propertyPath: m_LocalScale.x
