@@ -14692,8 +14692,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5416791, y: 2.0156434, z: 2.342256}
-  m_Center: {x: 0.100270115, y: 1.0064169, z: -0.7536409}
+  m_Size: {x: 1.2746228, y: 0.7814201, z: 0.9492291}
+  m_Center: {x: -0.033258338, y: 0.3893053, z: -0.057127282}
 --- !u!1 &2064825664
 GameObject:
   m_ObjectHideFlags: 0
@@ -15300,6 +15300,10 @@ PrefabInstance:
     - target: {fileID: 8066734663440442418, guid: 2d8848142df938a47a8fe251c6b1e7d5, type: 3}
       propertyPath: m_Name
       value: Third Person Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066734663440442418, guid: 2d8848142df938a47a8fe251c6b1e7d5, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8802030664574833283, guid: 2d8848142df938a47a8fe251c6b1e7d5, type: 3}
       propertyPath: m_LocalScale.x
@@ -16123,6 +16127,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8772924036488376244, guid: cda244ec42204d2418748480df27a1e3, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872675767963253467, guid: cda244ec42204d2418748480df27a1e3, type: 3}
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
