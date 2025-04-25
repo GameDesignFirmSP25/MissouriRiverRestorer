@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699cd9accf508574f8349f80ae25803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  QuizButton: {fileID: 5518204209403012104}
   GameState: 0
   isAllEventsCompleted: 0
   CurrentProgressionStep: 0
@@ -504,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2682177444759727137, guid: a7f3d08940ebf414582b6e30fc68d650, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2885911327878265741, guid: a7f3d08940ebf414582b6e30fc68d650, type: 3}
       propertyPath: m_IsActive
@@ -610,5 +611,10 @@ PrefabInstance:
 --- !u!224 &1214992719496731335 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8378046619428603202, guid: a7f3d08940ebf414582b6e30fc68d650, type: 3}
+  m_PrefabInstance: {fileID: 7248623255202668421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5518204209403012104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2885911327878265741, guid: a7f3d08940ebf414582b6e30fc68d650, type: 3}
   m_PrefabInstance: {fileID: 7248623255202668421}
   m_PrefabAsset: {fileID: 0}
