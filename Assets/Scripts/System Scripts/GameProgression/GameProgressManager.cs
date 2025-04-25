@@ -150,6 +150,12 @@ public class GameProgressManager : MonoBehaviour
           }
      }
 
+     // For Dev Only. Advances progress step
+     public void DebugProgressNextEvent()
+     {
+          progressEvents[CurrentProgressionStep].CompleteProgressEvent(0);
+     }
+
      // TODO: Cleanup logic
      private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
      {
