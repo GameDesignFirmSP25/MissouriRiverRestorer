@@ -4829,6 +4829,7 @@ MonoBehaviour:
   instructionsShown: 0
   objectivesComplete: 0
   gameStarted: 0
+  pauseButtonClicked: 0
   PauseUI: {fileID: 0}
 --- !u!4 &1444597321 stripped
 Transform:
@@ -5739,6 +5740,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Look At Trash Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 6598723822980038490, guid: 0f5612d7f3c0cdf4d9f83e5f35e473a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658157303975507347, guid: 0f5612d7f3c0cdf4d9f83e5f35e473a0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5756,6 +5765,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Good Water Quality Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 5349919155335809228, guid: 9ab4d49e1cae46747b04a64fddb0011d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 8264000364295731458, guid: 9ab4d49e1cae46747b04a64fddb0011d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5849,6 +5862,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1564989080}
     m_Modifications:
+    - target: {fileID: 43938841671583256, guid: f979542f4a1789642b010284e10772ab, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 1849612885146682617, guid: f979542f4a1789642b010284e10772ab, type: 3}
       propertyPath: m_Name
       value: Poor Water Quality Panel
@@ -6047,6 +6064,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1564989080}
     m_Modifications:
+    - target: {fileID: 1742447608840352941, guid: 570ae0e5d8e0a834da4c39ca955b039a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 4233140334290084946, guid: 570ae0e5d8e0a834da4c39ca955b039a, type: 3}
       propertyPath: gameManagerScript
       value: 
@@ -6152,6 +6173,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Effects of Gas Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 345590371368072734, guid: cf81f5100a93eb04b875502216dc7513, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1695231757846089695, guid: cf81f5100a93eb04b875502216dc7513, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6232,6 +6257,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3633005383727151296, guid: cf81f5100a93eb04b875502216dc7513, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 4982769514490871705, guid: cf81f5100a93eb04b875502216dc7513, type: 3}
       propertyPath: gameManagerScript
       value: 
@@ -6329,6 +6358,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2448445882448663365, guid: b538b2e729f489d41b0b93f7d75fc231, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 2596210778391134821, guid: b538b2e729f489d41b0b93f7d75fc231, type: 3}
       propertyPath: gameManagerScript
       value: 
@@ -6430,6 +6463,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3813301704278307241, guid: 186e0d948bffe64418b1c00c916fb461, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 6055026749386164826, guid: 186e0d948bffe64418b1c00c916fb461, type: 3}
       propertyPath: m_Name
       value: Clean Water Is Essential Panel
@@ -6451,6 +6488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Great Job Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 1023992418475971876, guid: 44b267ead1ea73a459a371e65ae3fa29, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 8775753119736851332, guid: 44b267ead1ea73a459a371e65ae3fa29, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6628,6 +6669,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7375866662949461775, guid: d8cb6f0e69d237044be0660dcf3ee0ad, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6721,6 +6766,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4626249392210525875, guid: e870ebb319984fe47b4fdb1411d63060, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 5014930253945078820, guid: e870ebb319984fe47b4fdb1411d63060, type: 3}
       propertyPath: gameManagerScript
       value: 
@@ -6826,6 +6875,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4956591169578623454, guid: 698cdb1210906b249b48dccdf2057a3e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 6594090326902373384, guid: 698cdb1210906b249b48dccdf2057a3e, type: 3}
       propertyPath: gameManagerScript
       value: 
@@ -6927,6 +6980,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Introduction Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 6865860446357202093, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267149551201188431, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6940,6 +7001,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1564989080}
     m_Modifications:
+    - target: {fileID: 820722238831957667, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 1654351183312028186, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7023,6 +7088,10 @@ PrefabInstance:
     - target: {fileID: 6596522841883553767, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
       propertyPath: m_Name
       value: First Introduction Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596522841883553767, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7117,6 +7186,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7136339354920211061, guid: d9ba7e7152baeaf4ab33ce521188441f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 8396340516009172741, guid: d9ba7e7152baeaf4ab33ce521188441f, type: 3}
       propertyPath: m_Name
       value: Testing Instructions Panel
@@ -7134,6 +7207,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1564989080}
     m_Modifications:
+    - target: {fileID: 833636193936105032, guid: 80c4a23f5dde8be4ebbb3b82104256a6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 3876385516374727683, guid: 80c4a23f5dde8be4ebbb3b82104256a6, type: 3}
       propertyPath: gameManagerScript
       value: 
@@ -7235,6 +7312,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1564989080}
     m_Modifications:
+    - target: {fileID: 1479625953578784247, guid: 03d69ef58e22b6c4c8384355fa353ab1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 71373172f0ae46f43a0a9b6e02244142, type: 3}
     - target: {fileID: 4132230304894291171, guid: 03d69ef58e22b6c4c8384355fa353ab1, type: 3}
       propertyPath: m_Name
       value: Effects on Biodiversity Panel 3
