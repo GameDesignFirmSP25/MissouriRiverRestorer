@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
-
+using StarterAssets;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private bool canSkip = true;
     public bool dialogueIsPlaying { get; private set; }
     private bool canContinueToNextLine = false;
+     private bool skipKeyReset = false;
 
     [Header("UI Elements")]
     private TextMeshProUGUI[] choicesText;
@@ -34,8 +35,9 @@ public class DialogueManager : MonoBehaviour
     private Story currentStory;
     private Coroutine displayLineCoroutine;
     private static DialogueManager instance;
+     public StarterAssetsInputs _playerInput;
 
-    private void Awake()
+     private void Awake()
     {
         // Singleton pattern to ensure only one instance of DialogueManager exists
         if (instance == null)
@@ -78,6 +80,12 @@ public class DialogueManager : MonoBehaviour
             return; // Exit the Update method
         }
 
+        if(Input.GetKeyUp(skipKey))
+        {
+           skipKeyReset = true;
+        }
+
+
         // Handle input for continuing the story
         // If 
         if (canContinueToNextLine && currentStory.currentChoices.Count == 0 && (Input.GetKeyDown(KeyCode.E)))
@@ -91,6 +99,7 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory = new Story(inkJSON.text); // Create a new Story object with the provided ink JSON
         dialogueIsPlaying = true; // Set bool dialogueIsPlaying to true
+          _playerInput.controlsLocked = true;
         dialogueBox.SetActive(true); // Show the dialogue box
         ContinueStory(); // Call the method to continue the story
     }
@@ -99,15 +108,17 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         dialogueIsPlaying = false; // Set bool dialogueIsPlaying to false
-        dialogueBox.SetActive(false); // Hide the dialogue box
+          _playerInput.controlsLocked = false;
+          dialogueBox.SetActive(false); // Hide the dialogue box
         dialogueText.text = ""; // Clear the dialogue text
     }
 
     //Method to continue the story
     private void ContinueStory()
     {
-        // If currentStory can continue...
-        if (currentStory.canContinue)
+          skipKeyReset = false;
+          // If currentStory can continue...
+          if (currentStory.canContinue)
         {
             // set text for the current dialogue line
             if (displayLineCoroutine != null)
@@ -144,10 +155,11 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // If bool canSkiop is true and the skip key is pressed...
-            if (canSkip && Input.GetKeyDown(skipKey))
+            if (canSkip && skipKeyReset && Input.GetKey(skipKey))
             {
                 Debug.Log("Typing animation skipped."); // Log the skip action
                 dialogueText.maxVisibleCharacters = line.Length; // Display the full line
+                    skipKeyReset = false;
                 break; // Exit the loop
             }
 
