@@ -13,12 +13,6 @@ Player: “Is it even possible to restore it?”
 
 Dr. Waterson: “Of course!”
 Dr. Waterson: “I have faith in you. Cleaning up the trash was a big step, and it’s only up from here.”
-Dr. Waterson: “Next you’ll need to weed out the harmful flora. See that guidebook you have there?”
-
-Player: “Oh yeah, this one?”
-
-Dr. Waterson: “That’s it! Open it and give it a look. Inside is a listing of natural region plants…”
-Dr. Waterson: “...as well as some invasive ones that you’ll need to get rid of.”
 Dr. Waterson: “Your job now is to remove the harmful plants to restore the area to a healthier, more balanced state.”
 
 Player: “I’ll give it a go. I… I think I can do this.”
