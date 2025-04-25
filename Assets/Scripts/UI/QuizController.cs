@@ -112,6 +112,12 @@ public class QuizController : MonoBehaviour
         //Debug.Log(scoreFinal);
 
     }
+
+     public void ReturnToGame()
+     {
+          SceneManager.LoadScene("Overworld");
+     }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR

@@ -107,7 +107,7 @@ public class DynamicGuidebook : MonoBehaviour
      public void LoadPage(int page)
      {
           index = page;
-          PageNumber.text = page.ToString();
+          PageNumber.text = (page + 1).ToString();
      
           if (objectManager.ObjectList[index].isScanned == false)
           {

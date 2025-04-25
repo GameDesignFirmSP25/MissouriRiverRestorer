@@ -150,6 +150,11 @@ public class GameProgressManager : MonoBehaviour
           }
      }
 
+     public void LoadQuizScreen()
+     {
+          SceneManager.LoadScene("End Game");
+     }
+
      // For Dev Only. Advances progress step
      public void DebugProgressNextEvent()
      {
@@ -160,7 +165,7 @@ public class GameProgressManager : MonoBehaviour
      private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
      {
           Debug.Log("Scene Loaded: " + loadedScene.name);
-
+          if (loadedScene.name == "End Game") return;
           //TODO: make function for checking the scene name and which miinigames should be active
 
           // Turn off minigames when not in overworld
