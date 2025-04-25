@@ -1230,6 +1230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause UI panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8415966729292464517, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3915912915459946447, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
@@ -1659,6 +1663,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6443677457605652680, guid: 30f6e4f565aeebc499eadc555532a34d, type: 3}
   m_PrefabInstance: {fileID: 720857712}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &405261282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5327168727656425712, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+  m_PrefabInstance: {fileID: 289247671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &405261284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2250156714908927356, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+  m_PrefabInstance: {fileID: 289247671}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405261282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &417550911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443677457605652680, guid: 30f6e4f565aeebc499eadc555532a34d, type: 3}
@@ -2506,6 +2526,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30f6e4f565aeebc499eadc555532a34d, type: 3}
+--- !u!1 &716007484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8415966729292464517, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+  m_PrefabInstance: {fileID: 289247671}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &720857712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3892,35 +3917,35 @@ PrefabInstance:
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: MMBtn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5136725755044796347, guid: 264f387236d80db4f87d8a73283eb352, type: 3}
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: QuitBtn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 405261284}
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: ResumeBtn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1597418227}
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: MenuButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8494782106500955867, guid: 264f387236d80db4f87d8a73283eb352, type: 3}
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: QuitButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 405261282}
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: SettingsBtn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1840389498}
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: PauseUiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 716007484}
     - target: {fileID: 3730102147866515335, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: ResumeButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1597418225}
     - target: {fileID: 4136208656607909183, guid: 07ae34e15b3d0a34e823e11bb14a04b2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4885,6 +4910,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1597418225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1850107476335356311, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+  m_PrefabInstance: {fileID: 289247671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1597418227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3278696494027278141, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+  m_PrefabInstance: {fileID: 289247671}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597418225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1606585175 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1964304123318569427, guid: 698cdb1210906b249b48dccdf2057a3e, type: 3}
@@ -5237,6 +5278,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1840389498 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8934117837493450367, guid: 65e2bd8818cab9848822de405deb3712, type: 3}
+  m_PrefabInstance: {fileID: 289247671}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1967886133
 GameObject:
   m_ObjectHideFlags: 0
