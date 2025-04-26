@@ -15,7 +15,10 @@ public class VolumeControl : MonoBehaviour
     [SerializeField][Range(0f, 1f)] float testDXVol = 1f;
 
     [SerializeField] AudioMixer mixer;
-
+    private void Start()
+    {
+        volumeSlider_master.onValueChanged.AddListener(delegate { SetMasterVolume(volumeSlider_master.value); });
+    }
     private void Update()
     {
         if(testSound)
@@ -29,9 +32,10 @@ public class VolumeControl : MonoBehaviour
 
     public void SetMasterVolume(float f)
     {
+        
         if (f == 0f) { f = -.01f; }
         mixer.SetFloat("MasterVol", (Mathf.Log10(f) * 20f) - .2f);
-        if(volumeSlider_master!= null)
+        if (volumeSlider_master != null)
         {
             volumeSlider_master.value = f;
         }
