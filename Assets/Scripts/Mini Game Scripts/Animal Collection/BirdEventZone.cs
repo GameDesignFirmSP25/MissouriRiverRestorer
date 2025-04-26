@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class BirdEventZone : MonoBehaviour
 {
-    public bool isBirdEventActive = false; 
+    public static bool isBirdEventEntered = false; 
     public static bool birdEventTriggered = false; 
     
 
@@ -12,9 +12,9 @@ public class BirdEventZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Start event
-            if (!isBirdEventActive)
+            if (!isBirdEventEntered)
             {
-                isBirdEventActive = true;
+                isBirdEventEntered = true;
                 birdEventTriggered = true; 
                 Debug.Log("Bird event triggered.");
             }

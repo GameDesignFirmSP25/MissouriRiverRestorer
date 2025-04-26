@@ -5,7 +5,7 @@ public class ChangeNavAgentSpeed : MonoBehaviour
 {
     public NavMeshAgent agent;
 
-    public AnimalGameManager animalGameManager;
+    //public AnimalGameManager animalGameManager;
 
     public float radius;
     private float timer;
@@ -44,11 +44,11 @@ public class ChangeNavAgentSpeed : MonoBehaviour
         }
 
         // Change the speed based on some condition (e.g., a button press)
-        if (!animalGameManager.deerEventZoneComplete)
+        if (!AnimalGameManager.deerEventZoneComplete)
         {
             agent.speed = 0f; // Increase speed
         }
-        else if (animalGameManager.deerEventZoneComplete)
+        else if (AnimalGameManager.deerEventZoneComplete)
         {
             agent.speed = 3.5f;  // Reduce speed
         }

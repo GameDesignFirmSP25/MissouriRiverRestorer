@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Runtime.CompilerServices;
+using System.Data.SqlTypes;
 
 public class AnimalGameManager : BaseMiniGameManager
 {
@@ -51,6 +52,9 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     TextMeshProUGUI fishEventZoneText;
 
+    [SerializeField]
+    TextMeshProUGUI animalsFoundCounterText;
+
     private Slider slider;
 
     [Header("Game Objects")]
@@ -62,6 +66,18 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [SerializeField]
     GameObject endOfGamePanel;
+
+    [SerializeField]
+    GameObject bradfordPearTreePanel;
+
+    [SerializeField]
+    GameObject invasivePlantPanel1;
+
+    [SerializeField]
+    GameObject invasivePlantPanel2;
+
+    [SerializeField]
+    GameObject invasivePlantPanel3;
 
     [SerializeField]
     GameObject deerEventZonePanel;
@@ -103,6 +119,9 @@ public class AnimalGameManager : BaseMiniGameManager
     GameObject objectiveSubText7;
 
     [SerializeField]
+    GameObject animalsFoundCounterText1;
+
+    [SerializeField]
     GameObject startButton;
 
     [SerializeField]
@@ -110,6 +129,21 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [SerializeField]
     GameObject pauseButton;
+
+    [SerializeField]
+    GameObject replacePlantButton;
+
+    [SerializeField]
+    GameObject choice0Button;
+
+    [SerializeField]
+    GameObject choice1Button;
+
+    [SerializeField] 
+    GameObject choice2Button;
+
+    [SerializeField]
+    GameObject choice3Button;
 
     [SerializeField]
     GameObject clickCounter;
@@ -146,6 +180,9 @@ public class AnimalGameManager : BaseMiniGameManager
     private float targetProgress = 1f;
     private float progressIncrement = 0.2f;
 
+    [Header("Interger Variables")]
+    private int animalsFound = 0;
+
     [Header("Booleans")]
     public static bool trappingCompleted = false; // Global variable to check if trapping is completed
     public static bool dialogueIsActive = false;
@@ -163,6 +200,13 @@ public class AnimalGameManager : BaseMiniGameManager
     public static bool northernMapTurtlePanelActive = false;
     public static bool endOfGamePanelActive = false;
     public static bool eventZonePanelActive = false;
+    public static bool bradfordPearTreePanelActive = false;
+    public static bool invasivePlant1PanelActive = false;
+    public static bool invasivePlant2PanelActive = false;
+    public static bool invasivePlant3PanelActive = false;
+    public static bool deerEventZoneComplete = false;
+    public static bool birdEventZoneComplete = false;
+    public static bool fishEventZoneComplete = false;
     private bool hasResetDialogueState = false;
     private bool hasResetEventPanelState = false;
     private bool objective1Active = false;
@@ -175,9 +219,6 @@ public class AnimalGameManager : BaseMiniGameManager
     public bool deerEventObjectiveSet = false;
     public bool birdEventObjectiveSet = false;
     public bool fishEventObjectiveSet = false;
-    public bool deerEventZoneComplete = false;
-    public bool birdEventZoneComplete = false;
-    public bool fishEventZoneComplete = false;
     public bool isAsianCarpFound = false;
     public bool isBaldEagleFound = false;
     public bool isBandedPennantDragonflyFound = false;
@@ -191,6 +232,12 @@ public class AnimalGameManager : BaseMiniGameManager
     public bool isSnappingTurtleFound = false;
     public bool isWhiteTailedDeerFound = false;
     public bool isBradfordPearTreeFound = false;
+    public bool wasBradfordPearTreeClicked = false;
+    public bool wasInvasivePlant1Clicked = false;
+    public bool wasInvasivePlan2Clicked = false;
+    public bool wasInvasivePlant3Clicked = false;
+    public bool wasInvasivePlantsPanelButtonClicked = false;
+    public bool readyToSpawnSycamoreTree = false;
     public bool isPressed = false;
 
     [Header("Raycast Variables")]
@@ -199,6 +246,12 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [Header("Script References")]
     public ClickCounter clickCounterScript;
+    public ChangeablePlant changeablePlant;
+
+    private void Awake()
+    {
+        UpdateAnimalCounter();
+    }
 
     void Start()
     {
@@ -206,8 +259,10 @@ public class AnimalGameManager : BaseMiniGameManager
         InitializeUI(); // Initialize UI elements
         GetDialoguePanels(); // Get dialogue panels
         GetEventZonePanels(); // Get event zone panels
+        GetChangeablePlants();
         DeactivateAllDialoguePanels(); // Deactivate all dialogue panels
         DeactivateAllEventZonePanels(); // Deactivate all event zone panels
+        DeactivatePlantSortingPanels(); // Deactivate all plant sorting panels
         DisableObjectives(); // Disable all objective subtexts
         DisableEventZones(); // Diasble event trigger zones
         Time.timeScale = 0; // Freeze time at start of game
@@ -340,6 +395,7 @@ public class AnimalGameManager : BaseMiniGameManager
         startButton.SetActive(false); // hide start button
         startPanel.SetActive(false); // hide start panel
         pauseButton.SetActive(true); // show pause button
+        animalsFoundCounterText1.SetActive(true); // show animals found counter
         Time.timeScale = 1; // Unfreeze time
     }
 
@@ -353,6 +409,7 @@ public class AnimalGameManager : BaseMiniGameManager
         pauseButton.SetActive(false); // hide pause button
         endOfGamePanel.SetActive(false); // hide end of game panel
         clickCounter.SetActive(false); // hide click counter slider
+        animalsFoundCounterText1.SetActive(false); // hide animals found counter
     }
 
     // Method that gets panels in dialoguePanels array
@@ -380,6 +437,25 @@ public class AnimalGameManager : BaseMiniGameManager
         GameObject panel15 = eventPanels[2]; // Get the fish event zone panel
     }
 
+    private void GetChangeablePlants()
+    {
+        if (changeablePlant == null)
+        {
+            Debug.LogWarning("changeablePlant is null. Attempting to find it...");
+            changeablePlant = FindFirstObjectByType<ChangeablePlant>();
+        }
+
+        if (changeablePlant != null)
+        {
+            Debug.Log("changeablePlant successfully assigned.");
+        }
+        else
+        {
+            Debug.LogError("changeablePlant is still null! Ensure the ChangeablePlant script is attached to a GameObject in the scene.");
+
+        }
+    }
+
     // Method to get click counter
     private void GetClickCounter()
     {
@@ -387,6 +463,15 @@ public class AnimalGameManager : BaseMiniGameManager
         slider = clickCounter.GetComponent<Slider>(); // slider equals Slider component
     }
     
+    public int AnimalsFound
+    {
+        get { return animalsFound; }
+        set
+        {
+            animalsFound = value;
+            UpdateAnimalCounter();
+        }
+    }
     // Method to check for animal clicks in event zones
     private void CheckForAnimalClicks()
     {
@@ -404,6 +489,11 @@ public class AnimalGameManager : BaseMiniGameManager
             isPressed = false; // Set bool isPressed to false
             RaycastScript.eventAnimalClicked = false; // Set bool testTubeClicked to false
         }
+    }
+
+    public void UpdateAnimalCounter()
+    {
+        animalsFoundCounterText.text = $"Animals Found: {animalsFound.ToString()} / 12";
     }
 
     // Method to increment progress on click counter
@@ -430,32 +520,50 @@ public class AnimalGameManager : BaseMiniGameManager
         }
 
         // If slider value is equal to variable targetProgress 
-        if (slider.value == targetProgress)
+        if (slider.value >= targetProgress)
         {
-            // If bool deerEventZoneComplete is false and bool deerEventActive is true and bool birdEventActive is false and bool fishEventActive is false... 
-            if (!deerEventZoneComplete && deerEventActive && !birdEventActive && !fishEventActive)
+            // If bool isDeerEventEntered is true and bool deerEventZoneComplete is false and bool deerEventActive is true...
+            if (DeerEventZone.isDeerEventEntered && !deerEventZoneComplete && deerEventActive)
             {
-                deerEventZoneComplete = true; // 
+                deerEventZoneComplete = true;
+                Debug.Log("Deer Event Complete."); 
                 clickCounter.SetActive(false);
                 deerEventActive = false;
                 deerEventZone.gameObject.SetActive(false);
+                deerEventZonePanel.SetActive(true);
+                deerEventZoneText.text = "Great Job! You dispersed that group of deer! Now native plants can grow!";
+                DeerEventZone.isDeerEventEntered = false;
+                slider.value = 0f;
+                CancelInvoke();
             }
             
             // If bool birdEventComplete is false
-            if (!birdEventZoneComplete && birdEventActive && !deerEventActive && !fishEventActive)
+            if (BirdEventZone.isBirdEventEntered && !birdEventZoneComplete && birdEventActive)
             {
                 birdEventZoneComplete = true;
+                Debug.Log("Bird Event Complete.");
                 clickCounter.SetActive(false);
                 birdEventActive = false;
                 birdEventZone.gameObject.SetActive(false);
+                birdEventZonePanel.SetActive(true);
+                birdEventZoneText.text = "Great Job! The starlings have flown away! Now native birds can repopulate!";
+                BirdEventZone.isBirdEventEntered = false;
+                slider.value = 0f;
+                CancelInvoke();
             }
 
-            if (!fishEventZoneComplete && fishEventActive && !deerEventActive && !birdEventActive)
+            if (FishEventZone.isFishEventEntered && !fishEventZoneComplete && fishEventActive)
             {
                 fishEventZoneComplete = true;
+                Debug.Log("Fish Event Complete.");
                 clickCounter.SetActive(false);
                 fishEventActive = false;
                 fishEventZone.gameObject.SetActive(false);
+                fishEventZonePanel.SetActive(true);
+                fishEventZoneText.text = "Great Job! You caught the Asian Carp! Now Now the native fish are safe!";
+                FishEventZone.isFishEventEntered = false;
+                slider.value = 0f;
+                CancelInvoke();
             }
         }
     }
@@ -534,6 +642,14 @@ public class AnimalGameManager : BaseMiniGameManager
         deerEventZonePanel.SetActive(false);
         birdEventZonePanel.SetActive(false);
         fishEventZonePanel.SetActive(false);
+    }
+
+    public void DeactivatePlantSortingPanels()
+    {
+        bradfordPearTreePanel.SetActive(false);
+        invasivePlantPanel1.SetActive(false);
+        invasivePlantPanel2.SetActive(false);
+        invasivePlantPanel3.SetActive(false);
     }
 
     void EndLevel()
@@ -630,11 +746,11 @@ public class AnimalGameManager : BaseMiniGameManager
             AsianCarpClicked();
         }
 
-        // If bradford pear tree is clicked
-        if (RaycastScript.bradfordPearTreeClicked)
-        {
-            BradfordPearTreeClicked();
-        }
+        //// If bradford pear tree is clicked
+        //if (RaycastScript.bradfordPearTreeClicked)
+        //{
+        //    BradfordPearTreeClicked();
+        //}
     }
 
     // Method to check if any dialogue panel is clicked
@@ -833,12 +949,12 @@ public class AnimalGameManager : BaseMiniGameManager
         animalNames.Remove("Painted Lady Butterfly"); // Remove painted lady butterfly from the list of animal names
     }
 
-    // Handle clicks on bradford pear tree
-    private void BradfordPearTreeClicked()
-    {
-        RaycastScript.bradfordPearTreeClicked = false;
-        isBradfordPearTreeFound = true;
-    }
+    //// Handle clicks on bradford pear tree
+    //private void BradfordPearTreeClicked()
+    //{
+    //    RaycastScript.bradfordPearTreeClicked = false;
+    //    isBradfordPearTreeFound = true;
+    //}
 
     // Method to reset dialogue state
     public void ResetDialogueState()
@@ -946,6 +1062,84 @@ public class AnimalGameManager : BaseMiniGameManager
             fishEventObjectiveSet = true;
             //Time.timeScale = 0f;
         }
+    }
+
+    // Method to activate panel when Bradford Pear Tree is clicked
+    public void BradfordPearTreeClicked(ChangeablePlant clickedPlant)
+    {
+        wasBradfordPearTreeClicked = true;
+        bradfordPearTreePanel.SetActive(true);
+        bradfordPearTreePanelActive = true;
+        changeablePlant = clickedPlant; // Assign the clicked plant to changeablePlant
+    }
+
+    public void InvasivePlant1Clicked()
+    {
+        wasInvasivePlant1Clicked = true;
+        invasivePlantPanel1.SetActive(true);
+        invasivePlant1PanelActive = true;
+    }
+
+    public void InvasivePlant2Clicked()
+    {
+        wasInvasivePlan2Clicked = true;
+        invasivePlantPanel2.SetActive(true);
+        invasivePlant2PanelActive = true;
+    }
+
+    public void InvasivePlant3Clicked()
+    {
+        wasInvasivePlant3Clicked = true;
+        invasivePlantPanel3.SetActive(true);
+        invasivePlant3PanelActive = true;
+    }
+
+    //
+    public void BradfordPearTreePanelButtonClicked()
+    {
+        wasBradfordPearTreeClicked = false; // Reset the flag
+        bradfordPearTreePanel.SetActive(false);
+        bradfordPearTreePanelActive = false;
+        replacePlantButton.SetActive(false);
+        wasInvasivePlantsPanelButtonClicked = true;
+        Invoke("ResetButtonState", 1f);
+        //changeablePlantGameObject = GameObject.FindGameObjectWithTag("Bradford Pear Tree");
+        changeablePlant.SwapPlants(); // Swap the plant to Bradford Pear Tree
+
+    }
+
+    public void InvasivePlant1PanelButtonClicked()
+    {
+        invasivePlantPanel1.SetActive(false);
+        invasivePlant1PanelActive = false;
+        choice0Button.SetActive(false);
+        choice1Button.SetActive(false);
+        choice2Button.SetActive(false);
+        choice3Button.SetActive(false);
+        wasInvasivePlantsPanelButtonClicked = true;
+        Invoke("ResetButtonState", 1f);
+    }
+
+    public void InvasivePlant2PanelButtonClicked()
+    {
+        invasivePlantPanel2.SetActive(false);
+        invasivePlant1PanelActive = false;
+        wasInvasivePlantsPanelButtonClicked = true;
+        Invoke("ResetButtonState", 1f);
+    }
+
+    public void InvasivePlant3PanelButtonClicked()
+    {
+        invasivePlantPanel3.SetActive(false);
+        invasivePlant1PanelActive = false;
+        wasInvasivePlantsPanelButtonClicked = true;
+        Invoke("ResetButtonState", 1f);
+    }
+
+    public void ResetButtonState()
+    {
+        wasInvasivePlantsPanelButtonClicked = false;
+        replacePlantButton.SetActive(true); // Show the replace plant button
     }
 
     // Method to strikethrough text

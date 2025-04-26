@@ -23,6 +23,10 @@ public class ClickCounter : MonoBehaviour
     // Add progress to bar
     public void IncrementProgress(float newProgress)
     {
-        targetProgress = slider.value + newProgress; // targetProcess is equal to slider value + newProgress
+        if (slider != null)
+        {
+            slider.value += newProgress;
+            slider.value = Mathf.Clamp(slider.value, 0f, 1f); // Ensure slider value stays within bounds
+        }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class DeerEventZone : MonoBehaviour
 {
-    public bool isDeerEventActive = false;
+    public static bool isDeerEventEntered = false;
     public static bool deerEventTriggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -11,9 +11,9 @@ public class DeerEventZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Start event
-            if (!isDeerEventActive)
+            if (!isDeerEventEntered)
             {
-                isDeerEventActive = true;
+                isDeerEventEntered = true;
                 deerEventTriggered = true; 
                 Debug.Log("Deer event triggered.");
             }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 
 public class RaycastScript : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class RaycastScript : MonoBehaviour
 
     [Header("Script References")]
     public AnimalGameManager animalGameManagerScript;
+    public ChangeablePlant changeablePlantScript;
 
     [Header("Booleans")]
     public static bool easternStarlingClicked = false;
@@ -87,6 +89,7 @@ public class RaycastScript : MonoBehaviour
     [Header("Layers to Hit")]
     public LayerMask clickable;
     public LayerMask animalEventClicks;
+    public LayerMask playerInteraction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -259,16 +262,45 @@ public class RaycastScript : MonoBehaviour
             {
                 HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
             }
-            else if (System.Array.Exists(bradfordPearTreeNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleBradfordPearTreeClick(hit.collider.gameObject); // Handle the click on the bradford pear tree GameObject 
-            }
+            //else if (System.Array.Exists(bradfordPearTreeNames, name => name == hit.collider.gameObject.name))
+            //{
+            //    HandleBradfordPearTreeClick(hit.collider.gameObject); // Handle the click on the bradford pear tree GameObject 
+            //}
         }
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, animalEventClicks)) 
         {
             EventAnimalClicked();
-        } 
+        }
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, playerInteraction))
+        {
+            Debug.Log("Click on Bradford Pear Tree detected.");
+
+            if (changeablePlantScript == null)
+            {
+                Debug.LogError("ChangeablePlantScript is not assigned!");
+                return;
+            }
+
+            if (hit.collider == null)
+            {
+                Debug.LogWarning("No collider was hit by the raycast.");
+                return;
+            }
+
+            if (!changeablePlantScript.isSwapped)
+            {
+                Debug.Log($"Swapping plant: {hit.collider.gameObject.name}");
+                //changeablePlantScript.SwapPlants(hit.collider.gameObject);
+
+                HandleBradfordPearTreeClick(hit.collider.gameObject); // Handle the click on the bradford pear tree GameObject
+            }
+            else
+            {
+                Debug.Log("Plant has already been swapped.");
+            }
+        }
     }
 
     // Handle clicks on eastern starling
@@ -280,6 +312,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             easternStarlingClicked = true; // Set bool easternStarlingClicked to true
             wasEasternStarlingPreviouslyClicked = true; // Set bool wasEasternStarlingPreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
 
         }
         else
@@ -297,6 +331,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             whiteTailedDeerClicked = true; // Set bool whiteTailedDeerClicked to true
             wasWhiteTailedDeerPreviouslyClicked = true; // Set bool wasWhiteTailedDeerPreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -313,6 +349,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             bandedPennantDragonflyClicked = true; // Set bool bandedPennantDragonflyClicked to true
             wasBandedPennantDragonflyPreviouslyClicked = true; // Set bool wasBandedPennantDragonflyPreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -329,6 +367,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             garterSnakeClicked = true; // Set bool garterSnakeClicked to true
             wasGarterSnakePreviouslyClicked = true; // Set bool wasGarterSnakePreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -345,6 +385,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             baldEagleClicked = true; // Set bool baldEagleClicked to true
             wasBaldEaglePreviouslyClicked = true; // Set bool wasBaldEaglePreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -361,6 +403,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             paintedLadyButterflyClicked = true; // Set bool baldEagleClicked to true
             wasPaintedLadyButterflyPreviouslyClicked = true; // Set bool wasPaintedLadyButterflyPreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -377,6 +421,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             asianCarpClicked = true; // Set bool asianCarpClicked to true
             wasAsianCarpPreviouslyClicked = true; // Set bool wasAsianCarpPreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -393,6 +439,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             beaverClicked = true; // Set bool beaverClicked to true
             wasBeaverPreviouslyClicked = true; // Set bool wasBeaverPreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -409,6 +457,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             raccoonClicked = true; // Set bool raccoonClicked to true
             wasRaccoonPreviouslyClicked = true; // Set bool wasRaccoonPreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -425,6 +475,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             muskratClicked = true; // Set bool muskeratClicked to true
             wasMuskratPreviouslyClicked = true; // Set bool wasMuskratPreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -441,6 +493,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             snappingTurtleClicked = true; // Set bool snappingTurtleClicked to true
             wasSnappingTurtlePreviouslyClicked = true; // Set bool wasSnappingTurtlePreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -457,6 +511,8 @@ public class RaycastScript : MonoBehaviour
             Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
             northernMapTurtleClicked = true; // Set bool northernMapTurtleClicked to true
             wasNorthernMapTurtlePreviouslyClicked = true; // Set bool wasNorthernMapTurtlePreviouslyClicked to true
+            animalGameManagerScript.AnimalsFound += 1;
+            animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -467,11 +523,19 @@ public class RaycastScript : MonoBehaviour
     // Handles click on bradford pear tree
     private void HandleBradfordPearTreeClick(GameObject clickedObject)
     {
-        if (!bradfordPearTreeClicked && !wasBradfordPearTreePreviouslyClicked)
+        // Get the ChangeablePlant component from the clicked object
+        ChangeablePlant clickedPlant = clickedObject.GetComponent<ChangeablePlant>();
+        if (clickedPlant != null)
         {
-            Debug.Log($"GameObject {clickedObject.name} was clicked!"); // Debug.Log
-            bradfordPearTreeClicked = true;
-            wasBradfordPearTreePreviouslyClicked = true;
+            Debug.Log($"Bradford Pear Tree clicked! Plant ID: {clickedPlant.plantID}");
+            bradfordPearTreeClicked = true; // Set the boolean to true
+                                            // Pass the clicked plant to AnimalGameManager
+            animalGameManagerScript.changeablePlant = clickedPlant; // Assign the clicked plant to the AnimalGameManager script
+            animalGameManagerScript.BradfordPearTreeClicked(clickedPlant);
+        }
+        else
+        {
+            Debug.LogWarning("Clicked object does not have a ChangeablePlant component.");
         }
     }
 
@@ -480,5 +544,31 @@ public class RaycastScript : MonoBehaviour
     {
         Debug.Log("Event animal clicked.");
         eventAnimalClicked = true;
+    }
+
+    // Handles clicks on plants
+    private void PlantClicked()
+    {
+        //if (changeablePlantScript == null)
+        //{
+        //    Debug.LogError("ChangeablePlantScript is not assigned!");
+        //    return;
+        //}
+
+        //if (hit.collider == null)
+        //{
+        //    Debug.LogWarning("No collider was hit by the raycast.");
+        //    return;
+        //}
+
+        //if (!changeablePlantScript.isSwapped)
+        //{
+        //    Debug.Log($"Swapping plant: {hit.collider.gameObject.name}");
+        //    changeablePlantScript.SwapPlants(hit.collider.gameObject);
+        //}
+        //else
+        //{
+        //    Debug.Log("Plant has already been swapped.");
+        //}
     }
 }

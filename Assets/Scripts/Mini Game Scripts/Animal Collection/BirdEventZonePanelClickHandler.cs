@@ -3,6 +3,9 @@ using UnityEngine.EventSystems;
 
 public class BirdEventZonePanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField]
+    private GameObject objectivesPanel;
+
     //public GameObject eventPanel;
     public static bool isBirdEventZonePanelClicked = false;
 
@@ -13,5 +16,9 @@ public class BirdEventZonePanelClickHandler : MonoBehaviour, IPointerClickHandle
         Debug.Log("Bird Event zone panel clicked. Hiding panel...");
         isBirdEventZonePanelClicked = true;
         AnimalGameManager.eventZonePanelActive = false;
+        if (AnimalGameManager.birdEventZoneComplete)
+        {
+            objectivesPanel.SetActive(true); // show objectives panel
+        }
     }
 }

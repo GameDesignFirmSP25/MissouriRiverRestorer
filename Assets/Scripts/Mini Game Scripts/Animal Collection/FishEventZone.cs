@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class FishEventZone : MonoBehaviour
 {
-    public bool isFishEventActive = false; 
+    public static bool isFishEventEntered = false; 
     public static bool fishEventTriggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -11,9 +11,9 @@ public class FishEventZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Start event
-            if (!isFishEventActive)
+            if (!isFishEventEntered)
             {
-                isFishEventActive = true;
+                isFishEventEntered = true;
                 fishEventTriggered = true;
                 Debug.Log("Fish event triggered.");
             }

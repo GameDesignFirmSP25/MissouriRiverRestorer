@@ -5,7 +5,7 @@ public class BirdFlight : MonoBehaviour
 {
     public GameObject player;
     public Animator animator;
-    public AnimalGameManager animalGameManager;
+    //public AnimalGameManager animalGameManager;
     public bool birdsFlownAway = false;
     private float flySpeed = 0.025f; // Speed when flying
     private float randomOffset = 3f; // Add some randomness for direction
@@ -19,7 +19,7 @@ public class BirdFlight : MonoBehaviour
 
     private void Update()
     {
-        if (animalGameManager.birdEventZoneComplete && !birdsFlownAway)
+        if (AnimalGameManager.birdEventZoneComplete && !birdsFlownAway)
         {
             FlyAway(player.transform.position);
         }
