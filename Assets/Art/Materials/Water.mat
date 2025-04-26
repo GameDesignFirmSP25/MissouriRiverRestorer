@@ -87,13 +87,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _Alpha: 0.621
+    - _Alpha: 0.385
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _Brightness: 10
     - _BumpScale: 1
+    - _Cleanliness: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -121,6 +122,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Saturation: 1.48
     - _Smoothness: 0.836
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -137,7 +139,7 @@ Material:
     - _WaveDensityX: 9.26
     - _WaveDensityY: 10
     - _WaveScale: 3.21
-    - _WaveSharp: 0.475
+    - _WaveSharp: 0.338
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -148,8 +150,8 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _WaterColor: {r: 0.34464967, g: 0.26981127, b: 1, a: 1}
-    - _WaterColor2: {r: 0.89433956, g: 0.86601996, b: 0.80828047, a: 1}
-    - _WaveColor: {r: 0.7030616, g: 0.85660374, b: 0.71179926, a: 1}
+    - _WaterColor2: {r: 0.3509434, g: 0.2795207, b: 0.12647206, a: 1}
+    - _WaveColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3879457683948920210

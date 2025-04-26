@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Palette_Environment
+  m_Name: Palette_DIRTY
   m_Shader: {fileID: -6465566751694194690, guid: bb76e4318480e6a40abcd11f9a2efdfd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -92,7 +92,7 @@ Material:
     - _AmbientLighting: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Brightness: 4.11
+    - _Brightness: 5.37
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -109,10 +109,10 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GradientLerp: 1
-    - _HueShiftAmount: -26.74
+    - _HueShiftAmount: 3.6
     - _Metallic: 0
-    - _NormalSize: 476.66
-    - _NormalStrength: 6.11
+    - _NormalSize: 1
+    - _NormalStrength: 0.68
     - _OcclusionStrength: 1
     - _OneColorOutline: 0
     - _Outline: 5.75
@@ -122,30 +122,30 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Saturation: 1.1
+    - _Saturation: 0.55
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SpecularAlpha: 0
+    - _SpecularAlpha: 0.02
     - _SpecularHighlights: 1
     - _SpecularMax: 7.69
-    - _SpecularMin: 0.69
-    - _SpecularSize: 8
+    - _SpecularMin: 0.99
+    - _SpecularSize: 18.14
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _Steps: 5.55
+    - _Steps: 5.25
     - _Surface: 0
     - _TextureNormal: 0
-    - _ToonRampContrast: 0.12
-    - _UseNormal: 1
-    - _VoronoiAngle: 0
+    - _ToonRampContrast: 0.35
+    - _UseNormal: 0
+    - _VoronoiAngle: -0.12
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MultiplyColor: {r: 1, g: 1, b: 1, a: 1}
-    - _NormalTiling: {r: 5, g: 1, b: 0, a: 0}
+    - _MultiplyColor: {r: 0.4423488, g: 0.5320754, b: 0.13954426, a: 1}
+    - _NormalTiling: {r: 1, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
