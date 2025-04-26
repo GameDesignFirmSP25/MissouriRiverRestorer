@@ -89,34 +89,63 @@ public class ChangeablePlant : MonoBehaviour
                 // Perform an action based on the index
                 if (originalPlantIndex == 0) // Example: Bradford Pear Tree
                 {
-                    Transform childTransform = changeablePlant.transform.Find(childName1);
-                    
-                    Debug.Log("Destroying Bradford Pear Tree");
-                    Destroy(childTransform.gameObject);
-                    Debug.Log("Swapping Plants...");
-                    isSwapped = true; // Set the plant as swapped
-                    ExecuteSpawnOfSycamore();
-                    
+                    ChangeablePlant plantComponent = originalPlant[0].GetComponent<ChangeablePlant>();
+                    if (plantComponent.plantID == "Bradford Pear Tree 1")
+                    {
+                        Transform childTransform = changeablePlant.transform.Find(childName1);
+                        Vector3 childPosition = childTransform.position;
+                        Quaternion childRotation = childTransform.rotation;
+                        Debug.Log("Destroying Bradford Pear Tree");
+                        Destroy(childTransform.gameObject);
+                        Debug.Log("Swapping Plants...");
+                        isSwapped = true; // Set the plant as swapped
+                        InstantiatePrefabAsChild(swappedPlant[0], childPosition, childRotation);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Clicked plant is not a Bradford Pear Tree.");
+                        return;
+                    }
                 }
                 else if (originalPlantIndex == 1) // Example: Another plant
                 {
-                    Transform childTransform = changeablePlant.transform.Find(childName1);
-
-                    Debug.Log("Destroying Bradford Pear Tree");
-                    Destroy(childTransform.gameObject);
-                    Debug.Log("Swapping Plants...");
-                    isSwapped = true; // Set the plant as swapped
-                    ExecuteSpawnOfSycamore();
+                    ChangeablePlant plantComponent = originalPlant[1].GetComponent<ChangeablePlant>();
+                    if (plantComponent.plantID == "Bradford Pear Tree 2")
+                    {
+                        Transform childTransform = changeablePlant.transform.Find(childName1);
+                        Vector3 childPosition = childTransform.position;
+                        Quaternion childRotation = childTransform.rotation;
+                        Debug.Log("Destroying Bradford Pear Tree");
+                        Destroy(childTransform.gameObject);
+                        Debug.Log("Swapping Plants...");
+                        isSwapped = true; // Set the plant as swapped
+                        InstantiatePrefabAsChild(swappedPlant[0], childPosition, childRotation);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Clicked plant is not a Bradford Pear Tree.");
+                        return;
+                    }
                 }
                 else if (originalPlantIndex == 2)
                 {
-                    Transform childTransform = changeablePlant.transform.Find(childName1);
-
-                    Debug.Log("Destroying Bradford Pear Tree");
-                    Destroy(childTransform.gameObject);
-                    Debug.Log("Swapping Plants...");
-                    isSwapped = true; // Set the plant as swapped
-                    ExecuteSpawnOfSycamore();
+                    ChangeablePlant plantComponent = originalPlant[2].GetComponent<ChangeablePlant>();
+                    if (plantComponent.plantID == "Bradford Pear Tree 3")
+                    {
+                        Transform childTransform = changeablePlant.transform.Find(childName1);
+                        Vector3 childPosition = childTransform.position;
+                        Quaternion childRotation = childTransform.rotation;
+                        Debug.Log("Destroying Bradford Pear Tree");
+                        Destroy(childTransform.gameObject);
+                        Debug.Log("Swapping Plants...");
+                        isSwapped = true; // Set the plant as swapped
+                        InstantiatePrefabAsChild(swappedPlant[0], childPosition, childRotation);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Clicked plant is not a Bradford Pear Tree.");
+                        return;
+                    }
                 }
             }
             else
@@ -127,31 +156,31 @@ public class ChangeablePlant : MonoBehaviour
         
     }
 
-    public void ExecuteSpawnOfSycamore()
-    {
-        if (changeablePlant == null)
-        {
-            Debug.LogError("changeablePlant is null! Cannot spawn Sycamore Tree.");
-            return;
-        }
+    //public void ExecuteSpawnOfSycamore()
+    //{
+    //    if (changeablePlant == null)
+    //    {
+    //        Debug.LogError("changeablePlant is null! Cannot spawn Sycamore Tree.");
+    //        return;
+    //    }
 
-        Debug.Log("Swapping Bradford Pear Tree with Sycamore Tree.");
-        InstantiatePrefabAsChild(changeablePlant, swappedPlant[0]);
-    }
+    //    Debug.Log("Swapping Bradford Pear Tree with Sycamore Tree.");
+    //    InstantiatePrefabAsChild(swappedPlant[0], childPosition, childRotation);
+    //}
 
-    public void InstantiatePrefabAsChild(GameObject parentObject, GameObject prefab)
+    public void InstantiatePrefabAsChild(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         // Instantiate the prefab
-        GameObject instantiatedPrefab = Instantiate(prefab);
+        GameObject instantiatedPrefab = Instantiate(prefab, position, rotation);
 
         // Set the parent of the instantiated prefab
-        instantiatedPrefab.transform.SetParent(parentObject.transform);
+        instantiatedPrefab.transform.SetParent(transform);
 
         //// Optionally reset the local position, rotation, and scale
-        instantiatedPrefab.transform.localPosition = Vector3.zero;
-        instantiatedPrefab.transform.localRotation = Quaternion.identity;
+        //instantiatedPrefab.transform.localPosition = parentObject.transform.position;
+        //instantiatedPrefab.transform.localRotation = Quaternion.identity;
         isSwapped = false;
 
-        Debug.Log($"Prefab instantiated as a child of {parentObject.name}");
+        Debug.Log($"Prefab instantiated as a child at {position} with rotation {rotation}");
     }
 }

@@ -410,6 +410,10 @@ public class AnimalGameManager : BaseMiniGameManager
         endOfGamePanel.SetActive(false); // hide end of game panel
         clickCounter.SetActive(false); // hide click counter slider
         animalsFoundCounterText1.SetActive(false); // hide animals found counter
+        choice0Button.SetActive(false); // hide choice 0 button
+        choice1Button.SetActive(false); // hide choice 1 button
+        choice2Button.SetActive(false); // hide choice 2 button
+        choice3Button.SetActive(false); // hide choice 3 button
     }
 
     // Method that gets panels in dialoguePanels array
@@ -1067,6 +1071,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to activate panel when Bradford Pear Tree is clicked
     public void BradfordPearTreeClicked(ChangeablePlant clickedPlant)
     {
+        Debug.Log($"Bradford Pear Tree Clicked: {clickedPlant.plantID}");
         wasBradfordPearTreeClicked = true;
         bradfordPearTreePanel.SetActive(true);
         bradfordPearTreePanelActive = true;
@@ -1097,13 +1102,13 @@ public class AnimalGameManager : BaseMiniGameManager
     //
     public void BradfordPearTreePanelButtonClicked()
     {
+        Debug.Log($"Swapping plant: {changeablePlant.plantID}");
         wasBradfordPearTreeClicked = false; // Reset the flag
         bradfordPearTreePanel.SetActive(false);
         bradfordPearTreePanelActive = false;
         replacePlantButton.SetActive(false);
         wasInvasivePlantsPanelButtonClicked = true;
         Invoke("ResetButtonState", 1f);
-        //changeablePlantGameObject = GameObject.FindGameObjectWithTag("Bradford Pear Tree");
         changeablePlant.SwapPlants(); // Swap the plant to Bradford Pear Tree
 
     }

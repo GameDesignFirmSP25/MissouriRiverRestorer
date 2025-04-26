@@ -89,7 +89,7 @@ public class RaycastScript : MonoBehaviour
     [Header("Layers to Hit")]
     public LayerMask clickable;
     public LayerMask animalEventClicks;
-    public LayerMask playerInteraction;
+    public LayerMask plantInteraction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -262,10 +262,6 @@ public class RaycastScript : MonoBehaviour
             {
                 HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
             }
-            //else if (System.Array.Exists(bradfordPearTreeNames, name => name == hit.collider.gameObject.name))
-            //{
-            //    HandleBradfordPearTreeClick(hit.collider.gameObject); // Handle the click on the bradford pear tree GameObject 
-            //}
         }
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, animalEventClicks)) 
@@ -273,7 +269,7 @@ public class RaycastScript : MonoBehaviour
             EventAnimalClicked();
         }
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, playerInteraction))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, plantInteraction))
         {
             Debug.Log("Click on Bradford Pear Tree detected.");
 
