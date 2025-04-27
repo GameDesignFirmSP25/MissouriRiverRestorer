@@ -18,6 +18,7 @@ public class DeerEventZonePanelClickHandler : MonoBehaviour, IPointerClickHandle
         if (AnimalGameManager.deerEventZoneComplete)
         {
             objectivesPanel.SetActive(true); // show objectives panel
+            AnimalGameManager.objectivesShown = true; // set objectivesShown to true
         }
     }
 }

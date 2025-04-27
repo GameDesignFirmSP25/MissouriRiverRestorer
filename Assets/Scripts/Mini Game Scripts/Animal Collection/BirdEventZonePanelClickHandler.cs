@@ -19,6 +19,7 @@ public class BirdEventZonePanelClickHandler : MonoBehaviour, IPointerClickHandle
         if (AnimalGameManager.birdEventZoneComplete)
         {
             objectivesPanel.SetActive(true); // show objectives panel
+            AnimalGameManager.objectivesShown = true; // set objectivesShown to true
         }
     }
 }
