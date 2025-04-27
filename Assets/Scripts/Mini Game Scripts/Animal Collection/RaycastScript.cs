@@ -43,8 +43,8 @@ public class RaycastScript : MonoBehaviour
     [SerializeField]
     private string[] northernMapTurtleNames;
 
-    [SerializeField]
-    private string[] bradfordPearTreeNames;
+    //[SerializeField]
+    //private string[] bradfordPearTreeNames;
 
     [Header("Camera")]
     public Camera _mainCamera;
@@ -52,6 +52,9 @@ public class RaycastScript : MonoBehaviour
     [Header("Raycast Variables")]
     private Ray ray;
     private RaycastHit hit;
+
+    [Header("Float Variables")]
+    private float raycastDistance = 20f; 
 
     [Header("Script References")]
     public AnimalGameManager animalGameManagerScript;
@@ -70,7 +73,8 @@ public class RaycastScript : MonoBehaviour
     public static bool muskratClicked = false;
     public static bool snappingTurtleClicked = false;
     public static bool northernMapTurtleClicked = false;
-    public static bool bradfordPearTreeClicked = false;
+    //public static bool bradfordPearTreeClicked = false;
+    //public static bool purpleLoosestrifeClicked = false;
     public static bool wasEasternStarlingPreviouslyClicked = false;
     public static bool wasWhiteTailedDeerPreviouslyClicked = false;
     public static bool wasBandedPennantDragonflyPreviouslyClicked = false;
@@ -83,13 +87,14 @@ public class RaycastScript : MonoBehaviour
     public static bool wasMuskratPreviouslyClicked = false;
     public static bool wasSnappingTurtlePreviouslyClicked = false;
     public static bool wasNorthernMapTurtlePreviouslyClicked = false;
-    public static bool wasBradfordPearTreePreviouslyClicked = false;
+    //public static bool wasBradfordPearTreePreviouslyClicked = false;
     public static bool eventAnimalClicked = false;
 
     [Header("Layers to Hit")]
     public LayerMask clickable;
     public LayerMask animalEventClicks;
-    public LayerMask plantInteraction;
+    public LayerMask bradfordPearTreeInteraction;
+    public LayerMask purpleLoosestrifeInteraction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -185,12 +190,12 @@ public class RaycastScript : MonoBehaviour
             "Northern Map Turtle (3)", "Northern Map Turtle (4)"
         };
 
-        // Set list of Bradford Pear Tree names
-        bradfordPearTreeNames = new string[]
-        {
-            "Bradford Pear Tree", "Bradford Pear Tree (1)", "Bradford Pear Tree (2)",
-            "Bradford Pear Tree (3)", "Bradford Pear Tree (4)", "Bradford Pear Tree (5)"
-        };
+        //// Set list of Bradford Pear Tree names
+        //bradfordPearTreeNames = new string[]
+        //{
+        //    "Bradford Pear Tree", "Bradford Pear Tree (1)", "Bradford Pear Tree (2)",
+        //    "Bradford Pear Tree (3)", "Bradford Pear Tree (4)", "Bradford Pear Tree (5)"
+        //};
     }
 
     // Update is called once per frame
@@ -207,96 +212,158 @@ public class RaycastScript : MonoBehaviour
     void CastRay()
     {
         ray = _mainCamera.ScreenPointToRay(Input.mousePosition); // Create a ray from the camera to the mouse position
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickable)) // Perform the raycast
+
+        Debug.DrawRay(ray.origin, ray.direction * raycastDistance, Color.red, 2f);
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, clickable)) // Perform the raycast
         {
-            //            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red); // Draw the ray for debugging purposes
+            if (hit.distance <= raycastDistance)
+            {
+                Debug.Log($"Hit object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
 
-            // If the clicked GameObject's name matches the target name for eastern starling...
-            if (System.Array.Exists(easternStarlingNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleEasternStarlingClick(hit.collider.gameObject); // Handle the click on the eastern starling GameObject
-            }
-            // Check if the clicked GameObject's name matches any white-tailed deer name
-            else if (System.Array.Exists(whiteTailedDeerNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleWhiteTailedDeerClick(hit.collider.gameObject); // Handle the click on the white-tailed deer GameObject
-            }
-            // Check if the clicked GameObject's name matches any banded pennant dragonfly name
-            else if (System.Array.Exists(bandedPennantDragonflyNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleBandedPennantDragonflyClick(hit.collider.gameObject); // Handle the click on the banded pennant dragonfly GameObject
-            }
-            else if (System.Array.Exists(garterSnakeNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleGarterSnakeClick(hit.collider.gameObject); // Handle the click on the garter snake GameObject
-            } 
-            else if (System.Array.Exists(baldEagleNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleBaldEagleClick(hit.collider.gameObject); // Handle the click on the bald eagle GameObject 
-            }
-            else if (System.Array.Exists(paintedLadyButterflyNames, name => name == hit.collider.gameObject.name))
-            {
-                HandlePaintedLadyButterflyClick(hit.collider.gameObject); // Handle the click on the painted lady butterfly GameObject 
-            }
-            else if (System.Array.Exists(asianCarpNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleAsianCarpClick(hit.collider.gameObject); // Handle the click on the asian carp GameObject 
-            }
-            else if (System.Array.Exists(beaverNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleBeaverClick(hit.collider.gameObject); // Handle the click on the beaver GameObject 
-            }
-            else if (System.Array.Exists(raccoonNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleRaccoonClick(hit.collider.gameObject); // Handle the click on the raccoon GameObject 
-            }
-            else if (System.Array.Exists(muskratNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleMuskratClick(hit.collider.gameObject); // Handle the click on the muskrat GameObject 
-            }
-            else if (System.Array.Exists(snappingTurtleNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleSnappingTurtleClick(hit.collider.gameObject); // Handle the click on the snapping turtle GameObject 
-            }
-            else if (System.Array.Exists(northernMapTurtleNames, name => name == hit.collider.gameObject.name))
-            {
-                HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
-            }
-        }
-
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, animalEventClicks)) 
-        {
-            EventAnimalClicked();
-        }
-
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, plantInteraction))
-        {
-            Debug.Log("Click on Bradford Pear Tree detected.");
-
-            if (changeablePlantScript == null)
-            {
-                Debug.LogError("ChangeablePlantScript is not assigned!");
-                return;
-            }
-
-            if (hit.collider == null)
-            {
-                Debug.LogWarning("No collider was hit by the raycast.");
-                return;
-            }
-
-            if (!changeablePlantScript.isSwapped)
-            {
-                Debug.Log($"Swapping plant: {hit.collider.gameObject.name}");
-                //changeablePlantScript.SwapPlants(hit.collider.gameObject);
-
-                HandleBradfordPearTreeClick(hit.collider.gameObject); // Handle the click on the bradford pear tree GameObject
+                // If the clicked GameObject's name matches the target name for eastern starling...
+                if (System.Array.Exists(easternStarlingNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleEasternStarlingClick(hit.collider.gameObject); // Handle the click on the eastern starling GameObject
+                }
+                // Check if the clicked GameObject's name matches any white-tailed deer name
+                else if (System.Array.Exists(whiteTailedDeerNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleWhiteTailedDeerClick(hit.collider.gameObject); // Handle the click on the white-tailed deer GameObject
+                }
+                // Check if the clicked GameObject's name matches any banded pennant dragonfly name
+                else if (System.Array.Exists(bandedPennantDragonflyNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleBandedPennantDragonflyClick(hit.collider.gameObject); // Handle the click on the banded pennant dragonfly GameObject
+                }
+                else if (System.Array.Exists(garterSnakeNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleGarterSnakeClick(hit.collider.gameObject); // Handle the click on the garter snake GameObject
+                }
+                else if (System.Array.Exists(baldEagleNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleBaldEagleClick(hit.collider.gameObject); // Handle the click on the bald eagle GameObject 
+                }
+                else if (System.Array.Exists(paintedLadyButterflyNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandlePaintedLadyButterflyClick(hit.collider.gameObject); // Handle the click on the painted lady butterfly GameObject 
+                }
+                else if (System.Array.Exists(asianCarpNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleAsianCarpClick(hit.collider.gameObject); // Handle the click on the asian carp GameObject 
+                }
+                else if (System.Array.Exists(beaverNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleBeaverClick(hit.collider.gameObject); // Handle the click on the beaver GameObject 
+                }
+                else if (System.Array.Exists(raccoonNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleRaccoonClick(hit.collider.gameObject); // Handle the click on the raccoon GameObject 
+                }
+                else if (System.Array.Exists(muskratNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleMuskratClick(hit.collider.gameObject); // Handle the click on the muskrat GameObject 
+                }
+                else if (System.Array.Exists(snappingTurtleNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleSnappingTurtleClick(hit.collider.gameObject); // Handle the click on the snapping turtle GameObject 
+                }
+                else if (System.Array.Exists(northernMapTurtleNames, name => name == hit.collider.gameObject.name))
+                {
+                    HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
+                }
             }
             else
             {
-                Debug.Log("Plant has already been swapped.");
+                Debug.Log($"Ignored object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
             }
         }
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, animalEventClicks)) 
+        {
+            Debug.Log($"Hit object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
+
+            EventAnimalClicked();
+        }
+
+        if (animalGameManagerScript.eventZonesComplete)
+        {
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, bradfordPearTreeInteraction))
+            {
+                Debug.Log("Click on Bradford Pear Tree detected.");
+
+                if (hit.distance <= raycastDistance)
+                {
+                    Debug.Log($"Hit object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
+
+                    if (changeablePlantScript == null)
+                    {
+                        Debug.LogError("ChangeablePlantScript is not assigned!");
+                        return;
+                    }
+
+                    if (hit.collider == null)
+                    {
+                        Debug.LogWarning("No collider was hit by the raycast.");
+                        return;
+                    }
+
+                    if (!changeablePlantScript.isSwapped)
+                    {
+                        Debug.Log($"Swapping plant: {hit.collider.gameObject.name}");
+                        //changeablePlantScript.SwapPlants(hit.collider.gameObject);
+
+                        HandleBradfordPearTreeClick(hit.collider.gameObject); // Handle the click on the bradford pear tree GameObject
+                    }
+                    else
+                    {
+                        Debug.Log("Plant has already been swapped.");
+                    }
+                }
+                else
+                {
+                    Debug.Log($"Ignored object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
+                }
+            }
+
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, purpleLoosestrifeInteraction))
+            {
+                Debug.Log("Click on Purple Loosestrife detected.");
+
+                if (hit.distance <= raycastDistance)
+                {
+                    Debug.Log($"Hit object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
+
+                    if (changeablePlantScript == null)
+                    {
+                        Debug.LogError("ChangeablePlantScript is not assigned!");
+                        return;
+                    }
+
+                    if (hit.collider == null)
+                    {
+                        Debug.LogWarning("No collider was hit by the raycast.");
+                        return;
+                    }
+
+                    if (!changeablePlantScript.isSwapped)
+                    {
+                        Debug.Log($"Swapping plant: {hit.collider.gameObject.name}");
+                        //changeablePlantScript.SwapPlants(hit.collider.gameObject);
+
+                        HandlePurpleLoosestrifeClick(hit.collider.gameObject); // Handle the click on the bradford pear tree GameObject
+                    }
+                    else
+                    {
+                        Debug.Log("Plant has already been swapped.");
+                    }
+                }
+                else
+                {
+                    Debug.Log($"Ignored object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
+                }
+            }
+        } 
     }
 
     // Handle clicks on eastern starling
@@ -524,10 +591,29 @@ public class RaycastScript : MonoBehaviour
         if (clickedPlant != null)
         {
             Debug.Log($"Bradford Pear Tree clicked! Plant ID: {clickedPlant.plantID}");
-            bradfordPearTreeClicked = true; // Set the boolean to true
-                                            // Pass the clicked plant to AnimalGameManager
+            //bradfordPearTreeClicked = true; // Set the boolean to true
+            //                                // Pass the clicked plant to AnimalGameManager
             animalGameManagerScript.changeablePlant = clickedPlant; // Assign the clicked plant to the AnimalGameManager script
             animalGameManagerScript.BradfordPearTreeClicked(clickedPlant);
+        }
+        else
+        {
+            Debug.LogWarning("Clicked object does not have a ChangeablePlant component.");
+        }
+    }
+
+    // Handles click on purple loosestrife
+    private void HandlePurpleLoosestrifeClick(GameObject clickedObject)
+    {
+        // Get the ChangeablePlant component from the clicked object
+        ChangeablePlant clickedPlant = clickedObject.GetComponent<ChangeablePlant>();
+        if (clickedPlant != null)
+        {
+            Debug.Log($"Purple Loosestrife clicked! Plant ID: {clickedPlant.plantID}");
+            //purpleLoosestrifeClicked = true; // Set the boolean to true
+            //                                // Pass the clicked plant to AnimalGameManager
+            animalGameManagerScript.changeablePlant = clickedPlant; // Assign the clicked plant to the AnimalGameManager script
+            animalGameManagerScript.PurpleLoosestrifeClicked(clickedPlant);
         }
         else
         {

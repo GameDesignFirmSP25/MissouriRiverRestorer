@@ -19,6 +19,7 @@ public class FishEventZonePanelClickHandler : MonoBehaviour, IPointerClickHandle
         if (AnimalGameManager.fishEventZoneComplete)
         {
             objectivesPanel.SetActive(true); // show objectives panel
+            AnimalGameManager.objectivesShown = true; // set objectivesShown to true
         }
     }
 }
