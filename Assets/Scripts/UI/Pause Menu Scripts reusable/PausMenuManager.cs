@@ -43,7 +43,6 @@ public class PausMenuManager : MonoBehaviour
         SettingsBtn.onClick.RemoveListener(settings);
         QuitBtn.onClick.RemoveListener(PosReset);
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -78,7 +77,6 @@ public class PausMenuManager : MonoBehaviour
     public void PosReset()
     {
           Resume();
-          if (player == null) return;
           GameObject controller = player.GetComponent<CharacterController>().gameObject;
           controller.SetActive(false);
           player.transform.localPosition = returnPos;
