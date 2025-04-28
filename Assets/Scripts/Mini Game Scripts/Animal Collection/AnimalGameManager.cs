@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System.Runtime.CompilerServices;
 using System.Data.SqlTypes;
 using Unity.VisualScripting;
+using StarterAssets;
 
 public class AnimalGameManager : BaseMiniGameManager
 {
@@ -341,6 +342,9 @@ public class AnimalGameManager : BaseMiniGameManager
     public ClickCounter clickCounterScript;
     public ChangeablePlant changeablePlant;
 
+    [Header("Player Input")]
+    public StarterAssetsInputs playerInput;
+
     private void Awake()
     {
         UpdateAnimalCounter();
@@ -592,6 +596,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 deerEventZone.gameObject.SetActive(false); // Disable deer event zone
                 deerEventZoneArrow.gameObject.SetActive(false); // Disable deer event waypoint arrow
                 deerEventZonePanel.SetActive(true); // Enable deer event zone panel
+                playerInput.controlsLocked = true; // Lock player controls
                 deerEventZoneText.text = "Great Job! You dispersed that group of deer! Now native plants can grow!"; // Set text for deer event zone
                 DeerEventZone.isDeerEventEntered = false; // Set bool isDeerEventEntered to false
                 slider.value = 0f; // Reset slider value to 0
@@ -608,6 +613,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 birdEventZone.gameObject.SetActive(false); // Disable bird event zone
                 birdEventZoneArrow.gameObject.SetActive(false); // Disable bird event waypoint arrow
                 birdEventZonePanel.SetActive(true); // Enable bird event zone panel
+                playerInput.controlsLocked = true; // Lock player controls
                 birdEventZoneText.text = "Great Job! The starlings have flown away! Now native birds can repopulate!"; // Set text for bird event zone
                 BirdEventZone.isBirdEventEntered = false; // Set bool isBirdEventEntered to false 
                 slider.value = 0f; // Reset slider value to 0
@@ -624,6 +630,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 fishEventZone.gameObject.SetActive(false); // Disable fish event zone
                 fishEventZoneArrow.gameObject.SetActive(false); // Disable fish event waypoint arrow
                 fishEventZonePanel.SetActive(true); // Enable fish event zone panel
+                playerInput.controlsLocked = true; // Lock player controls
                 fishEventZoneText.text = "Great Job! You caught the Asian Carp! Now Now the native fish are safe!"; // Set text for fish event zone
                 FishEventZone.isFishEventEntered = false; // Set bool isFishEventEntered to false
                 slider.value = 0f; // Reset slider value to 0
@@ -671,6 +678,7 @@ public class AnimalGameManager : BaseMiniGameManager
             {
                 eventsStartPanel.SetActive(true); // Show events start panel
                 eventsStartPanelActive = true; // Set events start panel active flag to true
+                playerInput.controlsLocked = true; // Lock player controls
                 EventObjectives(); // Call method to set event objectives
                 objectivesPanel.SetActive(false); // Hide objectives panel
                 objectivesShown = false; // Set objectivesShown to false
@@ -699,6 +707,7 @@ public class AnimalGameManager : BaseMiniGameManager
         {
             dialoguePanels[dialoguePanelIndex].SetActive(true); // Activate the specified panel
             dialogueIsActive = true; // Set the active panel flag to true
+            playerInput.controlsLocked = true; // Lock player controls
             Debug.Log("Panel " + dialoguePanelIndex + " activated."); // Debug.Log
         }
         else
@@ -712,6 +721,7 @@ public class AnimalGameManager : BaseMiniGameManager
     {
         dialoguePanels[dialoguePanelIndex].SetActive(false); // Activate the specified panel
         dialogueIsActive = false; // Set the active panel flag to false
+        playerInput.controlsLocked = false; // unlock player controls
         Debug.Log("Panel " + dialoguePanelIndex + " deactivated."); // Debug.Log
     }
 
@@ -725,6 +735,7 @@ public class AnimalGameManager : BaseMiniGameManager
         }
 
         dialogueIsActive = false; // Set the active panel flag to false
+        playerInput.controlsLocked = false; // unlock player controls
     }
 
     // Method to Activate event zone panels
@@ -732,6 +743,7 @@ public class AnimalGameManager : BaseMiniGameManager
     {
         eventPanels[eventPanelIndex].SetActive(true); // Activate the specified event panel
         eventZonePanelActive = true; // Set the event zone panel active flag to true
+        playerInput.controlsLocked = true; // Lock player controls
     }
 
     // Method to deactivate all event panels
@@ -763,6 +775,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to return to the main scene
     public void ReturnButton()
     {
+        playerInput.controlsLocked = false; // Lock player controls
         SceneManager.LoadScene("Overworld"); //load main scene
     }
 
@@ -926,6 +939,7 @@ public class AnimalGameManager : BaseMiniGameManager
         {
             plantSortingPanel.SetActive(true); // Show plant sorting panel
             plantSortingPanelActive = true; // Set the flag to true to indicate the panel is active
+            //playerInput.controlsLocked = true; // Lock player controls
         }
     }
 
@@ -1157,6 +1171,7 @@ public class AnimalGameManager : BaseMiniGameManager
             Debug.Log("Start deer event."); // Debug.Log
             deerEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
+            playerInput.controlsLocked = true; // Lock player controls
             deerEventZoneText.text = "Oh no! There are too many White-Tailed deer here. Look at how they have destroyed the plants. Click to drive them off."; // Set event zone text
             deerEventActive = true; // Set deer event active
             deerEventObjectiveSet = true; // Set bool deerEventObjectiveSet to true
@@ -1191,6 +1206,7 @@ public class AnimalGameManager : BaseMiniGameManager
             Debug.Log("Start bird event."); // Debug.Log
             birdEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
+            playerInput.controlsLocked = true; // Lock player controls
             birdEventZoneText.text = "Check out those European Starling. They seem to have taken over those trees driving away native birds. Hurry! Click to shoo them away."; // Set event zone text
             birdEventActive = true; // Set bird event active
             birdEventObjectiveSet = true; // Set bool birdEventObjectiveSet to true
@@ -1225,6 +1241,7 @@ public class AnimalGameManager : BaseMiniGameManager
             Debug.Log("Start fish event."); // Debug.Log
             fishEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
+            playerInput.controlsLocked = true; // Lock player controls
             fishEventZoneText.text = "Look at the river. There seems to be a disturbance. Large Asian Carp are attacking the native fish. We must relocate them. Quickly click on them to catch them."; // Set event zone text
             fishEventActive = true; // Set fish event active
             fishEventObjectiveSet = true; // Set bool fishEventObjectiveSet
@@ -1255,6 +1272,7 @@ public class AnimalGameManager : BaseMiniGameManager
         wasBradfordPearTreeClicked = true; // Set bool wasBradfordPearTreeClicked to true
         bradfordPearTreePanel.SetActive(true); // Show the Bradford Pear Tree panel
         bradfordPearTreePanelActive = true; // Set bool bradfordPearTreePanelActive to true
+        playerInput.controlsLocked = true; // Lock player controls
         changeablePlant = clickedPlant; // Assign the clicked plant to changeablePlant
     }
 
@@ -1265,6 +1283,7 @@ public class AnimalGameManager : BaseMiniGameManager
         wasPurpleLoosestrifeClicked = true; // Set bool wasPurpleLoosestrifeClicked to true
         purpleLoosestrifePanel.SetActive(true); // Show the Purple Loosestrife panel
         purpleLoosestrifePanelActive = true; // Set bool purpleLoosestrifePanelActive to true
+        playerInput.controlsLocked = true; // Lock player controls
         replaceWithAmericanLotusButton.SetActive(true); // Show the replace with American Lotus button
         replaceWithCordgrassButton.SetActive(true); // Show the replace with Cordgrass button
         replaceWithSwampMilkweedButton.SetActive(true); // Show the replace with Swamp Milkweed button
@@ -1279,6 +1298,7 @@ public class AnimalGameManager : BaseMiniGameManager
         wasBradfordPearTreeClicked = false; // Set bool wasBradfordPearTreeClicked to false
         bradfordPearTreePanel.SetActive(false); // Hide the Bradford Pear Tree panel
         bradfordPearTreePanelActive = false; // Set bool bradfordPearTreePanelActive to false
+        playerInput.controlsLocked = false; // unlock player controls
         replaceWithSycamoreButton.SetActive(false); // Hide the replace with sycamore button
         replaceWithBoxElderButton.SetActive(false); // Hide the replace with box elder button
         wasReplaceWithSycamoreButtonClicked = true; // Set bool wasReplaceWithSycamoreButtonClicked to true
@@ -1294,6 +1314,7 @@ public class AnimalGameManager : BaseMiniGameManager
         wasBradfordPearTreeClicked = false; // Set bool wasBradfordPearTreeClicked to false
         bradfordPearTreePanel.SetActive(false); // Hide the Bradford Pear Tree panel
         bradfordPearTreePanelActive = false; // Set bool bradfordPearTreePanelActive to false
+        playerInput.controlsLocked = false; // unlock player controls
         replaceWithSycamoreButton.SetActive(false); // Hide the replace with sycamore button
         replaceWithBoxElderButton.SetActive(false); // Hide the replace with box elder button
         wasReplaceWithBoxElderButtonClicked = true; // Set bool wasReplaceWithBoxElderButtonClicked to true
@@ -1307,6 +1328,7 @@ public class AnimalGameManager : BaseMiniGameManager
     {
         purpleLoosestrifePanel.SetActive(false); // Hide the Purple Loosestrife panel
         purpleLoosestrifePanelActive = false; // Set bool purpleLoosestrifePanelActive to false
+        playerInput.controlsLocked = false; // unlock player controls
         replaceWithAmericanLotusButton.SetActive(false); // Hide the replace with American Lotus button
         replaceWithCordgrassButton.SetActive(false); // Hide the replace with Cordgrass button
         replaceWithSwampMilkweedButton.SetActive(false); // Hide the replace with Swamp Milkweed button
@@ -1321,6 +1343,7 @@ public class AnimalGameManager : BaseMiniGameManager
     {
         purpleLoosestrifePanel.SetActive(false); // Hide the Purple Loosestrife panel
         purpleLoosestrifePanelActive = false; // Set bool purpleLoosestrifePanelActive to false
+        playerInput.controlsLocked = false; // unlock player controls
         replaceWithAmericanLotusButton.SetActive(false); // Hide the replace with American Lotus button
         replaceWithCordgrassButton.SetActive(false); // Hide the replace with Cordgrass button
         replaceWithSwampMilkweedButton.SetActive(false); // Hide the replace with Swamp Milkweed button
@@ -1335,6 +1358,7 @@ public class AnimalGameManager : BaseMiniGameManager
     {
         purpleLoosestrifePanel.SetActive(false); // Hide the Purple Loosestrife panel
         purpleLoosestrifePanelActive = false; // Set bool purpleLoosestrifePanelActive to false
+        playerInput.controlsLocked = false; // unlock player controls
         replaceWithAmericanLotusButton.SetActive(false); // Hide the replace with American Lotus button
         replaceWithCordgrassButton.SetActive(false); // Hide the replace with Cordgrass button
         replaceWithSwampMilkweedButton.SetActive(false); // Hide the replace with Swamp Milkweed button 
@@ -1349,6 +1373,7 @@ public class AnimalGameManager : BaseMiniGameManager
     {
         purpleLoosestrifePanel.SetActive(false); // Hide the Purple Loosestrife panel
         purpleLoosestrifePanelActive = false; // Set bool purpleLoosestrifePanelActive to false
+        playerInput.controlsLocked = false; // unlock player controls
         replaceWithAmericanLotusButton.SetActive(false); // Hide the replace with American Lotus button
         replaceWithCordgrassButton.SetActive(false); // Hide the replace with Cordgrass button
         replaceWithSwampMilkweedButton.SetActive(false); // Hide the replace with Swamp Milkweed button
@@ -1475,7 +1500,7 @@ public class AnimalGameManager : BaseMiniGameManager
         // If bool deerEventZoneComplete is true, bool birdEventZoneComplete is true, and bool fishEventZoneComplete is true...
         if (deerEventZoneComplete && birdEventZoneComplete && fishEventZoneComplete)
         {
-            eventZonesComplete = true; // Set bool eventZonesCOmplete to true
+            eventZonesComplete = true; // Set bool eventZonesComplete to true
             Debug.Log("All event zones are complete!"); // Debug.Log
             eventsObjectivesPanel.SetActive(false); // Hide event objectives panel
             objectivesPanel.SetActive(true); // Show objectives panel
@@ -1563,9 +1588,9 @@ public class AnimalGameManager : BaseMiniGameManager
             Debug.Log("All objectives are complete!"); // Debug.Log
             endOfGamePanel.SetActive(true); // Show end of game panel
             endOfGamePanelActive = true; // Set end of game panel active
+            playerInput.controlsLocked = true; // Lock player controls
             returnButton.SetActive(true); // Show return button
             trappingCompleted = true; // Set trappingCompleted to true   
-            Time.timeScale = 0; // Freeze time
         }
     }
 
