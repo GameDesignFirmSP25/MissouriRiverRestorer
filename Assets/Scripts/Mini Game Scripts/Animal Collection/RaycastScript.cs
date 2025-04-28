@@ -103,7 +103,8 @@ public class RaycastScript : MonoBehaviour
         easternStarlingNames = new string[]
         {
             "European (Eastern) Starling", "European (Eastern) Starling (1)", "European (Eastern) Starling (2)",
-            "European (Eastern) Starling (3)"
+            "European (Eastern) Starling (3)", "European (Eastern) Starling (4)", "European (Eastern) Starling (5)",
+            "European (Eastern) Starling (6)", "European (Eastern) Starling (7)"
         };
 
         // Set list of white-tailed deer names
@@ -119,7 +120,8 @@ public class RaycastScript : MonoBehaviour
         bandedPennantDragonflyNames = new string[]
         {
             "Banded Pennant Dragonfly", "Banded Pennant Dragonfly (1)", "Banded Pennant Dragonfly (2)",
-            "Banded Pennant Dragonfly (3)", "Banded Pennant Dragonfly (4)"
+            "Banded Pennant Dragonfly (3)", "Banded Pennant Dragonfly (4)", "Banded Pennant Dragonfly (5)",
+            "Banded Pennant Dragonfly (6)"
         };
 
         // Set list of garter snake names
@@ -132,14 +134,16 @@ public class RaycastScript : MonoBehaviour
         // Set list of bald eagle names
         baldEagleNames = new string[]
         {
-            "Bald Eagle", "Bald Eagle (1)"
+            "Bald Eagle", "Bald Eagle (1)", "Bald Eagle (2)",
+            "Bald Eagle (3)"
         };
 
         // Set list of painted lady butterfly names
         paintedLadyButterflyNames = new string[]
         {
             "Painted Lady Butterfly", "Painted Lady Butterfly (1)", "Painted Lady Butterfly (2)",
-            "Painted Lady Butterfly (3)"
+            "Painted Lady Butterfly (3)", "Painted Lady Butterfly (4)", "Painted Lady Butterfly (5)",
+            "Painted Lady Butterfly (6)"
         };
 
         // Set list of asian carp names
@@ -168,19 +172,30 @@ public class RaycastScript : MonoBehaviour
         muskratNames = new string[]
         {
             "Muskrat", "Muskrat (1)", "Muskrat (2)",
+            "Muskrat (3)", "Muskrat (4)", "Muskrat (5)",
+            "Muskrat (6)"
         };
 
         // Set list of snapping turtle names
         snappingTurtleNames = new string[]
         {
-            "Snapping Turtle", "Snapping Turtle (1)", "Snapping Turtle (2)"
+            "Snapping Turtle", "Snapping Turtle (1)", "Snapping Turtle (2)",
+            "Snapping Turtle (3)", "Snapping Turtle (4)"
         };
 
         // Set list of northern map turtle names
         northernMapTurtleNames = new string[]
         {
             "Northern Map Turtle", "Northern Map Turtle (1)", "Northern Map Turtle (2)",
+            "Northern Map Turtle (3)", "Northern Map Turtle (4)"
         };
+
+        //// Set list of Bradford Pear Tree names
+        //bradfordPearTreeNames = new string[]
+        //{
+        //    "Bradford Pear Tree", "Bradford Pear Tree (1)", "Bradford Pear Tree (2)",
+        //    "Bradford Pear Tree (3)", "Bradford Pear Tree (4)", "Bradford Pear Tree (5)"
+        //};
     }
 
     // Update is called once per frame
@@ -611,5 +626,31 @@ public class RaycastScript : MonoBehaviour
     {
         Debug.Log("Event animal clicked.");
         eventAnimalClicked = true;
+    }
+
+    // Handles clicks on plants
+    private void PlantClicked()
+    {
+        //if (changeablePlantScript == null)
+        //{
+        //    Debug.LogError("ChangeablePlantScript is not assigned!");
+        //    return;
+        //}
+
+        //if (hit.collider == null)
+        //{
+        //    Debug.LogWarning("No collider was hit by the raycast.");
+        //    return;
+        //}
+
+        //if (!changeablePlantScript.isSwapped)
+        //{
+        //    Debug.Log($"Swapping plant: {hit.collider.gameObject.name}");
+        //    changeablePlantScript.SwapPlants(hit.collider.gameObject);
+        //}
+        //else
+        //{
+        //    Debug.Log("Plant has already been swapped.");
+        //}
     }
 }

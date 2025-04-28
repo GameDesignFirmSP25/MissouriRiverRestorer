@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 
 public class DeerEventZonePanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField]
+    private GameObject objectivesPanel; 
     //public GameObject eventPanel;
     public static bool isDeerEventZonePanelClicked = false;
 
@@ -13,5 +15,10 @@ public class DeerEventZonePanelClickHandler : MonoBehaviour, IPointerClickHandle
         Debug.Log("Event zone panel clicked. Hiding panel...");
         isDeerEventZonePanelClicked = true;
         AnimalGameManager.eventZonePanelActive = false;
+        if (AnimalGameManager.deerEventZoneComplete)
+        {
+            objectivesPanel.SetActive(true); // show objectives panel
+            AnimalGameManager.objectivesShown = true; // set objectivesShown to true
+        }
     }
 }

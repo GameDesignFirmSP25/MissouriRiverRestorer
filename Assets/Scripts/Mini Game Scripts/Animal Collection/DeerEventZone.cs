@@ -16,7 +16,6 @@ public class DeerEventZone : MonoBehaviour
                 isDeerEventEntered = true;
                 deerEventTriggered = true; 
                 Debug.Log("Deer event triggered.");
-
             }
             else
             {

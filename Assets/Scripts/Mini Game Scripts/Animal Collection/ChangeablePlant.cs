@@ -117,13 +117,6 @@ public class ChangeablePlant : MonoBehaviour
                             InstantiatePrefabAsChild(swappedPlant[1], childPosition, childRotation);
                         }
 
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
-
                     }
                     else
                     {
@@ -152,13 +145,6 @@ public class ChangeablePlant : MonoBehaviour
                         else if (animalGameManager.wasReplaceWithBoxElderButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[1], childPosition, childRotation);
-                        }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
                         }
                     }
                     else
@@ -189,13 +175,6 @@ public class ChangeablePlant : MonoBehaviour
                         {
                             InstantiatePrefabAsChild(swappedPlant[1], childPosition, childRotation);
                         }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
                     }
                     else
                     {
@@ -224,13 +203,6 @@ public class ChangeablePlant : MonoBehaviour
                         else if (animalGameManager.wasReplaceWithBoxElderButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[1], childPosition, childRotation);
-                        }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
                         }
                     }
                     else
@@ -261,13 +233,6 @@ public class ChangeablePlant : MonoBehaviour
                         {
                             InstantiatePrefabAsChild(swappedPlant[1], childPosition, childRotation);
                         }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
                     }
                     else
                     {
@@ -278,42 +243,6 @@ public class ChangeablePlant : MonoBehaviour
                 else if (originalPlantIndex == 5)
                 {
                     ChangeablePlant plantComponent = originalPlant[5].GetComponent<ChangeablePlant>();
-                    if (plantComponent.plantID == "Bradford Pear Tree 6")
-                    {
-                        Transform childTransform = changeablePlant.transform.Find(childName1);
-                        Vector3 childPosition = childTransform.position;
-                        Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Bradford Pear Tree");
-                        Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
-                        isSwapped = true; // Set the plant as swapped
-                        if (animalGameManager.wasReplaceWithSycamoreButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[0], childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithBoxElderButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[1], childPosition, childRotation);
-                        }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Clicked plant is not a Bradford Pear Tree.");
-                        return;
-                    }
-                }
-                else if (originalPlantIndex == 6)
-                {
-                    ChangeablePlant plantComponent = originalPlant[6].GetComponent<ChangeablePlant>();
                     if (plantComponent.plantID == "Purple Loosestrife 1")
                     {
                         Transform childTransform = changeablePlant.transform.Find(childName2);
@@ -345,228 +274,6 @@ public class ChangeablePlant : MonoBehaviour
                         {
                             InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
                         }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
-                    }
-                }
-                else if (originalPlantIndex == 7)
-                {
-                    ChangeablePlant plantComponent = originalPlant[7].GetComponent<ChangeablePlant>();
-                    if (plantComponent.plantID == "Purple Loosestrife 2")
-                    {
-                        Transform childTransform = changeablePlant.transform.Find(childName2);
-                        Vector3 childPosition = childTransform.position;
-                        Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
-                        Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
-                        isSwapped = true; // Set the plant as swapped
-                        if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(2, 8);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(8, 10);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
-                        }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
-                    }
-                }
-                else if (originalPlantIndex == 8)
-                {
-                    ChangeablePlant plantComponent = originalPlant[8].GetComponent<ChangeablePlant>();
-                    if (plantComponent.plantID == "Purple Loosestrife 3")
-                    {
-                        Transform childTransform = changeablePlant.transform.Find(childName2);
-                        Vector3 childPosition = childTransform.position;
-                        Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
-                        Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
-                        isSwapped = true; // Set the plant as swapped
-                        if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(2, 8);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(8, 10);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
-                        }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
-                    }
-                }
-                else if (originalPlantIndex == 9)
-                {
-                    ChangeablePlant plantComponent = originalPlant[9].GetComponent<ChangeablePlant>();
-                    if (plantComponent.plantID == "Purple Loosestrife 4")
-                    {
-                        Transform childTransform = changeablePlant.transform.Find(childName2);
-                        Vector3 childPosition = childTransform.position;
-                        Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
-                        Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
-                        isSwapped = true; // Set the plant as swapped
-                        if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(2, 8);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(8, 10);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
-                        }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
-                    }
-                }
-                else if (originalPlantIndex == 10)
-                {
-                    ChangeablePlant plantComponent = originalPlant[10].GetComponent<ChangeablePlant>();
-                    if (plantComponent.plantID == "Purple Loosestrife 5")
-                    {
-                        Transform childTransform = changeablePlant.transform.Find(childName2);
-                        Vector3 childPosition = childTransform.position;
-                        Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
-                        Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
-                        isSwapped = true; // Set the plant as swapped
-                        if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(2, 8);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(8, 10);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
-                        }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
-                    }
-                }
-                else if (originalPlantIndex == 11)
-                {
-                    ChangeablePlant plantComponent = originalPlant[11].GetComponent<ChangeablePlant>();
-                    if (plantComponent.plantID == "Purple Loosestrife 6")
-                    {
-                        Transform childTransform = changeablePlant.transform.Find(childName2);
-                        Vector3 childPosition = childTransform.position;
-                        Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
-                        Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
-                        isSwapped = true; // Set the plant as swapped
-                        if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(2, 8);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
-                        {
-                            int swappedPlantIndex = Random.Range(8, 10);
-                            GameObject selectedPlant = swappedPlant[swappedPlantIndex];
-                            InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
-                        }
-                        else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
-                        }
-
-                        Collider collider = GetComponent<Collider>();
-                        if (collider != null)
-                        {
-                            collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
-                        }
                     }
                 }
                 else
@@ -577,6 +284,18 @@ public class ChangeablePlant : MonoBehaviour
         }
         
     }
+
+    //public void ExecuteSpawnOfSycamore()
+    //{
+    //    if (changeablePlant == null)
+    //    {
+    //        Debug.LogError("changeablePlant is null! Cannot spawn Sycamore Tree.");
+    //        return;
+    //    }
+
+    //    Debug.Log("Swapping Bradford Pear Tree with Sycamore Tree.");
+    //    InstantiatePrefabAsChild(swappedPlant[0], childPosition, childRotation);
+    //}
 
     public void InstantiatePrefabAsChild(GameObject prefab, Vector3 position, Quaternion rotation)
     {
@@ -592,7 +311,7 @@ public class ChangeablePlant : MonoBehaviour
         //// Optionally reset the local position, rotation, and scale
         //instantiatedPrefab.transform.localPosition = parentObject.transform.position;
         //instantiatedPrefab.transform.localRotation = Quaternion.identity;
-        //isSwapped = false;
+        isSwapped = false;
 
         Debug.Log($"Prefab instantiated as a child at {position} with rotation {rotation}");
     }

@@ -66,15 +66,6 @@ public class AnimalGameManager : BaseMiniGameManager
     TextMeshProUGUI objectiveSubtext15;
 
     [SerializeField]
-    TextMeshProUGUI eventObjectiveSubtext1;
-
-    [SerializeField]
-    TextMeshProUGUI eventObjectiveSubtext2;
-
-    [SerializeField]
-    TextMeshProUGUI eventObjectiveSubtext3;
-
-    [SerializeField]
     TextMeshProUGUI EndText;
 
     [SerializeField]
@@ -121,15 +112,6 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [SerializeField]
     GameObject plantSortingPanel;
-
-    [SerializeField]
-    GameObject exploringIndicatorPanel;
-
-    [SerializeField]
-    GameObject eventsStartPanel;
-
-    [SerializeField]
-    GameObject eventsObjectivesPanel;
 
     [SerializeField]
     GameObject deerEventZoneText1;
@@ -230,21 +212,6 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     GameObject fishEventZone;
 
-    [SerializeField]
-    GameObject deerEventZoneArrow;
-
-    [SerializeField]
-    GameObject birdEventZoneArrow;
-
-    [SerializeField]
-    GameObject fishEventZoneArrow;
-
-    [SerializeField]
-    GameObject groupOfDeer;
-
-    [SerializeField]
-    GameObject groupOfStarlings;
-
     [Header("Arrays and Lists")]
     public GameObject[] dialoguePanels = new GameObject[12];
     public GameObject[] eventPanels = new GameObject[3];
@@ -292,7 +259,6 @@ public class AnimalGameManager : BaseMiniGameManager
     public static bool eventZonePanelActive = false;
     public static bool bradfordPearTreePanelActive = false;
     public static bool purpleLoosestrifePanelActive = false;
-    public static bool eventsStartPanelActive = false;
     public static bool plantSortingPanelActive = false;
     public static bool deerEventZoneComplete = false;
     public static bool birdEventZoneComplete = false;
@@ -326,7 +292,8 @@ public class AnimalGameManager : BaseMiniGameManager
     public bool isBradfordPearTreeFound = false;
     public bool wasBradfordPearTreeClicked = false;
     public bool wasPurpleLoosestrifeClicked = false;
-    public bool startPlantSorting = false;
+    public bool wasInvasivePlan2Clicked = false;
+    public bool wasInvasivePlant3Clicked = false;
     public bool wasReplaceWithSycamoreButtonClicked = false;
     public bool wasReplaceWithBoxElderButtonClicked = false;
     public bool wasReplaceWithAmericanLotusButtonClicked = false;
@@ -368,13 +335,37 @@ public class AnimalGameManager : BaseMiniGameManager
     // Update is called once per frame
     void Update()
     {   
+        // If bool lowerBankEntered is true and bool objective1Active is false...
+        if (LowerBankZoneTrigger.lowerBankEntered && !objective1Active)
+        {
+            LowerBankEntered(); //  Call method LowerBankEntered
+        }
+
+        // If bool midBankEntered is true and bool objective2Active is false...
+        if (MidBankZoneTrigger.midBankEntered && !objective2Active)
+        {
+            MidBankEntered(); // Call method MidBankEntered
+        }
+
+        // If bool upperBankEntered is true and objective3Active is false...
+        if (UpperBankZoneTrigger.upperBankEntered && !objective3Active)
+        {
+            UpperBankEntered(); // Call method UpperBankEntered
+        }
+
         AnimalClicked(); // Check if animal is clicked
 
         DialoguePanelClicked(); // Check if any dialogue panel is clicked
 
         StrikethroughText(); // Strikethrough text
 
-        EnableEventZones(); // Enable event zones if conditions are met
+
+        // If list count of animalNames equals 8...
+        if (animalNames.Count <= 8)
+        {
+            EnableEventZones(); // Enable Event Zones
+        }
+
 
         // If bool deerEventTriggered  is true and bool deerEventZoneComplete is fale
         if (DeerEventZone.deerEventTriggered && !deerEventZoneComplete)
@@ -465,26 +456,12 @@ public class AnimalGameManager : BaseMiniGameManager
         PlantSortingPanelClicked(); // Check if plant sorting panel is clicked
 
         ObjectivesComplete(); // Check if all objectives are complete
-
-        if (animalsFound >= 12 && plantsSwapped >= 12 && objectivesComplete && !trappingCompleted)
-        {
-            Debug.Log("All objectives are complete!"); // Debug.Log
-            endOfGamePanel.SetActive(true); // Show end of game panel
-            endOfGamePanelActive = true; // Set end of game panel active
-            returnButton.SetActive(true); // Show return button
-            trappingCompleted = true; // Set trappingCompleted to true   
-            Time.timeScale = 0; // Freeze time
-        }
     }
 
     // Method that triggers on start button press
     public void StartButton()
     {
-        exploringIndicatorPanel.SetActive(true); // show exploring indicator panel
         objectivesPanel.SetActive(true); // show objectives panel
-        LowerBankObjectives(); //  Call method LowerBankEntered
-        MidBankObjectives(); // Call method MidBankEntered
-        UpperBankObjectives(); // Call method UpperBankEntered
         objectivesShown = true; // set objectivesShown to true
         startButton.SetActive(false); // hide start button
         startPanel.SetActive(false); // hide start panel
@@ -498,9 +475,6 @@ public class AnimalGameManager : BaseMiniGameManager
     {
         objectivesPanel.SetActive(false); // hide objectives panel
         plantSortingPanel.SetActive(false); // hide plant sorting panel
-        exploringIndicatorPanel.SetActive(false); // hide exploring indicator panel
-        eventsObjectivesPanel.SetActive(false); // hide events objectives panel
-        eventsStartPanel.SetActive(false); // hide events start panel
         returnButton.SetActive(false); // hide return button
         startButton.SetActive(true); // show start button
         startPanel.SetActive(true); // show start panel
@@ -618,7 +592,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to update plants swapped counter text
     public void UpdatePlantsSwappedCounter()
     {
-        plantsSwappedCounterText.text = $"Plants Swapped: {plantsSwapped.ToString()} / 12"; // Update the text to show plants swapped
+        plantsSwappedCounterText.text = $"Plants Swapped: {plantsSwapped.ToString()} / 6"; // Update the text to show plants swapped
     }
 
     // Method to increment progress on click counter
@@ -655,7 +629,6 @@ public class AnimalGameManager : BaseMiniGameManager
                 clickCounter.SetActive(false); // Disable click counter
                 deerEventActive = false; // Set bool deerEventActive to false
                 deerEventZone.gameObject.SetActive(false); // Disable deer event zone
-                deerEventZoneArrow.gameObject.SetActive(false); // Disable deer event waypoint arrow
                 deerEventZonePanel.SetActive(true); // Enable deer event zone panel
                 deerEventZoneText.text = "Great Job! You dispersed that group of deer! Now native plants can grow!"; // Set text for deer event zone
                 DeerEventZone.isDeerEventEntered = false; // Set bool isDeerEventEntered to false
@@ -671,10 +644,9 @@ public class AnimalGameManager : BaseMiniGameManager
                 clickCounter.SetActive(false); // Disable click counter
                 birdEventActive = false; // Set bool birdEventActive to false
                 birdEventZone.gameObject.SetActive(false); // Disable bird event zone
-                birdEventZoneArrow.gameObject.SetActive(false); // Disable bird event waypoint arrow
                 birdEventZonePanel.SetActive(true); // Enable bird event zone panel
                 birdEventZoneText.text = "Great Job! The starlings have flown away! Now native birds can repopulate!"; // Set text for bird event zone
-                BirdEventZone.isBirdEventEntered = false; // Set bool isBirdEventEntered to false 
+                BirdEventZone.isBirdEventEntered = false; // Set bool isBirdEventEntered to false
                 slider.value = 0f; // Reset slider value to 0
                 CancelInvoke(); // Cancel any ongoing invocations
             }
@@ -687,7 +659,6 @@ public class AnimalGameManager : BaseMiniGameManager
                 clickCounter.SetActive(false); // Disable click counter
                 fishEventActive = false; // Set bool fishEventActive to false
                 fishEventZone.gameObject.SetActive(false); // Disable fish event zone
-                fishEventZoneArrow.gameObject.SetActive(false); // Disable fish event waypoint arrow
                 fishEventZonePanel.SetActive(true); // Enable fish event zone panel
                 fishEventZoneText.text = "Great Job! You caught the Asian Carp! Now Now the native fish are safe!"; // Set text for fish event zone
                 FishEventZone.isFishEventEntered = false; // Set bool isFishEventEntered to false
@@ -720,27 +691,9 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to enable event zones
     public void EnableEventZones()
     {
-        if (animalsFound >= 4 && !deerEventZoneComplete && !birdEventZoneComplete && !fishEventZoneComplete)
-        {
-            deerEventZone.gameObject.SetActive(true); // Enable deer event zone
-            birdEventZone.gameObject.SetActive(true); // Enable bird event zone
-            fishEventZone.gameObject.SetActive(true); // Enable fish event zone
-            deerEventZoneArrow.gameObject.SetActive(true); // Enable deer event waypoint arrow
-            birdEventZoneArrow.gameObject.SetActive(true); // Enable bird event waypoint arrow
-            fishEventZoneArrow.gameObject.SetActive(true); // Enable fish event waypoint arrow
-            groupOfDeer.SetActive(true); // Enable group of deer
-            groupOfStarlings.SetActive(true); // Enable group of starlings
-
-            // If events start panel is not active...
-            if (!eventsStartPanelActive && !dialogueIsActive)
-            {
-                eventsStartPanel.SetActive(true); // Show events start panel
-                eventsStartPanelActive = true; // Set events start panel active flag to true
-                EventObjectives(); // Call method to set event objectives
-                objectivesPanel.SetActive(false); // Hide objectives panel
-                objectivesShown = false; // Set objectivesShown to false
-            }
-        }   
+        deerEventZone.gameObject.SetActive(true); // Enable deer event zone
+        birdEventZone.gameObject.SetActive(true); // Enable bird event zone
+        fishEventZone.gameObject.SetActive(true); // Enable fish event zone
     }
 
     // Method to disable event zones
@@ -749,11 +702,6 @@ public class AnimalGameManager : BaseMiniGameManager
         deerEventZone.gameObject.SetActive(false); // Disable deer event zone
         birdEventZone.gameObject.SetActive(false); // Disable bird event zone
         fishEventZone.gameObject.SetActive(false); // Disable fish event zone
-        deerEventZoneArrow.gameObject.SetActive(false); // Disable deer event waypoint arrow
-        birdEventZoneArrow.gameObject.SetActive(false); // Disable bird event waypoint arrow
-        fishEventZoneArrow.gameObject.SetActive(false); // Disable fish event waypoint arrow
-        groupOfDeer.SetActive(false); // Disable group of deer
-        groupOfStarlings.SetActive(false); // Disable group of starlings
     }
 
     // Method to activate specific panel in index
@@ -819,6 +767,9 @@ public class AnimalGameManager : BaseMiniGameManager
         // If bool trappingCompleted is false
         if (trappingCompleted == false)
         {
+            EndText.text = "Great Job clearing out the invasive species!"; // Set end text for player
+            returnButton.SetActive(true); // Show return button
+
             // For Game Progression
             TriggerMiniGameCompleteEvent(0);   // Can add score pass through
             trappingCompleted = true; //set global variable to true
@@ -987,7 +938,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void ShowPlantSortingPanel()
     {
         // If bool eventZonesComplete is true and bool eventZonePanelActive is false and bool objectivesShown is true and bool plantSortingPanelActive is false...
-        if (eventZonesComplete && !eventZonePanelActive && objectivesShown && !plantSortingPanelActive && startPlantSorting)
+        if (eventZonesComplete && !eventZonePanelActive && objectivesShown && !plantSortingPanelActive)
         {
             plantSortingPanel.SetActive(true); // Show plant sorting panel
             plantSortingPanelActive = true; // Set the flag to true to indicate the panel is active
@@ -1151,12 +1102,12 @@ public class AnimalGameManager : BaseMiniGameManager
     }
 
     // Set subtext for objective 1
-    private void LowerBankObjectives()
+    private void LowerBankEntered()
     {
         Debug.Log("Player is exploring the lower bank."); //Debug.Log
         objective1Active = true; // Set bool objective1Active to true
         objectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
-        objectiveSubtext1.text = "Find and click on:"; //set objective subtext 1 text
+        objectiveSubtext1.text = "Find and interact with:"; //set objective subtext 1 text
         objectiveSubtext2.gameObject.SetActive(true); //show objective subtext 2
         objectiveSubtext2.text = "Snapping Turtle"; //set objective subtext 2 text
         objectiveSubtext3.gameObject.SetActive(true); //show objective subtext 3
@@ -1170,12 +1121,12 @@ public class AnimalGameManager : BaseMiniGameManager
     }
 
     // Set subtext for objective 2
-    private void MidBankObjectives()
+    private void MidBankEntered()
     {
         Debug.Log("Player is exploring the Mid Bank!"); //Debug.Log
         objective2Active = true; // Set bool objective2Active to true
         objectiveSubtext7.gameObject.SetActive(true); //show objective subtext 7
-        objectiveSubtext7.text = "Find and click on:"; //set objective subtext 7 text
+        objectiveSubtext7.text = "Find and interact with:"; //set objective subtext 7 text
         objectiveSubtext8.gameObject.SetActive(true); //show objective subtext 8
         objectiveSubtext8.text = "White - Tailed Deer"; //set objective subtext 8 text
         objectiveSubtext9.gameObject.SetActive(true); //show objective subtext 9
@@ -1184,13 +1135,13 @@ public class AnimalGameManager : BaseMiniGameManager
         objectiveSubtext10.text = "Muskrat"; //set objective subtext 10 text
     }
 
-    // Set subtext for objective 3
-    private void UpperBankObjectives()
+    // Set subtext for oibjective 3
+    private void UpperBankEntered()
     {
         Debug.Log("Player is exploring the Upper Bank!"); //Debug.Log
         objective3Active = true; // Set bool objective3Active to true
         objectiveSubtext11.gameObject.SetActive(true); //show objective subtext 11
-        objectiveSubtext11.text = "Find and click on:"; //set objective subtext 11 text
+        objectiveSubtext11.text = "Find and interact with:"; //set objective subtext 11 text
         objectiveSubtext12.gameObject.SetActive(true); //show objective subtext 12
         objectiveSubtext12.text = "European Starling"; //set objective subtext 12 text
         objectiveSubtext13.gameObject.SetActive(true); //show objective subtext 13
@@ -1199,19 +1150,6 @@ public class AnimalGameManager : BaseMiniGameManager
         objectiveSubtext14.text = "Raccoon"; //set objective subtext 14 text
         objectiveSubtext15.gameObject.SetActive(true); //show objective subtext 15
         objectiveSubtext15.text = "Bald Eagle"; //set objective subtext 15 text
-    }
-
-    // Set subtext for event objectives
-    private void EventObjectives()
-    {
-        Debug.Log("Player is completing the event objectives!"); //Debug.Log
-        eventsObjectivesPanel.SetActive(true); // Show event objectives panel
-        eventObjectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
-        eventObjectiveSubtext1.text = "Investigate the fish."; //set objective subtext 1 text
-        eventObjectiveSubtext2.gameObject.SetActive(true); //show objective subtext 2
-        eventObjectiveSubtext2.text = "Investigate the birds."; //set objective subtext 2 text
-        eventObjectiveSubtext3.gameObject.SetActive(true); //show objective subtext 3
-        eventObjectiveSubtext3.text = "Investigate the deer."; //set objective subtext 3 text
     }
 
     //  Method to called when deer event zone is entered
@@ -1224,8 +1162,8 @@ public class AnimalGameManager : BaseMiniGameManager
             deerEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
             deerEventZoneText.text = "Oh no! There are too many White-Tailed deer here. Look at how they have destroyed the plants. Click to drive them off."; // Set event zone text
-            //objectivesPanel.SetActive(false); // Hide objectives panel
-            //objectivesShown = false; // Set objectivesShown to false
+            objectivesPanel.SetActive(false); // Hide objectives panel
+            objectivesShown = false; // Set objectivesShown to false
             deerEventActive = true; // Set deer event active
             deerEventObjectiveSet = true; // Set bool deerEventObjectiveSet to true
         }  
@@ -1241,8 +1179,8 @@ public class AnimalGameManager : BaseMiniGameManager
             birdEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
             birdEventZoneText.text = "Check out those European Starling. They seem to have taken over those trees driving away native birds. Hurry! Click to shoo them away."; // Set event zone text
-            //objectivesPanel.SetActive(false); // Hide objectives panel
-            //objectivesShown = false; // Set objectivesShown to false
+            objectivesPanel.SetActive(false); // Hide objectives panel
+            objectivesShown = false; // Set objectivesShown to false
             birdEventActive = true; // Set bird event active
             birdEventObjectiveSet = true; // Set bool birdEventObjectiveSet to true
         } 
@@ -1258,8 +1196,8 @@ public class AnimalGameManager : BaseMiniGameManager
             fishEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
             fishEventZoneText.text = "Look at the river. There seems to be a disturbance. Large Asian Carp are attacking the native fish. We must relocate them. Quickly click on them to catch them."; // Set event zone text
-            //objectivesPanel.SetActive(false); // Hide objectives panel
-            //objectivesShown = false; // Set objectivesShown to false
+            objectivesPanel.SetActive(false); // Hide objectives panel
+            objectivesShown = false; // Set objectivesShown to false
             fishEventActive = true; // Set fish event active
             fishEventObjectiveSet = true; // Set bool fishEventObjectiveSet to true
         }
@@ -1467,21 +1405,6 @@ public class AnimalGameManager : BaseMiniGameManager
         {
             objectiveSubtext15.fontStyle = FontStyles.Strikethrough; // Strikethrough bald eagle text
         }
-
-        if (deerEventZoneComplete && !objectivesComplete)
-        {
-            eventObjectiveSubtext3.fontStyle = FontStyles.Strikethrough; // Strikethrough deer event text
-        }
-
-        if (birdEventZoneComplete && !objectivesComplete)
-        {
-            eventObjectiveSubtext2.fontStyle = FontStyles.Strikethrough; // Strikethrough bird event text
-        }
-
-        if (fishEventZoneComplete && !objectivesComplete)
-        {
-            eventObjectiveSubtext1.fontStyle = FontStyles.Strikethrough; // Strikethrough fish event text
-        }
     }
 
 
@@ -1493,17 +1416,10 @@ public class AnimalGameManager : BaseMiniGameManager
         {
             eventZonesComplete = true; // Set bool eventZonesCOmplete to true
             Debug.Log("All event zones are complete!"); // Debug.Log
-            eventsObjectivesPanel.SetActive(false); // Hide event objectives panel
-            objectivesPanel.SetActive(true); // Show objectives panel
-            objectivesShown = true; // Set objectivesShown to true
-            Invoke("StartPlantSorting", 2f); // Call StartPlantSorting after 2 seconds
         }
     }
 
-    public void StartPlantSorting()
-    {
-        startPlantSorting = true; // Set startPlantSorting to true to allow plant sorting panel to be shown
-    }
+
 
     // Method to check if all objectives are complete
     private void ObjectivesComplete()
@@ -1515,7 +1431,14 @@ public class AnimalGameManager : BaseMiniGameManager
             { 
                 objectivesComplete = true; // Set objectivesComplete to true if all objectives are met
             }
-        
+        // If all objectives are active and trapping is not completed...
+        if (objectivesComplete && !trappingCompleted)
+        {
+            Debug.Log("All objectives are complete!"); // Debug.Log
+            endOfGamePanel.SetActive(true); // Show end of game panel
+            endOfGamePanelActive = true; // Set end of game panel active
+            //DisableEventZones(); // Disable event zones
+        }
     }
 
      // For dev use. Skips game
