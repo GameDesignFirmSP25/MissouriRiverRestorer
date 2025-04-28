@@ -68,12 +68,13 @@ public class DynamicGuidebook : MonoBehaviour
      {
           if (!GBUI.isGuidebookOpen || Model == null) return;
 
-          float referenceAspect = 1920f / 1080f;
+          // Scaling before moved to separate canvas
+/*          float referenceAspect = 1920f / 1080f;
 
           float currentAspect = (float)Screen.width / Screen.height;
           float aspectRatioScale = currentAspect / referenceAspect;
 
-          float scaleWidth = Screen.width / 1920f;
+          float scaleWidth = Screen.width / 1920f;*/
 
 
           offset = currentObj.ModelOffset;
@@ -82,7 +83,7 @@ public class DynamicGuidebook : MonoBehaviour
                                                                            + Camera.main.transform.up * offset.y;
 
  
-          Model.transform.localScale = Vector3.one * currentObj.ModelScale * scaleWidth * aspectRatioScale;
+          Model.transform.localScale = Vector3.one * currentObj.ModelScale;
           ModelParent.gameObject.transform.Rotate(Vector3.up, Time.deltaTime * rotationSpeed);
      }
 
