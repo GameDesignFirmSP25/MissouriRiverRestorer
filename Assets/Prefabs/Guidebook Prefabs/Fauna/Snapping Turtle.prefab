@@ -72,11 +72,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_Size.x
-      value: 0.45
+      value: 4.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: m_Size.y
+      value: 3.31
       objectReference: {fileID: 0}
     - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_Size.z
-      value: 3.05
+      value: 7.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: m_Center.z
+      value: 1.74
       objectReference: {fileID: 0}
     - target: {fileID: 1008525795072701342, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_LocalScale.x
@@ -100,7 +108,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2f9dd6faeafb97f489ba23304d405b30, type: 2}
     - target: {fileID: 5299996111501757330, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_Name
-      value: Snapping Turtle (NM)
+      value: Snapping Turtle
       objectReference: {fileID: 0}
     - target: {fileID: 5692997988386021403, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_IsTrigger

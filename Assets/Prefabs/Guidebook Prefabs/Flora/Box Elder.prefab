@@ -70,6 +70,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: m_Size.x
+      value: 3.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: m_Size.y
+      value: 1.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: m_Size.z
+      value: 3.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: m_Center.x
+      value: -0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 576449795273231434, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: m_Center.y
+      value: 1.02
+      objectReference: {fileID: 0}
     - target: {fileID: 1008525795072701342, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
@@ -80,7 +100,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f4803fdb42edf054db2fdf2680515500, type: 2}
     - target: {fileID: 5299996111501757330, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_Name
-      value: Box Elder (NM)
+      value: Box Elder
       objectReference: {fileID: 0}
     - target: {fileID: 5692997988386021403, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_IsTrigger
