@@ -300,9 +300,6 @@ public class AnimalGameManager : BaseMiniGameManager
     private bool hasResetDialogueState = false;
     private bool hasResetEventPanelState = false;
     private bool hasResetPlantSortingPanelState = false;
-    private bool objective1Active = false;
-    private bool objective2Active = false;
-    private bool objective3Active = false;
     public bool objectivesComplete = false;
     public bool eventZonesComplete = false;
     public bool deerEventActive = false;
@@ -1092,7 +1089,6 @@ public class AnimalGameManager : BaseMiniGameManager
     private void LowerBankObjectives()
     {
         Debug.Log("Player is exploring the lower bank."); //Debug.Log
-        objective1Active = true; // Set bool objective1Active to true
         objectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
         objectiveSubtext1.text = "Find and click on:"; //set objective subtext 1 text
         objectiveSubtext2.gameObject.SetActive(true); //show objective subtext 2
@@ -1111,7 +1107,6 @@ public class AnimalGameManager : BaseMiniGameManager
     private void MidBankObjectives()
     {
         Debug.Log("Player is exploring the Mid Bank!"); //Debug.Log
-        objective2Active = true; // Set bool objective2Active to true
         objectiveSubtext7.gameObject.SetActive(true); //show objective subtext 7
         objectiveSubtext7.text = "Find and click on:"; //set objective subtext 7 text
         objectiveSubtext8.gameObject.SetActive(true); //show objective subtext 8
@@ -1126,7 +1121,6 @@ public class AnimalGameManager : BaseMiniGameManager
     private void UpperBankObjectives()
     {
         Debug.Log("Player is exploring the Upper Bank!"); //Debug.Log
-        objective3Active = true; // Set bool objective3Active to true
         objectiveSubtext11.gameObject.SetActive(true); //show objective subtext 11
         objectiveSubtext11.text = "Find and click on:"; //set objective subtext 11 text
         objectiveSubtext12.gameObject.SetActive(true); //show objective subtext 12
@@ -1457,16 +1451,17 @@ public class AnimalGameManager : BaseMiniGameManager
             objectiveSubtext15.fontStyle = FontStyles.Strikethrough; // Strikethrough bald eagle text
         }
 
+        // If bool deerEventZoneComplete is true and bool objectivesComplete is false...
         if (deerEventZoneComplete && !objectivesComplete)
         {
             eventObjectiveSubtext3.fontStyle = FontStyles.Strikethrough; // Strikethrough deer event text
         }
-
+        // If bool birdEventZoneComplete is true and bool objectivesComplete is false...
         if (birdEventZoneComplete && !objectivesComplete)
         {
             eventObjectiveSubtext2.fontStyle = FontStyles.Strikethrough; // Strikethrough bird event text
         }
-
+        // If bool fishEventZoneComplete is true and bool objectivesComplete is false...
         if (fishEventZoneComplete && !objectivesComplete)
         {
             eventObjectiveSubtext1.fontStyle = FontStyles.Strikethrough; // Strikethrough fish event text
@@ -1497,21 +1492,6 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to check if all objectives are complete
     private void ObjectivesComplete()
     {
-        Debug.Log("ObjectivesComplete() called.");
-
-        Debug.Log($"isAsianCarpFound: {isAsianCarpFound}");
-        Debug.Log($"isBaldEagleFound: {isBaldEagleFound}");
-        Debug.Log($"isBandedPennantDragonflyFound: {isBandedPennantDragonflyFound}");
-        Debug.Log($"isBeaverFound: {isBeaverFound}");
-        Debug.Log($"isCommonGarterSnakeFound: {isCommonGarterSnakeFound}");
-        Debug.Log($"isEasternStarlingFound: {isEasternStarlingFound}");
-        Debug.Log($"isMuskratFound: {isMuskratFound}");
-        Debug.Log($"isNorthernMapTurtleFound: {isNorthernMapTurtleFound}");
-        Debug.Log($"isPaintedLadyButterflyFound: {isPaintedLadyButterflyFound}");
-        Debug.Log($"isRaccoonFound: {isRaccoonFound}");
-        Debug.Log($"isSnappingTurtleFound: {isSnappingTurtleFound}");
-        Debug.Log($"isWhiteTailedDeerFound: {isWhiteTailedDeerFound}");
-
         // Check if all objectives are met
         if (isAsianCarpFound && isBaldEagleFound && isBandedPennantDragonflyFound && isBeaverFound && isCommonGarterSnakeFound
             && isEasternStarlingFound && isBeaverFound && isMuskratFound && isNorthernMapTurtleFound && isPaintedLadyButterflyFound
@@ -1595,7 +1575,6 @@ public class AnimalGameManager : BaseMiniGameManager
           Debug.Log("All objectives are complete!"); // Debug.Log
           endOfGamePanel.SetActive(true); // Show end of game panel
           endOfGamePanelActive = true; // Set end of game panel active
-          //DisableEventZones(); // Disable event zones
           TriggerMiniGameCompleteEvent(0);
           trappingCompleted = true; //set global variable to true
           SceneManager.LoadScene("Overworld");
