@@ -6,6 +6,8 @@ public class FishEventZone : MonoBehaviour
     public static bool isFishEventEntered = false; 
     public static bool fishEventTriggered = false;
 
+    public AnimalGameManager animalGameManager;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -16,6 +18,8 @@ public class FishEventZone : MonoBehaviour
                 isFishEventEntered = true;
                 fishEventTriggered = true;
                 Debug.Log("Fish event triggered.");
+
+                animalGameManager.FishEventZoneEntered();
             }
             else
             {

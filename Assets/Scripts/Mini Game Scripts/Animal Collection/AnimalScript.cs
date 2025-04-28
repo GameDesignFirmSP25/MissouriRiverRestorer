@@ -42,7 +42,7 @@ public class AnimalScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Update method called."); // Debug.Log
+        //Debug.Log("Update method called."); // Debug.Log
         timer += Time.deltaTime; // timer is equal to itslef plus Time.deltaTime 
 
         // If timer is greater than or equal to wanderTimer...
