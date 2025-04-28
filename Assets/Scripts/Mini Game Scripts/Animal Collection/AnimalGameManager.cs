@@ -776,6 +776,7 @@ public class AnimalGameManager : BaseMiniGameManager
     public void ReturnButton()
     {
         playerInput.controlsLocked = false; // Lock player controls
+        Time.timeScale = 1;
         SceneManager.LoadScene("Overworld"); //load main scene
     }
 
@@ -1591,7 +1592,8 @@ public class AnimalGameManager : BaseMiniGameManager
             playerInput.controlsLocked = true; // Lock player controls
             returnButton.SetActive(true); // Show return button
             trappingCompleted = true; // Set trappingCompleted to true   
-        }
+            TriggerMiniGameCompleteEvent(0);
+          }
     }
 
      // For dev use. Skips game
