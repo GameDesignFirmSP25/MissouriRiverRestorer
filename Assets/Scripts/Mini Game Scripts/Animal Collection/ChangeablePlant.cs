@@ -118,7 +118,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -155,7 +155,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -191,7 +191,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -227,7 +227,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -263,7 +263,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -299,7 +299,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -347,7 +347,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -390,7 +390,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -433,7 +433,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -476,7 +476,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -519,7 +519,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -562,7 +562,7 @@ public class ChangeablePlant : MonoBehaviour
                         }
 
                         Collider collider = GetComponent<Collider>();
-                        if (collider != null)
+                        if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
                             Debug.Log($"Collider disabled for {plantID}");
@@ -592,7 +592,7 @@ public class ChangeablePlant : MonoBehaviour
         //// Optionally reset the local position, rotation, and scale
         //instantiatedPrefab.transform.localPosition = parentObject.transform.position;
         //instantiatedPrefab.transform.localRotation = Quaternion.identity;
-        //isSwapped = false;
+        isSwapped = false;
 
         Debug.Log($"Prefab instantiated as a child at {position} with rotation {rotation}");
     }

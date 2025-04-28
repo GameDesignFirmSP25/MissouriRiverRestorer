@@ -372,71 +372,17 @@ public class AnimalGameManager : BaseMiniGameManager
 
         DialoguePanelClicked(); // Check if any dialogue panel is clicked
 
+        CheckForPreviouslyClickedAnimals(); // Check if any animals were previously clicked
+
         StrikethroughText(); // Strikethrough text
 
         EnableEventZones(); // Enable event zones if conditions are met
 
-        // If bool deerEventTriggered  is true and bool deerEventZoneComplete is fale
-        if (DeerEventZone.deerEventTriggered && !deerEventZoneComplete)
-        {
-            Debug.Log("Deer event zone condition met. Triggering DeerEventZone."); // Debug.Log
-            DeerEventZoneEntered(); // Call method DeerEventZoneEntered
-        }
-        else
-        {
-            // If bool deerEvetTriggered is not true...
-            if (!DeerEventZone.deerEventTriggered)
-            {
-                Debug.Log("Deer Event not triggered yet."); //Debug.Log
-            }
+        DeerEventZoneEntered(); // Check if deer event zone is entered
 
-            // If bool deerEventComplete is true...
-            if (deerEventZoneComplete)
-            {
-                Debug.Log("Deer Event zone already completed."); // Debug.Log
-            }
-        }
+        BirdEventZoneEntered(); // Check if bird event zone is entered
 
-        // If bool birdEventTriggered and bool BirdEventZoneComplete is false...
-        if (BirdEventZone.birdEventTriggered && !birdEventZoneComplete)
-        {
-            Debug.Log("Bird event zone condition met. Triggering BirdEventZone."); // Debug.Log
-            BirdEventZoneEntered(); // Call method BirdEventZoneEntered
-        }
-        else
-        {
-            // If bool birdEventTriggered is false...
-            if (!BirdEventZone.birdEventTriggered)
-            {
-                Debug.Log("Bird Event not triggered yet."); // Debug.Log
-            }
-
-            // If bool birdEventZoneComplete is true...
-            if (birdEventZoneComplete)
-            {
-                Debug.Log("Bird Event zone already completed."); // Debug.Log
-            }
-        }
-        // If bool fishEventTriggered is true and fishEventComplete is false...
-        if (FishEventZone.fishEventTriggered && !fishEventZoneComplete)
-        {
-            Debug.Log("Fish event zone condition met. Triggering FishEventZone."); // Debug.Log
-            FishEventZoneEntered(); // Call method FishEventZoneEntered
-        }
-        else
-        {
-            // If bool fishEventTrigerred is false...
-            if (!FishEventZone.fishEventTriggered)
-            {
-                Debug.Log("Fish Event not triggered yet."); // Debug.Log
-            }
-
-            // If bool fishEventZoneComplete is true...
-            if (fishEventZoneComplete)
-            {
-                Debug.Log("Fish Event zone already completed."); // Debug.Log
-            }
-        }
+        FishEventZoneEntered(); // Check if fish event zone is entered
 
         EventPanelClicked(); // Call method EventPanelClicked
 
@@ -466,15 +412,7 @@ public class AnimalGameManager : BaseMiniGameManager
 
         ObjectivesComplete(); // Check if all objectives are complete
 
-        if (animalsFound >= 12 && plantsSwapped >= 12 && objectivesComplete && !trappingCompleted)
-        {
-            Debug.Log("All objectives are complete!"); // Debug.Log
-            endOfGamePanel.SetActive(true); // Show end of game panel
-            endOfGamePanelActive = true; // Set end of game panel active
-            returnButton.SetActive(true); // Show return button
-            trappingCompleted = true; // Set trappingCompleted to true   
-            Time.timeScale = 0; // Freeze time
-        }
+        RunEndGameCycle();
     }
 
     // Method that triggers on start button press
@@ -1217,51 +1155,102 @@ public class AnimalGameManager : BaseMiniGameManager
     //  Method to called when deer event zone is entered
     public void DeerEventZoneEntered()
     {
-        // If bool dialogueIsActive is false and bool eventZonePanelActive is false and bool deerEventObjectiveSet is false...
-        if (!dialogueIsActive && !eventZonePanelActive && !deerEventObjectiveSet)
+        // If bool deerEventTriggered  is true and bool deerEventZoneComplete is fale
+        if (DeerEventZone.deerEventTriggered && !deerEventZoneComplete && !deerEventActive)
         {
+            Debug.Log("Deer event zone condition met. Triggering DeerEventZone."); // Debug.Log
+
             Debug.Log("Start deer event."); // Debug.Log
             deerEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
             deerEventZoneText.text = "Oh no! There are too many White-Tailed deer here. Look at how they have destroyed the plants. Click to drive them off."; // Set event zone text
-            //objectivesPanel.SetActive(false); // Hide objectives panel
-            //objectivesShown = false; // Set objectivesShown to false
             deerEventActive = true; // Set deer event active
             deerEventObjectiveSet = true; // Set bool deerEventObjectiveSet to true
-        }  
+        }
+
+        // If bool deerEvetTriggered is not true...
+        else if (!DeerEventZone.deerEventTriggered)
+        {
+            Debug.Log("Deer Event not triggered yet."); //Debug.Log
+        }
+
+        // If bool deerEventZoneComplete is true...
+        else if (deerEventZoneComplete)
+        {
+                Debug.Log("Deer Event zone already completed."); // Debug.Log
+        }
+
+        else
+        {
+            Debug.LogWarning($"Deer event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, deerEventObjectiveSet={deerEventObjectiveSet}");
+        }
     }
 
     // Method to called when bird event zone is entered
     public void BirdEventZoneEntered()
     {
-        // If bool dialogueIsActive is false and bool eventZonePanelActive is false and bool birdEventObjectiveSet is false...
-        if (!dialogueIsActive && !eventZonePanelActive && !birdEventObjectiveSet)
+        // If bool birdEventTriggered and bool BirdEventZoneComplete is false...
+        if (BirdEventZone.birdEventTriggered && !birdEventZoneComplete && !birdEventActive)
         {
+            Debug.Log("Bird event zone condition met. Triggering BirdEventZone."); // Debug.Log
+
             Debug.Log("Start bird event."); // Debug.Log
             birdEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
             birdEventZoneText.text = "Check out those European Starling. They seem to have taken over those trees driving away native birds. Hurry! Click to shoo them away."; // Set event zone text
-            //objectivesPanel.SetActive(false); // Hide objectives panel
-            //objectivesShown = false; // Set objectivesShown to false
             birdEventActive = true; // Set bird event active
             birdEventObjectiveSet = true; // Set bool birdEventObjectiveSet to true
-        } 
+        }
+
+        // If bool birdEventTriggered is false...
+        else if (!BirdEventZone.birdEventTriggered)
+        {
+            Debug.Log("Bird Event not triggered yet."); // Debug.Log
+        }
+
+        // If bool birdEventZoneComplete is true...
+        else if (birdEventZoneComplete)
+        {
+            Debug.Log("Bird Event zone already completed."); // Debug.Log
+        }
+        
+        else
+        {
+            Debug.LogWarning($"Bird event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, birdEventObjectiveSet={birdEventObjectiveSet}");
+        }
     }
 
     // Method to called when fish event zone is entered
     public void FishEventZoneEntered()
     {
-        // If bool dialogueIsActive is false and bool eventZonePanelActive is false and bool fishEventObjectiveSet is false...
-        if (!dialogueIsActive && !eventZonePanelActive && !fishEventObjectiveSet)
+        // If bool fishEventTriggered is true and fishEventComplete is false...
+        if (FishEventZone.fishEventTriggered && !fishEventZoneComplete && !fishEventActive)
         {
+            Debug.Log("Fish event zone condition met. Triggering FishEventZone."); // Debug.Log
+
             Debug.Log("Start fish event."); // Debug.Log
             fishEventZonePanel.SetActive(true); // Show event zone panel
             eventZonePanelActive = true; // Set event zone panel active
             fishEventZoneText.text = "Look at the river. There seems to be a disturbance. Large Asian Carp are attacking the native fish. We must relocate them. Quickly click on them to catch them."; // Set event zone text
-            //objectivesPanel.SetActive(false); // Hide objectives panel
-            //objectivesShown = false; // Set objectivesShown to false
             fishEventActive = true; // Set fish event active
-            fishEventObjectiveSet = true; // Set bool fishEventObjectiveSet to true
+            fishEventObjectiveSet = true; // Set bool fishEventObjectiveSet
+        }
+
+        // If bool fishEventTrigerred is false...
+        else if (!FishEventZone.fishEventTriggered)
+        {
+            Debug.Log("Fish Event not triggered yet."); // Debug.Log
+
+        }
+        // If bool fishEventZoneComplete is true...
+        else if (fishEventZoneComplete)
+        {
+            Debug.Log("Fish Event zone already completed."); // Debug.Log
+        }
+
+        else
+        {
+            Debug.LogWarning($"Fish event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, fishEventObjectiveSet={fishEventObjectiveSet}");
         }
     }
 
@@ -1508,14 +1497,96 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to check if all objectives are complete
     private void ObjectivesComplete()
     {
+        Debug.Log("ObjectivesComplete() called.");
+
+        Debug.Log($"isAsianCarpFound: {isAsianCarpFound}");
+        Debug.Log($"isBaldEagleFound: {isBaldEagleFound}");
+        Debug.Log($"isBandedPennantDragonflyFound: {isBandedPennantDragonflyFound}");
+        Debug.Log($"isBeaverFound: {isBeaverFound}");
+        Debug.Log($"isCommonGarterSnakeFound: {isCommonGarterSnakeFound}");
+        Debug.Log($"isEasternStarlingFound: {isEasternStarlingFound}");
+        Debug.Log($"isMuskratFound: {isMuskratFound}");
+        Debug.Log($"isNorthernMapTurtleFound: {isNorthernMapTurtleFound}");
+        Debug.Log($"isPaintedLadyButterflyFound: {isPaintedLadyButterflyFound}");
+        Debug.Log($"isRaccoonFound: {isRaccoonFound}");
+        Debug.Log($"isSnappingTurtleFound: {isSnappingTurtleFound}");
+        Debug.Log($"isWhiteTailedDeerFound: {isWhiteTailedDeerFound}");
+
         // Check if all objectives are met
         if (isAsianCarpFound && isBaldEagleFound && isBandedPennantDragonflyFound && isBeaverFound && isCommonGarterSnakeFound
             && isEasternStarlingFound && isBeaverFound && isMuskratFound && isNorthernMapTurtleFound && isPaintedLadyButterflyFound
-            && isRaccoonFound && isSnappingTurtleFound && isWhiteTailedDeerFound && isBradfordPearTreeFound && eventZonesComplete)
+            && isRaccoonFound && isSnappingTurtleFound && isWhiteTailedDeerFound)
             { 
                 objectivesComplete = true; // Set objectivesComplete to true if all objectives are met
             }
         
+    }
+
+    // Method to check if any animal has been previously clicked
+    private void CheckForPreviouslyClickedAnimals()
+    {
+        if (RaycastScript.wasAsianCarpPreviouslyClicked && !isAsianCarpFound)
+        {
+            isAsianCarpFound = true; // Set isAsianCarpFound to true if Asian Carp was previously clicked
+        }
+        if (RaycastScript.wasBaldEaglePreviouslyClicked && !isBaldEagleFound)
+        {
+            isBaldEagleFound = true; // Set isBaldEagleFound to true if Bald Eagle was previously clicked
+        }
+        if (RaycastScript.wasBandedPennantDragonflyPreviouslyClicked && !isBandedPennantDragonflyFound)
+        {
+            isBandedPennantDragonflyFound = true; // Set isBandedPennantDragonflyFound to true if Banded Pennant Dragonfly was previously clicked
+        }
+        if (RaycastScript.wasBeaverPreviouslyClicked && !isBeaverFound)
+        {
+            isBeaverFound = true; // Set isBeaverFound to true if Beaver was previously clicked
+        }
+        if (RaycastScript.wasGarterSnakePreviouslyClicked && !isCommonGarterSnakeFound)
+        {
+            isCommonGarterSnakeFound = true; // Set isCommonGarterSnakeFound to true if Common Garter Snake was previously clicked
+        }
+        if (RaycastScript.wasEasternStarlingPreviouslyClicked && !isEasternStarlingFound)
+        {
+            isEasternStarlingFound = true; // Set isEasternStarlingFound to true if Eastern Starling was previously clicked
+        }
+        if (RaycastScript.wasMuskratPreviouslyClicked && !isMuskratFound)
+        {
+            isMuskratFound = true; // Set isMuskratFound to true if Muskrat was previously clicked
+        }
+        if (RaycastScript.wasSnappingTurtlePreviouslyClicked && !isSnappingTurtleFound)
+        {
+            isSnappingTurtleFound = true; // Set isSnappingTurtleFound to true if Snapping Turtle was previously clicked
+        }
+        if (RaycastScript.wasRaccoonPreviouslyClicked && !isRaccoonFound)
+        {
+            isRaccoonFound = true; // Set isRaccoonFound to true if Raccoon was previously clicked
+        }
+        if (RaycastScript.wasNorthernMapTurtlePreviouslyClicked && !isNorthernMapTurtleFound)
+        {
+            isNorthernMapTurtleFound = true; // Set isNorthernMapTurtleFound to true if Northern Map Turtle was previously clicked
+        }
+        if (RaycastScript.wasPaintedLadyButterflyPreviouslyClicked && !isPaintedLadyButterflyFound)
+        {
+            isPaintedLadyButterflyFound = true; // Set isPaintedLadyButterflyFound to true if Painted Lady Butterfly was previously clicked
+        }
+        if (RaycastScript.wasWhiteTailedDeerPreviouslyClicked && !isWhiteTailedDeerFound)
+        {
+            isWhiteTailedDeerFound = true; // Set isWhiteTailedDeerFound to true if White-Tailed Deer was previously clicked
+        }
+    }
+
+    private void RunEndGameCycle()
+    {
+        Debug.Log($"plants swapped: {plantsSwapped}, objectives complete: {objectivesComplete}, event zones complete: {eventZonesComplete}, trapping completed: {trappingCompleted}"); // Debug.Log
+        if (plantsSwapped == 12 && objectivesComplete && eventZonesComplete && !trappingCompleted)
+        {
+            Debug.Log("All objectives are complete!"); // Debug.Log
+            endOfGamePanel.SetActive(true); // Show end of game panel
+            endOfGamePanelActive = true; // Set end of game panel active
+            returnButton.SetActive(true); // Show return button
+            trappingCompleted = true; // Set trappingCompleted to true   
+            Time.timeScale = 0; // Freeze time
+        }
     }
 
      // For dev use. Skips game

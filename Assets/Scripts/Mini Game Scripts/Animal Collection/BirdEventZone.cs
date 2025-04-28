@@ -5,7 +5,9 @@ public class BirdEventZone : MonoBehaviour
 {
     public static bool isBirdEventEntered = false; 
     public static bool birdEventTriggered = false; 
-    
+
+    public AnimalGameManager animalGameManager;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +19,8 @@ public class BirdEventZone : MonoBehaviour
                 isBirdEventEntered = true;
                 birdEventTriggered = true; 
                 Debug.Log("Bird event triggered.");
+
+                animalGameManager.BirdEventZoneEntered(); // Call the method in AnimalGameManager to handle the event
             }
             else
             {
