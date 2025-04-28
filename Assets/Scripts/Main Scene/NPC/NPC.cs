@@ -57,7 +57,7 @@ public class NPC : MonoBehaviour
           {
                Vector3 direction = (playerTransform.position - transform.position).normalized;
                Quaternion lookRotation = Quaternion.LookRotation(direction);
-               // Model axis not aligned with Unity. Add 90 to y rotation to compensate
+               // Model axis not aligned with Unity. 
                lookRotation.eulerAngles = new Vector3(0f, lookRotation.eulerAngles.y, 0f);
                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Adjust the speed (5f) as needed
           }
