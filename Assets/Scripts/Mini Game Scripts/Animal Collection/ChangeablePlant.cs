@@ -60,15 +60,6 @@ public class ChangeablePlant : MonoBehaviour
 
     public void SwapPlants()
     {
-        // Pop up panel
-
-        // If plant is Bradford Pear Tree, swap with Sycamore Tree
-        // Sycamore becomes plantParent
-
-
-        // If plant is invasive plant from originalPlant array, choose native plant from swappedPlant array. 
-        // Chosen plant becomes plantParent
-
         // Ensure the plant is not already swapped
         if (isSwapped)
         {
@@ -589,9 +580,6 @@ public class ChangeablePlant : MonoBehaviour
         // Set the parent of the instantiated prefab
         instantiatedPrefab.transform.SetParent(transform);
 
-        //// Optionally reset the local position, rotation, and scale
-        //instantiatedPrefab.transform.localPosition = parentObject.transform.position;
-        //instantiatedPrefab.transform.localRotation = Quaternion.identity;
         isSwapped = false;
 
         Debug.Log($"Prefab instantiated as a child at {position} with rotation {rotation}");
