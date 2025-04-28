@@ -68,17 +68,17 @@ public class NPC : MonoBehaviour
           }
 
           //  If the player is not within distance
-          if (interactSprite.gameObject.activeSelf && !IsWithinInteractDistance())
+          if (interactText.gameObject.activeSelf && !IsWithinInteractDistance())
           {
-               interactSprite.gameObject.SetActive(false); // Deactivate the interact sprite
+               //interactSprite.gameObject.SetActive(false); // Deactivate the interact sprite
                interactText.SetActive(false); // Deactivate the interact text
                isWithinInteractDistance = false; // set bool isWithinInteractDistance to false
           }
 
           // Else  if the player is within distance...
-          else if (!interactSprite.gameObject.activeSelf && IsWithinInteractDistance())
+          else if (!interactText.gameObject.activeSelf && IsWithinInteractDistance())
           {
-               interactSprite.gameObject.SetActive(true); // Activate the interact sprite
+               //interactSprite.gameObject.SetActive(true); // Activate the interact sprite
                interactText.SetActive(true); // Activate the interact text
                isWithinInteractDistance = true; // set bool isWithinInteractDistance to true
           }
