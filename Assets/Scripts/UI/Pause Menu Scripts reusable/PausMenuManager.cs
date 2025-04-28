@@ -22,6 +22,9 @@ public class PausMenuManager : MonoBehaviour
 
     public bool isPaused = false;
 
+     public GameObject player;
+     public Vector3 returnPos = new Vector3();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -73,7 +76,12 @@ public class PausMenuManager : MonoBehaviour
     }
     public void PosReset()
     {
-    
+          Resume();
+          GameObject controller = player.GetComponent<CharacterController>().gameObject;
+          controller.SetActive(false);
+          player.transform.localPosition = returnPos;
+          controller.SetActive(true);
+          pauseButton.SetActive(true);
     }
     public void QuitGame()
     {
