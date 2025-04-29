@@ -26,7 +26,7 @@ public class SpawnManager : MonoBehaviour
     private float maximumXOnGround = 240f;
     private float yPositionOnGround = 0f;
     private float minimumZOnGround = -20f;
-    private float maximumZOnGround = 226f;
+    private float maximumZOnGround = 150f;
     private float xPositionInRiver = -282f;
     private float yPositionInRiver = -20f;
     private float minimumZInRiver = -126.5f;
