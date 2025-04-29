@@ -2733,10 +2733,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
-    - target: {fileID: 7153795939298224609, guid: cc179c849aed8044a8293ba69d032298, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: db97f06a89210274f8f8fc7e1b990a80, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4299,11 +4295,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 417097139295012727, guid: cc179c849aed8044a8293ba69d032298, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -65.46838
+      value: -77.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 417097139295012727, guid: cc179c849aed8044a8293ba69d032298, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 417097139295012727, guid: cc179c849aed8044a8293ba69d032298, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -29.591156
+      value: -28.2
       objectReference: {fileID: 0}
     - target: {fileID: 417097139295012727, guid: cc179c849aed8044a8293ba69d032298, type: 3}
       propertyPath: m_LocalRotation.w
