@@ -65,6 +65,7 @@ public class PausMenuManager : MonoBehaviour
         isPaused = false;
        
         PauseUiPanel.SetActive(false);
+          pauseButton.SetActive(true);
     }
     public void MainMenu()
     {
