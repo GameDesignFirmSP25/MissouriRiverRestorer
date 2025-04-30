@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using StarterAssets; // Assuming you have a StarterAssets namespace for player inputs
 
 public class GasEffectsPanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
     public bool isEffectsOfGasPanelClicked = false; // Variable to track if the panel has been clicked
+
+    public StarterAssetsInputs playerInput;
 
     public WaterTestingManager gameManagerScript;
 
@@ -15,5 +18,6 @@ public class GasEffectsPanelClickHandler : MonoBehaviour, IPointerClickHandler
         WaterTestingManager.effectsOfGasPanelActive = false; // Set bool effectsOfGasPanelActive to false;
         gameManagerScript.AreObjectivesComplete(); // Call the method to check if all objectives are complete
         WaterTestingManager.aPanelIsActive = false; // Set bool aPanelIsActive to false
+        playerInput.controlsLocked = false; // Unlock player controls
     }
 }

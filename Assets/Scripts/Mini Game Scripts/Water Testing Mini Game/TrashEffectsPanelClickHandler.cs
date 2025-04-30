@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using StarterAssets; // Importing StarterAssets namespace for player input handling
 
 public class TrashEffectsPanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
     public bool isEffectsOfTrashPanelClicked = false; // Variable to track if the panel has been clicked
+
+    public StarterAssetsInputs playerInput;
 
     public WaterTestingManager gameManagerScript;
 
@@ -15,5 +18,6 @@ public class TrashEffectsPanelClickHandler : MonoBehaviour, IPointerClickHandler
         WaterTestingManager.effectsOfTrashPanelActive = false; // Set bool effectsOfTrashPanelActive to false;
         gameManagerScript.AreObjectivesComplete(); // Call the method to check if all objectives are complete
         WaterTestingManager.aPanelIsActive = false; // Set bool aPanelIsActive to false
+        playerInput.controlsLocked = false; // Unlock player controls
     }
 }

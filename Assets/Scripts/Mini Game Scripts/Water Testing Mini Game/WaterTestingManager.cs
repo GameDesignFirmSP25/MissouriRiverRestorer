@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.Events;
+using StarterAssets;
 
 public class WaterTestingManager : BaseMiniGameManager
 {
@@ -48,6 +49,7 @@ public class WaterTestingManager : BaseMiniGameManager
     private Slider slider;
     public Button StartBtn;
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
+    public StarterAssetsInputs playerInput; // Reference to StarterAssetsInputs script
 
     [Header("Scripts")]
     public Raycast raycastScript;
@@ -272,6 +274,7 @@ public class WaterTestingManager : BaseMiniGameManager
         panels[panelIndex].SetActive(false); // Activate the specified panel
         aPanelIsActive = false; // Set the active panel flag to false
         Debug.Log("Panel " + panelIndex + " deactivated."); // Debug.Log
+        playerInput.controlsLocked = false; // Unlock player controls when no panel is active
     }
 
     // Method to activate a specific panel
@@ -282,6 +285,7 @@ public class WaterTestingManager : BaseMiniGameManager
             panels[panelIndex].SetActive(true); // Activate the specified panel
             aPanelIsActive = true; // Set the active panel flag to true
             Debug.Log("Panel " + panelIndex + " activated."); // Debug.Log
+            playerInput.controlsLocked = true; // Lock player controls when a panel is active
         }
         else
         {

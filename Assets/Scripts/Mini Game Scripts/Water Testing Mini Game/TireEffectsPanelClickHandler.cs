@@ -1,9 +1,12 @@
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TireEffectsPanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
     public bool isEffectsOfTirePanelClicked = false; // Variable to track if the panel has been clicked
+
+    public StarterAssetsInputs playerInput;
 
     public WaterTestingManager gameManagerScript;
 
@@ -15,5 +18,6 @@ public class TireEffectsPanelClickHandler : MonoBehaviour, IPointerClickHandler
         WaterTestingManager.effectsOfTirePanelActive = false; // Set bool effectsOfTirePanelActive to false;
         gameManagerScript.AreObjectivesComplete(); // Call the method to check if all objectives are complete
         WaterTestingManager.aPanelIsActive = false; // Set bool aPanelIsActive to false
+        playerInput.controlsLocked = false; // Unlock player controls
     }
 }

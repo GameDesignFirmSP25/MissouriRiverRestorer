@@ -4,14 +4,24 @@ using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject[] trashOnGroundPrefabs;
+    public GameObject[] aluminumCanPrefabs;
     public GameObject[] trashInRiverPrefabs;
     public GameObject[] fishPrefabs;
-    public GameObject[] mammalPrefabs;
+    public GameObject[] deerPrefabs;
+    public GameObject beaverPrefab;
+    public GameObject raccoonPrefab;
     public GameObject testTubePrefab;
+    public GameObject trashBagPrefab;
+    public GameObject gasCanPrefab;
+    public GameObject tirePrefab;
 
-    private int numberOfMammalsToSpawn = 7;
-    private int numberOfTrashOnGroundToSpawn = 30;
+    private int numberOfDeerToSpawn = 4;
+    private int numberOfBeaverToSpawn = 2;
+    private int numberOfRaccoonToSpawn = 2;
+    private int numberOfTrashBagsToSpawn = 30;
+    private int numberOfGasCansToSpawn = 10;
+    private int numberOfAluminumCansToSpawn = 10;
+    private int numberOfTiresToSpawn = 10;
     private int maximumTrashInRiver = 20;
     private int spawnedTrashInRiverCount = 0;
     private int minimumFishInRiver = 8;
@@ -22,15 +32,22 @@ public class SpawnManager : MonoBehaviour
 
     private float spawnTime = 0.05f;
     private float spawnDelay = 2.5f;
-    private float minimumXOnGround = -285f;
-    private float maximumXOnGround = 240f;
-    private float yPositionOnGround = 0f;
-    private float minimumZOnGround = -20f;
-    private float maximumZOnGround = 226f;
-    private float xPositionInRiver = -282f;
-    private float yPositionInRiver = -20f;
-    private float minimumZInRiver = -126.5f;
-    private float maximumZInRiver = -61.5f;
+    private float minimumXOnGround = -62f;
+    private float maximumXOnGround = -13f;
+    private float yPositionOnGroundForDeer = 5f;
+    private float yPositionOnGroundForBeaver = 1.4f;
+    private float yPositionOnGroundForRaccoon = 2f;
+    private float yPositionOnGroundForTrashBag = 1.25f;
+    private float yPositionOnGroundForGasCan = 5f;
+    private float yPositionOnGroundForAluminumCan = 2f;
+    private float yPositionOnGroundForTire = 1f;
+    private float minimumZOnGround = -152f;
+    private float maximumZOnGround = -9f;
+    private float minimumXInRiver = 20f;
+    private float maximumXInRiver = 130f;
+    private float yPositionInRiver = 0f;
+    private float minimumZInRiver = -41f;
+    private float maximumZInRiver = -100f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,7 +64,9 @@ public class SpawnManager : MonoBehaviour
         if (WaterTestingManager.isFirstWaterTestComplete)
         {
             spawnDelay = 1f;
-            numberOfMammalsToSpawn = 20;
+            numberOfDeerToSpawn = 6;
+            numberOfBeaverToSpawn = 5;
+            numberOfRaccoonToSpawn = 5;
             SpawnMammals();
             InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
             InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
@@ -65,24 +84,59 @@ public class SpawnManager : MonoBehaviour
     // Spawn Mammals
     private void SpawnMammals()
     {
-        // For, i equals 0, i is less than numberOfTrashOnGroundToSpawn; when called i is equal to itself plus 1
-        for (int i = 0; i < numberOfMammalsToSpawn; i++)
+        // For, i equals 0, i is less than numberOfMammalsToSpawn; when called i is equal to itself plus 1
+        for (int i = 0; i < numberOfDeerToSpawn; i++)
         {
-            int mammalIndex = Random.Range(0, mammalPrefabs.Length); // mammalIndex equals a number with in range of 0 to 2
-            Instantiate(mammalPrefabs[mammalIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
-                yPositionOnGround, Random.Range(minimumZOnGround, maximumZOnGround)), mammalPrefabs[mammalIndex].transform.rotation); // Instantiate mammalPrefab at mammalIndex at new Vector3
+            int deerIndex = Random.Range(0, deerPrefabs.Length); // mammalIndex equals a number with in range of 0 to 2
+            Instantiate(deerPrefabs[deerIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGroundForDeer, Random.Range(minimumZOnGround, maximumZOnGround)), deerPrefabs[deerIndex].transform.rotation); // Instantiate deerPrefab at deerIndex at new Vector3
+        }
+
+        // For, i equals 0, i is less than numberOfBeaverToSpawn; when called i is equal to itself plus 1
+        for (int i = 0; i < numberOfBeaverToSpawn; i++)
+        {
+            Instantiate(beaverPrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGroundForBeaver, Random.Range(minimumZOnGround, maximumZOnGround)), beaverPrefab.transform.rotation); // Instantiate beaverPrefab at new Vector3
+        }
+
+        // For, i equals 0, i is less than numberOfRaccoonToSpawn; when called i is equal to itself plus 1
+        for (int i = 0; i < numberOfRaccoonToSpawn; i++)
+        {
+            Instantiate(raccoonPrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGroundForRaccoon, Random.Range(minimumZOnGround, maximumZOnGround)), raccoonPrefab.transform.rotation); // Instantiate raccoonPrefab at new Vector3
         }
     }
 
     // Spawn trash on the ground
     private void SpawnTrashOnGround()
     {
-        // For, i equals 0, i is less than numberOfTrashOnGroundToSpawn; when called i is equal to itself plus 1
-        for (int i = 0; i < numberOfTrashOnGroundToSpawn; i++)
+        // For, i equals 0, i is less than numberOfTrashBagsToSpawn; when called i is equal to itself plus 1
+        for (int i = 0; i < numberOfTrashBagsToSpawn; i++)
         {
-            int trashOnGroundIndex = Random.Range(0, trashOnGroundPrefabs.Length); // trashOnGroundIndex equals a number with in range of 0 to 2
-            Instantiate(trashOnGroundPrefabs[trashOnGroundIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
-                yPositionOnGround, Random.Range(minimumZOnGround, maximumZOnGround)), trashOnGroundPrefabs[trashOnGroundIndex].transform.rotation); // Instantiate trashOnGroundPrefab at trashOnGroundIndex at new Vector3
+            Instantiate(trashBagPrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGroundForTrashBag, Random.Range(minimumZOnGround, maximumZOnGround)), trashBagPrefab.transform.rotation); // Instantiate trashBagPrefab at new Vector3
+        }
+
+        // For, i equals 0, i is less than numberOfGasCansToSpawn; when called i is equal to itself plus 1
+        for (int i = 0; i < numberOfGasCansToSpawn; i++)
+        {
+            Instantiate(gasCanPrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGroundForGasCan, Random.Range(minimumZOnGround, maximumZOnGround)), gasCanPrefab.transform.rotation); // Instantiate gasCanPrefab at new Vector3
+        }
+
+        // For, i equals 0, i is less than numberOfAluminumCansToSpawn; when called i is equal to itself plus 1
+        for (int i = 0; i < numberOfAluminumCansToSpawn; i++)
+        {
+            int aluminumCanIndex = Random.Range(0, aluminumCanPrefabs.Length); // aluminumCanIndex equals a number with in range of 0 to 2
+            Instantiate(aluminumCanPrefabs[aluminumCanIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGroundForAluminumCan, Random.Range(minimumZOnGround, maximumZOnGround)), aluminumCanPrefabs[aluminumCanIndex].transform.rotation); // Instantiate aluminumCanPrefab at new Vector3
+        }
+
+        // For, i equals 0, i is less than numberOfTiresToSpawn; when called i is equal to itself plus 1
+        for (int i = 0; i < numberOfTiresToSpawn; i++)
+        {
+            Instantiate(tirePrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+                yPositionOnGroundForTire, Random.Range(minimumZOnGround, maximumZOnGround)), tirePrefab.transform.rotation); // Instantiate tirePrefab at new Vector3
         }
     }
 
@@ -93,8 +147,8 @@ public class SpawnManager : MonoBehaviour
         if (spawnedTrashInRiverCount < maximumTrashInRiver)
         {
             int trashInRiverIndex = Random.Range(0, trashInRiverPrefabs.Length); // trashInRiverIndex equals a number with in range of 0 to 1
-            Instantiate(trashInRiverPrefabs[trashInRiverIndex], new Vector3(xPositionInRiver, yPositionInRiver,
-                Random.Range(minimumZInRiver, maximumZInRiver)), trashInRiverPrefabs[trashInRiverIndex].transform.rotation); // Instantiate trashInRiverPrefab at trashInRiverIndex at new Vector3
+            Instantiate(trashInRiverPrefabs[trashInRiverIndex], new Vector3(Random.Range(minimumXInRiver, maximumXInRiver), yPositionInRiver,
+                Random.Range(minimumZInRiver, maximumZInRiver)), trashInRiverPrefabs[trashInRiverIndex].transform.rotation); // Instantiate trashInRiverPrefab at new Vector3
             spawnedTrashInRiverCount++; // spawnedTrashInRiverCount equals itself plus 1
         }
     }
@@ -104,7 +158,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (spawnedTestTubeCount < maximumTestTubesInRiver) // If spawnedTestTubeCount is less than maximumTestTubesInRiver...
         {
-            Instantiate(testTubePrefab, new Vector3(xPositionInRiver, yPositionInRiver,
+            Instantiate(testTubePrefab, new Vector3(Random.Range(minimumXInRiver, maximumXInRiver), yPositionInRiver,
                 Random.Range(minimumZInRiver, maximumZInRiver)), testTubePrefab.transform.rotation); // Instantiate testTubePrefab at new Vector3
             spawnedTestTubeCount++; // spawnedTestTubeCount equals itself plus 1
         }
@@ -120,7 +174,7 @@ public class SpawnManager : MonoBehaviour
             if (spawnedFishInRiverCount < minimumFishInRiver)
             {
                 int fishIndex = Random.Range(0, fishPrefabs.Length); // fishIndex equals a number with in range of 0 to 3
-                Instantiate(fishPrefabs[fishIndex], new Vector3(xPositionInRiver, yPositionInRiver, Random.Range(minimumZInRiver, maximumZInRiver)),
+                Instantiate(fishPrefabs[fishIndex], new Vector3(Random.Range(minimumXInRiver, maximumXInRiver), yPositionInRiver, Random.Range(minimumZInRiver, maximumZInRiver)),
                     fishPrefabs[fishIndex].transform.rotation); // Instantiate fishPrefab at fishIndex at new Vector3
                 spawnedFishInRiverCount++; // spawnedFishInRiverCount equals itself plus 1
             }
@@ -133,7 +187,7 @@ public class SpawnManager : MonoBehaviour
             if (spawnedFishInRiverCount < maximumFishInRiver)
             {
                 int fishIndex = Random.Range(0, fishPrefabs.Length); // fishIndex equals a number with in range of 0 to 3
-                Instantiate(fishPrefabs[fishIndex], new Vector3(xPositionInRiver, yPositionInRiver, Random.Range(minimumZInRiver, maximumZInRiver)),
+                Instantiate(fishPrefabs[fishIndex], new Vector3(Random.Range(minimumXInRiver, maximumXInRiver), yPositionInRiver, Random.Range(minimumZInRiver, maximumZInRiver)),
                     fishPrefabs[fishIndex].transform.rotation); // Instantiate fishPrefab at fishIndex at new Vector3
                 spawnedFishInRiverCount++; // spawnedFishInRiverCount equals itself plus 1
             }

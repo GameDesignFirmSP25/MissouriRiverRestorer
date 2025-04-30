@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using StarterAssets; // Assuming you have a StarterAssets namespace for the WaterTestingManager
 
 public class BiodiversityEffects3PanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
     public bool isEffectsOfBiodiversity3PanelClicked = false;
+
+    public StarterAssetsInputs playerInput;
 
     public WaterTestingManager gameManagerScript;
 
@@ -15,5 +18,6 @@ public class BiodiversityEffects3PanelClickHandler : MonoBehaviour, IPointerClic
         WaterTestingManager.effectsOfBiodiversity3PanelActive = false; // Set bool effectsOfAluminumPanelActive to false;
         gameManagerScript.AreObjectivesComplete(); // Call the method to check if all objectives are complete
         WaterTestingManager.aPanelIsActive = false; // Set bool aPanelIsActive to false
+        playerInput.controlsLocked = false; // Unlock player controls
     }
 }
