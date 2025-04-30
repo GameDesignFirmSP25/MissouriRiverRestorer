@@ -15,10 +15,37 @@ public class VolumeControl : MonoBehaviour
     [SerializeField][Range(0f, 1f)] float testDXVol = 1f;
 
     [SerializeField] AudioMixer mixer;
-    private void Start()
+
+    private void OnEnable()
     {
-        volumeSlider_master.onValueChanged.AddListener(delegate { SetMasterVolume(volumeSlider_master.value); });
+        if(volumeSlider_master!= null)
+            volumeSlider_master.onValueChanged.AddListener(delegate { SetMasterVolume(volumeSlider_master.value); });
+
+        if (volumeSlider_sfx != null)
+            volumeSlider_sfx.onValueChanged.AddListener(delegate { SetSFXVolume(volumeSlider_sfx.value); });
+
+        if (volumeSlider_music != null)
+            volumeSlider_music.onValueChanged.AddListener(delegate { SetMusicVolume(volumeSlider_music.value); });
+
+        if (volumeSlider_dx != null)
+            volumeSlider_dx.onValueChanged.AddListener(delegate { SetDXVolume(volumeSlider_dx.value); });
     }
+
+    private void OnDisable()
+    {
+        if (volumeSlider_master != null)
+            volumeSlider_master.onValueChanged.RemoveListener(delegate { SetMasterVolume(volumeSlider_master.value); });
+
+        if (volumeSlider_sfx != null)
+            volumeSlider_sfx.onValueChanged.RemoveListener(delegate { SetSFXVolume(volumeSlider_sfx.value); });
+
+        if (volumeSlider_music != null)
+            volumeSlider_music.onValueChanged.RemoveListener(delegate { SetMusicVolume(volumeSlider_music.value); });
+
+        if (volumeSlider_dx != null)
+            volumeSlider_dx.onValueChanged.RemoveListener(delegate { SetDXVolume(volumeSlider_dx.value); });
+    }
+
     private void Update()
     {
         if(testSound)
@@ -32,7 +59,7 @@ public class VolumeControl : MonoBehaviour
 
     public void SetMasterVolume(float f)
     {
-        
+        if(mixer == null) { return; }
         if (f == 0f) { f = -.01f; }
         mixer.SetFloat("MasterVol", (Mathf.Log10(f) * 20f) - .2f);
         if (volumeSlider_master != null)
@@ -43,6 +70,7 @@ public class VolumeControl : MonoBehaviour
 
     public void SetSFXVolume(float f)
     {
+        if (mixer == null) { return; }
         if (f == 0f) { f = -.01f; }
         mixer.SetFloat("SFXVol", (Mathf.Log10(f) * 20f) - .2f);
         if (volumeSlider_sfx != null)
@@ -53,6 +81,7 @@ public class VolumeControl : MonoBehaviour
 
     public void SetMusicVolume(float f)
     {
+        if (mixer == null) { return; }
         if (f == 0f) { f = -.01f; }
         mixer.SetFloat("MusicVol", (Mathf.Log10(f) * 20f) - .2f);
         if (volumeSlider_music != null)
@@ -63,6 +92,7 @@ public class VolumeControl : MonoBehaviour
 
     public void SetDXVolume(float f)
     {
+        if (mixer == null) { return; }
         if (f == 0f) { f = -.01f; }
         mixer.SetFloat("DXVol", (Mathf.Log10(f) * 20f) - .2f);
         if (volumeSlider_dx != null)
