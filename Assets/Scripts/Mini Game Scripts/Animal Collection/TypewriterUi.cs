@@ -11,7 +11,7 @@ public class TypewriterUi : MonoBehaviour
     string writer;
 
     [SerializeField] float delayBeforeStart = 0f;
-    [SerializeField] float timeBtwChars = 0.1f;
+    [SerializeField] float timeBtwChars = 0.01f;
     [SerializeField] string leadingChar = "";
     [SerializeField] bool leadingCharBeforeDelay = false;
 

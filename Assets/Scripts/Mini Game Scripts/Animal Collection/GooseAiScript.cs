@@ -16,7 +16,7 @@ public class GooseAiScript : MonoBehaviour
     [Header("Float Variables")]
     private float speed;
     private float speedMin = 5.0f;
-    private float speedMax = 20.0f;
+    private float speedMax = 15.0f;
     private float yPosition = -1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
