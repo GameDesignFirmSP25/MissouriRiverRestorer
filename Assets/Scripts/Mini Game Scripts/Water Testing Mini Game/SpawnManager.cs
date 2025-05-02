@@ -57,7 +57,7 @@ public class SpawnManager : MonoBehaviour
             SpawnMammals();
             SpawnTrashOnGround();
             InvokeRepeating("SpawnTrashInRiver", spawnTime, spawnDelay); // repeatedly invoke SpawnTrashInRiver()
-            InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+            //InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
             //InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
         }
 
@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
             numberOfBeaverToSpawn = 5;
             numberOfRaccoonToSpawn = 5;
             SpawnMammals();
-            InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+            //InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
             //InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
         }
     }
@@ -77,8 +77,8 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         OnTrashDestroyed();
-        OnFishDestroyed();
-        OnTestTubeDestroyed();
+        //OnFishDestroyed();
+        //OnTestTubeDestroyed();
     }
 
     // Spawn Mammals
