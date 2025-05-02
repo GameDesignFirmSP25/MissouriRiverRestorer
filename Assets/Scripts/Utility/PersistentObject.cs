@@ -8,7 +8,7 @@ public class PersistentObject : MonoBehaviour
 
     private void OnEnable()
     {
-        gameObject.name = Time.time.ToString();
+        //gameObject.name = Time.time.ToString();
 
         if (instance == null)
         {
