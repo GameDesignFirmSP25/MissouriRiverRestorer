@@ -1,13 +1,8 @@
-Dr. Waterson: “Ah, you cleared out all those invasive plants!”
-Dr. Waterson: “And chased off some of those invasive animals, too.”
-
-Student: “It was a lot of work, but I think I got them all.”
-
-Dr. Waterson: “You certainly did. This is a big help for the ecosystem.”
-Dr. Waterson: “Now is a good time to retest the water.”
-Dr. Waterson: “It should be looking much better!”
-Dr. Waterson: “Head back to the water testing area and we’ll take another look.”
+<color=\#7F00FF>Dr. Waterson</color>: “Ah, you cleared out all those invasive plants!”
+<color=\#7F00FF>Dr. Waterson</color>: “And chased off some of those invasive animals, too.”
+<color=\#7F00FF>Dr. Waterson</color>: “Now is a good time to retest the water.”
+<color=\#7F00FF>Dr. Waterson</color>: “Head back to the water testing area and we’ll take another look.”
 
 Student: “Okay, I think I’ve got the hang of it now.”
 
-Dr. Waterson: “I quite agree! Ohohoho!”
+<color=\#7F00FF>Dr. Waterson</color>: “I quite agree! Ohohoho!”
