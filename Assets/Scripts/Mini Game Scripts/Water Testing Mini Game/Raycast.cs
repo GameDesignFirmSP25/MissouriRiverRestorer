@@ -8,18 +8,21 @@ public class Raycast : MonoBehaviour
 {
     public Camera _mainCamera;
 
+    public GameObject clickedObject; // Variable to store the clicked object
+
     private Ray ray;
     private RaycastHit hit;
 
     public WaterTestingManager waterTestingManagerScript;
 
-    public bool testTubeClicked;
+    //public bool testTubeClicked;
+    public static bool surfaceWaveClicked;
     public static bool isClickable;
 
     private void Start()
     {
         isClickable = false; // Set bool isClickable to false
-        testTubeClicked = false; // Set bool testTubeClicked to false
+        //testTubeClicked = false; // Set bool testTubeClicked to false
     }
 
     private void Update()
@@ -50,12 +53,18 @@ public class Raycast : MonoBehaviour
         }
     }
 
-    // Function to handle the Test Tube click event
-    void TestTubeClicked()
+    //// Function to handle the Test Tube click event
+    //void TestTubeClicked()
+    //{
+    //    Debug.Log("Test Tube clicked"); // Debug.Log
+    //    testTubeClicked = true; // Set bool riverClicked to true
+    //    Destroy(hit.collider.gameObject); // Destroy the object that was clicked
+    //}
+
+    void SurfaceWaveClicked()
     {
-        Debug.Log("Test Tube clicked"); // Debug.Log
-        testTubeClicked = true; // Set bool riverClicked to true
-        Destroy(hit.collider.gameObject); // Destroy the object that was clicked
+        Debug.Log("Surface wave clicked"); // Debug.Log
+        surfaceWaveClicked = true; // Set bool surfaceWaveClicked to true  
     }
     
     // Function to handle the Aluminum Can click event
@@ -150,36 +159,39 @@ public class Raycast : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
+            clickedObject = hit.collider.gameObject; // Get the clicked object
+            Debug.Log($"Clicked on object: {clickedObject.name}");
+
             // Check if the clicked object has the "Test Tube" tag & if the objectives are complete
-            if (hit.collider.CompareTag("Test Tube") && waterTestingManagerScript.objectivesComplete)
+            if (clickedObject.CompareTag("Surface Wave") && waterTestingManagerScript.objectivesComplete)
 
             {
-                TestTubeClicked(); // Call the TestTubeClicked method
+                SurfaceWaveClicked(); // Call the SurfaceWaveClicked method
             }
 
             // If bool isFirstWaterTestCoomplete is true...
             if (!WaterTestingManager.isFirstWaterTestComplete)
             {
                 // Check if the clicked object has the "Trash: can" tag & bool isAluminumCanObjectiveComplete is false
-                if (hit.collider.CompareTag("Trash: can") && !WaterTestingManager.isAluminumCanObjectiveComplete)
+                if (clickedObject.CompareTag("Trash: can") && !WaterTestingManager.isAluminumCanObjectiveComplete)
                 {
                     AluminumCanClicked(); // Call the AluminumCanClicked method
                 }
                 
                 // Check if the clicked object has the "Trash: tire" tag & bool isTireObjectiveComplete is false
-                if (hit.collider.CompareTag("Trash: tire") && !WaterTestingManager.isTireObjectiveComplete)
+                if (clickedObject.CompareTag("Trash: tire") && !WaterTestingManager.isTireObjectiveComplete)
                 {
                     TireClicked(); // Call the TireClicked method
                 }
                 
                 // Check if the clicked object has the "Trash: gas can" tag & bool isGasCanObjectiveComplete is false
-                if (hit.collider.CompareTag("Trash: gas can") && !WaterTestingManager.isGasCanObjectiveComplete)
+                if (clickedObject.CompareTag("Trash: gas can") && !WaterTestingManager.isGasCanObjectiveComplete)
                 {
                     GasCanisterClicked(); // Call the GasCanisterClicked method
                 }
                 
                 // Check if the clicked object has the "Trash: trash bag" tag & bool isTrashBagObjective is false
-                if (hit.collider.CompareTag("Trash: trash bag") && !WaterTestingManager.isTrashBagObjectiveComplete)
+                if (clickedObject.CompareTag("Trash: trash bag") && !WaterTestingManager.isTrashBagObjectiveComplete)
                 {
                     TrashBagClicked(); // Call the TrashBagClicked method
                 }
@@ -189,19 +201,19 @@ public class Raycast : MonoBehaviour
             if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
             {
                 // Check if clicked object has the "Fish" tag & bool isFishObjectiveComplete is false
-                if (hit.collider.CompareTag("Fish") && !WaterTestingManager.isFishObjectiveComplete)
+                if (clickedObject.CompareTag("Fish") && !WaterTestingManager.isFishObjectiveComplete)
                 {
                     FishClicked(); // Call the FishClicked method
                 }
                 
                 //Check if clicked object has the "Mammal" tag & bool isMammalObjectiveComplete is false
-                if (hit.collider.CompareTag("Mammal") && !WaterTestingManager.isMammalObjectiveComplete)
+                if (clickedObject.CompareTag("Mammal") && !WaterTestingManager.isMammalObjectiveComplete)
                 {
                     MammalClicked(); // Call the MammalClicked method
                 }
 
                 // Check if clicked object has the "Riverbank" tag & bool isRiverbankObjectiveComplete is false
-                if (hit.collider.CompareTag("Riverbank") && !WaterTestingManager.isRiverbankObjectiveComplete)
+                if (clickedObject.CompareTag("Riverbank") && !WaterTestingManager.isRiverbankObjectiveComplete)
                 {
                     RiverbankClicked(); // Call the RiverbankClicked method
                 }

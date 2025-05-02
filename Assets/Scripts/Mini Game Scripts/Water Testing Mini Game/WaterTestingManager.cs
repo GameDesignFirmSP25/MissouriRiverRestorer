@@ -46,10 +46,17 @@ public class WaterTestingManager : BaseMiniGameManager
     [SerializeField]
     TextMeshProUGUI riverbankObjectiveText;
 
-    private Slider slider;
-    public Button StartBtn;
+    [Header("Prefab References")]
+    public GameObject surfaceWavePrefab; // Prefab for the surface wave
+
+    [Header("Arrays and Lists")]
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
-    public StarterAssetsInputs playerInput; // Reference to StarterAssetsInputs script
+
+    [SerializeField]
+    private List<GameObject> surfaceWaves = new List<GameObject>(); // List to hold surface wave instances
+
+    [SerializeField]
+    private List<Vector3> surfaceWaveWaypoints = new List<Vector3>(); // List to hold preplanned positions for the surface wave
 
     [Header("Scripts")]
     public Raycast raycastScript;
@@ -116,7 +123,9 @@ public class WaterTestingManager : BaseMiniGameManager
     public static bool isFirstWaterTestComplete = false;
     public static bool isSecondWaterTestComplete = false;
 
-    public GameObject PauseUI;
+    private Slider slider;
+    public Button StartBtn;
+    public StarterAssetsInputs playerInput; // Reference to StarterAssetsInputs script
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -152,13 +161,14 @@ public class WaterTestingManager : BaseMiniGameManager
     // Update is called once per frame
     void Update()
     {
-        // If bool testTubeClicked is true...
-        if (raycastScript.testTubeClicked) 
+        // If bool surfaceWaveClicked is true...
+        if (Raycast.surfaceWaveClicked) 
         {
             // If the value on the slider component is less than the targetProgress variable...
             if (slider.value < targetProgress)
             {
-                CollectWater(); // call CollectWater method
+                //CollectWater(); // call CollectWater method
+                MoveSurfaceWave(); // call MoveSurfaceWave method
 
                 // If bool instructionsShown and testingInstructionsActive are true...
                 if (instructionsShown && testingInstructionsActive)
@@ -477,8 +487,88 @@ public class WaterTestingManager : BaseMiniGameManager
         if (Input.GetMouseButtonUp(0) && isPressed) 
         {
             isPressed = false; // Set bool isPressed to false
-            raycastScript.testTubeClicked = false; // Set bool testTubeClicked to false
         }
+    }
+
+    private void MoveSurfaceWave()
+    {
+        // If the surface wave was clicked...
+        if (Raycast.surfaceWaveClicked)
+        {
+            if (surfaceWaves.Count == 0)
+            {
+                Debug.LogError("No SurfaceWave objects found. Ensure they are added to the list.");
+                return;
+            }
+
+            // Iterate through each SurfaceWave object
+            foreach (var surfaceWave in surfaceWaves)
+            {
+                if (surfaceWave == null)
+                {
+                    Debug.LogWarning("A SurfaceWave reference is null. Skipping this object.");
+                    continue;
+                }
+
+                InvokeProgressBar(); // Call method InvokeProgressBar
+                // Hide the surface wave by disabling its renderer and collider
+                Renderer renderer = surfaceWave.GetComponent<Renderer>();
+                Collider collider = surfaceWave.GetComponent<Collider>();
+
+                if (renderer != null)
+                {
+                    renderer.enabled = false;
+                }
+
+                if (collider != null)
+                {
+                    collider.enabled = false;
+                }
+
+                Debug.Log($"SurfaceWave {surfaceWave.name} hidden.");
+
+                // Move the surface wave to a random preplanned position
+                if (surfaceWaveWaypoints.Count > 0)
+                {
+                    int randomIndex = Random.Range(0, surfaceWaveWaypoints.Count); // Pick a random index
+                    Vector3 newPosition = surfaceWaveWaypoints[randomIndex];
+                    surfaceWave.transform.position = newPosition;
+
+                    Debug.Log($"SurfaceWave {surfaceWave.name} moved to random position: {newPosition}");
+                }
+                else
+                {
+                    Debug.LogError("No preplanned positions defined for SurfaceWave.");
+                }
+
+                // Make the surface wave visible again after a short delay
+                StartCoroutine(ShowSurfaceWaveAfterDelay(surfaceWave, 1f)); // 1-second delay
+            }
+
+            // Reset the raycast flag
+            Raycast.surfaceWaveClicked = false;
+        }
+    }
+
+    private IEnumerator ShowSurfaceWaveAfterDelay(GameObject surfaceWave, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Re-enable the renderer and collider to make the surface wave visible and interactable
+        Renderer renderer = surfaceWave.GetComponent<Renderer>();
+        Collider collider = surfaceWave.GetComponent<Collider>();
+
+        if (renderer != null)
+        {
+            renderer.enabled = true;
+        }
+
+        if (collider != null)
+        {
+            collider.enabled = true;
+        }
+
+        Debug.Log($"SurfaceWave {surfaceWave.name} is now visible and interactable.");
     }
 
     // Invoke Progress Bar
