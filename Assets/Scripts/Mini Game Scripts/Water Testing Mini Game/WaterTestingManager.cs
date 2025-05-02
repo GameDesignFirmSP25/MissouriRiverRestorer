@@ -125,7 +125,8 @@ public class WaterTestingManager : BaseMiniGameManager
 
     private Slider slider;
     public Button StartBtn;
-    public StarterAssetsInputs playerInput; // Reference to StarterAssetsInputs script
+    public StarterAssetsInputs playerInput;
+    public GameObject additionalAnimals;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -133,6 +134,7 @@ public class WaterTestingManager : BaseMiniGameManager
         Time.timeScale = 0f; // Freezes time
         GetProgressBar(); // Call the GetProgressBar function to initialize the progress bar
         GetPanels(); // Call the GetPanels function to initialize the panels
+        additionalAnimals.SetActive(false); // Set additional animals to not active at the start
         Cursor.visible = true; // Set Cursor to be visible
 
         // If isFirstWaterTestComplete is false...
@@ -260,6 +262,7 @@ public class WaterTestingManager : BaseMiniGameManager
         if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
             DeactivatePanel(1); // Disable secondIntroductionPanel
+            additionalAnimals.SetActive(true); // Activate additional animals in the scene
         }
     }
 
