@@ -7,9 +7,23 @@ using UnityEngine.Audio;
 [Serializable]
 public class SFXSO : ScriptableObject
 {
+    //public enum ClipPlayType { OneShot, LoopForSeconds, Interval }
     [SerializeField] internal SFXLibrary.SFXType type;
     [SerializeField] List<AudioClip> clips;
     [SerializeField] AudioMixerGroup outputMixerGroup;
+
+    //[Header("Playing Clip")]
+    //[SerializeField] private ClipPlayType clipType = ClipPlayType.OneShot;
+    //public ClipPlayType ClipType
+    //{
+    //    get => clipType;
+    //}
+    [SerializeField] private float seconds = 1f;
+    public float Seconds { get { return seconds; } }
+    [SerializeField] internal bool fadeIn = false;
+    public bool FadesIn { get { return fadeIn; } }
+    [SerializeField] internal bool fadeOut = false;
+    public bool FadesOut { get { return fadeOut; } }
 
     [Header("Pitch")]
     [SerializeField][Range(0f, 3f)] float basePitch = 1.0f;
@@ -19,9 +33,16 @@ public class SFXSO : ScriptableObject
     [SerializeField][Range(0f, 1f)] float baseVolume = 1.0f;
     [SerializeField][Range(0f, 1f)] float volumeModPercent = 0f;
 
+
+
     public AudioMixerGroup GetAudioGroup()
     {
         return outputMixerGroup;
+    }
+
+    public float GetBaseVolume()
+    {
+        return baseVolume;
     }
 
     public float GetVolume()
@@ -42,4 +63,6 @@ public class SFXSO : ScriptableObject
         }
         return null;
     }
+
+
 }
