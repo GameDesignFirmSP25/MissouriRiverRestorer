@@ -2016,6 +2016,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 95467874}
     m_Modifications:
+    - target: {fileID: 3354741897764826546, guid: 319a581435d886c40abc9f7bb6792d0c, type: 3}
+      propertyPath: m_text
+      value: 'Gasoline poisons the land causing irreperable damage to the soil. This
+        can kill any plants native or invasive. As well as being an accelerant for
+        fires. '
+      objectReference: {fileID: 0}
     - target: {fileID: 3529873446964783561, guid: 319a581435d886c40abc9f7bb6792d0c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2195,6 +2201,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 340881f5c7605da48b4b19ed7a789256, type: 3}
   m_PrefabInstance: {fileID: 543632848}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &590693261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5423868822838860902, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
+  m_PrefabInstance: {fileID: 7186473484489634559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &590693263
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590693261}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5ef26a825b0b44469da28f7af05926d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &605859173
 GameObject:
   m_ObjectHideFlags: 0
@@ -3766,7 +3799,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Collect PIzza
+  m_text: Collect Pizza
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4403,6 +4436,11 @@ PrefabInstance:
     - target: {fileID: 3010777932472144705, guid: 388e912502e17594088df63ec517393c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015698326691862330, guid: 388e912502e17594088df63ec517393c, type: 3}
+      propertyPath: m_text
+      value: "Get that fish nto some fresh water. Pollutants in the river enter through
+        a fish\u2019s gills and slowly poisons them from the inside."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5875,7 +5913,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5423868822838860902, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590693263}
   m_SourcePrefab: {fileID: 100100000, guid: 3f0a12f73308b49448d4f1feca5577de, type: 3}
 --- !u!1001 &7548470292030466582
 PrefabInstance:
