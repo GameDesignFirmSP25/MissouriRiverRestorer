@@ -596,6 +596,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 deerEventZone.gameObject.SetActive(false); // Disable deer event zone
                 deerEventZoneArrow.gameObject.SetActive(false); // Disable deer event waypoint arrow
                 deerEventZonePanel.SetActive(true); // Enable deer event zone panel
+                eventZonePanelActive = true; // Set bool eventZonePanelActive to true
                 playerInput.controlsLocked = true; // Lock player controls
                 deerEventZoneText.text = "Great Job! You dispersed that group of deer! Now native plants can grow!"; // Set text for deer event zone
                 DeerEventZone.isDeerEventEntered = false; // Set bool isDeerEventEntered to false
@@ -613,6 +614,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 birdEventZone.gameObject.SetActive(false); // Disable bird event zone
                 birdEventZoneArrow.gameObject.SetActive(false); // Disable bird event waypoint arrow
                 birdEventZonePanel.SetActive(true); // Enable bird event zone panel
+                eventZonePanelActive = true; // Set bool eventZonePanelActive to true
                 playerInput.controlsLocked = true; // Lock player controls
                 birdEventZoneText.text = "Great Job! The starlings have flown away! Now native birds can repopulate!"; // Set text for bird event zone
                 BirdEventZone.isBirdEventEntered = false; // Set bool isBirdEventEntered to false 
@@ -630,6 +632,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 fishEventZone.gameObject.SetActive(false); // Disable fish event zone
                 fishEventZoneArrow.gameObject.SetActive(false); // Disable fish event waypoint arrow
                 fishEventZonePanel.SetActive(true); // Enable fish event zone panel
+                eventZonePanelActive = true; // Set bool eventZonePanelActive to true
                 playerInput.controlsLocked = true; // Lock player controls
                 fishEventZoneText.text = "Great Job! You caught the Asian Carp! Now Now the native fish are safe!"; // Set text for fish event zone
                 FishEventZone.isFishEventEntered = false; // Set bool isFishEventEntered to false
@@ -1165,7 +1168,7 @@ public class AnimalGameManager : BaseMiniGameManager
     public void DeerEventZoneEntered()
     {
         // If bool deerEventTriggered  is true and bool deerEventZoneComplete is fale
-        if (DeerEventZone.deerEventTriggered && !deerEventZoneComplete && !deerEventActive)
+        if (DeerEventZone.deerEventTriggered && !deerEventZoneComplete && !deerEventActive && !dialogueIsActive)
         {
             Debug.Log("Deer event zone condition met. Triggering DeerEventZone."); // Debug.Log
 
@@ -1200,7 +1203,7 @@ public class AnimalGameManager : BaseMiniGameManager
     public void BirdEventZoneEntered()
     {
         // If bool birdEventTriggered and bool BirdEventZoneComplete is false...
-        if (BirdEventZone.birdEventTriggered && !birdEventZoneComplete && !birdEventActive)
+        if (BirdEventZone.birdEventTriggered && !birdEventZoneComplete && !birdEventActive && !dialogueIsActive)
         {
             Debug.Log("Bird event zone condition met. Triggering BirdEventZone."); // Debug.Log
 
@@ -1235,7 +1238,7 @@ public class AnimalGameManager : BaseMiniGameManager
     public void FishEventZoneEntered()
     {
         // If bool fishEventTriggered is true and fishEventComplete is false...
-        if (FishEventZone.fishEventTriggered && !fishEventZoneComplete && !fishEventActive)
+        if (FishEventZone.fishEventTriggered && !fishEventZoneComplete && !fishEventActive && !dialogueIsActive)
         {
             Debug.Log("Fish event zone condition met. Triggering FishEventZone."); // Debug.Log
 
