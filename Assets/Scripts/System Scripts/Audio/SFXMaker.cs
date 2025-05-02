@@ -157,19 +157,20 @@ public class SFXMaker : MonoBehaviour
         }
         else
         {
-            if(so.ClipType == SFXSO.ClipPlayType.OneShot)
+            source.Play();
+            if (source.clip != null)
             {
-                source.Play();
-                if (source.clip != null)
-                {
-                    GameObject.Destroy(source.gameObject, source.clip.length + so.Seconds);
-                }
+                GameObject.Destroy(source.gameObject, source.clip.length + so.Seconds);
             }
-            else //loop
-            {
-                source.loop = true;
-                source.Play();
-            }
+            //if (so.ClipType == SFXSO.ClipPlayType.OneShot)
+            //{
+
+            //}
+            //else //loop
+            //{
+            //    source.loop = true;
+            //    source.Play();
+            //}
         }
     }
 
