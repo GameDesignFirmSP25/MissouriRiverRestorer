@@ -18,11 +18,11 @@ public class SpawnManager : MonoBehaviour
     private int numberOfDeerToSpawn = 4;
     private int numberOfBeaverToSpawn = 2;
     private int numberOfRaccoonToSpawn = 2;
-    private int numberOfTrashBagsToSpawn = 30;
-    private int numberOfGasCansToSpawn = 10;
-    private int numberOfAluminumCansToSpawn = 10;
-    private int numberOfTiresToSpawn = 10;
-    private int maximumTrashInRiver = 20;
+    private int numberOfTrashBagsToSpawn = 15;
+    private int numberOfGasCansToSpawn = 5;
+    private int numberOfAluminumCansToSpawn = 5;
+    private int numberOfTiresToSpawn = 5;
+    private int maximumTrashInRiver = 30;
     private int spawnedTrashInRiverCount = 0;
     private int minimumFishInRiver = 8;
     private int maximumFishInRiver = 20;
@@ -38,16 +38,16 @@ public class SpawnManager : MonoBehaviour
     private float yPositionOnGroundForBeaver = 1.4f;
     private float yPositionOnGroundForRaccoon = 2f;
     private float yPositionOnGroundForTrashBag = 1.25f;
-    private float yPositionOnGroundForGasCan = 5f;
+    private float yPositionOnGroundForGasCan = 1.4f;
     private float yPositionOnGroundForAluminumCan = 2f;
     private float yPositionOnGroundForTire = 1f;
     private float minimumZOnGround = -152f;
     private float maximumZOnGround = -9f;
-    private float minimumXInRiver = 20f;
-    private float maximumXInRiver = 130f;
-    private float yPositionInRiver = 0f;
-    private float minimumZInRiver = -41f;
-    private float maximumZInRiver = -100f;
+    private float minimumXInRiver = -23.5f;
+    private float maximumXInRiver = 100f;
+    private float yPositionInRiver = -1.75f;
+    private float minimumZInRiver = -175.5f;
+    private float maximumZInRiver = -175.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,7 +58,7 @@ public class SpawnManager : MonoBehaviour
             SpawnTrashOnGround();
             InvokeRepeating("SpawnTrashInRiver", spawnTime, spawnDelay); // repeatedly invoke SpawnTrashInRiver()
             InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
-            InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
+            //InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
         }
 
         if (WaterTestingManager.isFirstWaterTestComplete)
@@ -69,7 +69,7 @@ public class SpawnManager : MonoBehaviour
             numberOfRaccoonToSpawn = 5;
             SpawnMammals();
             InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
-            InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
+            //InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
         }
     }
 
@@ -153,16 +153,16 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // Spawn test tube
-    private void SpawnTestTube()
-    {
-        if (spawnedTestTubeCount < maximumTestTubesInRiver) // If spawnedTestTubeCount is less than maximumTestTubesInRiver...
-        {
-            Instantiate(testTubePrefab, new Vector3(Random.Range(minimumXInRiver, maximumXInRiver), yPositionInRiver,
-                Random.Range(minimumZInRiver, maximumZInRiver)), testTubePrefab.transform.rotation); // Instantiate testTubePrefab at new Vector3
-            spawnedTestTubeCount++; // spawnedTestTubeCount equals itself plus 1
-        }
-    }
+    //// Spawn test tube
+    //private void SpawnTestTube()
+    //{
+    //    if (spawnedTestTubeCount < maximumTestTubesInRiver) // If spawnedTestTubeCount is less than maximumTestTubesInRiver...
+    //    {
+    //        Instantiate(testTubePrefab, new Vector3(Random.Range(minimumXInRiver, maximumXInRiver), yPositionInRiver,
+    //            Random.Range(minimumZInRiver, maximumZInRiver)), testTubePrefab.transform.rotation); // Instantiate testTubePrefab at new Vector3
+    //        spawnedTestTubeCount++; // spawnedTestTubeCount equals itself plus 1
+    //    }
+    //}
 
     // Spawn fish in the river
     private void SpawnFish()
