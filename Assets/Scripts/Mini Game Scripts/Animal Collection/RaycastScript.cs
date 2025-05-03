@@ -189,6 +189,14 @@ public class RaycastScript : MonoBehaviour
         // Detect left mouse click.
         if (Input.GetMouseButtonDown(0))
         {
+            // Check if a panel is active
+            if (AnimalGameManager.dialogueIsActive || AnimalGameManager.eventZonePanelActive)
+            {
+                Debug.Log("A panel is active. Restricting clicks to the panel.");
+                return; // Prevent clicks on other objects
+            }
+
+            // If no panel is active, proceed with raycasting
             CastRay(); // Call the CastRay function
         }
     }

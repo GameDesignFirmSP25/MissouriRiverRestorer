@@ -76,6 +76,9 @@ public class AnimalGameManager : BaseMiniGameManager
     TextMeshProUGUI eventObjectiveSubtext3;
 
     [SerializeField]
+    TextMeshProUGUI plantSortingObjectiveText;
+
+    [SerializeField]
     TextMeshProUGUI EndText;
 
     [SerializeField]
@@ -131,6 +134,18 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [SerializeField]
     GameObject eventsObjectivesPanel;
+
+    [SerializeField]
+    GameObject lowerBankObjective;
+
+    [SerializeField]
+    GameObject midBankObjective;
+
+    [SerializeField]
+    GameObject upperBankObjective;
+
+    [SerializeField]
+    GameObject plantSortingObjective;
 
     [SerializeField]
     GameObject deerEventZoneText1;
@@ -301,6 +316,9 @@ public class AnimalGameManager : BaseMiniGameManager
     private bool hasResetDialogueState = false;
     private bool hasResetEventPanelState = false;
     private bool hasResetPlantSortingPanelState = false;
+    public bool lowerBankObjectivesComplete = false;
+    public bool midBankObjectivesComplete = false;
+    public bool upperBankObjectivesComplete = false;
     public bool objectivesComplete = false;
     public bool eventZonesComplete = false;
     public bool deerEventActive = false;
@@ -377,33 +395,51 @@ public class AnimalGameManager : BaseMiniGameManager
 
         StrikethroughText(); // Strikethrough text
 
-        EnableEventZones(); // Enable event zones if conditions are met
+        LowerBankObjectivesComplete(); // Check if lower bank objectives are complete
 
-        DeerEventZoneEntered(); // Check if deer event zone is entered
-
-        BirdEventZoneEntered(); // Check if bird event zone is entered
+        EnableFishEventZone(); // Enable event zones if conditions are met
 
         FishEventZoneEntered(); // Check if fish event zone is entered
 
         EventPanelClicked(); // Call method EventPanelClicked
-
-        // If bool deerEventActive and bool eventZonePanelActive is false and bool deerObjectiveSet is true...
-        if (deerEventActive && !eventZonePanelActive && deerEventObjectiveSet)
-        {
-            GetAnimalClicks(); // Call method GetAnimalClicks
-        }
-
-        // If bool birdEventActive and bool eventZonePanelActive is false and bool bool birdEventObjectiveSet is true...
-        if (birdEventActive && !eventZonePanelActive && birdEventObjectiveSet) 
-        {
-            GetAnimalClicks(); // Call method GetAnimalClicks
-        }
 
         // If bool fishEventActive is true && bool eventZonePanelActive is false and fish EventObjectiveSet is true...
         if (fishEventActive && !eventZonePanelActive && fishEventObjectiveSet)
         {
             GetAnimalClicks(); // Call method GetAnimalClicks
         }
+
+        if (fishEventZoneComplete)
+        {
+            MidBankObjectives(); // Call method MidBankObjectives
+        }
+
+        MidBankObjectivesComplete(); // Check if mid bank objectives are complete
+
+        EnableBirdEventZone(); // Enable bird event zone if conditions are met
+
+        BirdEventZoneEntered(); // Check if bird event zone is entered
+
+        // If bool birdEventActive and bool eventZonePanelActive is false and bool bool birdEventObjectiveSet is true...
+        if (birdEventActive && !eventZonePanelActive && birdEventObjectiveSet)
+        {
+            GetAnimalClicks(); // Call method GetAnimalClicks
+        }
+
+        if (birdEventZoneComplete)
+        {
+            UpperBankObjectives(); // Call method UpperBankObjectives
+        }
+
+        UpperBankObjectivesComplete(); // Check if upper bank objectives are complete
+
+        EnableDeerEventZone(); // Enable deer event zone if conditions are met
+
+        // If bool deerEventActive and bool eventZonePanelActive is false and bool deerObjectiveSet is true...
+        if (deerEventActive && !eventZonePanelActive && deerEventObjectiveSet)
+        {
+            GetAnimalClicks(); // Call method GetAnimalClicks
+        } 
 
         EventsComplete(); // Check if all events are complete
 
@@ -422,8 +458,8 @@ public class AnimalGameManager : BaseMiniGameManager
         exploringIndicatorPanel.SetActive(true); // show exploring indicator panel
         objectivesPanel.SetActive(true); // show objectives panel
         LowerBankObjectives(); //  Call method LowerBankEntered
-        MidBankObjectives(); // Call method MidBankEntered
-        UpperBankObjectives(); // Call method UpperBankEntered
+        //MidBankObjectives(); // Call method MidBankEntered
+        //UpperBankObjectives(); // Call method UpperBankEntered
         objectivesShown = true; // set objectivesShown to true
         startButton.SetActive(false); // hide start button
         startPanel.SetActive(false); // hide start panel
@@ -439,6 +475,7 @@ public class AnimalGameManager : BaseMiniGameManager
         plantSortingPanel.SetActive(false); // hide plant sorting panel
         exploringIndicatorPanel.SetActive(false); // hide exploring indicator panel
         eventsObjectivesPanel.SetActive(false); // hide events objectives panel
+        plantSortingObjective.SetActive(false); // hide plant sorting objective
         eventsStartPanel.SetActive(false); // hide events start panel
         returnButton.SetActive(false); // hide return button
         startButton.SetActive(true); // show start button
@@ -602,6 +639,9 @@ public class AnimalGameManager : BaseMiniGameManager
                 DeerEventZone.isDeerEventEntered = false; // Set bool isDeerEventEntered to false
                 slider.value = 0f; // Reset slider value to 0
                 CancelInvoke(); // Cancel any ongoing invocations
+
+                eventsObjectivesPanel.SetActive(false); // Hide events objectives panel
+                upperBankObjective.SetActive(false); // Hide upper bank objective
             }
 
             // If bool isBirdEventEntered is true and bool birdEventZoneComplete is false and bool birdEventActive is true...
@@ -620,6 +660,9 @@ public class AnimalGameManager : BaseMiniGameManager
                 BirdEventZone.isBirdEventEntered = false; // Set bool isBirdEventEntered to false 
                 slider.value = 0f; // Reset slider value to 0
                 CancelInvoke(); // Cancel any ongoing invocations
+
+                eventsObjectivesPanel.SetActive(false); // Hide events objectives panel
+                midBankObjective.SetActive(false); // Hide mid bank objective
             }
 
             // If bool isFishEventEntered is true and bool fishEventZoneComplete is false and bool fishEventActive is true...
@@ -638,6 +681,9 @@ public class AnimalGameManager : BaseMiniGameManager
                 FishEventZone.isFishEventEntered = false; // Set bool isFishEventEntered to false
                 slider.value = 0f; // Reset slider value to 0
                 CancelInvoke(); // Cancel any ongoing invocations
+
+                eventsObjectivesPanel.SetActive(false); // Hide events objectives panel
+                lowerBankObjective.SetActive(false); // Hide lower bank objective
             }
         }
     }
@@ -645,6 +691,9 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to disable all text objects
     public void DisableObjectives()
     {
+        objectiveText1.gameObject.SetActive(false); //hide objective text 1
+        objectiveText2.gameObject.SetActive(false); //hide objective text 2
+        objectiveText3.gameObject.SetActive(false); //hide objective text 3
         objectiveSubtext1.gameObject.SetActive(false); //hide objective subtext 1
         objectiveSubtext2.gameObject.SetActive(false); //hide objective subtext 2
         objectiveSubtext3.gameObject.SetActive(false); //hide objective subtext 3
@@ -660,6 +709,10 @@ public class AnimalGameManager : BaseMiniGameManager
         objectiveSubtext13.gameObject.SetActive(false); //hide objective subtext 13
         objectiveSubtext14.gameObject.SetActive(false); //hide objective subtext 14
         objectiveSubtext15.gameObject.SetActive(false); //hide objective subtext 15
+        eventsObjectivesPanel.SetActive(false); // Hide events objectives panel
+        lowerBankObjective.SetActive(false); // Hide lower bank objective
+        midBankObjective.SetActive(false); // Hide mid bank objective
+        upperBankObjective.SetActive(false); // Hide upper bank objective
     }
 
     // Method to enable event zones
@@ -682,11 +735,44 @@ public class AnimalGameManager : BaseMiniGameManager
                 eventsStartPanel.SetActive(true); // Show events start panel
                 eventsStartPanelActive = true; // Set events start panel active flag to true
                 playerInput.controlsLocked = true; // Lock player controls
-                EventObjectives(); // Call method to set event objectives
+                //EventObjectives(); // Call method to set event objectives
                 objectivesPanel.SetActive(false); // Hide objectives panel
                 objectivesShown = false; // Set objectivesShown to false
             }
         }   
+    }
+
+    public void EnableDeerEventZone()
+    {
+        if (upperBankObjectivesComplete && !deerEventZoneComplete)
+        {
+            deerEventZone.gameObject.SetActive(true); // Enable deer event zone
+            deerEventZoneArrow.gameObject.SetActive(true); // Enable deer event waypoint arrow
+            groupOfDeer.SetActive(true); // Enable group of deer
+            Debug.Log("Deer Event Zone Enabled."); // Debug.Log
+        }
+        
+    }
+
+    public void EnableBirdEventZone()
+    {
+        if (midBankObjectivesComplete && !birdEventZoneComplete)
+        {
+            birdEventZone.gameObject.SetActive(true); // Enable bird event zone
+            birdEventZoneArrow.gameObject.SetActive(true); // Enable bird event waypoint arrow
+            groupOfStarlings.SetActive(true); // Enable group of starlings
+            Debug.Log("Bird Event Zone Enabled."); // Debug.Log
+        }
+    }
+
+    public void EnableFishEventZone()
+    {
+        if (lowerBankObjectivesComplete && !fishEventZoneComplete)
+        {
+            fishEventZone.gameObject.SetActive(true); // Enable fish event zone
+            fishEventZoneArrow.gameObject.SetActive(true); // Enable fish event waypoint arrow
+            Debug.Log("Fish Event Zone Enabled."); // Debug.Log
+        }
     }
 
     // Method to disable event zones
@@ -1107,6 +1193,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void LowerBankObjectives()
     {
         Debug.Log("Player is exploring the lower bank."); //Debug.Log
+        objectiveText1.gameObject.SetActive(true); //show objective text 1
         objectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
         objectiveSubtext1.text = "Find and click on:"; //set objective subtext 1 text
         objectiveSubtext2.gameObject.SetActive(true); //show objective subtext 2
@@ -1121,28 +1208,66 @@ public class AnimalGameManager : BaseMiniGameManager
         objectiveSubtext6.text = "Beaver"; //set objective subtext 6 text
     }
 
+    private void LowerBankObjectivesComplete()
+    {
+        if (isCommonGarterSnakeFound && isSnappingTurtleFound && isNorthernMapTurtleFound && isAsianCarpFound && isBeaverFound)
+        {
+            Debug.Log("Lower Bank objectives complete!"); //Debug.Log
+            lowerBankObjectivesComplete = true; //set bool lowerBankObjectivesComplete to true
+            objectivesPanel.SetActive(false); //hide objectives panel
+            objectiveText1.gameObject.SetActive(false); //hide objective text 1
+            objectiveSubtext1.gameObject.SetActive(false); //hide objective subtext 1
+            objectiveSubtext2.gameObject.SetActive(false); //hide objective subtext 2
+            objectiveSubtext3.gameObject.SetActive(false); //hide objective subtext 3
+            objectiveSubtext4.gameObject.SetActive(false); //hide objective subtext 4
+            objectiveSubtext5.gameObject.SetActive(false); //hide objective subtext 5
+            objectiveSubtext6.gameObject.SetActive(false); //hide objective subtext 6
+            LowerBankEventObjective(); //call method to set lower bank event objective
+        }
+    }
+
     // Set subtext for objective 2
     private void MidBankObjectives()
     {
         Debug.Log("Player is exploring the Mid Bank!"); //Debug.Log
+        objectivesPanel.SetActive(true); //show objectives panel
+        objectiveText2.gameObject.SetActive(true); //show objective text 2
         objectiveSubtext7.gameObject.SetActive(true); //show objective subtext 7
         objectiveSubtext7.text = "Find and click on:"; //set objective subtext 7 text
         objectiveSubtext8.gameObject.SetActive(true); //show objective subtext 8
-        objectiveSubtext8.text = "White - Tailed Deer"; //set objective subtext 8 text
+        objectiveSubtext8.text = "European Starling"; //set objective subtext 8 text
         objectiveSubtext9.gameObject.SetActive(true); //show objective subtext 9
         objectiveSubtext9.text = "Banded Pennant Dragonfly"; //set objective subtext 9 text
         objectiveSubtext10.gameObject.SetActive(true); //show objective subtext 10
         objectiveSubtext10.text = "Muskrat"; //set objective subtext 10 text
     }
 
+    private void MidBankObjectivesComplete()
+    {
+        if (isEasternStarlingFound && isBandedPennantDragonflyFound && isMuskratFound)
+        {
+            Debug.Log("Mid Bank objectives complete!"); //Debug.Log
+            midBankObjectivesComplete = true; //set bool midBankObjectivesComplete to true
+            objectivesPanel.SetActive(false); //hide objectives panel
+            objectiveText2.gameObject.SetActive(false); //hide objective text 2
+            objectiveSubtext7.gameObject.SetActive(false); //hide objective subtext 7
+            objectiveSubtext8.gameObject.SetActive(false); //hide objective subtext 8
+            objectiveSubtext9.gameObject.SetActive(false); //hide objective subtext 9
+            objectiveSubtext10.gameObject.SetActive(false); //hide objective subtext 10
+            MidBankEventObjective(); //call method to set mid bank event objective
+        }
+    }
+
     // Set subtext for objective 3
     private void UpperBankObjectives()
     {
         Debug.Log("Player is exploring the Upper Bank!"); //Debug.Log
+        objectivesPanel.SetActive(true); //show objectives panel
+        objectiveText3.gameObject.SetActive(true); //show objective text 3
         objectiveSubtext11.gameObject.SetActive(true); //show objective subtext 11
         objectiveSubtext11.text = "Find and click on:"; //set objective subtext 11 text
         objectiveSubtext12.gameObject.SetActive(true); //show objective subtext 12
-        objectiveSubtext12.text = "European Starling"; //set objective subtext 12 text
+        objectiveSubtext12.text = "White-Tailed Deer"; //set objective subtext 12 text
         objectiveSubtext13.gameObject.SetActive(true); //show objective subtext 13
         objectiveSubtext13.text = "Painted Lady Butterfly"; //set objective subtext 13 text
         objectiveSubtext14.gameObject.SetActive(true); //show objective subtext 14
@@ -1151,17 +1276,58 @@ public class AnimalGameManager : BaseMiniGameManager
         objectiveSubtext15.text = "Bald Eagle"; //set objective subtext 15 text
     }
 
-    // Set subtext for event objectives
-    private void EventObjectives()
+    private void UpperBankObjectivesComplete()
     {
-        Debug.Log("Player is completing the event objectives!"); //Debug.Log
-        eventsObjectivesPanel.SetActive(true); // Show event objectives panel
-        eventObjectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
-        eventObjectiveSubtext1.text = "Investigate the fish."; //set objective subtext 1 text
-        eventObjectiveSubtext2.gameObject.SetActive(true); //show objective subtext 2
-        eventObjectiveSubtext2.text = "Investigate the birds."; //set objective subtext 2 text
-        eventObjectiveSubtext3.gameObject.SetActive(true); //show objective subtext 3
-        eventObjectiveSubtext3.text = "Investigate the deer."; //set objective subtext 3 text
+        if (isWhiteTailedDeerFound && isPaintedLadyButterflyFound && isRaccoonFound && isBaldEagleFound)
+        {
+            Debug.Log("Upper Bank objectives complete!"); //Debug.Log
+            upperBankObjectivesComplete = true; //set bool upperBankObjectivesComplete to true
+            objectivesPanel.SetActive(false); //hide objectives panel
+            objectiveText3.gameObject.SetActive(false); //hide objective text 3
+            objectiveSubtext11.gameObject.SetActive(false); //hide objective subtext 11
+            objectiveSubtext12.gameObject.SetActive(false); //hide objective subtext 12
+            objectiveSubtext13.gameObject.SetActive(false); //hide objective subtext 13
+            objectiveSubtext14.gameObject.SetActive(false); //hide objective subtext 14
+            objectiveSubtext15.gameObject.SetActive(false); //hide objective subtext 15
+            UpperBankEventObjective(); //call method to set upper bank event objective
+        }
+    }
+
+    // Set subtext for event objectives
+    private void LowerBankEventObjective()
+    {
+        if (!fishEventZoneComplete)
+        {
+            Debug.Log("Player is completing the lower bank event objective!"); //Debug.Log
+            eventsObjectivesPanel.SetActive(true); // Show event objectives panel
+            lowerBankObjective.SetActive(true); // Show lower bank objective
+            eventObjectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
+            eventObjectiveSubtext1.text = "Investigate the fish."; //set objective subtext 1 text
+        }
+    }
+
+    private void MidBankEventObjective()
+    {
+        if (!birdEventZoneComplete)
+        {
+            Debug.Log("Player is completing the mid bank event objective!"); //Debug.Log
+            eventsObjectivesPanel.SetActive(true); // Show event objectives panel
+            midBankObjective.SetActive(true); // Show mid bank objective
+            eventObjectiveSubtext2.gameObject.SetActive(true); //show objective subtext 2
+            eventObjectiveSubtext2.text = "Investigate the birds."; //set objective subtext 2 text
+        }     
+    }
+
+    private void UpperBankEventObjective()
+    {
+        if (!deerEventZoneComplete)
+        {
+            Debug.Log("Player is completing the upper bank event objective!"); //Debug.Log
+            eventsObjectivesPanel.SetActive(true); // Show event objectives panel
+            upperBankObjective.SetActive(true); // Show upper bank objective
+            eventObjectiveSubtext3.gameObject.SetActive(true); //show objective subtext 3
+            eventObjectiveSubtext3.text = "Investigate the deer."; //set objective subtext 3 text
+        }    
     }
 
     //  Method to called when deer event zone is entered
@@ -1441,7 +1607,7 @@ public class AnimalGameManager : BaseMiniGameManager
         // If bool isWhiteTailedDeerFound is true and bool objectivesComplete is false...
         if (isWhiteTailedDeerFound && !objectivesComplete)
         {
-            objectiveSubtext8.fontStyle = FontStyles.Strikethrough; // Strikethrough white-tailed deer text
+            objectiveSubtext12.fontStyle = FontStyles.Strikethrough; // Strikethrough white-tailed deer text
         }
 
         // If bool isBandedPennantDragonflyFound is true and bool objectivesComplete is false...
@@ -1459,7 +1625,7 @@ public class AnimalGameManager : BaseMiniGameManager
         // If bool isEasternStarlingFound is true and bool objectivesComplete is false...
         if (isEasternStarlingFound && !objectivesComplete)
         {
-            objectiveSubtext12.fontStyle = FontStyles.Strikethrough; // Strikethrough eastern starling text
+            objectiveSubtext8.fontStyle = FontStyles.Strikethrough; // Strikethrough eastern starling text
         }
 
         // If bool isPaintedLadyButterflyFound is true and bool objectivesComplete is false...
@@ -1502,13 +1668,16 @@ public class AnimalGameManager : BaseMiniGameManager
     private void EventsComplete()
     {
         // If bool deerEventZoneComplete is true, bool birdEventZoneComplete is true, and bool fishEventZoneComplete is true...
-        if (deerEventZoneComplete && birdEventZoneComplete && fishEventZoneComplete)
+        if (deerEventZoneComplete && birdEventZoneComplete && fishEventZoneComplete && !eventZonePanelActive)
         {
             eventZonesComplete = true; // Set bool eventZonesComplete to true
             Debug.Log("All event zones are complete!"); // Debug.Log
             eventsObjectivesPanel.SetActive(false); // Hide event objectives panel
             objectivesPanel.SetActive(true); // Show objectives panel
+            plantSortingObjective.SetActive(true); // Show plant sorting objective
+            plantSortingObjectiveText.text = "Find and click on invasive plants.";
             objectivesShown = true; // Set objectivesShown to true
+            plantsSwappedCounterText1.SetActive(true); // Show plants swapped counter text 1
             Invoke("StartPlantSorting", 2f); // Call StartPlantSorting after 2 seconds
         }
     }
