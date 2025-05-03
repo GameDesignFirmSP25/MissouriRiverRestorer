@@ -5,19 +5,22 @@ using GneissUtilities;
 public class PersistentObject : MonoBehaviour
 {
     static PersistentObject instance;
+    public float birthTime;
 
     private void OnEnable()
     {
-        //gameObject.name = Time.time.ToString();
+        birthTime = Time.time;
 
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else if(instance != this)
+        else if (instance != this && instance.birthTime < birthTime)
         {
-            Destroy(gameObject);
+            try { Destroy(gameObject); }
+            catch {}
+
         }
     }
 }
