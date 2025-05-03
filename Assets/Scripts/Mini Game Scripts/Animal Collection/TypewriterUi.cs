@@ -15,6 +15,13 @@ public class TypewriterUi : MonoBehaviour
     [SerializeField] string leadingChar = "";
     [SerializeField] bool leadingCharBeforeDelay = false;
 
+    private bool isTyping = false; // Tracks if typing is in progress
+    private bool isTypingComplete = false; // Tracks if typing is complete
+    private Coroutine typingCoroutine; // Reference to the typing coroutine
+
+    public bool IsTypingComplete => isTypingComplete; // Expose typing state for external scripts
+
+
     // Use this for initialization
     void Start()
     {
@@ -26,7 +33,7 @@ public class TypewriterUi : MonoBehaviour
             writer = _text.text;
             _text.text = "";
 
-            StartCoroutine("TypeWriterText");
+            typingCoroutine = StartCoroutine("TypeWriterText");
         }
 
         if (_tmpProText != null)
@@ -34,12 +41,24 @@ public class TypewriterUi : MonoBehaviour
             writer = _tmpProText.text;
             _tmpProText.text = "";
 
-            StartCoroutine("TypeWriterTMP");
+            typingCoroutine = StartCoroutine("TypeWriterTMP");
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) // Detect left mouse click
+        {
+            if (isTyping) // If typing is in progress, finish it immediately
+            {
+                FinishTyping();
+            }
         }
     }
 
     IEnumerator TypeWriterText()
     {
+        isTyping = true; // Set typing state to true
         _text.text = leadingCharBeforeDelay ? leadingChar : "";
 
         yield return new WaitForSeconds(delayBeforeStart);
@@ -59,10 +78,14 @@ public class TypewriterUi : MonoBehaviour
         {
             _text.text = _text.text.Substring(0, _text.text.Length - leadingChar.Length);
         }
+
+        isTyping = false; // Set typing state to false
+        isTypingComplete = true; // Set typing complete state to true
     }
 
     IEnumerator TypeWriterTMP()
     {
+        isTyping = true; // Set typing state to true
         _tmpProText.text = leadingCharBeforeDelay ? leadingChar : "";
 
         yield return new WaitForSeconds(delayBeforeStart);
@@ -82,5 +105,29 @@ public class TypewriterUi : MonoBehaviour
         {
             _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
         }
+
+        isTyping = false; // Set typing state to false
+        isTypingComplete = true; // Set typing complete state to true
+    }
+
+    private void FinishTyping()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine); // Stop the typing coroutine
+        }
+
+        if (_text != null)
+        {
+            _text.text = writer; // Immediately display the full text
+        }
+
+        if (_tmpProText != null)
+        {
+            _tmpProText.text = writer; // Immediately display the full text
+        }
+
+        isTyping = false;
+        isTypingComplete = true;
     }
 }
