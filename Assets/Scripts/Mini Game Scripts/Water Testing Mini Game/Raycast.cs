@@ -10,12 +10,14 @@ public class Raycast : MonoBehaviour
 
     public GameObject clickedObject; // Variable to store the clicked object
 
+    [Header("Float Variables")]
+    private float raycastDistance = 12f;
+
     private Ray ray;
     private RaycastHit hit;
 
     public WaterTestingManager waterTestingManagerScript;
 
-    //public bool testTubeClicked;
     public static bool surfaceWaveClicked;
     public static bool isClickable;
 
@@ -157,7 +159,9 @@ public class Raycast : MonoBehaviour
         // Create a ray from the camera to the mouse position
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit))
+        Debug.DrawRay(ray.origin, ray.direction * raycastDistance, Color.red, 2f);
+
+        if (Physics.Raycast(ray, out hit, raycastDistance))
         {
             clickedObject = hit.collider.gameObject; // Get the clicked object
             Debug.Log($"Clicked on object: {clickedObject.name}");
