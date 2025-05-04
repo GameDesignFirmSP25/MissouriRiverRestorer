@@ -15,7 +15,7 @@ public class UpperBankZoneTrigger : MonoBehaviour
         {
             upperBankEntered = true;
             exploringText.text = "Upper Bank";
-            Debug.Log("Upper Bank Zone Triggered");
+            //Debug.Log("Upper Bank Zone Triggered");
         }
     }
 }
