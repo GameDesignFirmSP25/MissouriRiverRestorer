@@ -1,26 +1,42 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using StarterAssets;
+using UnityEditor;
+using System.Drawing;
+
 
 public class ChangeablePlant : MonoBehaviour
 {
     [Header("Booleans")]
     public bool isSwapped = false;
+    public static bool correctPlantSwappedPanelShown = false; // Flag to track if the correct plant swapped panel is shown
+    public static bool incorrectPlantSwappedPanelShown = false; // Flag to track if the incorrect plant swapped panel is shown
 
     [Header("Game Objects")]
     public GameObject[] originalPlant;
     public GameObject[] swappedPlant;
-    public GameObject changeablePlant;
+    public GameObject[] plantVariants;
+    public GameObject changeablePlant; 
 
     [Header("String Values")]
     private string childName1 = "Bradford Pear Tree";
     private string childName2 = "Purple Loosestrife";
-    private string childName3 = "Invasive Plant (mid bank)";
-    private string childName4 = "Invasive Plant (upper bank)";
     public string plantID;
+    public string plantLocation;
 
     [Header("Script References")]
     public AnimalGameManager animalGameManager;
+
+    [Header("Input Handling")]
+    public StarterAssetsInputs playerInput; // Reference to the StarterAssetsInputs script for player input handling
+
+    [SerializeField]
+    private GameObject correctPlantSwappedPanel;
+
+    [SerializeField]
+    private GameObject incorrectPlantSwappedPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,26 +52,6 @@ public class ChangeablePlant : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void GetOriginalPlant()
-    {
-        GameObject plant1 = originalPlant[0]; // Get the Breadford Pear Tree (plantID: "Bradford Pear Tree 1")
-        GameObject plant2 = originalPlant[1]; // Get the Bradford Pear Tree (plantID: "Bradford Pear Tree 2")
-        GameObject plant3 = originalPlant[2]; // Get the Bradford Pear Tree (plantID: "Bradford Pear Tree 3")
-        GameObject plant4 = originalPlant[3]; // Get the Bradford Pear Tree (plantID: "Bradford Pear Tree 4")
-        GameObject plant5 = originalPlant[4]; // Get the Bradford Pear Tree (plantID: "Bradford Pear Tree 5")
-        GameObject plant6 = originalPlant[5]; // Get the Purple Loosestrife (plantID: "Purple Loosestrife 1")
-    }
-
-    private void GetSwappedPlant()
-    {
-        GameObject plant5 = swappedPlant[0]; // Get the Sycamore Tree
-        GameObject plant6 = swappedPlant[1]; // Get the Box Elder Tree
-        GameObject plant7 = swappedPlant[2]; // Get the American Lotus Flower
-        GameObject plant8 = swappedPlant[3]; // Get the Gordgrass
-        GameObject plant9 = swappedPlant[4]; // Get the Swamp Milkweed
-        GameObject plant10 = swappedPlant[5]; // Get the Yellow Coneflower
     }
 
     public void SwapPlants()
@@ -99,8 +95,6 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
                         Debug.Log("Swapping Plants..."); // Debug.Log
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -124,6 +118,10 @@ public class ChangeablePlant : MonoBehaviour
                             Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
                         }
 
+                        animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
+                        animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                        animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
+                        animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
                     else
                     {
@@ -146,8 +144,6 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
                         Debug.Log("Swapping Plants..."); // Debug.Log
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -170,6 +166,11 @@ public class ChangeablePlant : MonoBehaviour
                             collider.enabled = false; // Disable the collider
                             Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
                         }
+
+                        animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
+                        animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                        animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
+                        animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
                     else
                     {
@@ -192,8 +193,6 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
                         Debug.Log("Swapping Plants..."); // Debug.Log
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped 
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -214,6 +213,11 @@ public class ChangeablePlant : MonoBehaviour
                             collider.enabled = false; // Disable the collider
                             Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
                         }
+
+                        animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
+                        animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                        animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
+                        animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
                     else
                     {
@@ -236,8 +240,6 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
                         Debug.Log("Swapping Plants..."); // Debug.Log
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -260,6 +262,11 @@ public class ChangeablePlant : MonoBehaviour
                             collider.enabled = false; // Disable the collider
                             Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
                         }
+
+                        animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
+                        animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                        animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
+                        animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
                     else
                     {
@@ -282,8 +289,6 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
                         Debug.Log("Swapping Plants..."); // Debug.Log
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -306,6 +311,11 @@ public class ChangeablePlant : MonoBehaviour
                             collider.enabled = false; // Disable the collider
                             Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
                         }
+
+                        animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
+                        animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                        animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
+                        animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
                     else
                     {
@@ -328,8 +338,6 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
                         Debug.Log("Swapping Plants..."); // Debug.Log
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -352,6 +360,11 @@ public class ChangeablePlant : MonoBehaviour
                             collider.enabled = false; // Disable the collider
                             Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
                         }
+
+                        animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
+                        animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                        animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
+                        animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
                     else
                     {
@@ -361,6 +374,7 @@ public class ChangeablePlant : MonoBehaviour
                 }
 
                 // If the clicked plant is the first Purple Loosestrife...
+                // plant location: upper bank
                 else if (originalPlantIndex == 6)
                 {
                     ChangeablePlant plantComponent = originalPlant[6].GetComponent<ChangeablePlant>(); // Get the ChangeablePlant component from the clicked object
@@ -371,39 +385,127 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName2); // Find the child transform with the name "Purple Loosestrife"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
-                        Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
-                        isSwapped = true; // Set the plant as swapped
-
+                        
                         // If the replace with American Lotus button was clicked...
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
+                            Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
+                            Destroy(childTransform.gameObject); // Destroy the child game object
+                            Debug.Log("Swapping Plants..."); // Debug.Log
+                            isSwapped = true; // Set the plant as swapped
+
                             int swappedPlantIndex = Random.Range(2, 8); // Randomly select an index for the American Lotus Flower
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex]; // Get the selected plant from the swappedPlant array
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation); // Instantiate the selected plant prefab as a child of the changeablePlant
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int wiltingPlantIndex = swappedPlantIndex - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("American Lotus", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+
                         }
 
                         // If the replace with Cordgrass button was clicked...
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
                         {
+                            Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
+                            Destroy(childTransform.gameObject); // Destroy the child game object
+                            Debug.Log("Swapping Plants..."); // Debug.Log
+                            isSwapped = true; // Set the plant as swapped
+
                             int swappedPlantIndex = Random.Range(8, 10); // Randomly select an index for the Cordgrass
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex]; // Get the selected plant from the swappedPlant array
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation); // Instantiate the selected plant prefab as a child of the changeablePlant
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int wiltingPlantIndex = swappedPlantIndex - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Cordgrass", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
                         // If the replace the Swamp Milkweed button was clicked...
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
                         {
+                            Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
+                            Destroy(childTransform.gameObject); // Destroy the child game object
+                            Debug.Log("Swapping Plants..."); // Debug.Log
+                            isSwapped = true; // Set the plant as swapped
+
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation); // Instantiate the Swamp Milkweed prefab as a child of the changeablePlant
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
+                            int wiltingPlantIndex = index - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Swamp Milkweed", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
                         // If th replace with Yellow Coneflower button as clicked...
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
+                            Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
+                            Destroy(childTransform.gameObject); // Destroy the child game object
+                            Debug.Log("Swapping Plants..."); // Debug.Log
+                            isSwapped = true; // Set the plant as swapped
+
                             InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation); // Instantiate the Yellow Coneflower prefab as a child of the changeablePlant
+
+                            Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
+                            // Spawn multiple yellow coneflowers around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(swappedPlant[11], childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
 
                         Collider collider = GetComponent<Collider>(); // Get the Collider component of the clicked object
@@ -431,8 +533,6 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
                         Debug.Log("Swapping Plants..."); // Debug.Log
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with American Lotus button was clicked...
@@ -441,6 +541,23 @@ public class ChangeablePlant : MonoBehaviour
                             int swappedPlantIndex = Random.Range(2, 8); // Randomly select an index for the American Lotus Flower
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex]; // Get the selected plant from the swappedPlant array
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation); // Instantiate the selected plant prefab as a child of the changeablePlant
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int wiltingPlantIndex = swappedPlantIndex - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("American Lotus", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
                         // If the replace with Cordgrass button was clicked...
@@ -449,19 +566,77 @@ public class ChangeablePlant : MonoBehaviour
                             int swappedPlantIndex = Random.Range(8, 10); // Randomly select an index for the Cordgrass
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex]; // Get the selected plant from the swappedPlant array
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation); // Instantiate the selected plant prefab as a child of the changeablePlant
+
+                            Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
+                            // Spawn multiple cordgrass around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                GameObject growingPlant = swappedPlant[Random.Range(8, 10)]; // growingPlant is selectig a random variant of Cordgrass
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(growingPlant, childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
 
-                        // If the replace th eSwamp Milkweed button was clicked...
+                        // If the replace the Swamp Milkweed button was clicked...
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation); // Instantiate the Swamp Milkweed prefab as a child of the changeablePlant
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
+                            int wiltingPlantIndex = index - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Swamp Milkweed", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation); // Instantiate the Yellow Coneflower prefab as a child of the changeablePlant
-                        }
-                        {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation); // Instantiate the Yellow Coneflower prefab as a child of the changeablePlant
+
+                            Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
+                            // Spawn multiple yellow coneflowers around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(swappedPlant[11], childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
 
                         Collider collider = GetComponent<Collider>(); // Get the Collider component of the clicked object
@@ -486,28 +661,104 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Purple Loosestrife");
                         Destroy(childTransform.gameObject);
                         Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
                             int swappedPlantIndex = Random.Range(2, 8);
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
+
+                            Debug.Log("Correct plant selected. Spawning multiple american lotus..."); // Debug.Log
+                            // Spawn multiple american lotus around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                GameObject growingPlant = swappedPlant[Random.Range(2, 8)]; // growingPlant is selectig a random variant of american lotus
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(growingPlant, childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
                         {
                             int swappedPlantIndex = Random.Range(8, 10);
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int wiltingPlantIndex = swappedPlantIndex - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Cordgrass", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
+
+                            Debug.Log("Correct plant selected. Spawning multiple swamp milkweed..."); // Debug.Log
+                            // Spawn multiple swamp milkweed around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(swappedPlant[10], childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int index = System.Array.IndexOf(swappedPlant, swappedPlant[11]); // Get the index of the Swamp Milkweed in the swappedPlant array
+                            int wiltingPlantIndex = index - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Yellow Coneflower", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
                         Collider collider = GetComponent<Collider>();
@@ -529,28 +780,101 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Purple Loosestrife");
                         Destroy(childTransform.gameObject);
                         Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
                             int swappedPlantIndex = Random.Range(2, 8);
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int wiltingPlantIndex = swappedPlantIndex - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("American Lotus", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
                         {
                             int swappedPlantIndex = Random.Range(8, 10);
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
+
+                            Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
+                            // Spawn multiple cordgrass around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                GameObject growingPlant = swappedPlant[Random.Range(8, 10)]; // growingPlant is selectig a random variant of cordgrass
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(growingPlant, childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
+                            int wiltingPlantIndex = index - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Swamp Milkweed", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int index = System.Array.IndexOf(swappedPlant, swappedPlant[11]); // Get the index of the Swamp Milkweed in the swappedPlant array
+                            int wiltingPlantIndex = index - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Yellow Coneflower", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
                         Collider collider = GetComponent<Collider>();
@@ -572,28 +896,104 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Purple Loosestrife");
                         Destroy(childTransform.gameObject);
                         Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
                             int swappedPlantIndex = Random.Range(2, 8);
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int wiltingPlantIndex = swappedPlantIndex - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("American Lotus", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
                         {
                             int swappedPlantIndex = Random.Range(8, 10);
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
+
+                            Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
+                            // Spawn multiple cordgrass around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                GameObject growingPlant = swappedPlant[Random.Range(8, 10)]; // growingPlant is selectig a random variant of cordgrass
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(growingPlant, childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
+                            int wiltingPlantIndex = index - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Swamp Milkweed", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
+
+                            Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
+                            // Spawn multiple yellow coneflowers around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(swappedPlant[11], childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
 
                         Collider collider = GetComponent<Collider>();
@@ -615,28 +1015,99 @@ public class ChangeablePlant : MonoBehaviour
                         Debug.Log("Destroying Purple Loosestrife");
                         Destroy(childTransform.gameObject);
                         Debug.Log("Swapping Plants...");
-                        animalGameManager.PlantsSwapped += 1; // Increment the number of plants swapped
-                        animalGameManager.UpdatePlantsSwappedCounter(); // Update the plants swapped counter
                         isSwapped = true; // Set the plant as swapped
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
                             int swappedPlantIndex = Random.Range(2, 8);
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int wiltingPlantIndex = swappedPlantIndex - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("American Lotus", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
                         {
                             int swappedPlantIndex = Random.Range(8, 10);
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int wiltingPlantIndex = swappedPlantIndex - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Cordgrass", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
+
+                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Wilt the plant by spawning in its wilting variant
+                            int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
+                            int wiltingPlantIndex = index - 2;
+                            GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
+                            ReplaceChildWithVariant("Swamp Milkweed", wiltingPlant);
+
+                            if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
+                            {
+                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
+                                incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
                             InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
+
+                            Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
+                            // Spawn multiple yellow coneflowers around the instantiated plant
+                            for (int i = 0; i < 3; i++)
+                            {
+                                Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
+                                InstantiatePrefabAsChild(swappedPlant[11], childPosition + randomOffset, childRotation);
+                            }
+
+                            if (!correctPlantSwappedPanelShown)
+                            {
+                                Debug.Log("Showing correct plant swapped panel...");
+                                correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
+                                correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
+                                playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
+                            }
+
+                            animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
+                            animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
+                            animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
+                            animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
 
                         Collider collider = GetComponent<Collider>();
@@ -667,8 +1138,69 @@ public class ChangeablePlant : MonoBehaviour
         // Set the parent of the instantiated prefab
         instantiatedPrefab.transform.SetParent(transform);
 
+        // Update the name of the instantiated child based on the selected plant type
+        if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
+        {
+            instantiatedPrefab.name = "American Lotus"; 
+        }
+        else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
+        {
+            instantiatedPrefab.name = "Cordgrass";
+        }
+        else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
+        {
+            instantiatedPrefab.name = "Swamp Milkweed";
+        }
+        else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
+        {
+            instantiatedPrefab.name = "Yellow Coneflower";
+        }
+
+        Debug.Log($"Name changed to {instantiatedPrefab.name}");
+        childName2 = instantiatedPrefab.name; // Update the name of the child object
+        Debug.Log($"childName2 updated to: {childName2}");
         isSwapped = false;
 
         Debug.Log($"Prefab instantiated as a child at {position} with rotation {rotation}");
+    }
+
+    public void ReplaceChildWithVariant (string targetPlantID, GameObject prefabVariant)
+    {
+        Debug.Log($"Target Plant ID: {targetPlantID}");
+        // Check if the parent's plantID matches the targetPlantID
+        if (childName2 == targetPlantID)
+        {
+            Debug.Log($"Parent with plantID {targetPlantID} found. Replacing child with {prefabVariant.name}");
+
+            // Iterate through all child objects of changeablePlant
+            foreach (Transform child in changeablePlant.transform)
+            {
+                child.name = childName2; // Update the name of the child object to match the target plant ID
+                Debug.Log($"Checking child: {child.name}");
+                Vector3 childPosition = child.position;
+                Quaternion childRotation = child.rotation;
+
+                if (child != null)
+                {
+                    Debug.Log($"Destroying child: {child.name}");
+                    child.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Debug.LogError("Child is null. Cannot destroy.");
+                }
+
+                // Instantiate the new prefab as a child
+                GameObject newChild = Instantiate(prefabVariant, childPosition, childRotation, changeablePlant.transform);
+                Debug.Log($"Replaced child with prefab variant {prefabVariant.name}");
+                return;
+            }
+
+            Debug.LogWarning($"No child found to replace under {changeablePlant.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"Parent plantID {this.plantID} does not match targetPlantID {targetPlantID}");
+        }
     }
 }

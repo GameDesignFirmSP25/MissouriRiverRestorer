@@ -38,7 +38,7 @@ public class FishScript : MonoBehaviour
         // If timer is greater than or equal to wanderTimer...
         if (timer >= wanderTimer)
         {
-            Debug.Log("Timer reached. Setting new destination."); // Debug.Log
+            //Debug.Log("Timer reached. Setting new destination."); // Debug.Log
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1); // newPos is equal to 
             agent.SetDestination(newPos); // Set destiantion of agent to newPos
             timer = 0; // Set timer to 0

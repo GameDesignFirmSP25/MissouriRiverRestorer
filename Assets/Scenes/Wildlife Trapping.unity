@@ -4306,7 +4306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &159909707
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5976,9 +5976,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 233609766}
   plantID: Purple Loosestrife 4
+  plantLocation: Lower Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &233609768
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6064,7 +6079,7 @@ Transform:
   m_GameObject: {fileID: 233609766}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.55, y: 1.006, z: 25.8}
+  m_LocalPosition: {x: 43.83, y: 1.12, z: 49.48}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6301,6 +6316,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8307839168394123998, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+    - {fileID: 6975021196085459625, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+    - {fileID: 3534955030504903046, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -10632,9 +10649,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 324416417}
   plantID: Bradford Pear Tree 3
+  plantLocation: Upper Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &324416419
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10727,6 +10759,159 @@ Transform:
   - {fileID: 717524624}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &332637194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332637195}
+  - component: {fileID: 332637198}
+  - component: {fileID: 332637197}
+  - component: {fileID: 332637196}
+  m_Layer: 5
+  m_Name: Correct Plant Swapped Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &332637195
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332637194}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.3333333, y: 3.3333333, z: 3.3333333}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1273922655}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 308.83292, y: -167.4385}
+  m_SizeDelta: {x: 250, y: 50}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &332637196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332637194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978bb864eeb1ce9438d167600a93a933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeStart: 0
+  timeBtwChars: 0.1
+  leadingChar: 
+  leadingCharBeforeDelay: 0
+--- !u!114 &332637197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332637194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: That is the correct plant for this zone! See how the plants grow!
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278913809
+  m_fontColor: {r: 0.066037714, g: 0.04392131, b: 0.04392131, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 16
+  m_fontSizeBase: 16
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &332637198
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332637194}
+  m_CullTransparentMesh: 1
 --- !u!1 &334937536
 GameObject:
   m_ObjectHideFlags: 0
@@ -12112,6 +12297,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8307839168394123998, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+    - {fileID: 6975021196085459625, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+    - {fileID: 3534955030504903046, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -14308,6 +14495,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8307839168394123998, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+    - {fileID: 6975021196085459625, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+    - {fileID: 3534955030504903046, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -15166,6 +15355,72 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.05, y: 3.9750001, z: 0.14}
   m_TimeToStationary: 0.5
+--- !u!1001 &527244296
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1872254765}
+    m_Modifications:
+    - target: {fileID: 3534955030504903046, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_Radius
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 79.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 83.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246669188367222570, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_Name
+      value: Asian Carp (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+--- !u!4 &527244297 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+  m_PrefabInstance: {fileID: 527244296}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &527983606 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5776924563309346174, guid: f69ad8cb120575442817048ba36547f3, type: 3}
@@ -15208,142 +15463,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.05, y: 3.9750001, z: 0.14}
   m_TimeToStationary: 0.5
---- !u!1 &529327882
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 529327883}
-  - component: {fileID: 529327885}
-  - component: {fileID: 529327884}
-  m_Layer: 5
-  m_Name: Animals Found Counter Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &529327883
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529327882}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2041530693}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -722, y: -500}
-  m_SizeDelta: {x: 400, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &529327884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529327882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4279176979
-  m_fontColor: {r: 0.0754717, g: 0.05731577, b: 0.05731577, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &529327885
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529327882}
-  m_CullTransparentMesh: 1
 --- !u!208 &531680141
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -15921,7 +16040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &562167114
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17141,7 +17260,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1886787713}
     m_Modifications:
     - target: {fileID: 206251324799979507, guid: 66007a72f83d6bc4383325862ca1e975, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18319,6 +18438,142 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animalGameManager: {fileID: 1899327843}
+--- !u!1 &683699636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 683699637}
+  - component: {fileID: 683699639}
+  - component: {fileID: 683699638}
+  m_Layer: 5
+  m_Name: Plants Correctly Swapped Counter Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &683699637
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683699636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2041530693}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 240, y: -205}
+  m_SizeDelta: {x: 400, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &683699638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683699636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: New Text
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4279176979
+  m_fontColor: {r: 0.0754717, g: 0.05731577, b: 0.05731577, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &683699639
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683699636}
+  m_CullTransparentMesh: 1
 --- !u!1 &683871303
 GameObject:
   m_ObjectHideFlags: 0
@@ -20169,6 +20424,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0.033, y: -0.019000001, z: 0.013}
   m_TimeToStationary: 0.5
+--- !u!4 &746806369 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 206251324799979507, guid: 66007a72f83d6bc4383325862ca1e975, type: 3}
+  m_PrefabInstance: {fileID: 1694658222}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &747719034 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3204349440110229800, guid: f69ad8cb120575442817048ba36547f3, type: 3}
@@ -21081,6 +21341,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0.033, y: -0.019000001, z: 0.013}
   m_TimeToStationary: 0.5
+--- !u!4 &788705374 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 206251324799979507, guid: 66007a72f83d6bc4383325862ca1e975, type: 3}
+  m_PrefabInstance: {fileID: 618238087}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &792757012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21811,6 +22076,159 @@ Transform:
   - {fileID: 1741997703}
   m_Father: {fileID: 571179154}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &812856118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812856119}
+  - component: {fileID: 812856122}
+  - component: {fileID: 812856121}
+  - component: {fileID: 812856120}
+  m_Layer: 5
+  m_Name: Incorrect Plant Swapped Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &812856119
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812856118}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.3333333, y: 3.3333333, z: 3.3333333}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1768927204}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 308.83292, y: -167.4385}
+  m_SizeDelta: {x: 250, y: 50}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &812856120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812856118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978bb864eeb1ce9438d167600a93a933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeStart: 0
+  timeBtwChars: 0.1
+  leadingChar: 
+  leadingCharBeforeDelay: 0
+--- !u!114 &812856121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812856118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: That is the wrong plant for this zone! Watch how it wilts!
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278913809
+  m_fontColor: {r: 0.066037714, g: 0.04392131, b: 0.04392131, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 16
+  m_fontSizeBase: 16
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &812856122
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812856118}
+  m_CullTransparentMesh: 1
 --- !u!1 &813082199 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 897417711996853510, guid: f69ad8cb120575442817048ba36547f3, type: 3}
@@ -23356,6 +23774,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872615069}
   m_CullTransparentMesh: 1
+--- !u!1001 &876340680
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1872254765}
+    m_Modifications:
+    - target: {fileID: 3534955030504903046, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_Radius
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 75.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 64.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246669188367222570, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+      propertyPath: m_Name
+      value: Asian Carp (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+--- !u!4 &876340681 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4865076687981632912, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+  m_PrefabInstance: {fileID: 876340680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &877010710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8129557189082000175, guid: e9d1a7d0671d5814cadca8a236530c4b, type: 3}
@@ -23646,6 +24130,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: -0.09900001, y: 0.10300001, z: 0.015000001}
   m_TimeToStationary: 0.5
+--- !u!4 &888551971 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7219253318179623427, guid: 654cb37873f5fd34eae3852a6416b4d5, type: 3}
+  m_PrefabInstance: {fileID: 141852272241137050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!208 &889949039
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -25935,7 +26424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &975062794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27566,6 +28055,213 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f506564621648c4aacd899429f86785, type: 3}
+--- !u!1 &1028137117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1028137118}
+  - component: {fileID: 1028137122}
+  - component: {fileID: 1028137121}
+  - component: {fileID: 1028137120}
+  - component: {fileID: 1028137123}
+  m_Layer: 5
+  m_Name: Click to Close Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1028137118
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028137117}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.8333335, y: 1, z: 1.666667}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1273922655}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2, y: -224.39998}
+  m_SizeDelta: {x: 281.4, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1028137120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028137117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1028137121}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1273922654}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1028137121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028137117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '[Click to Close]'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1028137122
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028137117}
+  m_CullTransparentMesh: 1
+--- !u!114 &1028137123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028137117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2c26f0992961a46abca4686bff0c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 412831568}
 --- !u!1 &1028169202 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0138b0249b6782644814c572fe0604fd, type: 3}
@@ -28001,9 +28697,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1040390901}
   plantID: Bradford Pear Tree 2
+  plantLocation: Mid Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &1040390903
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -29753,7 +30464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 624430946155504111, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.59
+      value: 4.652
       objectReference: {fileID: 0}
     - target: {fileID: 624430946155504111, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29790,6 +30501,10 @@ PrefabInstance:
     - target: {fileID: 2624150243322215668, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
       propertyPath: m_Radius
       value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624150243322215668, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
+      propertyPath: m_BaseOffset
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2624150243322215668, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
       propertyPath: m_AgentTypeID
@@ -29864,9 +30579,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1090861092}
   plantID: Purple Loosestrife 3
+  plantLocation: Lower Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &1090861094
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -31005,6 +31735,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: -0.27800003, y: 0.082, z: -0.010000001}
   m_TimeToStationary: 0.5
+--- !u!4 &1152016163 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5341463043667386138, guid: 60405cb41c2ed6e4e921d71cede8b0e5, type: 3}
+  m_PrefabInstance: {fileID: 7647527483363997041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1156365827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32679,9 +33414,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1223925547}
   plantID: Bradford Pear Tree 1
+  plantLocation: Upper Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!1 &1224445305
 GameObject:
   m_ObjectHideFlags: 0
@@ -33008,7 +33758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -100.8999, y: 32.8}
+  m_AnchoredPosition: {x: -100.8999, y: 32.80005}
   m_SizeDelta: {x: 320, y: 83.4}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1239105836
@@ -33877,6 +34627,83 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.041, y: -0.003, z: -0.013}
   m_TimeToStationary: 0.5
+--- !u!1 &1273922654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1273922655}
+  - component: {fileID: 1273922657}
+  - component: {fileID: 1273922656}
+  m_Layer: 5
+  m_Name: Correct Plant Swapped Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1273922655
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273922654}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 332637195}
+  - {fileID: 1028137118}
+  m_Father: {fileID: 2041530693}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 143.80005, y: 83.022705}
+  m_SizeDelta: {x: 1402, y: 846.3}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &1273922656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273922654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.88235295}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8f8c145603e004f49ba146bca5257306, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1273922657
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273922654}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1275704855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37373,9 +38200,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1423225470}
   plantID: Purple Loosestrife 1
+  plantLocation: Upper Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &1423225472
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -39148,6 +39990,142 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462676357}
   m_CullTransparentMesh: 1
+--- !u!1 &1463633317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1463633318}
+  - component: {fileID: 1463633320}
+  - component: {fileID: 1463633319}
+  m_Layer: 5
+  m_Name: Purple Loosestrifes Swapped Counter Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1463633318
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463633317}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2041530693}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 240, y: -175}
+  m_SizeDelta: {x: 400, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1463633319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463633317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: New Text
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4279176979
+  m_fontColor: {r: 0.0754717, g: 0.05731577, b: 0.05731577, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1463633320
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463633317}
+  m_CullTransparentMesh: 1
 --- !u!1 &1466170588 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7501694738109871604, guid: f69ad8cb120575442817048ba36547f3, type: 3}
@@ -39894,9 +40872,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1499273423}
   plantID: Purple Loosestrife 6
+  plantLocation: Upper Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &1499273425
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -40892,6 +41885,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0.033, y: -0.019000001, z: 0.013}
   m_TimeToStationary: 0.5
+--- !u!4 &1563946618 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 206251324799979507, guid: 66007a72f83d6bc4383325862ca1e975, type: 3}
+  m_PrefabInstance: {fileID: 8912176485477907353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1566025632
 GameObject:
   m_ObjectHideFlags: 0
@@ -41533,7 +42531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1593997438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -41772,9 +42770,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1603114920}
   plantID: Bradford Pear Tree 5
+  plantLocation: Upper Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &1603114922
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -42211,6 +43224,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8307839168394123998, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+    - {fileID: 6975021196085459625, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
+    - {fileID: 3534955030504903046, guid: 55a6ab29f011b344ca4a64b724500e5c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -44343,9 +45358,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1676565758}
   plantID: Purple Loosestrife 5
+  plantLocation: Mid Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &1676565760
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -44891,7 +45921,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1886787713}
     m_Modifications:
     - target: {fileID: 206251324799979507, guid: 66007a72f83d6bc4383325862ca1e975, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46861,6 +47891,83 @@ Transform:
   - {fileID: 2145317150}
   m_Father: {fileID: 571179154}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1768927203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1768927204}
+  - component: {fileID: 1768927206}
+  - component: {fileID: 1768927205}
+  m_Layer: 5
+  m_Name: Incorrect Plant Swapped Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1768927204
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768927203}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 812856119}
+  - {fileID: 2000015285}
+  m_Father: {fileID: 2041530693}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 143.80005, y: 83.022705}
+  m_SizeDelta: {x: 1402, y: 846.3}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &1768927205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768927203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.88235295}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8f8c145603e004f49ba146bca5257306, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1768927206
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768927203}
+  m_CullTransparentMesh: 1
 --- !u!1 &1778771903
 GameObject:
   m_ObjectHideFlags: 0
@@ -48586,6 +49693,8 @@ Transform:
   - {fileID: 4771881618840066040}
   - {fileID: 729694690}
   - {fileID: 1530894671}
+  - {fileID: 876340681}
+  - {fileID: 527244297}
   - {fileID: 1640182940}
   - {fileID: 1780793681}
   - {fileID: 1959694485}
@@ -48671,9 +49780,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1879674799}
   plantID: Bradford Pear Tree 6
+  plantLocation: Lower Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &1879674801
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -48870,6 +49994,42 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.033, y: -0.019000001, z: 0.013}
   m_TimeToStationary: 0.5
+--- !u!1 &1886787712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1886787713}
+  m_Layer: 0
+  m_Name: Props
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1886787713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886787712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 888551971}
+  - {fileID: 1563946618}
+  - {fileID: 1152016163}
+  - {fileID: 746806369}
+  - {fileID: 788705374}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1888538242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49201,8 +50361,9 @@ MonoBehaviour:
   deerEventZoneText: {fileID: 1579144736}
   birdEventZoneText: {fileID: 946506789}
   fishEventZoneText: {fileID: 1452337410}
-  animalsFoundCounterText: {fileID: 529327884}
-  plantsSwappedCounterText: {fileID: 2062558044}
+  bradfordPearsSwappedCounterText: {fileID: 2062558044}
+  purpleLoosestrifesSwappedCounterText: {fileID: 1463633319}
+  plantsCorrectlySwappedCounterText: {fileID: 683699638}
   startPanel: {fileID: 93126940}
   objectivesPanel: {fileID: 975062793}
   endOfGamePanel: {fileID: 36078804}
@@ -49219,6 +50380,8 @@ MonoBehaviour:
   midBankObjective: {fileID: 13583098}
   upperBankObjective: {fileID: 334937536}
   plantSortingObjective: {fileID: 1706834040}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
   deerEventZoneText1: {fileID: 1579144734}
   birdEventZoneText1: {fileID: 946506787}
   fishEventZoneText1: {fileID: 1452337408}
@@ -49237,8 +50400,10 @@ MonoBehaviour:
   objectiveSubText13: {fileID: 1333502278}
   objectiveSubText14: {fileID: 27810655}
   objectiveSubText15: {fileID: 64926221}
-  animalsFoundCounterText1: {fileID: 529327882}
-  plantsSwappedCounterText1: {fileID: 2062558042}
+  animalsFoundCounterText1: {fileID: 0}
+  bradfordPearsSwappedCounterText1: {fileID: 2062558042}
+  purpleLoosestrifesSwappedCounterText1: {fileID: 1463633317}
+  plantsCorrectlySwappedCounterText1: {fileID: 683699636}
   startButton: {fileID: 733150458}
   returnButton: {fileID: 1907633557}
   pauseButton: {fileID: 654458305}
@@ -49287,11 +50452,15 @@ MonoBehaviour:
   - Northern Map Turtle
   - Banded Pennant Dragonfly
   - Painted Lady Butterfly
+  lowerBankObjectivesActive: 0
+  midBankObjectivesActive: 0
+  upperBankObjectivesActive: 0
   lowerBankObjectivesComplete: 0
   midBankObjectivesComplete: 0
   upperBankObjectivesComplete: 0
   objectivesComplete: 0
   eventZonesComplete: 0
+  plantSortingComplete: 0
   deerEventActive: 0
   birdEventActive: 0
   fishEventActive: 0
@@ -51183,9 +52352,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 1966325004}
   plantID: Bradford Pear Tree 4
+  plantLocation: Mid Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &1966325006
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -51420,7 +52604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 624430946155504111, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.62
+      value: 4.642
       objectReference: {fileID: 0}
     - target: {fileID: 624430946155504111, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51457,6 +52641,10 @@ PrefabInstance:
     - target: {fileID: 2624150243322215668, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
       propertyPath: m_Radius
       value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624150243322215668, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
+      propertyPath: m_BaseOffset
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2624150243322215668, guid: bff40d91200e07143be7d5e0c4d96b6f, type: 3}
       propertyPath: m_AgentTypeID
@@ -52063,6 +53251,213 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 3801740175355240254, guid: 7e0c5ff49daf68143ac26627563f99b0, type: 3}
   m_PrefabInstance: {fileID: 1991159143}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2000015284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2000015285}
+  - component: {fileID: 2000015289}
+  - component: {fileID: 2000015288}
+  - component: {fileID: 2000015287}
+  - component: {fileID: 2000015290}
+  m_Layer: 5
+  m_Name: Click to Close Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2000015285
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000015284}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.8333335, y: 1, z: 1.666667}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1768927204}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2, y: -224.39998}
+  m_SizeDelta: {x: 281.4, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2000015287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000015284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2000015288}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1768927203}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2000015288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000015284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '[Click to Close]'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &2000015289
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000015284}
+  m_CullTransparentMesh: 1
+--- !u!114 &2000015290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000015284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028839d39ab26e747ac43f05f963ba9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 412831568}
 --- !u!208 &2001596271
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -52715,11 +54110,14 @@ RectTransform:
   - {fileID: 975062794}
   - {fileID: 1239105835}
   - {fileID: 965457534}
+  - {fileID: 1273922655}
+  - {fileID: 1768927204}
   - {fileID: 565224903}
   - {fileID: 1945979742}
   - {fileID: 483204207}
-  - {fileID: 529327883}
   - {fileID: 2062558043}
+  - {fileID: 1463633318}
+  - {fileID: 683699637}
   - {fileID: 1659043538}
   - {fileID: 988859222}
   - {fileID: 115575804}
@@ -53366,7 +54764,7 @@ GameObject:
   - component: {fileID: 2062558045}
   - component: {fileID: 2062558044}
   m_Layer: 5
-  m_Name: Plants Swapped Counter Text
+  m_Name: Bradford Pears Swapped Counter Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53386,9 +54784,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2041530693}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -343.7, y: -500}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 240, y: -145}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062558044
@@ -53438,8 +54836,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -54580,9 +55978,24 @@ MonoBehaviour:
   - {fileID: 4505496532563873807, guid: 98cc565a4399c5c4b90b9a98a7401710, type: 3}
   - {fileID: 1487026486433785778, guid: 8447cb01d98673342aec5249f1ac6ecf, type: 3}
   - {fileID: 8336289633293117889, guid: 0ca7df66ee0fb8e43aab10fb4b6781e5, type: 3}
+  plantVariants:
+  - {fileID: 3801047468508447501, guid: 32ba831ff3d2a484cae1ea8ef1782961, type: 3}
+  - {fileID: 872601811090014047, guid: 24bea520d32fbd342b3e276e44baaeb6, type: 3}
+  - {fileID: 8712389932919382656, guid: 88248894660c0b643b171cf2e8dcbf16, type: 3}
+  - {fileID: 6433350572552152875, guid: 9523e299ce4e41244a556e072e68a0c7, type: 3}
+  - {fileID: 7157138861140052661, guid: e4c759593fce04a44bf6498c572276b8, type: 3}
+  - {fileID: 1052978936813799838, guid: bb23377c8bbc1354f90cb82e63c734ce, type: 3}
+  - {fileID: 8510616008917651905, guid: 54be6e93fe9f06b4495e1467390a237b, type: 3}
+  - {fileID: 58560697283833279, guid: fc9f416c50b7f7c4a9db170da6663134, type: 3}
+  - {fileID: 6807438407775529150, guid: c037697c77efdb34d921820ead489077, type: 3}
+  - {fileID: 7181826914066830279, guid: 0e7ff7ab5e06ce74a9aad1237c6573a4, type: 3}
   changeablePlant: {fileID: 2131158822}
   plantID: Purple Loosestrife 2
+  plantLocation: Mid Bank
   animalGameManager: {fileID: 1899327843}
+  playerInput: {fileID: 412831568}
+  correctPlantSwappedPanel: {fileID: 1273922654}
+  incorrectPlantSwappedPanel: {fileID: 1768927203}
 --- !u!136 &2131158824
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -55585,7 +56998,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1886787713}
     m_Modifications:
     - target: {fileID: 7219253318179623427, guid: 654cb37873f5fd34eae3852a6416b4d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56452,7 +57865,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1886787713}
     m_Modifications:
     - target: {fileID: 4713968062235903392, guid: 60405cb41c2ed6e4e921d71cede8b0e5, type: 3}
       propertyPath: m_Name
@@ -56519,7 +57932,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1886787713}
     m_Modifications:
     - target: {fileID: 206251324799979507, guid: 66007a72f83d6bc4383325862ca1e975, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56610,10 +58023,6 @@ SceneRoots:
   - {fileID: 233609771}
   - {fileID: 1676565763}
   - {fileID: 1499273428}
-  - {fileID: 141852272241137050}
-  - {fileID: 8912176485477907353}
-  - {fileID: 7647527483363997041}
-  - {fileID: 1694658222}
-  - {fileID: 618238087}
   - {fileID: 1578719923}
   - {fileID: 1062225327}
+  - {fileID: 1886787713}

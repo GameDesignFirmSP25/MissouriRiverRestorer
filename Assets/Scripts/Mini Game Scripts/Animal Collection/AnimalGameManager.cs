@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Data.SqlTypes;
 using Unity.VisualScripting;
 using StarterAssets;
+using JetBrains.Annotations;
 
 public class AnimalGameManager : BaseMiniGameManager
 {
@@ -90,11 +91,17 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     TextMeshProUGUI fishEventZoneText;
 
-    [SerializeField]
-    TextMeshProUGUI animalsFoundCounterText;
+    //[SerializeField]
+    //TextMeshProUGUI animalsFoundCounterText;
 
     [SerializeField]
-    TextMeshProUGUI plantsSwappedCounterText;
+    TextMeshProUGUI bradfordPearsSwappedCounterText;
+
+    [SerializeField]
+    TextMeshProUGUI purpleLoosestrifesSwappedCounterText;
+
+    [SerializeField]
+    TextMeshProUGUI plantsCorrectlySwappedCounterText;
 
     private Slider slider;
 
@@ -146,6 +153,12 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [SerializeField]
     GameObject plantSortingObjective;
+
+    [SerializeField]
+    GameObject correctPlantSwappedPanel;
+
+    [SerializeField]
+    GameObject incorrectPlantSwappedPanel;
 
     [SerializeField]
     GameObject deerEventZoneText1;
@@ -205,7 +218,13 @@ public class AnimalGameManager : BaseMiniGameManager
     GameObject animalsFoundCounterText1;
 
     [SerializeField]
-    GameObject plantsSwappedCounterText1;
+    GameObject bradfordPearsSwappedCounterText1;
+
+    [SerializeField]
+    GameObject purpleLoosestrifesSwappedCounterText1;
+
+    [SerializeField]
+    GameObject plantsCorrectlySwappedCounterText1;
 
     [SerializeField]
     GameObject startButton;
@@ -286,7 +305,9 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [Header("Interger Variables")]
     private int animalsFound = 0;
-    private int plantsSwapped = 0; 
+    private int bradfordPearsSwapped = 0;
+    private int purpleLoosestrifesSwapped = 0;
+    private int plantsCorrectlySwapped = 0; 
 
     [Header("Booleans")]
     public static bool trappingCompleted = false; // Global variable to check if trapping is completed
@@ -316,11 +337,15 @@ public class AnimalGameManager : BaseMiniGameManager
     private bool hasResetDialogueState = false;
     private bool hasResetEventPanelState = false;
     private bool hasResetPlantSortingPanelState = false;
+    public bool lowerBankObjectivesActive = false;
+    public bool midBankObjectivesActive = false;
+    public bool upperBankObjectivesActive = false;
     public bool lowerBankObjectivesComplete = false;
     public bool midBankObjectivesComplete = false;
     public bool upperBankObjectivesComplete = false;
     public bool objectivesComplete = false;
     public bool eventZonesComplete = false;
+    public bool plantSortingComplete = false;
     public bool deerEventActive = false;
     public bool birdEventActive = false;
     public bool fishEventActive = false;
@@ -365,8 +390,10 @@ public class AnimalGameManager : BaseMiniGameManager
 
     private void Awake()
     {
-        UpdateAnimalCounter();
-        UpdatePlantsSwappedCounter(); // Update the plants swapped counter on awake
+        //UpdateAnimalCounter();
+        UpdateBradfordPearsSwappedCounter(); // Update the bradford pears swapped counter on awake
+        UpdatePurpleLoosestrifesSwappedCounter(); // Update the purple loosestrifes swapped counter on awake
+        UpdatePlantsCorrectlySwappedCounter(); // Update the plants swapped counter on awake
     }
 
     void Start()
@@ -449,6 +476,8 @@ public class AnimalGameManager : BaseMiniGameManager
 
         ObjectivesComplete(); // Check if all objectives are complete
 
+        PlantSortingComplete(); // Check if plant sorting is complete
+
         RunEndGameCycle();
     }
 
@@ -464,7 +493,7 @@ public class AnimalGameManager : BaseMiniGameManager
         startButton.SetActive(false); // hide start button
         startPanel.SetActive(false); // hide start panel
         pauseButton.SetActive(true); // show pause button
-        animalsFoundCounterText1.SetActive(true); // show animals found counter
+        //animalsFoundCounterText1.SetActive(true); // show animals found counter
         Time.timeScale = 1; // Unfreeze time
     }
 
@@ -477,14 +506,18 @@ public class AnimalGameManager : BaseMiniGameManager
         eventsObjectivesPanel.SetActive(false); // hide events objectives panel
         plantSortingObjective.SetActive(false); // hide plant sorting objective
         eventsStartPanel.SetActive(false); // hide events start panel
+        correctPlantSwappedPanel.SetActive(false); // hide correct plant swapped panel
+        incorrectPlantSwappedPanel.SetActive(false); // hide incorrect plant swapped panel
         returnButton.SetActive(false); // hide return button
         startButton.SetActive(true); // show start button
         startPanel.SetActive(true); // show start panel
         pauseButton.SetActive(false); // hide pause button
         endOfGamePanel.SetActive(false); // hide end of game panel
         clickCounter.SetActive(false); // hide click counter slider
-        animalsFoundCounterText1.SetActive(false); // hide animals found counter
-        plantsSwappedCounterText1.SetActive(false); // hide plants swapped counter
+        //animalsFoundCounterText1.SetActive(false); // hide animals found counter
+        bradfordPearsSwappedCounterText1.SetActive(false); // hide bradford pears swapped counter
+        purpleLoosestrifesSwappedCounterText1.SetActive(false); // hide purple loosestrifes swapped counter
+        plantsCorrectlySwappedCounterText1.SetActive(false); // hide plants swapped counter
         replaceWithAmericanLotusButton.SetActive(false); // hide choice 0 button
         replaceWithCordgrassButton.SetActive(false); // hide choice 1 button
         replaceWithSwampMilkweedButton.SetActive(false); // hide choice 2 button
@@ -551,18 +584,40 @@ public class AnimalGameManager : BaseMiniGameManager
         set
         {
             animalsFound = value; // Setter for animalsFound
-            UpdateAnimalCounter(); // Update the animals found counter
+            //UpdateAnimalCounter(); // Update the animals found counter
+        }
+    }
+
+    // Integer properties to manage bradford pears swapped
+    public int BradfordPearsSwapped
+    {
+        get { return bradfordPearsSwapped; } // Getter for bradfordPearsSwapped
+        set
+        {
+            bradfordPearsSwapped = value; // Setter for bradfordPearsSwapped
+            UpdateBradfordPearsSwappedCounter(); // Update the bradford pears swapped counter
+        }
+    }
+
+    // Integer properties to manage purple loosestrifes swapped
+    public int PurpleLoosestrifesSwapped
+    {
+        get { return purpleLoosestrifesSwapped; } // Getter for purpleLoosestrifesSwapped
+        set
+        {
+            purpleLoosestrifesSwapped = value; // Setter for purpleLoosestrifesSwapped
+            UpdatePurpleLoosestrifesSwappedCounter(); // Update the purple loosestrifes swapped counter
         }
     }
 
     // Integer properties to manage plants swapped
-    public int PlantsSwapped
+    public int PlantsCorrectlySwapped
     {
-        get { return plantsSwapped; } // Getter for plantsSwapped
+        get { return plantsCorrectlySwapped; } // Getter for plantsSwapped
         set
         {
-            plantsSwapped = value; // Setter for plantsSwapped
-            UpdatePlantsSwappedCounter(); // Update the plants swapped counter
+            plantsCorrectlySwapped = value; // Setter for plantsSwapped
+            UpdatePlantsCorrectlySwappedCounter(); // Update the plants swapped counter
         }
     }
 
@@ -586,15 +641,27 @@ public class AnimalGameManager : BaseMiniGameManager
     }
 
     // Method to update animal counter text
-    public void UpdateAnimalCounter()
+    //public void UpdateAnimalCounter()
+    //{
+    //    animalsFoundCounterText.text = $"Animals Found: {animalsFound.ToString()} / 12"; // Update the text to show animals found
+    //}
+
+    // Method to update bradford pears swapped counter text
+    public void UpdateBradfordPearsSwappedCounter()
     {
-        animalsFoundCounterText.text = $"Animals Found: {animalsFound.ToString()} / 12"; // Update the text to show animals found
+        bradfordPearsSwappedCounterText.text = $"Bradford Pears Swapped: {bradfordPearsSwapped.ToString()} / 6"; // Update the text to show bradford pears swapped
+    }
+
+    // Method to update purple loosestrifes swapped counter text
+    public void UpdatePurpleLoosestrifesSwappedCounter()
+    {
+        purpleLoosestrifesSwappedCounterText.text = $"Purple Loosestrifes Swapped: {purpleLoosestrifesSwapped.ToString()} / 6"; // Update the text to show purple loosestrifes swapped
     }
 
     // Method to update plants swapped counter text
-    public void UpdatePlantsSwappedCounter()
+    public void UpdatePlantsCorrectlySwappedCounter()
     {
-        plantsSwappedCounterText.text = $"Plants Swapped: {plantsSwapped.ToString()} / 12"; // Update the text to show plants swapped
+        plantsCorrectlySwappedCounterText.text = $"Plants Correctly Swapped: {plantsCorrectlySwapped.ToString()} / 12"; // Update the text to show plants swapped
     }
 
     // Method to increment progress on click counter
@@ -1192,6 +1259,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Set subtext for objective 1
     private void LowerBankObjectives()
     {
+        lowerBankObjectivesActive = true; //set bool lowerBankObjectivesActive to true
         Debug.Log("Player is exploring the lower bank."); //Debug.Log
         objectiveText1.gameObject.SetActive(true); //show objective text 1
         objectiveSubtext1.gameObject.SetActive(true); //show objective subtext 1
@@ -1214,6 +1282,7 @@ public class AnimalGameManager : BaseMiniGameManager
         {
             Debug.Log("Lower Bank objectives complete!"); //Debug.Log
             lowerBankObjectivesComplete = true; //set bool lowerBankObjectivesComplete to true
+            lowerBankObjectivesActive = false; //set bool lowerBankObjectivesActive to false
             objectivesPanel.SetActive(false); //hide objectives panel
             objectiveText1.gameObject.SetActive(false); //hide objective text 1
             objectiveSubtext1.gameObject.SetActive(false); //hide objective subtext 1
@@ -1229,6 +1298,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Set subtext for objective 2
     private void MidBankObjectives()
     {
+        midBankObjectivesActive = true; //set bool midBankObjectivesActive to true
         Debug.Log("Player is exploring the Mid Bank!"); //Debug.Log
         objectivesPanel.SetActive(true); //show objectives panel
         objectiveText2.gameObject.SetActive(true); //show objective text 2
@@ -1248,6 +1318,7 @@ public class AnimalGameManager : BaseMiniGameManager
         {
             Debug.Log("Mid Bank objectives complete!"); //Debug.Log
             midBankObjectivesComplete = true; //set bool midBankObjectivesComplete to true
+            midBankObjectivesActive = false; //set bool midBankObjectivesActive to false
             objectivesPanel.SetActive(false); //hide objectives panel
             objectiveText2.gameObject.SetActive(false); //hide objective text 2
             objectiveSubtext7.gameObject.SetActive(false); //hide objective subtext 7
@@ -1261,6 +1332,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Set subtext for objective 3
     private void UpperBankObjectives()
     {
+        upperBankObjectivesActive = true; //set bool upperBankObjectivesActive to true
         Debug.Log("Player is exploring the Upper Bank!"); //Debug.Log
         objectivesPanel.SetActive(true); //show objectives panel
         objectiveText3.gameObject.SetActive(true); //show objective text 3
@@ -1282,6 +1354,7 @@ public class AnimalGameManager : BaseMiniGameManager
         {
             Debug.Log("Upper Bank objectives complete!"); //Debug.Log
             upperBankObjectivesComplete = true; //set bool upperBankObjectivesComplete to true
+            upperBankObjectivesActive = false; //set bool upperBankObjectivesActive to false
             objectivesPanel.SetActive(false); //hide objectives panel
             objectiveText3.gameObject.SetActive(false); //hide objective text 3
             objectiveSubtext11.gameObject.SetActive(false); //hide objective subtext 11
@@ -1347,22 +1420,22 @@ public class AnimalGameManager : BaseMiniGameManager
             deerEventObjectiveSet = true; // Set bool deerEventObjectiveSet to true
         }
 
-        // If bool deerEvetTriggered is not true...
-        else if (!DeerEventZone.deerEventTriggered)
-        {
-            Debug.Log("Deer Event not triggered yet."); //Debug.Log
-        }
+        //// If bool deerEvetTriggered is not true...
+        //else if (!DeerEventZone.deerEventTriggered)
+        //{
+        //    Debug.Log("Deer Event not triggered yet."); //Debug.Log
+        //}
 
-        // If bool deerEventZoneComplete is true...
-        else if (deerEventZoneComplete)
-        {
-                Debug.Log("Deer Event zone already completed."); // Debug.Log
-        }
+        //// If bool deerEventZoneComplete is true...
+        //else if (deerEventZoneComplete)
+        //{
+        //        Debug.Log("Deer Event zone already completed."); // Debug.Log
+        //}
 
-        else
-        {
-            Debug.LogWarning($"Deer event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, deerEventObjectiveSet={deerEventObjectiveSet}");
-        }
+        //else
+        //{
+        //    Debug.LogWarning($"Deer event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, deerEventObjectiveSet={deerEventObjectiveSet}");
+        //}
     }
 
     // Method to called when bird event zone is entered
@@ -1382,22 +1455,22 @@ public class AnimalGameManager : BaseMiniGameManager
             birdEventObjectiveSet = true; // Set bool birdEventObjectiveSet to true
         }
 
-        // If bool birdEventTriggered is false...
-        else if (!BirdEventZone.birdEventTriggered)
-        {
-            Debug.Log("Bird Event not triggered yet."); // Debug.Log
-        }
+        //// If bool birdEventTriggered is false...
+        //else if (!BirdEventZone.birdEventTriggered)
+        //{
+        //    Debug.Log("Bird Event not triggered yet."); // Debug.Log
+        //}
 
-        // If bool birdEventZoneComplete is true...
-        else if (birdEventZoneComplete)
-        {
-            Debug.Log("Bird Event zone already completed."); // Debug.Log
-        }
+        //// If bool birdEventZoneComplete is true...
+        //else if (birdEventZoneComplete)
+        //{
+        //    Debug.Log("Bird Event zone already completed."); // Debug.Log
+        //}
         
-        else
-        {
-            Debug.LogWarning($"Bird event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, birdEventObjectiveSet={birdEventObjectiveSet}");
-        }
+        //else
+        //{
+        //    Debug.LogWarning($"Bird event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, birdEventObjectiveSet={birdEventObjectiveSet}");
+        //}
     }
 
     // Method to called when fish event zone is entered
@@ -1417,22 +1490,22 @@ public class AnimalGameManager : BaseMiniGameManager
             fishEventObjectiveSet = true; // Set bool fishEventObjectiveSet
         }
 
-        // If bool fishEventTrigerred is false...
-        else if (!FishEventZone.fishEventTriggered)
-        {
-            Debug.Log("Fish Event not triggered yet."); // Debug.Log
+        //// If bool fishEventTrigerred is false...
+        //else if (!FishEventZone.fishEventTriggered)
+        //{
+        //    Debug.Log("Fish Event not triggered yet."); // Debug.Log
 
-        }
-        // If bool fishEventZoneComplete is true...
-        else if (fishEventZoneComplete)
-        {
-            Debug.Log("Fish Event zone already completed."); // Debug.Log
-        }
+        //}
+        //// If bool fishEventZoneComplete is true...
+        //else if (fishEventZoneComplete)
+        //{
+        //    Debug.Log("Fish Event zone already completed."); // Debug.Log
+        //}
 
-        else
-        {
-            Debug.LogWarning($"Fish event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, fishEventObjectiveSet={fishEventObjectiveSet}");
-        }
+        //else
+        //{
+        //    Debug.LogWarning($"Fish event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, fishEventObjectiveSet={fishEventObjectiveSet}");
+        //}
     }
 
     // Method to handle Bradford Pear Tree click
@@ -1472,7 +1545,7 @@ public class AnimalGameManager : BaseMiniGameManager
         replaceWithSycamoreButton.SetActive(false); // Hide the replace with sycamore button
         replaceWithBoxElderButton.SetActive(false); // Hide the replace with box elder button
         wasReplaceWithSycamoreButtonClicked = true; // Set bool wasReplaceWithSycamoreButtonClicked to true
-        Invoke("ResetTreeButtonsState", 1f); // Call ResetTreeButtonsState after 1 second
+        Invoke("ResetTreeButtonsState", 2f); ; // Call ResetTreeButtonsState 
         changeablePlant.SwapPlants(); // Call the SwapPlants method to swap the plant to Sycamore Tree
 
     }
@@ -1488,7 +1561,7 @@ public class AnimalGameManager : BaseMiniGameManager
         replaceWithSycamoreButton.SetActive(false); // Hide the replace with sycamore button
         replaceWithBoxElderButton.SetActive(false); // Hide the replace with box elder button
         wasReplaceWithBoxElderButtonClicked = true; // Set bool wasReplaceWithBoxElderButtonClicked to true
-        Invoke("ResetTreeButtonsState", 1f); // Call ResetTreeButtonsState after 1 second
+        Invoke("ResetTreeButtonsState", 2f); ; // Call ResetTreeButtonsState 
         changeablePlant.SwapPlants(); // Call the SwapPlants method to swap the plant to Box Elder Tree
 
     }
@@ -1504,7 +1577,7 @@ public class AnimalGameManager : BaseMiniGameManager
         replaceWithSwampMilkweedButton.SetActive(false); // Hide the replace with Swamp Milkweed button
         replaceWithYellowConeflowerButton.SetActive(false); // Hide the replace with Yellow Coneflower button
         wasReplaceWithAmericanLotusButtonClicked = true; // Set bool wasReplaceWithAmericanLotusButtonClicked to true
-        Invoke("ResetPlantButtonsState", 1f); // Call ResetPlantButtonsState after 1 second
+        Invoke("ResetPlantButtonsState", 2f); ; // Call ResetPlantButtonsState
         changeablePlant.SwapPlants(); // Call the SwapPlants method to swap the plant to American Lotus
     }
 
@@ -1519,7 +1592,7 @@ public class AnimalGameManager : BaseMiniGameManager
         replaceWithSwampMilkweedButton.SetActive(false); // Hide the replace with Swamp Milkweed button
         replaceWithYellowConeflowerButton.SetActive(false); // Hide the replace with Yellow Coneflower button
         wasReplaceWithCordgrassButtonClicked = true; // Set bool wasReplaceWithCordgrassButtonClicked to true
-        Invoke("ResetPlantButtonsState", 1f); // Call ResetPlantButtonsState after 1 second
+        Invoke("ResetPlantButtonsState", 2f); ; // Call ResetPlantButtonsState
         changeablePlant.SwapPlants(); // Call the SwapPlants method to swap the plant to Cordgrass
     }
 
@@ -1534,7 +1607,7 @@ public class AnimalGameManager : BaseMiniGameManager
         replaceWithSwampMilkweedButton.SetActive(false); // Hide the replace with Swamp Milkweed button 
         replaceWithYellowConeflowerButton.SetActive(false); // Hide the replace with Yellow Coneflower button
         wasReplaceWithSwampMilkweedButtonClicked = true; // Set bool wasReplaceWithSwampMilkweedButtonClicked to true
-        Invoke("ResetPlantButtonsState", 1f); // Call ResetPlantButtonsState after 1 second
+        Invoke("ResetPlantButtonsState", 2f); ; // Call ResetPlantButtonsState
         changeablePlant.SwapPlants(); // Call the SwapPlants method to swap the plant to Swamp Milkweed
     }
 
@@ -1549,7 +1622,7 @@ public class AnimalGameManager : BaseMiniGameManager
         replaceWithSwampMilkweedButton.SetActive(false); // Hide the replace with Swamp Milkweed button
         replaceWithYellowConeflowerButton.SetActive(false); // Hide the replace with Yellow Coneflower button
         wasReplaceWithYellowConeflowerButtonClicked = true; // Set bool wasReplaceWithYellowConeflowerButtonClicked to true
-        Invoke("ResetPlantButtonsState", 1f); // Call ResetPlantButtonsState after 1 second
+        Invoke("ResetPlantButtonsState", 2f); ; // Call ResetPlantButtonsState
         changeablePlant.SwapPlants(); // Call the SwapPlants method to swap the plant to Yellow Coneflower
     }
 
@@ -1677,8 +1750,10 @@ public class AnimalGameManager : BaseMiniGameManager
             plantSortingObjective.SetActive(true); // Show plant sorting objective
             plantSortingObjectiveText.text = "Find and click on invasive plants.";
             objectivesShown = true; // Set objectivesShown to true
-            plantsSwappedCounterText1.SetActive(true); // Show plants swapped counter text 1
-            Invoke("StartPlantSorting", 2f); // Call StartPlantSorting after 2 seconds
+            bradfordPearsSwappedCounterText1.SetActive(true); // Show plants swapped counter text 1
+            purpleLoosestrifesSwappedCounterText1.SetActive(true); // Show plants swapped counter text 1
+            plantsCorrectlySwappedCounterText1.SetActive(true); // Show plants swapped counter text 1
+            StartPlantSorting(); // Call StartPlantSorting to allow plant sorting panel to be shown
         }
     }
 
@@ -1698,6 +1773,16 @@ public class AnimalGameManager : BaseMiniGameManager
                 objectivesComplete = true; // Set objectivesComplete to true if all objectives are met
             }
         
+    }
+
+    private void PlantSortingComplete()
+    {
+        int plantsSwapped = bradfordPearsSwapped + purpleLoosestrifesSwapped; // Calculate total plants swapped
+
+        if (plantsSwapped == 12 && !plantSortingComplete)
+        {
+            plantSortingComplete = true;
+        }
     }
 
     // Method to check if any animal has been previously clicked
@@ -1755,8 +1840,8 @@ public class AnimalGameManager : BaseMiniGameManager
 
     private void RunEndGameCycle()
     {
-        Debug.Log($"plants swapped: {plantsSwapped}, objectives complete: {objectivesComplete}, event zones complete: {eventZonesComplete}, trapping completed: {trappingCompleted}"); // Debug.Log
-        if (plantsSwapped == 12 && objectivesComplete && eventZonesComplete && !trappingCompleted)
+        //Debug.Log($"plant sorting complete: {plantSortingComplete}, objectives complete: {objectivesComplete}, event zones complete: {eventZonesComplete}, trapping completed: {trappingCompleted}"); // Debug.Log
+        if (plantSortingComplete && objectivesComplete && eventZonesComplete && !trappingCompleted)
         {
             Debug.Log("All objectives are complete!"); // Debug.Log
             endOfGamePanel.SetActive(true); // Show end of game panel
