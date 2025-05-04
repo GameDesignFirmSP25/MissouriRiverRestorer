@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: bb76e4318480e6a40abcd11f9a2efdfd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _GAMESTATE_DIRTY
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -100,6 +101,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DirtySaturation: 0.4
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -107,12 +109,17 @@ Material:
     - _FresnelAlpha: 0
     - _FresnelGlow: 1
     - _FresnelPower: 1.16
+    - _GAMESTATE: 0
+    - _GameStateLerp: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GlowFrequency: 5
     - _GradientLerp: 1
+    - _GustFrequency: 0
+    - _HeightOfInfluence: 0
     - _HueShiftAmount: 0
+    - _InfluenceStrength: 1
     - _Metallic: 0
     - _NormalSize: -3.48
     - _NormalStrength: 4.71
@@ -137,17 +144,20 @@ Material:
     - _SpecularSize: 18.04
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
+    - _StartingHueShift: 0
     - _Steps: 4.22
     - _Surface: 0
     - _TextureNormal: 0
     - _ToonRampContrast: 0.36
     - _UseNormal: 0
     - _VoronoiAngle: -0.12
+    - _WindStrength: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DirtyColor: {r: 0.9529411, g: 0.7913905, b: 0.7333333, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 0, b: 0.69803905, a: 1}
     - _MultiplyColor: {r: 0.957572, g: 0.80566037, b: 1, a: 1}
