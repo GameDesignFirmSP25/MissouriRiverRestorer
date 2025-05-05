@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.LowLevel;
 
 public class ChangeNavAgentSpeed : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class ChangeNavAgentSpeed : MonoBehaviour
 
     public bool isWaiting = true;
     public bool isWalking = false;
+    private bool speedUpdated = false; // Track if the agent speed has been changed
 
     void Start()
     {
@@ -27,47 +29,32 @@ public class ChangeNavAgentSpeed : MonoBehaviour
 
 
         agent.stoppingDistance = 1f; // Set a small stopping distance
+
+        
+        
+        SetAgentSpeed(0); ; // Stop the agent
+        
+       
     }
 
     void Update()
     {
-        //timer += Time.deltaTime; // timer is equal to itslef plus Time.deltaTime 
-
-        //// If timer is greater than or equal to wanderTimer...
-        //if (timer >= wanderTimer)
-        //{
-        //    Debug.Log("Timer reached. Setting new destination."); // Debug.Log
-        //    Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1); // newPos is equal to 
-        //    agent.SetDestination(newPos); // Set destination of agent to newPos
-        //    timer = 0; // Set timer to 0
-        //    isWalking = true; // Set bool isWalking to true
-        //    isWaiting = false; // Set bool isWaiting to false
-        //    Debug.Log("isWalking set to true.");
-        //    AnimalMovement();
-        //}
-
-        //// Change the speed based on some condition (e.g., a button press)
-        //if (!AnimalGameManager.deerEventZoneComplete)
-        //{
-        //    agent.speed = 0f; // Increase speed
-        //}
-        //else if (AnimalGameManager.deerEventZoneComplete)
-        //{
-        //    agent.speed = 3.5f;  // Reduce speed
-        //}
         timer += Time.deltaTime; // Increment the timer
 
         // If the deer event is not complete, stop the agent
-        if (!AnimalGameManager.deerEventZoneComplete)
+        if (AnimalGameManager.deerEventZoneComplete && !speedUpdated)
         {
-            agent.speed = 0f; // Stop the agent
-        }
-        else if (AnimalGameManager.deerEventZoneComplete)
-        {
-            agent.speed = 3.5f; // Set walking speed
-            AnimalMovement(); // Trigger the movement logic
+            SetAgentSpeed(3.5f); // Set walking speed
         }
 
+        AnimalMovement(); // Call the animal movement logic
+
+        SetPosition();
+    }
+
+    // Method to set the agent's position to a random point within a sphere
+    private void SetPosition()
+    {
         // Handle wandering logic if the timer exceeds the wander time
         if (timer >= wanderTimer && isWalking)
         {
@@ -102,30 +89,6 @@ public class ChangeNavAgentSpeed : MonoBehaviour
     // Controls animal movement
     private void AnimalMovement()
     {
-        //// If bool isWalking is true...
-        //if (isWalking)
-        //{
-        //    Debug.Log("Animal is walking. Transitioning to waiting state."); // Debug.Log
-        //    isWalking = false; // Set bool isWalking to false
-        //    isWaiting = true; // Set bool isWaiting to true
-        //    //agent.speed = 0f; // Set the speed of the NavMeshAgent to 0
-
-        //}
-
-        //// If bool isWaiting is true...
-        //if (isWaiting)
-        //{
-        //    Debug.Log("Animal is waiting."); // Debug.Log the state of isWaiting
-        //    waitCounter += Time.deltaTime; // Wait counter is equal to wait counter plus Time.deltaTime
-        //    if (waitCounter < waitTime) // If wait counter is less than wait time...
-        //        return;
-        //    Debug.Log("Wait time completed. Transitioning to walking state."); // Debug.Log
-        //    isWaiting = false; // Set bool isWaiting to false
-        //    //agent.speed = 3.5f; // Set the speed of the NavMeshAgent to 3.5
-        //    waitCounter = 0f; // Reset wait counter to 0
-        //}
-        // If the deer event is complete, ensure the deer starts walking
-        // If the deer event is complete, ensure the deer starts walking
         if (AnimalGameManager.deerEventZoneComplete && !isWalking)
         {
             Debug.Log("Deer event complete. Starting to walk immediately.");
@@ -163,6 +126,22 @@ public class ChangeNavAgentSpeed : MonoBehaviour
             // Set a new destination
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             agent.SetDestination(newPos);
+        }
+    }
+
+    public void SetAgentSpeed(float speed)
+    {
+        if (agent != null)
+        {
+            speedUpdated = true; // Mark that the speed has been updated
+            agent.speed = speed; // Update the agent's speed
+            Debug.Log($"Agent speed set to {speed} for {gameObject.name}");
+            AnimalMovement(); // Call the movement logic to ensure it reacts to the speed change
+            SetPosition(); // Set a new position based on the updated speed
+        }
+        else
+        {
+            Debug.LogWarning("NavMeshAgent is not assigned.");
         }
     }
 }

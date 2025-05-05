@@ -385,15 +385,14 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName2); // Find the child transform with the name "Purple Loosestrife"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        
+                        Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
+                        Destroy(childTransform.gameObject); // Destroy the child game object
+                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        isSwapped = true; // Set the plant as swapped
+
                         // If the replace with American Lotus button was clicked...
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
-                            Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
-                            Destroy(childTransform.gameObject); // Destroy the child game object
-                            Debug.Log("Swapping Plants..."); // Debug.Log
-                            isSwapped = true; // Set the plant as swapped
-
                             int swappedPlantIndex = Random.Range(2, 8); // Randomly select an index for the American Lotus Flower
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex]; // Get the selected plant from the swappedPlant array
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation); // Instantiate the selected plant prefab as a child of the changeablePlant
@@ -420,11 +419,6 @@ public class ChangeablePlant : MonoBehaviour
                         // If the replace with Cordgrass button was clicked...
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
                         {
-                            Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
-                            Destroy(childTransform.gameObject); // Destroy the child game object
-                            Debug.Log("Swapping Plants..."); // Debug.Log
-                            isSwapped = true; // Set the plant as swapped
-
                             int swappedPlantIndex = Random.Range(8, 10); // Randomly select an index for the Cordgrass
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex]; // Get the selected plant from the swappedPlant array
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation); // Instantiate the selected plant prefab as a child of the changeablePlant
@@ -450,11 +444,6 @@ public class ChangeablePlant : MonoBehaviour
                         // If the replace the Swamp Milkweed button was clicked...
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
                         {
-                            Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
-                            Destroy(childTransform.gameObject); // Destroy the child game object
-                            Debug.Log("Swapping Plants..."); // Debug.Log
-                            isSwapped = true; // Set the plant as swapped
-
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation); // Instantiate the Swamp Milkweed prefab as a child of the changeablePlant
 
                             Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
@@ -479,19 +468,15 @@ public class ChangeablePlant : MonoBehaviour
                         // If th replace with Yellow Coneflower button as clicked...
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
-                            Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
-                            Destroy(childTransform.gameObject); // Destroy the child game object
-                            Debug.Log("Swapping Plants..."); // Debug.Log
-                            isSwapped = true; // Set the plant as swapped
-
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation); // Instantiate the Yellow Coneflower prefab as a child of the changeablePlant
+                            Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
+                            InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
                             Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
                             // Spawn multiple yellow coneflowers around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
                                 Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
-                                InstantiatePrefabAsChild(swappedPlant[11], childPosition + randomOffset, childRotation);
+                                InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition + randomOffset, childRotation);
                             }
 
                             if (!correctPlantSwappedPanelShown)
@@ -615,14 +600,15 @@ public class ChangeablePlant : MonoBehaviour
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation); // Instantiate the Yellow Coneflower prefab as a child of the changeablePlant
+                            Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
+                            InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
                             Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
                             // Spawn multiple yellow coneflowers around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
                                 Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
-                                InstantiatePrefabAsChild(swappedPlant[11], childPosition + randomOffset, childRotation);
+                                InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition + randomOffset, childRotation);
                             }
 
                             if (!correctPlantSwappedPanelShown)
@@ -740,7 +726,8 @@ public class ChangeablePlant : MonoBehaviour
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
+                            Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
+                            InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
                             Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
@@ -856,7 +843,8 @@ public class ChangeablePlant : MonoBehaviour
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
+                            Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
+                            InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
                             Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
@@ -972,14 +960,15 @@ public class ChangeablePlant : MonoBehaviour
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
+                            Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
+                            InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
                             Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
                             // Spawn multiple yellow coneflowers around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
                                 Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
-                                InstantiatePrefabAsChild(swappedPlant[11], childPosition + randomOffset, childRotation);
+                                InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition + randomOffset, childRotation);
                             }
 
                             if (!correctPlantSwappedPanelShown)
@@ -1086,14 +1075,15 @@ public class ChangeablePlant : MonoBehaviour
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
                         {
-                            InstantiatePrefabAsChild(swappedPlant[11], childPosition, childRotation);
+                            Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
+                            InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
                             Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
                             // Spawn multiple yellow coneflowers around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
                                 Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * Random.Range(0.5f, 1.5f);
-                                InstantiatePrefabAsChild(swappedPlant[11], childPosition + randomOffset, childRotation);
+                                InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition + randomOffset, childRotation);
                             }
 
                             if (!correctPlantSwappedPanelShown)
@@ -1175,28 +1165,49 @@ public class ChangeablePlant : MonoBehaviour
             // Iterate through all child objects of changeablePlant
             foreach (Transform child in changeablePlant.transform)
             {
-                child.name = childName2; // Update the name of the child object to match the target plant ID
-                Debug.Log($"Checking child: {child.name}");
-                Vector3 childPosition = child.position;
-                Quaternion childRotation = child.rotation;
-
-                if (child != null)
+                if (child.name == childName2)
                 {
-                    Debug.Log($"Destroying child: {child.name}");
-                    child.gameObject.SetActive(false);
-                }
-                else
-                {
-                    Debug.LogError("Child is null. Cannot destroy.");
-                }
+                    Debug.Log($"Deactivating child: {child.name}");
+                    child.gameObject.SetActive(false); // Deactivate the child
 
-                // Instantiate the new prefab as a child
-                GameObject newChild = Instantiate(prefabVariant, childPosition, childRotation, changeablePlant.transform);
-                Debug.Log($"Replaced child with prefab variant {prefabVariant.name}");
-                return;
+                    // Check if the prefab is already instantiated
+                    if (changeablePlant.transform.Find(prefabVariant.name) == null)
+                    {
+                        Vector3 childPosition = child.position;
+                        Quaternion childRotation = child.rotation;
+                        GameObject newChild = Instantiate(prefabVariant, childPosition, childRotation, changeablePlant.transform);
+                        Debug.Log($"Replaced child with prefab variant {prefabVariant.name}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Prefab {prefabVariant.name} already exists. Skipping instantiation.");
+                    }
+                    return;
+                }
+                //foreach (Transform child in changeablePlant.transform)
+                //{
+                //    child.name = childName2; // Update the name of the child object to match the target plant ID
+                //    Debug.Log($"Checking child: {child.name}");
+                //    Vector3 childPosition = child.position;
+                //    Quaternion childRotation = child.rotation;
+
+                //    if (child != null)
+                //    {
+                //        Debug.Log($"Destroying child: {child.name}");
+                //        child.gameObject.SetActive(false);
+                //    }
+                //    else
+                //    {
+                //        Debug.LogError("Child is null. Cannot destroy.");
+                //    }
+
+                //    // Instantiate the new prefab as a child
+                //    GameObject newChild = Instantiate(prefabVariant, childPosition, childRotation, changeablePlant.transform);
+                //    Debug.Log($"Replaced child with prefab variant {prefabVariant.name}");
+                //    return;
+                //}
             }
-
-            Debug.LogWarning($"No child found to replace under {changeablePlant.name}");
+                Debug.LogWarning($"No child found to replace under {changeablePlant.name}");
         }
         else
         {
