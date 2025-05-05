@@ -7,7 +7,7 @@ public class BirdFlight : MonoBehaviour
     public Animator animator;
     //public AnimalGameManager animalGameManager;
     public bool birdsFlownAway = false;
-    private float flySpeed = 0.025f; // Speed when flying
+    private float flySpeed = .25f; // Speed when flying
     private float randomOffset = 3f; // Add some randomness for direction
     private Vector3 targetPosition; // Position to fly to
 
@@ -28,8 +28,8 @@ public class BirdFlight : MonoBehaviour
     public void FlyAway(Vector3 playerPosition)
     {
         Vector3 direction = (transform.position - playerPosition).normalized;
-        targetPosition = transform.position + direction * randomOffset + Vector3.up * 5f; // Add upward movement
-        targetPosition = Vector3.ClampMagnitude(targetPosition, 100f); // Clamp to a maximum distance
+        targetPosition = transform.position + direction * randomOffset + Vector3.up * 30f; // Add upward movement
+        targetPosition = Vector3.ClampMagnitude(targetPosition, 300f); // Clamp to a maximum distance
         //// Calculate a flight direction away from the player
         //targetPosition = transform.position + Vector3.Normalize(Random.onUnitSphere) * randomOffset + (transform.position - playerPosition);
 

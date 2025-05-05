@@ -90,9 +90,15 @@ public class RaycastScript : MonoBehaviour
     //public static bool wasBradfordPearTreePreviouslyClicked = false;
     public static bool eventAnimalClicked = false;
 
+    [Header("Player Reference")]
+    public GameObject player; // Reference to the player GameObject
+
     [Header("Layers to Hit")]
     public LayerMask clickable;
     public LayerMask animalEventClicks;
+    public LayerMask deerEvent;
+    public LayerMask birdEvent;
+    public LayerMask fishEvent;
     public LayerMask bradfordPearTreeInteraction;
     public LayerMask purpleLoosestrifeInteraction;
 
@@ -196,6 +202,27 @@ public class RaycastScript : MonoBehaviour
                 return; // Prevent clicks on other objects
             }
 
+            //// If deer event is active, restrict clicks to event animals
+            //if (animalGameManagerScript.deerEventActive && !eventAnimalClicked)
+            //{
+            //    Debug.Log("Event is active. Restricting clicks to event animals.");
+            //    return; // Prevent clicks on other objects
+            //}
+
+            //// If bird event is active, restrict clicks to event animals
+            //if (animalGameManagerScript.birdEventActive && !eventAnimalClicked)
+            //{
+            //    Debug.Log("Event is active. Restricting clicks to event animals.");
+            //    return; // Prevent clicks on other objects
+            //}
+
+            //// If fish event is active, restrict clicks to event animals
+            //if (animalGameManagerScript.fishEventActive && !eventAnimalClicked)
+            //{
+            //    Debug.Log("Event is active. Restricting clicks to event animals.");
+            //    return; // Prevent clicks on other objects
+            //}
+
             // If no panel is active, proceed with raycasting
             CastRay(); // Call the CastRay function
         }
@@ -214,57 +241,68 @@ public class RaycastScript : MonoBehaviour
             {
                 Debug.Log($"Hit object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
 
-                // If the clicked GameObject's name matches the target name for eastern starling...
-                if (System.Array.Exists(easternStarlingNames, name => name == hit.collider.gameObject.name))
+                if (animalGameManagerScript.lowerBankObjectivesActive)
                 {
-                    HandleEasternStarlingClick(hit.collider.gameObject); // Handle the click on the eastern starling GameObject
+                    if (System.Array.Exists(snappingTurtleNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleSnappingTurtleClick(hit.collider.gameObject); // Handle the click on the snapping turtle GameObject 
+                    }
+                    else if (System.Array.Exists(garterSnakeNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleGarterSnakeClick(hit.collider.gameObject); // Handle the click on the garter snake GameObject
+                    }
+                    else if (System.Array.Exists(northernMapTurtleNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
+                    }
+                    else if (System.Array.Exists(asianCarpNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleAsianCarpClick(hit.collider.gameObject); // Handle the click on the asian carp GameObject 
+                    }
+                    else if (System.Array.Exists(beaverNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleBeaverClick(hit.collider.gameObject); // Handle the click on the beaver GameObject 
+                    }
                 }
-                // Check if the clicked GameObject's name matches any white-tailed deer name
-                else if (System.Array.Exists(whiteTailedDeerNames, name => name == hit.collider.gameObject.name))
+
+                if (animalGameManagerScript.midBankObjectivesActive)
                 {
-                    HandleWhiteTailedDeerClick(hit.collider.gameObject); // Handle the click on the white-tailed deer GameObject
+                    // If the clicked GameObject's name matches the target name for eastern starling...
+                    if (System.Array.Exists(easternStarlingNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleEasternStarlingClick(hit.collider.gameObject); // Handle the click on the eastern starling GameObject
+                    }
+                    // Check if the clicked GameObject's name matches any banded pennant dragonfly name
+                    else if (System.Array.Exists(bandedPennantDragonflyNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleBandedPennantDragonflyClick(hit.collider.gameObject); // Handle the click on the banded pennant dragonfly GameObject
+                    }
+                    else if (System.Array.Exists(muskratNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleMuskratClick(hit.collider.gameObject); // Handle the click on the muskrat GameObject 
+                    }
                 }
-                // Check if the clicked GameObject's name matches any banded pennant dragonfly name
-                else if (System.Array.Exists(bandedPennantDragonflyNames, name => name == hit.collider.gameObject.name))
+                
+                if (animalGameManagerScript.upperBankObjectivesActive)
                 {
-                    HandleBandedPennantDragonflyClick(hit.collider.gameObject); // Handle the click on the banded pennant dragonfly GameObject
-                }
-                else if (System.Array.Exists(garterSnakeNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandleGarterSnakeClick(hit.collider.gameObject); // Handle the click on the garter snake GameObject
-                }
-                else if (System.Array.Exists(baldEagleNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandleBaldEagleClick(hit.collider.gameObject); // Handle the click on the bald eagle GameObject 
-                }
-                else if (System.Array.Exists(paintedLadyButterflyNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandlePaintedLadyButterflyClick(hit.collider.gameObject); // Handle the click on the painted lady butterfly GameObject 
-                }
-                else if (System.Array.Exists(asianCarpNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandleAsianCarpClick(hit.collider.gameObject); // Handle the click on the asian carp GameObject 
-                }
-                else if (System.Array.Exists(beaverNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandleBeaverClick(hit.collider.gameObject); // Handle the click on the beaver GameObject 
-                }
-                else if (System.Array.Exists(raccoonNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandleRaccoonClick(hit.collider.gameObject); // Handle the click on the raccoon GameObject 
-                }
-                else if (System.Array.Exists(muskratNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandleMuskratClick(hit.collider.gameObject); // Handle the click on the muskrat GameObject 
-                }
-                else if (System.Array.Exists(snappingTurtleNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandleSnappingTurtleClick(hit.collider.gameObject); // Handle the click on the snapping turtle GameObject 
-                }
-                else if (System.Array.Exists(northernMapTurtleNames, name => name == hit.collider.gameObject.name))
-                {
-                    HandleNorthernMapTurtleClick(hit.collider.gameObject); // Handle the click on the northern map turtle GameObject 
-                }
+                    // Check if the clicked GameObject's name matches any white-tailed deer name
+                    if (System.Array.Exists(whiteTailedDeerNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleWhiteTailedDeerClick(hit.collider.gameObject); // Handle the click on the white-tailed deer GameObject
+                    }
+                    else if (System.Array.Exists(paintedLadyButterflyNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandlePaintedLadyButterflyClick(hit.collider.gameObject); // Handle the click on the painted lady butterfly GameObject 
+                    }
+                    else if (System.Array.Exists(raccoonNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleRaccoonClick(hit.collider.gameObject); // Handle the click on the raccoon GameObject 
+                    }
+                    else if (System.Array.Exists(baldEagleNames, name => name == hit.collider.gameObject.name))
+                    {
+                        HandleBaldEagleClick(hit.collider.gameObject); // Handle the click on the bald eagle GameObject 
+                    }
+                } 
             }
             else
             {
@@ -272,11 +310,34 @@ public class RaycastScript : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, animalEventClicks)) 
+        //if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, animalEventClicks)) 
+        //{
+        //    Debug.Log($"Hit object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
+
+        //    EventAnimalClicked();
+        //}
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, animalEventClicks))
         {
             Debug.Log($"Hit object: {hit.collider.gameObject.name}, Distance: {hit.distance}");
-
-            EventAnimalClicked();
+            Debug.Log($"deerEventActive: {animalGameManagerScript.deerEventActive}, birdEventActive: {animalGameManagerScript.birdEventActive}, fishEventActive: {animalGameManagerScript.fishEventActive}");
+            
+            if (animalGameManagerScript.deerEventActive)
+            {
+                Debug.Log("Deer event is active. Handling click on deer event animal.");
+                eventAnimalClicked = true; // Set eventAnimalClicked to true
+                HandleDeerEventClick(hit.collider.gameObject); // Handle the click on the deer GameObject in deer event
+            }
+            if (animalGameManagerScript.birdEventActive)
+            {
+                eventAnimalClicked = true; // Set eventAnimalClicked to true
+                HandleBirdEventClick(hit.collider.gameObject); // Handle the click on the bird GameObject in bird event 
+            }
+            if (animalGameManagerScript.fishEventActive)
+            {
+                eventAnimalClicked = true; // Set eventAnimalClicked to true
+                HandleFishEventClick(hit.collider.gameObject); // Handle the click on the asian carp GameObject in fish event
+            }
         }
 
         if (animalGameManagerScript.eventZonesComplete)
@@ -369,7 +430,7 @@ public class RaycastScript : MonoBehaviour
             easternStarlingClicked = true; // Set bool easternStarlingClicked to true
             wasEasternStarlingPreviouslyClicked = true; // Set bool wasEasternStarlingPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
 
         }
         else
@@ -388,7 +449,7 @@ public class RaycastScript : MonoBehaviour
             whiteTailedDeerClicked = true; // Set bool whiteTailedDeerClicked to true
             wasWhiteTailedDeerPreviouslyClicked = true; // Set bool wasWhiteTailedDeerPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -406,7 +467,7 @@ public class RaycastScript : MonoBehaviour
             bandedPennantDragonflyClicked = true; // Set bool bandedPennantDragonflyClicked to true
             wasBandedPennantDragonflyPreviouslyClicked = true; // Set bool wasBandedPennantDragonflyPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -424,7 +485,7 @@ public class RaycastScript : MonoBehaviour
             garterSnakeClicked = true; // Set bool garterSnakeClicked to true
             wasGarterSnakePreviouslyClicked = true; // Set bool wasGarterSnakePreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -442,7 +503,7 @@ public class RaycastScript : MonoBehaviour
             baldEagleClicked = true; // Set bool baldEagleClicked to true
             wasBaldEaglePreviouslyClicked = true; // Set bool wasBaldEaglePreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -460,7 +521,7 @@ public class RaycastScript : MonoBehaviour
             paintedLadyButterflyClicked = true; // Set bool baldEagleClicked to true
             wasPaintedLadyButterflyPreviouslyClicked = true; // Set bool wasPaintedLadyButterflyPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -478,7 +539,7 @@ public class RaycastScript : MonoBehaviour
             asianCarpClicked = true; // Set bool asianCarpClicked to true
             wasAsianCarpPreviouslyClicked = true; // Set bool wasAsianCarpPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -496,7 +557,7 @@ public class RaycastScript : MonoBehaviour
             beaverClicked = true; // Set bool beaverClicked to true
             wasBeaverPreviouslyClicked = true; // Set bool wasBeaverPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -514,7 +575,7 @@ public class RaycastScript : MonoBehaviour
             raccoonClicked = true; // Set bool raccoonClicked to true
             wasRaccoonPreviouslyClicked = true; // Set bool wasRaccoonPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -532,7 +593,7 @@ public class RaycastScript : MonoBehaviour
             muskratClicked = true; // Set bool muskeratClicked to true
             wasMuskratPreviouslyClicked = true; // Set bool wasMuskratPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -550,7 +611,7 @@ public class RaycastScript : MonoBehaviour
             snappingTurtleClicked = true; // Set bool snappingTurtleClicked to true
             wasSnappingTurtlePreviouslyClicked = true; // Set bool wasSnappingTurtlePreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -568,7 +629,7 @@ public class RaycastScript : MonoBehaviour
             northernMapTurtleClicked = true; // Set bool northernMapTurtleClicked to true
             wasNorthernMapTurtlePreviouslyClicked = true; // Set bool wasNorthernMapTurtlePreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
-            animalGameManagerScript.UpdateAnimalCounter();
+            //animalGameManagerScript.UpdateAnimalCounter();
         }
         else
         {
@@ -612,6 +673,46 @@ public class RaycastScript : MonoBehaviour
         {
             Debug.LogWarning("Clicked object does not have a ChangeablePlant component.");
         }
+    }
+
+    private void HandleDeerEventClick(GameObject clickedObject)
+    {
+        Debug.Log($"Deer clicked: {clickedObject.name}");
+
+        // Get the ChangeNavAgentSpeed component from the clicked object
+        ChangeNavAgentSpeed navAgentSpeed = clickedObject.GetComponent<ChangeNavAgentSpeed>();
+        if (navAgentSpeed != null)
+        {
+            navAgentSpeed.SetAgentSpeed(3.5f); // Set the agent's speed to 3.5
+        }
+        else
+        {
+            Debug.LogWarning($"ChangeNavAgentSpeed component not found on {clickedObject.name}");
+        }
+    }
+
+    private void HandleBirdEventClick(GameObject clickedObject)
+    {
+        Debug.Log($"Bird clicked: {clickedObject.name}");
+
+        // Get the BirdFlight component from the clicked object
+        BirdFlight birdFlight = clickedObject.GetComponent<BirdFlight>();
+        if (birdFlight != null)
+        {
+            birdFlight.FlyAway(player.transform.position); // Trigger the bird to fly away
+            Debug.Log($"Triggered FlyAway for {clickedObject.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"BirdFlight component not found on {clickedObject.name}");
+        }
+    }
+
+    private void HandleFishEventClick(GameObject clickedObject)
+    {
+        Debug.Log($"Fish clicked: {clickedObject.name}");
+        Debug.Log($"Destroying fish: {clickedObject.name}");
+        Destroy(clickedObject); // Destroy the fish GameObject
     }
 
     // Handles clicks on event animals
