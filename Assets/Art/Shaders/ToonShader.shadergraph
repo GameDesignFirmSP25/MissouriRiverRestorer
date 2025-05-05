@@ -103,7 +103,11 @@
             "m_Id": "f40911a611db429195f6c97e926ba5ad"
         }
     ],
-    "m_Keywords": [],
+    "m_Keywords": [
+        {
+            "m_Id": "15268b26eed1442f87569ba910e10842"
+        }
+    ],
     "m_Dropdowns": [],
     "m_CategoryData": [
         {
@@ -4422,6 +4426,52 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "15268b26eed1442f87569ba910e10842",
+    "m_Guid": {
+        "m_GuidSerialized": "8b0e14b0-78e6-4165-8553-967aa65a8d0e"
+    },
+    "m_Name": "GameState",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "GameState",
+    "m_DefaultReferenceName": "_GAMESTATE",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 1,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [
+        {
+            "id": 4,
+            "displayName": "Dirty",
+            "referenceName": "DIRTY"
+        },
+        {
+            "id": 1,
+            "displayName": "AfterWater",
+            "referenceName": "AFTERWATER"
+        },
+        {
+            "id": 2,
+            "displayName": "AfterAnimal",
+            "referenceName": "AFTERANIMAL"
+        },
+        {
+            "id": 5,
+            "displayName": "Clean",
+            "referenceName": "CLEAN"
+        }
+    ],
+    "m_Value": 0,
+    "m_IsEditable": true
 }
 
 {
@@ -15734,6 +15784,9 @@
     "m_ObjectId": "c97bcdaf11bb4b92b2585944a1dbe3f7",
     "m_Name": "Progression",
     "m_ChildObjectList": [
+        {
+            "m_Id": "15268b26eed1442f87569ba910e10842"
+        },
         {
             "m_Id": "f8628a6078cc42c1b4160e46989d4f77"
         },
