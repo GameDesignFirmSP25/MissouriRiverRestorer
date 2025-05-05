@@ -15,7 +15,7 @@ public class LowerBankZoneTrigger : MonoBehaviour
         {
             lowerBankEntered = true;
             exploringText.text = "Lower Bank";
-            Debug.Log("Lower Bank Zone Triggered");
+            //Debug.Log("Lower Bank Zone Triggered");
         }
     }
 }

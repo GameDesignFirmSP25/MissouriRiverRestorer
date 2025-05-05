@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 /// <summary>
 /// State of game progression decided by which minigames have been completed.
@@ -14,6 +15,10 @@ public enum GameState
      AfterSecondWaterTest,
 }
 
+/// <summary>
+/// Wrapper class for Unity Events that pass the type GameState
+/// </summary>
+public class GameStateEvent : UnityEvent<GameState> { }
 
 /// <summary>
 /// Singleton responsible for keeping track of minigame progress and directing progression.
@@ -30,7 +35,9 @@ public class GameProgressManager : MonoBehaviour
      public int CurrentProgressionStep;
      public MiniGameData CurrentMiniGamedData;
 
-     [SerializeField]
+    public GameStateEvent gameStateChanged = new GameStateEvent();
+
+    [SerializeField]
      private NPC npc;
 
      // Holds the minigame objects that 
@@ -114,10 +121,11 @@ public class GameProgressManager : MonoBehaviour
 
                // Maps game state to Correct enum. Assumes alternating events of NPC and Minigame
                GameState = (GameState)(((CurrentProgressionStep + 1) / 2) - 1);
-          }
+               gameStateChanged.Invoke(GameState);
+        }
 
-          // Move to the next progression step
-          CurrentProgressionStep++;
+        // Move to the next progression step
+        CurrentProgressionStep++;
           if(CurrentProgressionStep >= progressEvents.Count)
           {
                isAllEventsCompleted = true;

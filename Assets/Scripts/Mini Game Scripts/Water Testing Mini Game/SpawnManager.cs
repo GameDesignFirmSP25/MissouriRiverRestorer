@@ -32,14 +32,14 @@ public class SpawnManager : MonoBehaviour
 
     private float spawnTime = 0.05f;
     private float spawnDelay = 2.5f;
-    private float minimumXOnGround = -62f;
-    private float maximumXOnGround = -13f;
+    private float minimumXOnGround = -50f;
+    private float maximumXOnGround = -30f;
     private float yPositionOnGroundForDeer = 5f;
     private float yPositionOnGroundForBeaver = 1.4f;
     private float yPositionOnGroundForRaccoon = 2f;
     private float yPositionOnGroundForTrashBag = 1.25f;
     private float yPositionOnGroundForGasCan = 1.4f;
-    private float yPositionOnGroundForAluminumCan = 2f;
+    private float yPositionOnGroundForAluminumCan = 1.5f;
     private float yPositionOnGroundForTire = 1f;
     private float minimumZOnGround = -152f;
     private float maximumZOnGround = -9f;
@@ -57,7 +57,7 @@ public class SpawnManager : MonoBehaviour
             SpawnMammals();
             SpawnTrashOnGround();
             InvokeRepeating("SpawnTrashInRiver", spawnTime, spawnDelay); // repeatedly invoke SpawnTrashInRiver()
-            InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+            //InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
             //InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
         }
 
@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
             numberOfBeaverToSpawn = 5;
             numberOfRaccoonToSpawn = 5;
             SpawnMammals();
-            InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
+            //InvokeRepeating("SpawnFish", spawnTime, spawnDelay); // repeatedly invoke SpawnFish()
             //InvokeRepeating("SpawnTestTube", spawnTime, spawnDelay); // repeatedly invoke SpawnTestTube()
         }
     }
@@ -77,8 +77,8 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         OnTrashDestroyed();
-        OnFishDestroyed();
-        OnTestTubeDestroyed();
+        //OnFishDestroyed();
+        //OnTestTubeDestroyed();
     }
 
     // Spawn Mammals

@@ -48,13 +48,13 @@ public class AnimalScript : MonoBehaviour
         // If timer is greater than or equal to wanderTimer...
         if (timer >= wanderTimer)
         {
-            Debug.Log("Timer reached. Setting new destination."); // Debug.Log
+            //Debug.Log("Timer reached. Setting new destination."); // Debug.Log
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1); // newPos is equal to 
             agent.SetDestination(newPos); // Set destination of agent to newPos
             timer = 0; // Set timer to 0
             isWalking = true; // Set bool isWalking to true
             isWaiting = false; // Set bool isWaiting to false
-            Debug.Log("isWalking set to true.");
+            //Debug.Log("isWalking set to true.");
             AnimalMovement();
         }
     }
@@ -70,7 +70,7 @@ public class AnimalScript : MonoBehaviour
 
         if (NavMesh.SamplePosition(randDirection, out navHit, dist, layermask))
         {
-            Debug.Log($"Valid NavMesh position found: {navHit.position}");
+            //Debug.Log($"Valid NavMesh position found: {navHit.position}");
             return navHit.position;
         }
         else
@@ -86,7 +86,7 @@ public class AnimalScript : MonoBehaviour
         // If bool isWalking is true...
         if (isWalking)
         {
-            Debug.Log("Animal is walking. Transitioning to waiting state."); // Debug.Log
+            //Debug.Log("Animal is walking. Transitioning to waiting state."); // Debug.Log
             isWalking = false; // Set bool isWalking to false
             isWaiting = true; // Set bool isWaiting to true
             //agent.speed = 0f; // Set the speed of the NavMeshAgent to 0
@@ -96,11 +96,11 @@ public class AnimalScript : MonoBehaviour
         // If bool isWaiting is true...
         if (isWaiting)
         {
-            Debug.Log("Animal is waiting."); // Debug.Log the state of isWaiting
+            //Debug.Log("Animal is waiting."); // Debug.Log the state of isWaiting
             waitCounter += Time.deltaTime; // Wait counter is equal to wait counter plus Time.deltaTime
             if (waitCounter < waitTime) // If wait counter is less than wait time...
                 return;
-            Debug.Log("Wait time completed. Transitioning to walking state."); // Debug.Log
+            //Debug.Log("Wait time completed. Transitioning to walking state."); // Debug.Log
             isWaiting = false; // Set bool isWaiting to false
             //agent.speed = 3.5f; // Set the speed of the NavMeshAgent to 3.5
             waitCounter = 0f; // Reset wait counter to 0

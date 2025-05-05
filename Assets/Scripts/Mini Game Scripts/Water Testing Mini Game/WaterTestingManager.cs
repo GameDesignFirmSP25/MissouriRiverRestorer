@@ -20,6 +20,9 @@ public class WaterTestingManager : BaseMiniGameManager
     private GameObject PauseButton;
 
     [SerializeField]
+    private GameObject objectivesPanel;
+
+    [SerializeField]
     private GameObject firstWaterTestObjectives;
 
     [SerializeField]
@@ -125,7 +128,8 @@ public class WaterTestingManager : BaseMiniGameManager
 
     private Slider slider;
     public Button StartBtn;
-    public StarterAssetsInputs playerInput; // Reference to StarterAssetsInputs script
+    public StarterAssetsInputs playerInput;
+    public GameObject additionalAnimals;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -133,6 +137,8 @@ public class WaterTestingManager : BaseMiniGameManager
         Time.timeScale = 0f; // Freezes time
         GetProgressBar(); // Call the GetProgressBar function to initialize the progress bar
         GetPanels(); // Call the GetPanels function to initialize the panels
+        additionalAnimals.SetActive(false); // Set additional animals to not active at the start
+        objectivesPanel.SetActive(false); // Set objectivesPanel to not active at the start
         Cursor.visible = true; // Set Cursor to be visible
 
         // If isFirstWaterTestComplete is false...
@@ -245,7 +251,6 @@ public class WaterTestingManager : BaseMiniGameManager
     {
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
-        progressBar.SetActive(true); // Enable Progress bar
         Raycast.isClickable = true; // Set bool isClickable to true
         gameStarted = true; // Set bool gameStarted to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
@@ -260,6 +265,7 @@ public class WaterTestingManager : BaseMiniGameManager
         if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
             DeactivatePanel(1); // Disable secondIntroductionPanel
+            additionalAnimals.SetActive(true); // Activate additional animals in the scene
         }
     }
 
@@ -309,6 +315,7 @@ public class WaterTestingManager : BaseMiniGameManager
         // If bool firstWaterTestObjectivesVisible is false...
         if (!firstWaterTestObjectivesVisible && lookAtTrashPanelScript.isLookAtTrashPanelClicked)
         {
+            objectivesPanel.SetActive(true); // Enable objectives panel
             firstWaterTestObjectives.SetActive(true); // Enable objectives
             firstWaterTestObjectivesVisible = true; // Set bool objectivesVisible to true
         }
@@ -316,6 +323,7 @@ public class WaterTestingManager : BaseMiniGameManager
         // If bool secondWaterTestObjectivesVisible is false...
         if (!secondWaterTestObjectivesVisible && biodiversityPanelScript.isBiodiversityPanelClicked)
         {
+            objectivesPanel.SetActive(true); // Enable objectives panel
             secondWaterTestObjectives.SetActive(true); // Enable objectives
             secondWaterTestObjectivesVisible = true; // Set bool objectivesVisible to true
         }
@@ -405,6 +413,7 @@ public class WaterTestingManager : BaseMiniGameManager
             ActivatePanel(7); // Activate testing instructions panel
             testingInstructionsActive = true; // Set bool testingInstructionsActive to true
             instructionsShown = true; // Set bool instructionsShown to true
+            progressBar.SetActive(true); // Enable progress bar
         }
     }
 

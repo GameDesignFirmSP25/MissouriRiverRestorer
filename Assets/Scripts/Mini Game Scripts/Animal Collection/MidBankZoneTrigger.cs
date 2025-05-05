@@ -15,7 +15,7 @@ public class MidBankZoneTrigger : MonoBehaviour
         {
             midBankEntered = true;
             exploringText.text = "Mid Bank";
-            Debug.Log("Mid Bank Zone Triggered");
+            //Debug.Log("Mid Bank Zone Triggered");
         }
     }
 }
