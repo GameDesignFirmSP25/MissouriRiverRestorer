@@ -12,6 +12,9 @@ public class EnvironmentController : MonoBehaviour
 
     private void Awake()
     {
+
+
+
         if(environmentMat == null && environment != null && environment.materials.Length > 0)
         {
             environmentMat = environment.materials[0];
@@ -31,7 +34,7 @@ public class EnvironmentController : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
         if (GameProgressManager.instance != null)
         {
@@ -63,40 +66,10 @@ public class EnvironmentController : MonoBehaviour
     private void ChangeProgressionState(GameState state)
     {
         gameProgress = ((int)state) / Enum.GetValues(typeof(GameState)).Length;
-        environmentMat.SetFloat("_GameStateLerp", gameProgress);        
-        
-        //environmentMat.SetFloat("_GameStateLerp", gameProgress);
 
-
-        //   Dirty,
-        //AfterTrashGame,
-        //AfterPlantAndAnimalGame,
-        //AfterSecondWaterTest,
-
-        //   environmentMat.SetFloat("_GAMESTATE", (int)state);
-        //   riverMat.SetFloat("_GAMESTATE", (int)state);
-
-        //   string s = "";
-        //   switch(state)
-        //   {
-        //       case GameState.Dirty:
-        //           s = "DIRTY";
-        //           break;            
-        //       case GameState.Dirty:
-        //           break;            
-        //       case GameState.Dirty:
-        //           break;            
-        //       case GameState.Dirty:
-        //           default;
-        //           break;
-        //   }
-
-
-        /*
-         *     Dirty, //
-               AfterTrashGame,
-               AfterPlantAndAnimalGame,
-               AfterSecondWaterTest,
-        */
+        if(environmentMat != null)
+        {
+            environmentMat.SetFloat("_GameStateLerp", gameProgress);
+        }
     }
 }
