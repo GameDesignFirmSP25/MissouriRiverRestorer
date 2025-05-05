@@ -301,7 +301,9 @@ public class AnimalGameManager : BaseMiniGameManager
 
     [Header("Float Variables")]
     private float targetProgress = 1f;
-    private float progressIncrement = 0.2f;
+    private float deerClickIncrement = 0.2f;
+    private float birdClickIncrement = 0.2f; // Increment for bird event clicks
+    private float fishClickIncrement = 0.25f; // Increment for fish event clicks
 
     [Header("Interger Variables")]
     private int animalsFound = 0;
@@ -561,7 +563,7 @@ public class AnimalGameManager : BaseMiniGameManager
 
         if (changeablePlant != null)
         {
-            Debug.Log("changeablePlant successfully assigned."); // Debug.Log
+            //Debug.Log("changeablePlant successfully assigned."); // Debug.Log
         }
         else
         {
@@ -668,7 +670,21 @@ public class AnimalGameManager : BaseMiniGameManager
     private void InvokeClickCounter()
     {
         Debug.Log("Click counted."); // Debug.Log
-        clickCounterScript.IncrementProgress(progressIncrement); // increment progress by variable progressIncrement
+
+        if (deerEventActive)
+        {
+            clickCounterScript.IncrementProgress(deerClickIncrement); // Increment progress by variable progressIncrement
+        }
+
+        if (birdEventActive)
+        {
+            clickCounterScript.IncrementProgress(birdClickIncrement); // Increment progress by variable progressIncrement
+        }
+
+        if (fishEventActive)
+        {
+            clickCounterScript.IncrementProgress(fishClickIncrement); // Increment progress by variable progressIncrement
+        }
     }
 
     // Method to handle animal click in event zones
