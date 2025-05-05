@@ -12,7 +12,15 @@ public class EnvironmentController : MonoBehaviour
 
     private void Awake()
     {
+        if(environment == null)
+        {
+            environment = transform.Find("StCharles").GetComponent<MeshRenderer>();
 
+        }
+        if(river == null)
+        {
+            river = transform.Find("MissouriRiver").GetComponent<MeshRenderer>();
+        }
 
 
         if(environmentMat == null && environment != null && environment.materials.Length > 0)
@@ -66,6 +74,8 @@ public class EnvironmentController : MonoBehaviour
     private void ChangeProgressionState(GameState state)
     {
         gameProgress = ((int)state) / Enum.GetValues(typeof(GameState)).Length;
+
+
 
         if(environmentMat != null)
         {
