@@ -563,7 +563,7 @@ public class AnimalGameManager : BaseMiniGameManager
 
         if (changeablePlant != null)
         {
-            Debug.Log("changeablePlant successfully assigned."); // Debug.Log
+            //Debug.Log("changeablePlant successfully assigned."); // Debug.Log
         }
         else
         {

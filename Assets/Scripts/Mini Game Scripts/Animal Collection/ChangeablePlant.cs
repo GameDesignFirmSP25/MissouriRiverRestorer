@@ -41,11 +41,11 @@ public class ChangeablePlant : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log($"Initializing ChangeablePlant for {gameObject.name}");
-        for (int i = 0; i < originalPlant.Length; i++)
-        {
-            Debug.Log($"originalPlant[{i}] = {originalPlant[i]?.name ?? "null"}");
-        }
+        //Debug.Log($"Initializing ChangeablePlant for {gameObject.name}");
+        //for (int i = 0; i < originalPlant.Length; i++)
+        //{
+        //    Debug.Log($"originalPlant[{i}] = {originalPlant[i]?.name ?? "null"}");
+        //}
     }
 
     // Update is called once per frame
@@ -79,7 +79,7 @@ public class ChangeablePlant : MonoBehaviour
             // If the object is found in the array
             if (originalPlantIndex >= 0) 
             {
-                Debug.Log($"Clicked on plant at index {originalPlantIndex}"); // Debug.Log
+                //Debug.Log($"Clicked on plant at index {originalPlantIndex}"); // Debug.Log
 
                 // Perform an action based on the index
                 if (originalPlantIndex == 0)
@@ -92,9 +92,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName1); // Find the child transform with the name "Bradford Pear Tree"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
+                        //Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        //Debug.Log("Swapping Plants..."); // Debug.Log
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -115,7 +115,7 @@ public class ChangeablePlant : MonoBehaviour
                         if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false; // Disable the collider
-                            Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
+                            //Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
                         }
 
                         animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
@@ -141,9 +141,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName1); // Find the child transform with the name "Bradford Pear Tree"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
+                        //Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        //Debug.Log("Swapping Plants..."); // Debug.Log
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -190,9 +190,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName1); // Find the child transform with the name "Bradford Pear Tree"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
+                        //Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        //Debug.Log("Swapping Plants..."); // Debug.Log
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -237,9 +237,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName1); // Find the child transform with the name "Bradford Pear Tree"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
+                        //Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        //Debug.Log("Swapping Plants..."); // Debug.Log
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -286,9 +286,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName1); // Find the child transform with the name "Bradford Pear Tree"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
+                        //Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        //Debug.Log("Swapping Plants..."); // Debug.Log
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -335,9 +335,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName1); // Find the child transform with the name "Bradford Pear Tree"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
+                        //Debug.Log("Destroying Bradford Pear Tree"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        //Debug.Log("Swapping Plants..."); // Debug.Log
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with Sycamore button was clicked...
@@ -385,9 +385,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName2); // Find the child transform with the name "Purple Loosestrife"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
+                        //Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        //Debug.Log("Swapping Plants..."); // Debug.Log
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with American Lotus button was clicked...
@@ -515,9 +515,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName2); // Find the child transform with the name "Purple Loosestrife"
                         Vector3 childPosition = childTransform.position; // Get the position of the child transform
                         Quaternion childRotation = childTransform.rotation; // Get the rotation of the child transform
-                        Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
+                        //Debug.Log("Destroying Purple Loosestrife"); // Debug.Log
                         Destroy(childTransform.gameObject); // Destroy the child game object
-                        Debug.Log("Swapping Plants..."); // Debug.Log
+                        //Debug.Log("Swapping Plants..."); // Debug.Log
                         isSwapped = true; // Set the plant as swapped
 
                         // If the replace with American Lotus button was clicked...
@@ -527,7 +527,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex]; // Get the selected plant from the swappedPlant array
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation); // Instantiate the selected plant prefab as a child of the changeablePlant
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int wiltingPlantIndex = swappedPlantIndex - 2;
                             GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
@@ -535,7 +535,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -552,7 +552,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex]; // Get the selected plant from the swappedPlant array
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation); // Instantiate the selected plant prefab as a child of the changeablePlant
 
-                            Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
+                            //Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
                             // Spawn multiple cordgrass around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
@@ -563,7 +563,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!correctPlantSwappedPanelShown)
                             {
-                                Debug.Log("Showing correct plant swapped panel...");
+                                //Debug.Log("Showing correct plant swapped panel...");
                                 correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
                                 correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -580,7 +580,7 @@ public class ChangeablePlant : MonoBehaviour
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation); // Instantiate the Swamp Milkweed prefab as a child of the changeablePlant
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
                             int wiltingPlantIndex = index - 2;
@@ -589,7 +589,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -603,7 +603,7 @@ public class ChangeablePlant : MonoBehaviour
                             Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
                             InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
-                            Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
+                            //Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
                             // Spawn multiple yellow coneflowers around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
@@ -613,7 +613,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!correctPlantSwappedPanelShown)
                             {
-                                Debug.Log("Showing correct plant swapped panel...");
+                                //Debug.Log("Showing correct plant swapped panel...");
                                 correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
                                 correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -631,7 +631,7 @@ public class ChangeablePlant : MonoBehaviour
                         if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false; // Disable the collider
-                            Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
+                            //Debug.Log($"Collider disabled for {plantID}"); // Debug.Log
                         }
                     }
                 }
@@ -644,9 +644,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName2);
                         Vector3 childPosition = childTransform.position;
                         Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
+                        //Debug.Log("Destroying Purple Loosestrife");
                         Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
+                        //Debug.Log("Swapping Plants...");
                         isSwapped = true; // Set the plant as swapped
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
@@ -654,7 +654,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
 
-                            Debug.Log("Correct plant selected. Spawning multiple american lotus..."); // Debug.Log
+                            //Debug.Log("Correct plant selected. Spawning multiple american lotus..."); // Debug.Log
                             // Spawn multiple american lotus around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
@@ -665,7 +665,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!correctPlantSwappedPanelShown)
                             {
-                                Debug.Log("Showing correct plant swapped panel...");
+                                //Debug.Log("Showing correct plant swapped panel...");
                                 correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
                                 correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -682,7 +682,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int wiltingPlantIndex = swappedPlantIndex - 2;
                             GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
@@ -690,7 +690,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -703,7 +703,7 @@ public class ChangeablePlant : MonoBehaviour
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
 
-                            Debug.Log("Correct plant selected. Spawning multiple swamp milkweed..."); // Debug.Log
+                            //Debug.Log("Correct plant selected. Spawning multiple swamp milkweed..."); // Debug.Log
                             // Spawn multiple swamp milkweed around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
@@ -713,7 +713,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!correctPlantSwappedPanelShown)
                             {
-                                Debug.Log("Showing correct plant swapped panel...");
+                                //Debug.Log("Showing correct plant swapped panel...");
                                 correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
                                 correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -729,7 +729,7 @@ public class ChangeablePlant : MonoBehaviour
                             Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
                             InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int index = System.Array.IndexOf(swappedPlant, swappedPlant[11]); // Get the index of the Swamp Milkweed in the swappedPlant array
                             int wiltingPlantIndex = index - 2;
@@ -738,7 +738,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -752,7 +752,7 @@ public class ChangeablePlant : MonoBehaviour
                         if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
+                            //Debug.Log($"Collider disabled for {plantID}");
                         }
                     }
                 }
@@ -764,9 +764,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName2);
                         Vector3 childPosition = childTransform.position;
                         Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
+                        //Debug.Log("Destroying Purple Loosestrife");
                         Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
+                        //Debug.Log("Swapping Plants...");
                         isSwapped = true; // Set the plant as swapped
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
@@ -774,7 +774,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int wiltingPlantIndex = swappedPlantIndex - 2;
                             GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
@@ -782,7 +782,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -797,7 +797,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
 
-                            Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
+                            //Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
                             // Spawn multiple cordgrass around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
@@ -808,7 +808,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!correctPlantSwappedPanelShown)
                             {
-                                Debug.Log("Showing correct plant swapped panel...");
+                                //Debug.Log("Showing correct plant swapped panel...");
                                 correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
                                 correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -823,7 +823,7 @@ public class ChangeablePlant : MonoBehaviour
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
                             int wiltingPlantIndex = index - 2;
@@ -832,7 +832,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -846,7 +846,7 @@ public class ChangeablePlant : MonoBehaviour
                             Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
                             InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int index = System.Array.IndexOf(swappedPlant, swappedPlant[11]); // Get the index of the Swamp Milkweed in the swappedPlant array
                             int wiltingPlantIndex = index - 2;
@@ -855,7 +855,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -881,9 +881,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName2);
                         Vector3 childPosition = childTransform.position;
                         Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
+                        //Debug.Log("Destroying Purple Loosestrife");
                         Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
+                        //Debug.Log("Swapping Plants...");
                         isSwapped = true; // Set the plant as swapped
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
@@ -891,7 +891,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int wiltingPlantIndex = swappedPlantIndex - 2;
                             GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
@@ -899,7 +899,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -914,7 +914,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
 
-                            Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
+                            //Debug.Log("Correct plant selected. Spawning multiple cordgrass..."); // Debug.Log
                             // Spawn multiple cordgrass around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
@@ -925,7 +925,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!correctPlantSwappedPanelShown)
                             {
-                                Debug.Log("Showing correct plant swapped panel...");
+                                //Debug.Log("Showing correct plant swapped panel...");
                                 correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
                                 correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -940,7 +940,7 @@ public class ChangeablePlant : MonoBehaviour
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
                             int wiltingPlantIndex = index - 2;
@@ -949,7 +949,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -963,7 +963,7 @@ public class ChangeablePlant : MonoBehaviour
                             Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
                             InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
-                            Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
+                            //Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
                             // Spawn multiple yellow coneflowers around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
@@ -973,7 +973,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!correctPlantSwappedPanelShown)
                             {
-                                Debug.Log("Showing correct plant swapped panel...");
+                                //Debug.Log("Showing correct plant swapped panel...");
                                 correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
                                 correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -989,7 +989,7 @@ public class ChangeablePlant : MonoBehaviour
                         if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
+                            //Debug.Log($"Collider disabled for {plantID}");
                         }
                     }
                 }
@@ -1001,9 +1001,9 @@ public class ChangeablePlant : MonoBehaviour
                         Transform childTransform = changeablePlant.transform.Find(childName2);
                         Vector3 childPosition = childTransform.position;
                         Quaternion childRotation = childTransform.rotation;
-                        Debug.Log("Destroying Purple Loosestrife");
+                        //Debug.Log("Destroying Purple Loosestrife");
                         Destroy(childTransform.gameObject);
-                        Debug.Log("Swapping Plants...");
+                        //Debug.Log("Swapping Plants...");
                         isSwapped = true; // Set the plant as swapped
                         if (animalGameManager.wasReplaceWithAmericanLotusButtonClicked)
                         {
@@ -1011,7 +1011,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int wiltingPlantIndex = swappedPlantIndex - 2;
                             GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
@@ -1034,7 +1034,7 @@ public class ChangeablePlant : MonoBehaviour
                             GameObject selectedPlant = swappedPlant[swappedPlantIndex];
                             InstantiatePrefabAsChild(selectedPlant, childPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int wiltingPlantIndex = swappedPlantIndex - 2;
                             GameObject wiltingPlant = plantVariants[wiltingPlantIndex]; // Get the wilting variant of the plant
@@ -1042,7 +1042,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -1055,7 +1055,7 @@ public class ChangeablePlant : MonoBehaviour
                         {
                             InstantiatePrefabAsChild(swappedPlant[10], childPosition, childRotation);
 
-                            Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
+                            //Debug.Log("Incorrect plant selected. Wilting plant..."); // Debug.Log
                             //Wilt the plant by spawning in its wilting variant
                             int index = System.Array.IndexOf(swappedPlant, swappedPlant[10]); // Get the index of the Swamp Milkweed in the swappedPlant array
                             int wiltingPlantIndex = index - 2;
@@ -1064,7 +1064,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!incorrectPlantSwappedPanelShown) // If the incorrect plant swapped panel is not shown yet...
                             {
-                                Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
+                                //Debug.Log("Showing incorrect plant swapped panel..."); // Debug.Log
                                 incorrectPlantSwappedPanel.SetActive(true); // Show the incorrect plant swapped panel
                                 incorrectPlantSwappedPanelShown = true; // Set the flag to indicate that the incorrect plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -1078,7 +1078,7 @@ public class ChangeablePlant : MonoBehaviour
                             Vector3 adjustedPosition = childPosition + new Vector3(0.35f, 0, 1.67f); // Adjust the position to bring flower closer to normal of its parent
                             InstantiatePrefabAsChild(swappedPlant[11], adjustedPosition, childRotation);
 
-                            Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
+                            //Debug.Log("Correct plant selected. Spawning multiple yellow coneflowers..."); // Debug.Log
                             // Spawn multiple yellow coneflowers around the instantiated plant
                             for (int i = 0; i < 3; i++)
                             {
@@ -1088,7 +1088,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             if (!correctPlantSwappedPanelShown)
                             {
-                                Debug.Log("Showing correct plant swapped panel...");
+                                //Debug.Log("Showing correct plant swapped panel...");
                                 correctPlantSwappedPanel.SetActive(true); // Show the correct plant swapped panel
                                 correctPlantSwappedPanelShown = true; // Set the flag to indicate that the correct plant swapped panel is shown
                                 playerInput.controlsLocked = true; // Unlock player controls when the panel is clicked
@@ -1104,13 +1104,13 @@ public class ChangeablePlant : MonoBehaviour
                         if (collider != null && collider.gameObject == gameObject)
                         {
                             collider.enabled = false;
-                            Debug.Log($"Collider disabled for {plantID}");
+                            //Debug.Log($"Collider disabled for {plantID}");
                         }
                     }
                 }
                 else
                 {
-                    Debug.Log("Clicked object is not in the originalPlant array.");
+                    //Debug.Log("Clicked object is not in the originalPlant array.");
                 }
             }
         }
@@ -1146,28 +1146,28 @@ public class ChangeablePlant : MonoBehaviour
             instantiatedPrefab.name = "Yellow Coneflower";
         }
 
-        Debug.Log($"Name changed to {instantiatedPrefab.name}");
+        //Debug.Log($"Name changed to {instantiatedPrefab.name}");
         childName2 = instantiatedPrefab.name; // Update the name of the child object
-        Debug.Log($"childName2 updated to: {childName2}");
+        //Debug.Log($"childName2 updated to: {childName2}");
         isSwapped = false;
 
-        Debug.Log($"Prefab instantiated as a child at {position} with rotation {rotation}");
+        //Debug.Log($"Prefab instantiated as a child at {position} with rotation {rotation}");
     }
 
     public void ReplaceChildWithVariant (string targetPlantID, GameObject prefabVariant)
     {
-        Debug.Log($"Target Plant ID: {targetPlantID}");
+        //Debug.Log($"Target Plant ID: {targetPlantID}");
         // Check if the parent's plantID matches the targetPlantID
         if (childName2 == targetPlantID)
         {
-            Debug.Log($"Parent with plantID {targetPlantID} found. Replacing child with {prefabVariant.name}");
+            //Debug.Log($"Parent with plantID {targetPlantID} found. Replacing child with {prefabVariant.name}");
 
             // Iterate through all child objects of changeablePlant
             foreach (Transform child in changeablePlant.transform)
             {
                 if (child.name == childName2)
                 {
-                    Debug.Log($"Deactivating child: {child.name}");
+                    //Debug.Log($"Deactivating child: {child.name}");
                     child.gameObject.SetActive(false); // Deactivate the child
 
                     // Check if the prefab is already instantiated
@@ -1176,36 +1176,15 @@ public class ChangeablePlant : MonoBehaviour
                         Vector3 childPosition = child.position;
                         Quaternion childRotation = child.rotation;
                         GameObject newChild = Instantiate(prefabVariant, childPosition, childRotation, changeablePlant.transform);
-                        Debug.Log($"Replaced child with prefab variant {prefabVariant.name}");
+                        //Debug.Log($"Replaced child with prefab variant {prefabVariant.name}");
                     }
                     else
                     {
-                        Debug.LogWarning($"Prefab {prefabVariant.name} already exists. Skipping instantiation.");
+                        //Debug.LogWarning($"Prefab {prefabVariant.name} already exists. Skipping instantiation.");
                     }
                     return;
                 }
-                //foreach (Transform child in changeablePlant.transform)
-                //{
-                //    child.name = childName2; // Update the name of the child object to match the target plant ID
-                //    Debug.Log($"Checking child: {child.name}");
-                //    Vector3 childPosition = child.position;
-                //    Quaternion childRotation = child.rotation;
-
-                //    if (child != null)
-                //    {
-                //        Debug.Log($"Destroying child: {child.name}");
-                //        child.gameObject.SetActive(false);
-                //    }
-                //    else
-                //    {
-                //        Debug.LogError("Child is null. Cannot destroy.");
-                //    }
-
-                //    // Instantiate the new prefab as a child
-                //    GameObject newChild = Instantiate(prefabVariant, childPosition, childRotation, changeablePlant.transform);
-                //    Debug.Log($"Replaced child with prefab variant {prefabVariant.name}");
-                //    return;
-                //}
+                
             }
                 Debug.LogWarning($"No child found to replace under {changeablePlant.name}");
         }
