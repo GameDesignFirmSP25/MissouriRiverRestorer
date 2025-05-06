@@ -37,7 +37,10 @@ public class DialogueManager : MonoBehaviour
     private static DialogueManager instance;
      public StarterAssetsInputs _playerInput;
 
-     private void Awake()
+    [Header("Audio")]
+    [SerializeField] private SFXMaker interactbutton;
+
+    private void Awake()
     {
         // Singleton pattern to ensure only one instance of DialogueManager exists
         if (instance == null)
@@ -90,8 +93,14 @@ public class DialogueManager : MonoBehaviour
         // If 
         if (canContinueToNextLine && currentStory.currentChoices.Count == 0 && (Input.GetKeyDown(KeyCode.E)))
         {
+            PlayInteractButtonSound(); // Play the interact button sound
             ContinueStory(); // Call the method to continue the story
         }
+    }
+
+    public void PlayInteractButtonSound()
+    {
+        interactbutton.PlaySound(); // Play the interact button sound
     }
 
     // Method to start the dialogue with a given ink JSON file
@@ -101,6 +110,7 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = true; // Set bool dialogueIsPlaying to true
           _playerInput.controlsLocked = true;
         dialogueBox.SetActive(true); // Show the dialogue box
+        PlayInteractButtonSound(); // Play the interact button sound
         ContinueStory(); // Call the method to continue the story
     }
 
@@ -110,6 +120,7 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false; // Set bool dialogueIsPlaying to false
           _playerInput.controlsLocked = false;
           dialogueBox.SetActive(false); // Hide the dialogue box
+        PlayInteractButtonSound(); // Play the interact button sound
         dialogueText.text = ""; // Clear the dialogue text
     }
 
@@ -158,6 +169,7 @@ public class DialogueManager : MonoBehaviour
             if (canSkip && skipKeyReset && Input.GetKey(skipKey))
             {
                 Debug.Log("Typing animation skipped."); // Log the skip action
+                PlayInteractButtonSound(); // Play the interact button sound
                 dialogueText.maxVisibleCharacters = line.Length; // Display the full line
                     skipKeyReset = false;
                 break; // Exit the loop
