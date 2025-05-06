@@ -33,7 +33,10 @@ public class SFXMaker : MonoBehaviour
 
     private void OnEnable()
     {
-
+        if (playOnAwake)
+        {
+            MakeSound(awakeSoundEffect);
+        }
     }
 
     private void OnDisable()
@@ -54,6 +57,44 @@ public class SFXMaker : MonoBehaviour
     public void PlaySound()
     {
         MakeSound(mainSoundEffect);
+    }
+
+    public static void PlaySoundType(SFXLibrary.SFXType type, Vector3 position)
+    {
+        try
+        {
+            SFXSO sound = SFXLibrary.GetSound(type);
+
+            AudioSource source = null;
+            AudioClip clip = sound.GetClip();
+            source.clip = clip;
+
+            if (source == null)
+            {
+                source = (new GameObject()).AddComponent<AudioSource>();
+                source.name = type.ToString();
+                source.transform.position = position;
+                source.outputAudioMixerGroup = sound.GetAudioGroup();
+
+                if (clip != null)
+                {
+                    GameObject.Destroy(source.gameObject, source.clip.length + 3f);
+                }
+            }
+
+            source.volume = sound.GetVolume();
+            source.pitch = sound.GetPitch();
+
+            source.Play();
+            if (source.clip != null)
+            {
+                GameObject.Destroy(source.gameObject, source.clip.length + sound.Seconds);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
     }
 
     public void MakeSound(SFXLibrary.SFXType soundEffect)
