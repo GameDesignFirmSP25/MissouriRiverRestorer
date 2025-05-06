@@ -19,21 +19,35 @@ public class SFXMaker : MonoBehaviour
 
     public bool canMakeSound = false;
 
-    
+    //private static Transform audioTransform = null;
+    //public Transform AudioTransform
+    //{
+    //    get
+    //    {
+    //        if (audioTransform == null)
+    //        {
+    //            audioTransform = transform.Find("AudioParent");
+    //        }
+    //        return audioTransform;
+    //    }
+    //}
 
     public virtual void Awake()
     {
         if (myAudioSource == null) {  myAudioSource = GetComponent<AudioSource>();}
 
-        if(playOnAwake)
-        {
-            MakeSound(awakeSoundEffect);
-        }
+        //if(playOnAwake && awakeSoundEffect != SFXLibrary.SFXType.Default)
+        //{
+        //    MakeSound(awakeSoundEffect);
+        //}
     }
 
     private void OnEnable()
     {
-
+        if (playOnAwake && awakeSoundEffect != SFXLibrary.SFXType.Default)
+        {
+            MakeSound(awakeSoundEffect);
+        }
     }
 
     private void OnDisable()
@@ -56,25 +70,24 @@ public class SFXMaker : MonoBehaviour
         MakeSound(mainSoundEffect);
     }
 
-    public void MakeSound(SFXLibrary.SFXType soundEffect)
+    public static void PlaySoundType(SFXLibrary.SFXType type, Vector3 position)
     {
-        //Debug.Log(gameObject.name + " makes sound " + soundEffect.ToString());
         try
         {
-            SFXSO sound = SFXLibrary.GetSound(soundEffect);
+            SFXSO sound = SFXLibrary.GetSound(type);
 
-            AudioSource source = myAudioSource;
+            AudioSource source = null;
             AudioClip clip = sound.GetClip();
             source.clip = clip;
 
             if (source == null)
             {
                 source = (new GameObject()).AddComponent<AudioSource>();
-                source.name = soundEffect.ToString();
-                source.transform.position = transform.position;
+                source.name = type.ToString();
+                source.transform.position = position;
                 source.outputAudioMixerGroup = sound.GetAudioGroup();
 
-                if(clip != null)
+                if (clip != null)
                 {
                     GameObject.Destroy(source.gameObject, source.clip.length + 3f);
                 }
@@ -82,11 +95,64 @@ public class SFXMaker : MonoBehaviour
 
             source.volume = sound.GetVolume();
             source.pitch = sound.GetPitch();
-            PlayAudio(source, sound);
+
+            source.Play();
+            if (source.clip != null)
+            {
+                GameObject.Destroy(source.gameObject, source.clip.length + sound.Seconds);
+            }
         }
         catch (Exception e)
         {
             Debug.Log(e);
+        }
+    }
+
+    public void MakeSound(SFXLibrary.SFXType soundEffect)
+    {
+        if (soundEffect == SFXLibrary.SFXType.Default) { return; }
+        SFXSO sound = SFXLibrary.GetSound(soundEffect);
+
+        Debug.Log(sound);
+
+        AudioSource source = myAudioSource;
+        AudioClip clip = sound.GetClip();
+
+        if (clip == null)
+        {
+            Debug.Log("No Clip: " + soundEffect.ToString());
+            return;
+        }
+
+        if (source == null) //make a temp source
+        {
+            source = (new GameObject()).AddComponent<AudioSource>();
+            source.name = soundEffect.ToString() + " " + clip.name;
+            source.transform.position = transform.position;
+            source.outputAudioMixerGroup = sound.GetAudioGroup();
+
+            if(source != null)
+            {
+                GameObject.Destroy(source.gameObject, clip.length + sound.Seconds);
+            }
+;
+        }
+
+        if (source != null)
+        {
+            source.clip = clip;
+            source.volume = sound.GetVolume();
+            source.pitch = sound.GetPitch();
+            PlayAudio(source, sound);
+        }
+        //Debug.Log(gameObject.name + " makes sound " + soundEffect.ToString());
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e + " " + mainSoundEffect);
         }
     }
 
@@ -102,33 +168,50 @@ public class SFXMaker : MonoBehaviour
     {
         //Debug.Log(gameObject.name + " makes sound " + soundEffect.ToString());
         clipLength = 0;
-        try
+        if (mainSoundEffect == SFXLibrary.SFXType.Default) { return; }
+
+        SFXSO sound = SFXLibrary.GetSound(mainSoundEffect);
+        Debug.Log(sound + ", " + sound.GetNumClips());
+
+        AudioSource source = myAudioSource;
+        AudioClip clip = sound.GetClip();
+
+        if (clip == null)
         {
-            SFXSO sound = SFXLibrary.GetSound(mainSoundEffect);
+            Debug.Log("No Clip: " + sound.ToString());
+            return;
+        }
 
-            AudioSource source = myAudioSource;
-            AudioClip clip = sound.GetClip();
+        clipLength = sound.Seconds;
+
+        if (source == null) //make a temp source
+        {
+            source = (new GameObject()).AddComponent<AudioSource>();
+            source.name = mainSoundEffect.ToString() + " " + clip.name; ;
+            source.transform.position = transform.position;
+            source.outputAudioMixerGroup = sound.GetAudioGroup();
+
+
+            GameObject.Destroy(source.gameObject, (clip.length + sound.Seconds));
+        }
+
+        if (source != null)
+        {
             source.clip = clip;
-            if(source.clip != null)
-            {
-                clipLength = clip.length;
-            }
-
-            if (source == null)
-            {
-                source = (new GameObject()).AddComponent<AudioSource>();
-                source.name = mainSoundEffect.ToString();
-                source.transform.position = transform.position;
-                source.outputAudioMixerGroup = sound.GetAudioGroup();
-            }
-
             source.volume = sound.GetVolume();
             source.pitch = sound.GetPitch();
             PlayAudio(source, sound);
         }
+
+
+        try
+        {
+
+
+        }
         catch (Exception e)
         {
-            Debug.Log(e);
+            Debug.Log(e + " " + mainSoundEffect);
         }
     }
 
@@ -146,50 +229,50 @@ public class SFXMaker : MonoBehaviour
         return;
 
         //fade in
-        if (so.FadesIn || so.FadesOut)
-        {
-            if(coroutine != null)
-            {
-                StopCoroutine(coroutine);
-            }
+        //if (so.FadesIn || so.FadesOut)
+        //{
+        //    if(coroutine != null)
+        //    {
+        //        StopCoroutine(coroutine);
+        //    }
 
-            coroutine = StartCoroutine(FadeInFadeOutRoutine(so, source));
-        }
-        else
-        {
-            source.Play();
-            if (source.clip != null)
-            {
-                GameObject.Destroy(source.gameObject, source.clip.length + so.Seconds);
-            }
-            //if (so.ClipType == SFXSO.ClipPlayType.OneShot)
-            //{
+        //    coroutine = StartCoroutine(FadeInFadeOutRoutine(so, source));
+        //}
+        //else
+        //{
+        //    source.Play();
+        //    if (source.clip != null)
+        //    {
+        //        GameObject.Destroy(source.gameObject, source.clip.length + so.Seconds);
+        //    }
+        //    //if (so.ClipType == SFXSO.ClipPlayType.OneShot)
+        //    //{
 
-            //}
-            //else //loop
-            //{
-            //    source.loop = true;
-            //    source.Play();
-            //}
-        }
+        //    //}
+        //    //else //loop
+        //    //{
+        //    //    source.loop = true;
+        //    //    source.Play();
+        //    //}
+        //}
     }
 
-    public IEnumerator FadeInFadeOutRoutine(SFXSO data, params AudioSource[] source)
-    {
-        if(data.FadesIn)
-        {
-            yield return FadeInRoutine(data.Seconds, source);
-        }
-        if (source[0].clip != null)
-        {
+    //public IEnumerator FadeInFadeOutRoutine(SFXSO data, params AudioSource[] source)
+    //{
+    //    if(data.FadesIn)
+    //    {
+    //        yield return FadeInRoutine(data.Seconds, source);
+    //    }
+    //    if (source[0].clip != null)
+    //    {
             
-        }
-        if(data.FadesOut)
-        {
-            yield return FadeOutRoutine(data.Seconds, source);
-        }
-        yield return null;
-    }
+    //    }
+    //    if(data.FadesOut)
+    //    {
+    //        yield return FadeOutRoutine(data.Seconds, source);
+    //    }
+    //    yield return null;
+    //}
 
 
     public IEnumerator FadeOutRoutine(float fadeTime, params AudioSource[] source)

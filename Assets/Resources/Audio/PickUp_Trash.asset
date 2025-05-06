@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae993590ee5f054ba364d6899276da4, type: 3}
+  m_Name: PickUp_Trash
+  m_EditorClassIdentifier: 
+  type: 42
+  clips:
+  - {fileID: 8300000, guid: 9206d5769ebbf4a4193c3cd948badec9, type: 3}
+  - {fileID: 8300000, guid: 3757d3f704a501449a9649c1a8c6615a, type: 3}
+  - {fileID: 8300000, guid: 331452523916a2d4b88b6bb08eb756a7, type: 3}
+  - {fileID: 8300000, guid: 9b2d73abfd1e6e943a05be3db9d01f08, type: 3}
+  - {fileID: 8300000, guid: 48332297493349e4e8a6ff4ea0f661d7, type: 3}
+  outputMixerGroup: {fileID: 1997003956336563998, guid: ea25a6fb74033c640b2e4711beb21078, type: 2}
+  seconds: 1
+  basePitch: 1
+  pitchModPercent: 0.1
+  baseVolume: 1
+  volumeModPercent: 0

@@ -3,38 +3,102 @@ using UnityEngine;
 
 public class EnvironmentController : MonoBehaviour
 {
-    [Range(0f,1f)]public float gameProgress = 0f;
+    [Range(0f, 1f)] public float gameProgress = 0f;
     [SerializeField] MeshRenderer environment = null;
     [SerializeField] MeshRenderer river = null;
+    [SerializeField] Material[] progressionMaterials = null;
+    [SerializeField] Material sky = null;
 
-    Material environmentMat = null;
-    Material riverMat = null;
-
-    private void Awake()
+    private Material envMat;
+    Material EnvironmentMat
     {
-
-
-
-        if(environmentMat == null && environment != null && environment.materials.Length > 0)
+        set
         {
-            environmentMat = environment.materials[0];
+            envMat = value;
         }
-        else
+        get
         {
-            Debug.LogWarning("An appropriate TERRAIN shader is not assigned in the MeshRendererer");
-        }
+            if (envMat == null) 
+            { 
+                if(environment == null)
+                {
+                    Transform t = transform.Find("StCharles");
+                    if(t!= null)
+                    {
+                        environment = t.GetComponent<MeshRenderer>();
+                    }
 
-        if (riverMat == null && river != null && river.materials.Length > 0)
-        {
-            riverMat = river.materials[0];
-        }
-        else
-        {
-            Debug.LogWarning("An appropriate RIVER shader is not assigned in the MeshRendererer");
+                }
+                if(environment != null)
+                {
+                    envMat = environment.materials[0];
+                }
+            }
+            
+            return envMat;
         }
     }
 
-    private void OnEnable()
+    private Material riverMat;
+    Material RiverMat
+    {
+        set
+        {
+            riverMat = value;
+        }
+        get
+        {
+            if (riverMat == null)
+            {
+                if (river == null)
+                {
+                    Transform t = transform.Find("MissouriRiver");
+                    if(t!= null)
+                    {
+                        river = t.GetComponent<MeshRenderer>();
+                    }
+                }
+                if (river != null)
+                {
+                    riverMat = river.materials[0];
+                }
+            }
+            return riverMat;
+        }
+    }
+
+    //private void Awake()
+    //{
+    //    if (environment == null)
+    //    {
+    //        environment = transform.Find("StCharles").GetComponent<MeshRenderer>();
+
+    //    }
+    //    if (river == null)
+    //    {
+    //        river = transform.Find("MissouriRiver").GetComponent<MeshRenderer>();
+    //    }
+
+    //    if (EnvironmentMat == null && environment != null && environment.materials.Length > 0)
+    //    {
+    //        EnvironmentMat = environment.materials[0];
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("An appropriate TERRAIN shader is not assigned in the MeshRendererer");
+    //    }
+
+    //    if (RiverMat == null && river != null && river.materials.Length > 0)
+    //    {
+    //        RiverMat = river.materials[0];
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("An appropriate RIVER shader is not assigned in the MeshRendererer");
+    //    }
+    //}
+
+    private void Start()
     {
         if (GameProgressManager.instance != null)
         {
@@ -51,12 +115,18 @@ public class EnvironmentController : MonoBehaviour
         {
             Debug.Log("Game Progress Manager Instance is null");
         }
+        ChangeProgressionState(GameProgressManager.instance.GameState);
     }
 
 
     private void Update()
     {
-        ChangeProgressionState(GameProgressManager.instance.GameState);
+        //ChangeProgressionState(GameProgressManager.instance.GameState); //test without this
+
+        if(sky!= null)
+        {
+            sky.SetFloat("_Rotation", Time.time);
+        }
     }
     private void OnDisable()
     {
@@ -67,9 +137,17 @@ public class EnvironmentController : MonoBehaviour
     {
         gameProgress = ((int)state) / Enum.GetValues(typeof(GameState)).Length;
 
-        if(environmentMat != null)
+
+        foreach(Material m in progressionMaterials)
         {
-            environmentMat.SetFloat("_GameStateLerp", gameProgress);
+            //Debug.Log("Setting Material: " + m);
+            m.SetFloat("_GameStateLerp", gameProgress);
         }
+
+        //Debug.Log("Setting Material: " + EnvironmentMat);
+        EnvironmentMat.SetFloat("_GameStateLerp", gameProgress);
+
+        //Debug.Log("Setting Material: " + RiverMat);
+        RiverMat.SetFloat("_GameStateLerp", gameProgress);
     }
 }
