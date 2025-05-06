@@ -29,6 +29,9 @@ public class WaterTestingManager : BaseMiniGameManager
     private GameObject secondWaterTestObjectives;
 
     [SerializeField]
+    private GameObject waterTestObjective;
+
+    [SerializeField]
     TextMeshProUGUI gasCanObjectiveText;
 
     [SerializeField]
@@ -49,8 +52,15 @@ public class WaterTestingManager : BaseMiniGameManager
     [SerializeField]
     TextMeshProUGUI riverbankObjectiveText;
 
-    [Header("Prefab References")]
+    [SerializeField]
+    TextMeshProUGUI waterTestObjectiveText;
+
+    private Slider slider;
+    public Button StartBtn;
+
+    [Header("Game Objects")]
     public GameObject surfaceWavePrefab; // Prefab for the surface wave
+    public GameObject additionalAnimals;
 
     [Header("Arrays and Lists")]
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
@@ -126,10 +136,14 @@ public class WaterTestingManager : BaseMiniGameManager
     public static bool isFirstWaterTestComplete = false;
     public static bool isSecondWaterTestComplete = false;
 
-    private Slider slider;
-    public Button StartBtn;
+    [Header("Player Input")]
     public StarterAssetsInputs playerInput;
-    public GameObject additionalAnimals;
+
+    [Header("Audio")]
+    public AudioSource interactButton;
+    public AudioSource goodWaterTest;
+    public AudioSource badWaterTest;
+    public AudioSource surfaceWaveClick;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -139,6 +153,7 @@ public class WaterTestingManager : BaseMiniGameManager
         GetPanels(); // Call the GetPanels function to initialize the panels
         additionalAnimals.SetActive(false); // Set additional animals to not active at the start
         objectivesPanel.SetActive(false); // Set objectivesPanel to not active at the start
+        waterTestObjective.SetActive(false); // Set waterTestObjective to not active at the start
         Cursor.visible = true; // Set Cursor to be visible
 
         // If isFirstWaterTestComplete is false...
@@ -246,11 +261,17 @@ public class WaterTestingManager : BaseMiniGameManager
         GameObject panel16 = panels[15]; // Get the Great Job panel
     }
 
+    public void PlayButtonClick()
+    {
+        interactButton.Play(); // Play button click sound
+    }
+
     // Start game
     private void StartGame()
     {
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
+        PlayButtonClick(); // Call PlayButtonClick method
         Raycast.isClickable = true; // Set bool isClickable to true
         gameStarted = true; // Set bool gameStarted to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
@@ -387,6 +408,7 @@ public class WaterTestingManager : BaseMiniGameManager
             {
                 Debug.Log("All objectives complete!"); // Debug.Log
                 objectivesComplete = true; // Set bool objectivesComplete to true
+                ChangeObjectives(); // Call ChangeObjectives method
                 ShowInstructions(); // Call ShowInstructions method
             }
         }
@@ -399,8 +421,25 @@ public class WaterTestingManager : BaseMiniGameManager
             {
                 Debug.Log("All objectives complete!"); // Debug.Log
                 objectivesComplete = true; // Set bool objectivesComplete to true
+                ChangeObjectives(); // Call ChangeObjectives method
                 ShowInstructions(); // Call ShowInstructions method
             }
+        }
+    }
+
+    // Method to change objectives
+    public void ChangeObjectives()
+    {
+        if (objectivesComplete && firstWaterTestObjectivesVisible)
+        {
+            firstWaterTestObjectives.SetActive(false); // Disable firstWaterTestObjectives
+            waterTestObjective.SetActive(true); // Disable waterTestObjective
+        }
+
+        if (objectivesComplete && secondWaterTestObjectivesVisible)
+        {
+            secondWaterTestObjectives.SetActive(false); // Disable secondWaterTestObjectives
+            waterTestObjective.SetActive(true); // Disable waterTestObjective
         }
     }
 
@@ -410,7 +449,7 @@ public class WaterTestingManager : BaseMiniGameManager
         // if bool objectivesComplete is true & bool aPanelIsActive is false & bool !instructionsShown is false...
         if (!instructionsShown)
         {
-            ActivatePanel(7); // Activate testing instructions panel
+            //ActivatePanel(7); // Activate testing instructions panel
             testingInstructionsActive = true; // Set bool testingInstructionsActive to true
             instructionsShown = true; // Set bool instructionsShown to true
             progressBar.SetActive(true); // Enable progress bar
@@ -420,7 +459,7 @@ public class WaterTestingManager : BaseMiniGameManager
     // Method for disabling testing instructions
     private void DisableTestingInstructions()
     {
-        DeactivatePanel(7); // Deactivate testing instructions panel
+        //DeactivatePanel(7); // Deactivate testing instructions panel
         testingInstructionsActive = false; // Set bool testingInstructionsActive to false
     }
 
@@ -479,6 +518,12 @@ public class WaterTestingManager : BaseMiniGameManager
                 riverbankObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
             }
         }
+
+        // If bool isFirstWaterTestComplete or isSecondWaterTestComplete are true...
+        if (isFirstWaterTestComplete || isSecondWaterTestComplete)
+        {
+            waterTestObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+        }
     }
 
     // Collect water
@@ -504,55 +549,56 @@ public class WaterTestingManager : BaseMiniGameManager
         // If the surface wave was clicked...
         if (Raycast.surfaceWaveClicked)
         {
-            if (surfaceWaves.Count == 0)
+            if (raycastScript.clickedObject == null)
             {
-                Debug.LogError("No SurfaceWave objects found. Ensure they are added to the list.");
+                Debug.LogError("No clicked object found. Ensure the Raycast is detecting the surface wave.");
                 return;
             }
 
-            // Iterate through each SurfaceWave object
-            foreach (var surfaceWave in surfaceWaves)
+            GameObject clickedSurfaceWave = raycastScript.clickedObject; // Get the clicked surface wave
+
+            if (clickedSurfaceWave == null || !surfaceWaves.Contains(clickedSurfaceWave))
             {
-                if (surfaceWave == null)
-                {
-                    Debug.LogWarning("A SurfaceWave reference is null. Skipping this object.");
-                    continue;
-                }
-
-                InvokeProgressBar(); // Call method InvokeProgressBar
-                // Hide the surface wave by disabling its renderer and collider
-                Renderer renderer = surfaceWave.GetComponent<Renderer>();
-                Collider collider = surfaceWave.GetComponent<Collider>();
-
-                if (renderer != null)
-                {
-                    renderer.enabled = false;
-                }
-
-                if (collider != null)
-                {
-                    collider.enabled = false;
-                }
-
-                Debug.Log($"SurfaceWave {surfaceWave.name} hidden.");
-
-                // Move the surface wave to a random preplanned position
-                if (surfaceWaveWaypoints.Count > 0)
-                {
-                    int randomIndex = Random.Range(0, surfaceWaveWaypoints.Count); // Pick a random index
-                    Vector3 newPosition = surfaceWaveWaypoints[randomIndex];
-                    surfaceWave.transform.position = newPosition;
-
-                    Debug.Log($"SurfaceWave {surfaceWave.name} moved to random position: {newPosition}");
-                }
-                else
-                {
-                    Debug.LogError("No preplanned positions defined for SurfaceWave.");
-                }
-
-                // Make the surface wave visible again after a short delay
-                StartCoroutine(ShowSurfaceWaveAfterDelay(surfaceWave, 1f)); // 1-second delay
+                Debug.LogWarning("Clicked object is not a valid surface wave.");
+                return;
             }
+
+            InvokeProgressBar(); // Call method InvokeProgressBar
+
+            surfaceWaveClick.Play(); // Play the surface wave click sound
+
+            // Hide the surface wave by disabling its renderer and collider
+            Renderer renderer = clickedSurfaceWave.GetComponent<Renderer>();
+            Collider collider = clickedSurfaceWave.GetComponent<Collider>();
+
+            if (renderer != null)
+            {
+                renderer.enabled = false;
+            }
+
+            if (collider != null)
+            {
+                collider.enabled = false;
+            }
+
+            Debug.Log($"SurfaceWave {clickedSurfaceWave.name} hidden.");
+
+            // Move the surface wave to a random preplanned position
+            if (surfaceWaveWaypoints.Count > 0)
+            {
+                int randomIndex = Random.Range(0, surfaceWaveWaypoints.Count); // Pick a random index
+                Vector3 newPosition = surfaceWaveWaypoints[randomIndex];
+                clickedSurfaceWave.transform.position = newPosition;
+
+                Debug.Log($"SurfaceWave {clickedSurfaceWave.name} moved to random position: {newPosition}");
+            }
+            else
+            {
+                Debug.LogError("No preplanned positions defined for SurfaceWave.");
+            }
+
+            // Make the surface wave visible again after a short delay
+            StartCoroutine(ShowSurfaceWaveAfterDelay(clickedSurfaceWave, 1f)); // 1-second delay
 
             // Reset the raycast flag
             Raycast.surfaceWaveClicked = false;
@@ -598,11 +644,14 @@ public class WaterTestingManager : BaseMiniGameManager
         if (!isMiniGameOver)
         {
             ActivatePanel(8); // Activate poor water quality panel
+            badWaterTest.Play(); // Play bad water test sound
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isFirstWaterTestComplete = true; // Set bool isFirstWaterTestComplete to true
+            objectivesPanel.SetActive(false); // Disable objectives panel
+            waterTestObjective.SetActive(false); // Disable waterTestObjective
 
-               TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
+            TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
             // If isMiniGameOver is true and isCleanWaterPanelClicked is false...
             if (isMiniGameOver && !cleanWaterPanelScript.isCleanWaterPanelClicked)
@@ -625,12 +674,15 @@ public class WaterTestingManager : BaseMiniGameManager
         if (!isMiniGameOver)
         {
             ActivatePanel(14); // Activate good water quality panel
+            goodWaterTest.Play(); // Play good water test sound
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
             isSecondWaterTestComplete = true; // Set bool isSecondWaterTestComplete to true
+            objectivesPanel.SetActive(false); // Disable objectives panel
+            waterTestObjective.SetActive(false); // Disable waterTestObjective
 
-               TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
+            TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
                // If isMiniGameOver is true and isGreatJobPanelClicked is false...
                if (isMiniGameOver && !greatJobPanelScript.isGreatJobPanelClicked)

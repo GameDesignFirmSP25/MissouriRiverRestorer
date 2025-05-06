@@ -386,9 +386,16 @@ public class AnimalGameManager : BaseMiniGameManager
     [Header("Script References")]
     public ClickCounter clickCounterScript;
     public ChangeablePlant changeablePlant;
+    public EventsStartPanelClickHandler eventsStartPanelClickHandler;
 
     [Header("Player Input")]
     public StarterAssetsInputs playerInput;
+
+    [Header("Audio")]
+    public AudioSource interactButton;
+    public AudioSource invasiveSpeciesDisposed;
+    public AudioSource animalClickedSound;
+
 
     private void Awake()
     {
@@ -415,7 +422,7 @@ public class AnimalGameManager : BaseMiniGameManager
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         AnimalClicked(); // Check if animal is clicked
 
         DialoguePanelClicked(); // Check if any dialogue panel is clicked
@@ -486,6 +493,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method that triggers on start button press
     public void StartButton()
     {
+        interactButton.Play(); // Play button sound
         exploringIndicatorPanel.SetActive(true); // show exploring indicator panel
         objectivesPanel.SetActive(true); // show objectives panel
         LowerBankObjectives(); //  Call method LowerBankEntered
@@ -551,6 +559,11 @@ public class AnimalGameManager : BaseMiniGameManager
         GameObject panel15 = eventPanels[2]; // Get the fish event zone panel
     }
 
+    // Method to play button click sound
+    public void PlayButtonClick()
+    {
+        interactButton.Play(); // Play button click sound
+    }
 
     // Method to get changeable plant script
     private void GetChangeablePlants()
@@ -673,16 +686,19 @@ public class AnimalGameManager : BaseMiniGameManager
 
         if (deerEventActive)
         {
+            invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
             clickCounterScript.IncrementProgress(deerClickIncrement); // Increment progress by variable progressIncrement
         }
 
         if (birdEventActive)
         {
+            invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
             clickCounterScript.IncrementProgress(birdClickIncrement); // Increment progress by variable progressIncrement
         }
 
         if (fishEventActive)
         {
+            invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
             clickCounterScript.IncrementProgress(fishClickIncrement); // Increment progress by variable progressIncrement
         }
     }
@@ -947,6 +963,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to return to the main scene
     public void ReturnButton()
     {
+        interactButton.Play(); // Play button sound
         playerInput.controlsLocked = false; // Lock player controls
         Time.timeScale = 1;
         SceneManager.LoadScene("Overworld"); //load main scene
@@ -1130,6 +1147,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on eastern starling
     private void EasternStarlingClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(1); // Activate the eastern starling dialogue panel
         RaycastScript.easternStarlingClicked = false; // Reset the click handler for eastern starling
         dialogueIsActive = true; // Set dialogue active
@@ -1140,6 +1158,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on white-tailed deer
     private void WhiteTailedDeerClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(2); // Activate the white-tailed deer dialogue panel
         RaycastScript.whiteTailedDeerClicked = false; // Reset the click handler for white-tailed deer
         dialogueIsActive = true; // Set dialogue active
@@ -1150,6 +1169,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on banded pennant dragonfly
     private void BandedPennantDragonflyClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(10); // Activate the banded pennant dragonfly dialogue panel
         RaycastScript.bandedPennantDragonflyClicked = false; // Reset the click handler for banded pennant dragonfly
         dialogueIsActive = true; // Set dialogue active
@@ -1160,6 +1180,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on garter snake
     private void CommonGarterSnakeClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(8); // Activate the common garter snake dialogue panel
         RaycastScript.garterSnakeClicked = false; // Reset the click handler for common garter snake
         dialogueIsActive = true; // Set dialogue active
@@ -1170,6 +1191,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on bald eagle
     private void BaldEagleClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(3); // Activate the bald eagle dialogue panel
         RaycastScript.baldEagleClicked = false; // Reset the click handler for bald eagle
         dialogueIsActive = true; // Set dialogue active
@@ -1180,6 +1202,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on muskrat
     private void MuskratClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(6); // Activate the muskrat dialogue panel
         RaycastScript.muskratClicked = false; // Reset the click handler for muskrat
         dialogueIsActive = true; // Set dialogue active
@@ -1190,6 +1213,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on snapping turtle
     private void SnappingTurtleClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(7); // Activate the snapping turtle dialogue panel
         RaycastScript.snappingTurtleClicked = false; // Reset the click handler for snapping turtle
         dialogueIsActive = true; // Set dialogue active
@@ -1200,6 +1224,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on beaver
     private void BeaverClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(4); // Activate the beaver dialogue panel
         RaycastScript.beaverClicked = false; // Reset the click handler for beaver
         dialogueIsActive = true; // Set dialogue active
@@ -1210,6 +1235,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on raccoon
     private void RaccoonClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(5); // Activate the raccoon dialogue panel
         RaycastScript.raccoonClicked = false; // Reset the click handler for raccoon
         dialogueIsActive = true; // Set dialogue active
@@ -1220,6 +1246,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on northern map turtle
     private void NorthernMapTurtleClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(9); // Activate the northern map turtle dialogue panel
         RaycastScript.northernMapTurtleClicked = false; // Reset the click handler for northern map turtle
         dialogueIsActive = true; // Set dialogue active
@@ -1230,6 +1257,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on asian carp
     private void AsianCarpClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(0); // Activate the asian carp dialogue panel
         RaycastScript.asianCarpClicked = false; // Reset the click handler for asian carp
         dialogueIsActive = true; // Set dialogue active
@@ -1240,6 +1268,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on painted lady butterfly
     private void PaintedLadyButterflyClicked()
     {
+        animalClickedSound.Play(); // Play animal clicked sound
         ActivateDialoguePanel(11); // Activate the painted lady butterfly dialogue panel
         RaycastScript.paintedLadyButterflyClicked = false; // Reset the click handler for painted lady butterfly
         dialogueIsActive = true; // Set dialogue active
@@ -1435,23 +1464,6 @@ public class AnimalGameManager : BaseMiniGameManager
             deerEventActive = true; // Set deer event active
             deerEventObjectiveSet = true; // Set bool deerEventObjectiveSet to true
         }
-
-        //// If bool deerEvetTriggered is not true...
-        //else if (!DeerEventZone.deerEventTriggered)
-        //{
-        //    Debug.Log("Deer Event not triggered yet."); //Debug.Log
-        //}
-
-        //// If bool deerEventZoneComplete is true...
-        //else if (deerEventZoneComplete)
-        //{
-        //        Debug.Log("Deer Event zone already completed."); // Debug.Log
-        //}
-
-        //else
-        //{
-        //    Debug.LogWarning($"Deer event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, deerEventObjectiveSet={deerEventObjectiveSet}");
-        //}
     }
 
     // Method to called when bird event zone is entered
@@ -1470,23 +1482,6 @@ public class AnimalGameManager : BaseMiniGameManager
             birdEventActive = true; // Set bird event active
             birdEventObjectiveSet = true; // Set bool birdEventObjectiveSet to true
         }
-
-        //// If bool birdEventTriggered is false...
-        //else if (!BirdEventZone.birdEventTriggered)
-        //{
-        //    Debug.Log("Bird Event not triggered yet."); // Debug.Log
-        //}
-
-        //// If bool birdEventZoneComplete is true...
-        //else if (birdEventZoneComplete)
-        //{
-        //    Debug.Log("Bird Event zone already completed."); // Debug.Log
-        //}
-        
-        //else
-        //{
-        //    Debug.LogWarning($"Bird event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, birdEventObjectiveSet={birdEventObjectiveSet}");
-        //}
     }
 
     // Method to called when fish event zone is entered
@@ -1505,28 +1500,12 @@ public class AnimalGameManager : BaseMiniGameManager
             fishEventActive = true; // Set fish event active
             fishEventObjectiveSet = true; // Set bool fishEventObjectiveSet
         }
-
-        //// If bool fishEventTrigerred is false...
-        //else if (!FishEventZone.fishEventTriggered)
-        //{
-        //    Debug.Log("Fish Event not triggered yet."); // Debug.Log
-
-        //}
-        //// If bool fishEventZoneComplete is true...
-        //else if (fishEventZoneComplete)
-        //{
-        //    Debug.Log("Fish Event zone already completed."); // Debug.Log
-        //}
-
-        //else
-        //{
-        //    Debug.LogWarning($"Fish event not started. Conditions: dialogueIsActive={dialogueIsActive}, eventZonePanelActive={eventZonePanelActive}, fishEventObjectiveSet={fishEventObjectiveSet}");
-        //}
     }
 
     // Method to handle Bradford Pear Tree click
     public void BradfordPearTreeClicked(ChangeablePlant clickedPlant)
     {
+        invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
         Debug.Log($"Bradford Pear Tree Clicked: {clickedPlant.plantID}"); // Debug.Log
         wasBradfordPearTreeClicked = true; // Set bool wasBradfordPearTreeClicked to true
         bradfordPearTreePanel.SetActive(true); // Show the Bradford Pear Tree panel
@@ -1538,6 +1517,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to handle Purple Loosestrife click
     public void PurpleLoosestrifeClicked(ChangeablePlant clickedPlant)
     {
+        invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
         Debug.Log($"Purple Loosestrife Clicked: {clickedPlant.plantID}"); // Debug.Log
         wasPurpleLoosestrifeClicked = true; // Set bool wasPurpleLoosestrifeClicked to true
         purpleLoosestrifePanel.SetActive(true); // Show the Purple Loosestrife panel

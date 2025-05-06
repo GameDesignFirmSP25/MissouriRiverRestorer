@@ -23,9 +23,6 @@ public class TrashCollectionGame : BaseMiniGameManager
     public Button endbtn;
     public GameObject EndButton;
     public GameObject Finishpanel1;
-
-    
-
     
     public static bool trashCollected = false; // global variable to check if trash is collected
 
@@ -38,6 +35,7 @@ public class TrashCollectionGame : BaseMiniGameManager
     public GameObject objectiveSaveBirdPanel;
     public GameObject objectiveSaveFishPanel;
     public GameObject objectiveSaveDeerPanel;
+
     [Header("Objective text")]
     [SerializeField]
     TextMeshProUGUI objectiveScupText;
@@ -75,6 +73,11 @@ public class TrashCollectionGame : BaseMiniGameManager
     public TextMeshProUGUI ObjectiveSaveBirdtext;
     public TextMeshProUGUI ObjectiveSaveFishtext;
     public TextMeshProUGUI ObjectiveSaveDeertext;
+
+    [Header("Audio")]
+    public AudioSource interactButton;
+    public AudioSource trashGrabbed;
+    public AudioSource animalSaved;
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
@@ -127,6 +130,7 @@ public class TrashCollectionGame : BaseMiniGameManager
         Time.timeScale = 1f;
         GameScore = 8;
         StartButton.SetActive(false);
+        PlayButtonClick();
         Panel.SetActive(false);
        
     }
@@ -197,4 +201,18 @@ public class TrashCollectionGame : BaseMiniGameManager
         }
     }
 
+    public void PlayButtonClick()
+    {
+        interactButton.Play();
+    }
+
+    public void PlayTrashGrabbed()
+    {
+        trashGrabbed.Play();
+    }
+
+    public void PlayAnimalSaved()
+    {
+        animalSaved.Play();
+    }
 }
