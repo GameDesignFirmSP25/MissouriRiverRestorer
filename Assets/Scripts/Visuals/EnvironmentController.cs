@@ -3,35 +3,93 @@ using UnityEngine;
 
 public class EnvironmentController : MonoBehaviour
 {
-    [Range(0f,1f)]public float gameProgress = 0f;
+    [Range(0f, 1f)] public float gameProgress = 0f;
     [SerializeField] MeshRenderer environment = null;
     [SerializeField] MeshRenderer river = null;
+    [SerializeField] Material[] progressionMaterials = null;
 
-    Material environmentMat = null;
-    Material riverMat = null;
-
-    private void Awake()
+    private Material envMat;
+    Material EnvironmentMat
     {
-        if(environmentMat == null && environment != null && environment.materials.Length > 0)
+        set
         {
-            environmentMat = environment.materials[0];
+            envMat = value;
         }
-        else
+        get
         {
-            Debug.LogWarning("An appropriate TERRAIN shader is not assigned in the MeshRendererer");
-        }
-
-        if (riverMat == null && river != null && river.materials.Length > 0)
-        {
-            riverMat = river.materials[0];
-        }
-        else
-        {
-            Debug.LogWarning("An appropriate RIVER shader is not assigned in the MeshRendererer");
+            if (EnvironmentMat == null) 
+            { 
+                if(environment == null)
+                {
+                    environment = transform.Find("StCharles").GetComponent<MeshRenderer>();
+                }
+                if(environment != null)
+                {
+                    envMat = environment.materials[0];
+                }
+            }
+            
+            return envMat;
         }
     }
 
+    private Material riverMat;
+    Material RiverMat
+    {
+        set
+        {
+            riverMat = value;
+        }
+        get
+        {
+            if (EnvironmentMat == null)
+            {
+                if (river == null)
+                {
+                    river = transform.Find("StCharles").GetComponent<MeshRenderer>();
+                }
+                if (river != null)
+                {
+                    riverMat = river.materials[0];
+                }
+            }
+            return riverMat;
+        }
+    }
+
+    //private void Awake()
+    //{
+    //    if (environment == null)
+    //    {
+    //        environment = transform.Find("StCharles").GetComponent<MeshRenderer>();
+
+    //    }
+    //    if (river == null)
+    //    {
+    //        river = transform.Find("MissouriRiver").GetComponent<MeshRenderer>();
+    //    }
+
+    //    if (EnvironmentMat == null && environment != null && environment.materials.Length > 0)
+    //    {
+    //        EnvironmentMat = environment.materials[0];
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("An appropriate TERRAIN shader is not assigned in the MeshRendererer");
+    //    }
+
+    //    if (RiverMat == null && river != null && river.materials.Length > 0)
+    //    {
+    //        RiverMat = river.materials[0];
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("An appropriate RIVER shader is not assigned in the MeshRendererer");
+    //    }
+    //}
+
     private void Start()
+
     {
         if (GameProgressManager.instance != null)
         {
@@ -53,7 +111,7 @@ public class EnvironmentController : MonoBehaviour
 
     private void Update()
     {
-        ChangeProgressionState(GameProgressManager.instance.GameState);
+        //ChangeProgressionState(GameProgressManager.instance.GameState); //test without this
     }
     private void OnDisable()
     {
@@ -63,40 +121,20 @@ public class EnvironmentController : MonoBehaviour
     private void ChangeProgressionState(GameState state)
     {
         gameProgress = ((int)state) / Enum.GetValues(typeof(GameState)).Length;
-        environmentMat.SetFloat("_GameStateLerp", gameProgress);        
-        
-        //environmentMat.SetFloat("_GameStateLerp", gameProgress);
 
 
-        //   Dirty,
-        //AfterTrashGame,
-        //AfterPlantAndAnimalGame,
-        //AfterSecondWaterTest,
+        foreach(Material m in progressionMaterials)
+        {
+            m.SetFloat("_GameStateLerp", gameProgress);
+        }
+        if (EnvironmentMat != null)
+        {
+            EnvironmentMat.SetFloat("_GameStateLerp", gameProgress);
+        }
 
-        //   environmentMat.SetFloat("_GAMESTATE", (int)state);
-        //   riverMat.SetFloat("_GAMESTATE", (int)state);
-
-        //   string s = "";
-        //   switch(state)
-        //   {
-        //       case GameState.Dirty:
-        //           s = "DIRTY";
-        //           break;            
-        //       case GameState.Dirty:
-        //           break;            
-        //       case GameState.Dirty:
-        //           break;            
-        //       case GameState.Dirty:
-        //           default;
-        //           break;
-        //   }
-
-
-        /*
-         *     Dirty, //
-               AfterTrashGame,
-               AfterPlantAndAnimalGame,
-               AfterSecondWaterTest,
-        */
+        if (RiverMat != null)
+        {
+            RiverMat.SetFloat("_GameStateLerp", gameProgress);
+        }
     }
 }
