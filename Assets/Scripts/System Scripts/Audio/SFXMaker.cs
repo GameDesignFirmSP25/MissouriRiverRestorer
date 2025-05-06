@@ -89,7 +89,7 @@ public class SFXMaker : MonoBehaviour
 
                 if (clip != null)
                 {
-                    GameObject.Destroy(source.gameObject, source.clip.length + 3f);
+                    GameObject.Destroy(source.gameObject, source.clip.length + sound.Seconds);
                 }
             }
 
@@ -97,10 +97,6 @@ public class SFXMaker : MonoBehaviour
             source.pitch = sound.GetPitch();
 
             source.Play();
-            if (source.clip != null)
-            {
-                GameObject.Destroy(source.gameObject, source.clip.length + sound.Seconds);
-            }
         }
         catch (Exception e)
         {
@@ -191,7 +187,6 @@ public class SFXMaker : MonoBehaviour
             source.transform.position = transform.position;
             source.outputAudioMixerGroup = sound.GetAudioGroup();
 
-
             GameObject.Destroy(source.gameObject, (clip.length + sound.Seconds));
         }
 
@@ -203,16 +198,6 @@ public class SFXMaker : MonoBehaviour
             PlayAudio(source, sound);
         }
 
-
-        try
-        {
-
-
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e + " " + mainSoundEffect);
-        }
     }
 
 
@@ -221,10 +206,10 @@ public class SFXMaker : MonoBehaviour
     private void PlayAudio(AudioSource source, SFXSO so)
     {
         source.Play();
-        if (source.clip != null)
-        {
-            GameObject.Destroy(source.gameObject, source.clip.length + so.Seconds);
-        }
+        //if (source.clip != null)
+        //{
+        //    GameObject.Destroy(source.gameObject, source.clip.length + so.Seconds);
+        //}
 
         return;
 
