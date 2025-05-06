@@ -55,12 +55,22 @@ public static class SFXLibrary
         Starling,
         Fish,
         Splash,
-        /*** DO NOT CHANGE ANYTHING ABOVE THIS LINE****/
-        // Instead add new things at the bottom of the list \/ \/ \/
+
 
         Forest,
         WaterArea,  
-
+        GasCan,
+        Bottle,
+        Tire,
+        UI_Navigate,
+        UI_Close,
+        UI_Open,
+        PallidSturgeon,
+        TallGrass,
+        SparklyClean,
+        Step_Mud,
+        /*** DO NOT CHANGE ANYTHING ABOVE THIS LINE****/
+        // Instead add new things at the bottom of the list \/ \/ \/
     }
 
     public static Dictionary<SFXType, SFXSO> sfxDictionary = new Dictionary<SFXType, SFXSO>();
