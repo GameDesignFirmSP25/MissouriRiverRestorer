@@ -7,6 +7,7 @@ public class EnvironmentController : MonoBehaviour
     [SerializeField] MeshRenderer environment = null;
     [SerializeField] MeshRenderer river = null;
     [SerializeField] Material[] progressionMaterials = null;
+    [SerializeField] Material sky = null;
 
     private Material envMat;
     Material EnvironmentMat
@@ -17,11 +18,16 @@ public class EnvironmentController : MonoBehaviour
         }
         get
         {
-            if (EnvironmentMat == null) 
+            if (envMat == null) 
             { 
                 if(environment == null)
                 {
-                    environment = transform.Find("StCharles").GetComponent<MeshRenderer>();
+                    Transform t = transform.Find("StCharles");
+                    if(t!= null)
+                    {
+                        environment = t.GetComponent<MeshRenderer>();
+                    }
+
                 }
                 if(environment != null)
                 {
@@ -42,11 +48,15 @@ public class EnvironmentController : MonoBehaviour
         }
         get
         {
-            if (EnvironmentMat == null)
+            if (riverMat == null)
             {
                 if (river == null)
                 {
-                    river = transform.Find("StCharles").GetComponent<MeshRenderer>();
+                    Transform t = transform.Find("MissouriRiver");
+                    if(t!= null)
+                    {
+                        river = t.GetComponent<MeshRenderer>();
+                    }
                 }
                 if (river != null)
                 {
@@ -89,7 +99,6 @@ public class EnvironmentController : MonoBehaviour
     //}
 
     private void Start()
-
     {
         if (GameProgressManager.instance != null)
         {
@@ -106,12 +115,18 @@ public class EnvironmentController : MonoBehaviour
         {
             Debug.Log("Game Progress Manager Instance is null");
         }
+        ChangeProgressionState(GameProgressManager.instance.GameState);
     }
 
 
     private void Update()
     {
         //ChangeProgressionState(GameProgressManager.instance.GameState); //test without this
+
+        if(sky!= null)
+        {
+            sky.SetFloat("_Rotation", Time.time);
+        }
     }
     private void OnDisable()
     {
@@ -125,16 +140,14 @@ public class EnvironmentController : MonoBehaviour
 
         foreach(Material m in progressionMaterials)
         {
+            Debug.Log("Setting Material: " + m);
             m.SetFloat("_GameStateLerp", gameProgress);
         }
-        if (EnvironmentMat != null)
-        {
-            EnvironmentMat.SetFloat("_GameStateLerp", gameProgress);
-        }
 
-        if (RiverMat != null)
-        {
-            RiverMat.SetFloat("_GameStateLerp", gameProgress);
-        }
+        Debug.Log("Setting Material: " + EnvironmentMat);
+        EnvironmentMat.SetFloat("_GameStateLerp", gameProgress);
+
+        Debug.Log("Setting Material: " + RiverMat);
+        RiverMat.SetFloat("_GameStateLerp", gameProgress);
     }
 }
