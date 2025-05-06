@@ -135,36 +135,15 @@ public class WaterTestingManager : BaseMiniGameManager
     public static bool isWaterQualityGood = false;
     public static bool isFirstWaterTestComplete = false;
     public static bool isSecondWaterTestComplete = false;
-    public static bool firstRunThrough = false;
-    public static bool secondRunThrough = false;
 
     [Header("Player Input")]
     public StarterAssetsInputs playerInput;
 
     [Header("Audio")]
-    [SerializeField]
-    private SFXMaker interactButton;
-
-    [SerializeField]
-    private SFXMaker goodWaterTest;
-
-    [SerializeField]
-    private SFXMaker badWaterTest;
-
-    [SerializeField]
-    private SFXMaker surfaceWaveClick;
-
-    [SerializeField]
-    private SFXMaker trashGrabbed;
-
-    [SerializeField]
-    private SFXMaker fishClicked;
-
-    [SerializeField]
-    private SFXMaker mammalClicked;
-
-    [SerializeField]
-    private SFXMaker riverbankClicked;
+    public AudioSource interactButton;
+    public AudioSource goodWaterTest;
+    public AudioSource badWaterTest;
+    public AudioSource surfaceWaveClick;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -284,42 +263,7 @@ public class WaterTestingManager : BaseMiniGameManager
 
     public void PlayButtonClick()
     {
-        interactButton.PlaySound(); // Play button click sound
-    }
-
-    public void PlayGoodWaterTest()
-    {
-        goodWaterTest.PlaySound(); // Play good water test sound
-    }
-
-    public void PlayBadWaterTest()
-    {
-        badWaterTest.PlaySound(); // Play bad water test sound
-    }
-
-    public void PlaySurfaceWaveClick()
-    {
-        surfaceWaveClick.PlaySound(); // Play surface wave click sound
-    }
-
-    public void PlayTrashGrabbed()
-    {
-        trashGrabbed.PlaySound(); // Play trash grabbed sound
-    }
-
-    public void PlayFishClicked()
-    {
-        fishClicked.PlaySound(); // Play fish grabbed sound
-    }
-
-    public void PlayMammalClicked()
-    {
-        mammalClicked.PlaySound(); // Play mammals grabbed sound
-    }
-
-    public void PlayRiverbankClicked()
-    {
-        riverbankClicked.PlaySound(); // Play riverbank grabbed sound
+        interactButton.Play(); // Play button click sound
     }
 
     // Start game
@@ -336,7 +280,6 @@ public class WaterTestingManager : BaseMiniGameManager
         if (!isFirstWaterTestComplete)
         {
             DeactivatePanel(0); // Disable firstIntroductionPanel
-            firstRunThrough = true; // Set bool firstRunThrough to true
         }
 
         // If isFirstWaterTestComplete is true and isSecondWaterTestComplete is false...
@@ -344,7 +287,6 @@ public class WaterTestingManager : BaseMiniGameManager
         {
             DeactivatePanel(1); // Disable secondIntroductionPanel
             additionalAnimals.SetActive(true); // Activate additional animals in the scene
-            secondRunThrough = true; // Set bool secondRunThrough to true
         }
     }
 
@@ -577,14 +519,8 @@ public class WaterTestingManager : BaseMiniGameManager
             }
         }
 
-        // If bool firstRunthrough is true and bool isFirstWaterTestComplete is true...
-        if (firstRunThrough && isFirstWaterTestComplete)
-        {
-            waterTestObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
-        }
-
-        // If bool secondRunThrough is true and bool isSecondWaterTestComplete is true...
-        if (secondRunThrough && isSecondWaterTestComplete)
+        // If bool isFirstWaterTestComplete or isSecondWaterTestComplete are true...
+        if (isFirstWaterTestComplete || isSecondWaterTestComplete)
         {
             waterTestObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
         }
@@ -629,7 +565,7 @@ public class WaterTestingManager : BaseMiniGameManager
 
             InvokeProgressBar(); // Call method InvokeProgressBar
 
-            PlaySurfaceWaveClick(); // Play surface wave click sound
+            surfaceWaveClick.Play(); // Play the surface wave click sound
 
             // Hide the surface wave by disabling its renderer and collider
             Renderer renderer = clickedSurfaceWave.GetComponent<Renderer>();
@@ -708,13 +644,12 @@ public class WaterTestingManager : BaseMiniGameManager
         if (!isMiniGameOver)
         {
             ActivatePanel(8); // Activate poor water quality panel
-            PlayBadWaterTest(); // Play bad water test sound
+            badWaterTest.Play(); // Play bad water test sound
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isFirstWaterTestComplete = true; // Set bool isFirstWaterTestComplete to true
             objectivesPanel.SetActive(false); // Disable objectives panel
             waterTestObjective.SetActive(false); // Disable waterTestObjective
-            firstRunThrough = false; // Set bool firstRunThrough to false
 
             TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
@@ -739,14 +674,13 @@ public class WaterTestingManager : BaseMiniGameManager
         if (!isMiniGameOver)
         {
             ActivatePanel(14); // Activate good water quality panel
-            PlayGoodWaterTest(); // Play good water test sound
+            goodWaterTest.Play(); // Play good water test sound
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
             isSecondWaterTestComplete = true; // Set bool isSecondWaterTestComplete to true
             objectivesPanel.SetActive(false); // Disable objectives panel
             waterTestObjective.SetActive(false); // Disable waterTestObjective
-            secondRunThrough = false; // Set bool secondRunThrough to false
 
             TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 

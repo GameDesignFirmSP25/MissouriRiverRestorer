@@ -78,7 +78,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfAluminumPanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isAluminumCanObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
-            waterTestingManagerScript.PlayTrashGrabbed();
         }
     }
 
@@ -91,7 +90,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfTirePanelActive = true; // Set bool effectsOfTirePanelActive to true
             WaterTestingManager.isTireObjectiveComplete = true; // Set bool isTireObjectiveComplete to true
-            waterTestingManagerScript.PlayTrashGrabbed();
         }
     }
 
@@ -104,7 +102,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfGasPanelActive = true; // Set bool effectsOfGasPanelActive to true
             WaterTestingManager.isGasCanObjectiveComplete = true; // Set bool isGasCanObjectiveComplete to true
-            waterTestingManagerScript.PlayTrashGrabbed();
         }
     }
 
@@ -117,7 +114,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfTrashPanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isTrashBagObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
-            waterTestingManagerScript.PlayTrashGrabbed();
         }
     }
 
@@ -130,7 +126,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfBiodiversity1PanelActive = true; // Set bool effectsOfFishPanelActive to true
             WaterTestingManager.isFishObjectiveComplete = true; // Set bool isFishObjectiveComplete to true
-            waterTestingManagerScript.PlayFishClicked();
         }
     }
 
@@ -143,7 +138,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfBiodiversity3PanelActive = true; // Set bool effectsOfMammalPanelActive to true
             WaterTestingManager.isMammalObjectiveComplete = true; // Set bool isMammalObjectiveComplete to true
-            waterTestingManagerScript.PlayMammalClicked();
         }
     }
 
@@ -156,7 +150,6 @@ public class Raycast : MonoBehaviour
         {
             WaterTestingManager.effectsOfBiodiversity2PanelActive = true; // Set bool effectsOfRiverbankPanelActive to true
             WaterTestingManager.isRiverbankObjectiveComplete = true; // Set bool isRiverbankObjectiveComplete to true
-            waterTestingManagerScript.PlayRiverbankClicked();
         }
     }
 
