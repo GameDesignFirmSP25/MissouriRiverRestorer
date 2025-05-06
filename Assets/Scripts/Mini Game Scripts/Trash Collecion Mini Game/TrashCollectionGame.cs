@@ -75,12 +75,9 @@ public class TrashCollectionGame : BaseMiniGameManager
     public TextMeshProUGUI ObjectiveSaveDeertext;
 
     [Header("Audio")]
-    [SerializeField]
-    private SFXMaker interactButton;
-    [SerializeField]
-    private SFXMaker trashGrabbed;
-    [SerializeField]
-    private SFXMaker animalSaved;
+    public AudioSource interactButton;
+    public AudioSource trashGrabbed;
+    public AudioSource animalSaved;
 
     void Start() // Start is called once before the first execution of Update after the MonoBehaviour is created
     {
@@ -206,16 +203,16 @@ public class TrashCollectionGame : BaseMiniGameManager
 
     public void PlayButtonClick()
     {
-        interactButton.PlaySound();
+        interactButton.Play();
     }
 
     public void PlayTrashGrabbed()
     {
-        trashGrabbed.PlaySound();
+        trashGrabbed.Play();
     }
 
     public void PlayAnimalSaved()
     {
-        animalSaved.PlaySound();
+        animalSaved.Play();
     }
 }
