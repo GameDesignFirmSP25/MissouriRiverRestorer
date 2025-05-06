@@ -58,17 +58,20 @@ public static class SFXLibrary
         /*** DO NOT CHANGE ANYTHING ABOVE THIS LINE****/
         // Instead add new things at the bottom of the list \/ \/ \/
 
+        Forest,
+        WaterArea,  
+
     }
 
     public static Dictionary<SFXType, SFXSO> sfxDictionary = new Dictionary<SFXType, SFXSO>();
 
     public static SFXSO GetSound(SFXType type)
     {
-        if (sfxDictionary.Count == 0) 
+        if (sfxDictionary.Count == 0)
         {
-            var sos = Resources.LoadAll<SFXSO>("Audio");
+            SFXSO[] sos = Resources.LoadAll<SFXSO>("Audio");
 
-            foreach (UnityEngine.Object o in sos)
+            foreach (SFXSO o in sos)
             {
                 SFXSO s = (SFXSO)o;
                 if (!sfxDictionary.ContainsKey(s.type))
@@ -80,7 +83,7 @@ public static class SFXLibrary
                     //Debug.Log(s.type + " is already a key in SFX Dictionary");
                 }
             }
-            //Debug.Log(sfxDictionary.Count + " SFX types loaded into Dictionary");
+            Debug.Log(sfxDictionary.Count + " SFX types loaded into Dictionary");
         }
 
 
@@ -88,7 +91,12 @@ public static class SFXLibrary
         {
             return sfxDictionary[type];
         }
-        else return sfxDictionary[SFXType.Default];
+
+        else
+        {
+            Debug.Log("Cannot get " + type);
+            return sfxDictionary[SFXType.Default];
+
+        }
     }
-    
 }

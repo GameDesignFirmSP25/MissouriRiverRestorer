@@ -6,17 +6,17 @@ public class SFXInterval : SFXMaker
     [SerializeField] Vector2 intervalRange = new Vector2(5f, 15f);
     float internalTimer = 0f;
 
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
     void Update()
     {
         if (internalTimer <= 0f)
         {
-            try
-            {
-                base.MakeSound(out float clipLength);
-                internalTimer = clipLength + Random.Range(intervalRange.x, intervalRange.y);
-            }
-            catch { }
-
+            base.MakeSound(out float clipLength);
+            internalTimer = clipLength + Random.Range(intervalRange.x, intervalRange.y);
         }
         else
         {

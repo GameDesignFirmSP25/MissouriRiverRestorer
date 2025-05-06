@@ -33,7 +33,10 @@ public class SFXSO : ScriptableObject
     [SerializeField][Range(0f, 1f)] float baseVolume = 1.0f;
     [SerializeField][Range(0f, 1f)] float volumeModPercent = 0f;
 
-
+    public int GetNumClips()
+    {
+        return clips.Count;
+    }
 
     public AudioMixerGroup GetAudioGroup()
     {
