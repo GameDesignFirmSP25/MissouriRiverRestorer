@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae993590ee5f054ba364d6899276da4, type: 3}
   m_Name: White_Tailed_Deer_Cry
   m_EditorClassIdentifier: 
-  type: 0
-  clips: []
-  outputMixerGroup: {fileID: 0}
+  type: 47
+  clips:
+  - {fileID: 8300000, guid: 73f657588c70fe8408e7eb1c671964e3, type: 3}
+  outputMixerGroup: {fileID: 1997003956336563998, guid: ea25a6fb74033c640b2e4711beb21078, type: 2}
+  seconds: 1
+  fadeIn: 0
+  fadeOut: 0
   basePitch: 1
   pitchModPercent: 0.1
   baseVolume: 1

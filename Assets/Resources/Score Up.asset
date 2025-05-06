@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eae993590ee5f054ba364d6899276da4, type: 3}
-  m_Name: River_Ambience
+  m_Name: Score Up
   m_EditorClassIdentifier: 
-  type: 0
-  clips: []
-  outputMixerGroup: {fileID: 0}
+  type: 26
+  clips:
+  - {fileID: 8300000, guid: 5d54249518d7f90428e1fa5ae5906d8e, type: 3}
+  outputMixerGroup: {fileID: 1997003956336563998, guid: ea25a6fb74033c640b2e4711beb21078, type: 2}
+  seconds: 1
+  fadeIn: 0
+  fadeOut: 0
   basePitch: 1
   pitchModPercent: 0.1
   baseVolume: 1
