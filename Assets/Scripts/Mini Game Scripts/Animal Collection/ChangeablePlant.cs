@@ -39,10 +39,6 @@ public class ChangeablePlant : MonoBehaviour
     [SerializeField]
     private GameObject incorrectPlantSwappedPanel;
 
-    [Header("Audio")]
-    public AudioSource correctPlantSelected;
-    public AudioSource incorrectPlantSelected;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -125,7 +121,7 @@ public class ChangeablePlant : MonoBehaviour
 
                         animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
                         animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                        correctPlantSelected.Play(); // Play the correct plant selected sound
+                        animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                         animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
                         animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
@@ -175,7 +171,7 @@ public class ChangeablePlant : MonoBehaviour
 
                         animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
                         animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                        correctPlantSelected.Play(); // Play the correct plant selected sound
+                        animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                         animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
                         animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
@@ -223,7 +219,7 @@ public class ChangeablePlant : MonoBehaviour
 
                         animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
                         animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                        correctPlantSelected.Play(); // Play the correct plant selected sound
+                        animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                         animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
                         animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
@@ -273,7 +269,7 @@ public class ChangeablePlant : MonoBehaviour
 
                         animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
                         animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                        correctPlantSelected.Play(); // Play the correct plant selected sound
+                        animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                         animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
                         animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
@@ -323,7 +319,7 @@ public class ChangeablePlant : MonoBehaviour
 
                         animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
                         animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                        correctPlantSelected.Play(); // Play the correct plant selected sound
+                        animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                         animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
                         animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
@@ -373,7 +369,7 @@ public class ChangeablePlant : MonoBehaviour
 
                         animalGameManager.BradfordPearsSwapped += 1; // Increment the number of Bradford Pears swapped
                         animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                        correctPlantSelected.Play(); // Play the correct plant selected sound
+                        animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                         animalGameManager.UpdateBradfordPearsSwappedCounter(); // Update the Bradford Pears swapped counter
                         animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                     }
@@ -423,7 +419,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
 
                         }
@@ -450,7 +446,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
@@ -475,7 +471,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
@@ -503,7 +499,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
@@ -557,7 +553,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound   
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
@@ -587,7 +583,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
@@ -613,7 +609,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
@@ -639,7 +635,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
@@ -692,7 +688,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
@@ -717,7 +713,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
@@ -742,7 +738,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
@@ -767,7 +763,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
@@ -812,7 +808,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
@@ -840,7 +836,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
@@ -864,7 +860,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
@@ -888,7 +884,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
 
@@ -933,7 +929,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
@@ -961,7 +957,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
@@ -985,7 +981,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
@@ -1011,7 +1007,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
@@ -1057,7 +1053,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithCordgrassButtonClicked)
@@ -1081,7 +1077,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithSwampMilkweedButtonClicked)
@@ -1104,7 +1100,7 @@ public class ChangeablePlant : MonoBehaviour
                             }
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
-                            incorrectPlantSelected.Play(); // Play the incorrect plant selected sound
+                            animalGameManager.PlayIncorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                         }
                         else if (animalGameManager.wasReplaceWithYellowConeflowerButtonClicked)
@@ -1130,7 +1126,7 @@ public class ChangeablePlant : MonoBehaviour
 
                             animalGameManager.PurpleLoosestrifesSwapped += 1; // Increment the number of Purple Loosestrifes swapped
                             animalGameManager.PlantsCorrectlySwapped += 1; // Increment the number of plants correctly swapped
-                            correctPlantSelected.Play(); // Play the correct plant selected sound
+                            animalGameManager.PlayCorrectPlantSelectedSound(); // Play the correct plant selected sound
                             animalGameManager.UpdatePurpleLoosestrifesSwappedCounter(); // Update the Purple Loosestrifes swapped counter
                             animalGameManager.UpdatePlantsCorrectlySwappedCounter(); // Update the plants correctly swapped counter
                         }
