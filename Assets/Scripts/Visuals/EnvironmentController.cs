@@ -140,14 +140,14 @@ public class EnvironmentController : MonoBehaviour
 
         foreach(Material m in progressionMaterials)
         {
-            Debug.Log("Setting Material: " + m);
+            //Debug.Log("Setting Material: " + m);
             m.SetFloat("_GameStateLerp", gameProgress);
         }
 
-        Debug.Log("Setting Material: " + EnvironmentMat);
+        //Debug.Log("Setting Material: " + EnvironmentMat);
         EnvironmentMat.SetFloat("_GameStateLerp", gameProgress);
 
-        Debug.Log("Setting Material: " + RiverMat);
+        //Debug.Log("Setting Material: " + RiverMat);
         RiverMat.SetFloat("_GameStateLerp", gameProgress);
     }
 }
