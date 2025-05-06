@@ -20,10 +20,10 @@ public class SFXSO : ScriptableObject
     //}
     [SerializeField] private float seconds = 1f;
     public float Seconds { get { return seconds; } }
-    [SerializeField] internal bool fadeIn = false;
-    public bool FadesIn { get { return fadeIn; } }
-    [SerializeField] internal bool fadeOut = false;
-    public bool FadesOut { get { return fadeOut; } }
+    //[SerializeField] internal bool fadeIn = false;
+    //public bool FadesIn { get { return fadeIn; } }
+    //[SerializeField] internal bool fadeOut = false;
+    //public bool FadesOut { get { return fadeOut; } }
 
     [Header("Pitch")]
     [SerializeField][Range(0f, 3f)] float basePitch = 1.0f;

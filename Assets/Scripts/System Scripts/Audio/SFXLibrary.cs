@@ -53,10 +53,10 @@ public static class SFXLibrary
         SnappingTurtle, MapTurtle,
         Eagle,
         Starling,
-        Fish
+        Fish,
+        Splash,
         /*** DO NOT CHANGE ANYTHING ABOVE THIS LINE****/
         // Instead add new things at the bottom of the list \/ \/ \/
-
 
     }
 

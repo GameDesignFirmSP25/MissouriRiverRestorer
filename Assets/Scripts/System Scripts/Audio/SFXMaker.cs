@@ -187,50 +187,50 @@ public class SFXMaker : MonoBehaviour
         return;
 
         //fade in
-        if (so.FadesIn || so.FadesOut)
-        {
-            if(coroutine != null)
-            {
-                StopCoroutine(coroutine);
-            }
+        //if (so.FadesIn || so.FadesOut)
+        //{
+        //    if(coroutine != null)
+        //    {
+        //        StopCoroutine(coroutine);
+        //    }
 
-            coroutine = StartCoroutine(FadeInFadeOutRoutine(so, source));
-        }
-        else
-        {
-            source.Play();
-            if (source.clip != null)
-            {
-                GameObject.Destroy(source.gameObject, source.clip.length + so.Seconds);
-            }
-            //if (so.ClipType == SFXSO.ClipPlayType.OneShot)
-            //{
+        //    coroutine = StartCoroutine(FadeInFadeOutRoutine(so, source));
+        //}
+        //else
+        //{
+        //    source.Play();
+        //    if (source.clip != null)
+        //    {
+        //        GameObject.Destroy(source.gameObject, source.clip.length + so.Seconds);
+        //    }
+        //    //if (so.ClipType == SFXSO.ClipPlayType.OneShot)
+        //    //{
 
-            //}
-            //else //loop
-            //{
-            //    source.loop = true;
-            //    source.Play();
-            //}
-        }
+        //    //}
+        //    //else //loop
+        //    //{
+        //    //    source.loop = true;
+        //    //    source.Play();
+        //    //}
+        //}
     }
 
-    public IEnumerator FadeInFadeOutRoutine(SFXSO data, params AudioSource[] source)
-    {
-        if(data.FadesIn)
-        {
-            yield return FadeInRoutine(data.Seconds, source);
-        }
-        if (source[0].clip != null)
-        {
+    //public IEnumerator FadeInFadeOutRoutine(SFXSO data, params AudioSource[] source)
+    //{
+    //    if(data.FadesIn)
+    //    {
+    //        yield return FadeInRoutine(data.Seconds, source);
+    //    }
+    //    if (source[0].clip != null)
+    //    {
             
-        }
-        if(data.FadesOut)
-        {
-            yield return FadeOutRoutine(data.Seconds, source);
-        }
-        yield return null;
-    }
+    //    }
+    //    if(data.FadesOut)
+    //    {
+    //        yield return FadeOutRoutine(data.Seconds, source);
+    //    }
+    //    yield return null;
+    //}
 
 
     public IEnumerator FadeOutRoutine(float fadeTime, params AudioSource[] source)
