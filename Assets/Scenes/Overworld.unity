@@ -893,6 +893,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2004758094}
     - target: {fileID: 3851670727618937202, guid: 7868fbe9c4a4291499aee79907f72994, type: 3}
+      propertyPath: interactButton
+      value: 
+      objectReference: {fileID: 1147930684}
+    - target: {fileID: 3851670727618937202, guid: 7868fbe9c4a4291499aee79907f72994, type: 3}
       propertyPath: 'choices.Array.data[0]'
       value: 
       objectReference: {fileID: 563694642}
@@ -943,7 +947,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1547904320421618537, guid: 7868fbe9c4a4291499aee79907f72994, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1147930684}
   m_SourcePrefab: {fileID: 100100000, guid: 7868fbe9c4a4291499aee79907f72994, type: 3}
 --- !u!1 &454975630 stripped
 GameObject:
@@ -1441,6 +1448,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2847655557276537507, guid: a362abcc7ecccd74db7d220023571591, type: 3}
   m_PrefabInstance: {fileID: 1902270723013436215}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1147930683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1547904320421618537, guid: 7868fbe9c4a4291499aee79907f72994, type: 3}
+  m_PrefabInstance: {fileID: 389588662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1147930684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147930683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 31
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
 --- !u!1 &1211959323
 GameObject:
   m_ObjectHideFlags: 0

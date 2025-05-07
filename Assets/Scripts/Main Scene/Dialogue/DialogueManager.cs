@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private bool canSkip = true;
     public bool dialogueIsPlaying { get; private set; }
     private bool canContinueToNextLine = false;
-     private bool skipKeyReset = false;
+    private bool skipKeyReset = false;
 
     [Header("UI Elements")]
     private TextMeshProUGUI[] choicesText;
@@ -35,7 +35,13 @@ public class DialogueManager : MonoBehaviour
     private Story currentStory;
     private Coroutine displayLineCoroutine;
     private static DialogueManager instance;
-     public StarterAssetsInputs _playerInput;
+    public StarterAssetsInputs _playerInput;
+
+    [Header("Audio")]
+    [SerializeField]
+    private SFXMaker interactButton;
+
+
 
      private void Awake()
     {
@@ -90,6 +96,7 @@ public class DialogueManager : MonoBehaviour
         // If 
         if (canContinueToNextLine && currentStory.currentChoices.Count == 0 && (Input.GetKeyDown(KeyCode.E)))
         {
+            PlayInteractButtonClick(); // Play the interact button click sound
             ContinueStory(); // Call the method to continue the story
         }
     }
@@ -101,6 +108,7 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = true; // Set bool dialogueIsPlaying to true
           _playerInput.controlsLocked = true;
         dialogueBox.SetActive(true); // Show the dialogue box
+        PlayInteractButtonClick(); // Play the interact button click sound
         ContinueStory(); // Call the method to continue the story
     }
 
@@ -110,6 +118,7 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false; // Set bool dialogueIsPlaying to false
           _playerInput.controlsLocked = false;
           dialogueBox.SetActive(false); // Hide the dialogue box
+        PlayInteractButtonClick(); // Play the interact button click sound
         dialogueText.text = ""; // Clear the dialogue text
     }
 
@@ -158,6 +167,7 @@ public class DialogueManager : MonoBehaviour
             if (canSkip && skipKeyReset && Input.GetKey(skipKey))
             {
                 Debug.Log("Typing animation skipped."); // Log the skip action
+                PlayInteractButtonClick(); // Play the interact button click sound
                 dialogueText.maxVisibleCharacters = line.Length; // Display the full line
                     skipKeyReset = false;
                 break; // Exit the loop
@@ -237,5 +247,10 @@ public class DialogueManager : MonoBehaviour
             Input.GetKeyDown(KeyCode.Space); // Simulate key press
             ContinueStory(); // Continue the story after making the choice
         }
+    }
+
+    public void PlayInteractButtonClick()
+    {
+        interactButton.PlaySound(); // Play the interact button click sound
     }
 }
