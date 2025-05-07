@@ -51400,6 +51400,7 @@ GameObject:
   - component: {fileID: 1899327847}
   - component: {fileID: 1899327846}
   - component: {fileID: 1899327845}
+  - component: {fileID: 1899327850}
   m_Layer: 0
   m_Name: AnimalGameManager
   m_TagString: Untagged
@@ -51585,6 +51586,7 @@ MonoBehaviour:
   animalClickedSound: {fileID: 1899327847}
   correctPlantSwapped: {fileID: 1899327846}
   incorrectPlantSwapped: {fileID: 1899327845}
+  plantGrabbed: {fileID: 1899327850}
 --- !u!4 &1899327844
 Transform:
   m_ObjectHideFlags: 0
@@ -51683,6 +51685,23 @@ MonoBehaviour:
   awakeSoundEffect: 0
   playOnAwake: 0
   mainSoundEffect: 31
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
+--- !u!114 &1899327850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899327842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 9
   myAudioSource: {fileID: 0}
   canMakeSound: 0
 --- !u!208 &1899890115

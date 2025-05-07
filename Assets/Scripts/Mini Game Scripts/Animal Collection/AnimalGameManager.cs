@@ -408,6 +408,9 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     private SFXMaker incorrectPlantSwapped;
 
+    [SerializeField]
+    private SFXMaker plantGrabbed;
+
 
     private void Awake()
     {
@@ -617,6 +620,12 @@ public class AnimalGameManager : BaseMiniGameManager
     public void PlayIncorrectPlantSwappedSound()
     {
         incorrectPlantSwapped.PlaySound(); // Play incorrect plant swapped sound
+    }
+
+    // Method to play plant grabbed sound
+    public void PlayPlantGrabbedSound()
+    {
+        plantGrabbed.PlaySound(); // Play plant grabbed sound
     }
 
     // Method to get changeable plant script
@@ -1559,7 +1568,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to handle Bradford Pear Tree click
     public void BradfordPearTreeClicked(ChangeablePlant clickedPlant)
     {
-        PlayInvasiveSpeciesDisposedSound(); // Play invasive species disposed sound
+        PlayPlantGrabbedSound(); // Play plant grabbed sound
         Debug.Log($"Bradford Pear Tree Clicked: {clickedPlant.plantID}"); // Debug.Log
         wasBradfordPearTreeClicked = true; // Set bool wasBradfordPearTreeClicked to true
         bradfordPearTreePanel.SetActive(true); // Show the Bradford Pear Tree panel
@@ -1571,7 +1580,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to handle Purple Loosestrife click
     public void PurpleLoosestrifeClicked(ChangeablePlant clickedPlant)
     {
-        PlayInvasiveSpeciesDisposedSound(); // Play invasive species disposed sound
+        PlayPlantGrabbedSound(); // Play plant grabbed sound
         Debug.Log($"Purple Loosestrife Clicked: {clickedPlant.plantID}"); // Debug.Log
         wasPurpleLoosestrifeClicked = true; // Set bool wasPurpleLoosestrifeClicked to true
         purpleLoosestrifePanel.SetActive(true); // Show the Purple Loosestrife panel
