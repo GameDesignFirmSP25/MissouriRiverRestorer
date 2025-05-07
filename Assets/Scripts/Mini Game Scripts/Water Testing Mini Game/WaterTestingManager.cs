@@ -173,6 +173,9 @@ public class WaterTestingManager : BaseMiniGameManager
         additionalAnimals.SetActive(false); // Set additional animals to not active at the start
         objectivesPanel.SetActive(false); // Set objectivesPanel to not active at the start
         waterTestObjective.SetActive(false); // Set waterTestObjective to not active at the start
+        surfaceWaves[surfaceWaves.Count - 3].SetActive(false); // Disable the third to last surface wave
+        surfaceWaves[surfaceWaves.Count - 2].SetActive(false); // Disable the second to last surface wave
+        surfaceWaves[surfaceWaves.Count - 1].SetActive(false); // Disable the last surface wave
         Cursor.visible = true; // Set Cursor to be visible
 
         // If isFirstWaterTestComplete is false...
@@ -488,12 +491,18 @@ public class WaterTestingManager : BaseMiniGameManager
         {
             firstWaterTestObjectives.SetActive(false); // Disable firstWaterTestObjectives
             waterTestObjective.SetActive(true); // Disable waterTestObjective
+            surfaceWaves[surfaceWaves.Count - 3].SetActive(true); // Enable the third to last surface wave
+            surfaceWaves[surfaceWaves.Count - 2].SetActive(true); // Enable the second to last surface wave
+            surfaceWaves[surfaceWaves.Count - 1].SetActive(true); // Enable the last surface wave
         }
 
         if (objectivesComplete && secondWaterTestObjectivesVisible)
         {
             secondWaterTestObjectives.SetActive(false); // Disable secondWaterTestObjectives
             waterTestObjective.SetActive(true); // Disable waterTestObjective
+            surfaceWaves[surfaceWaves.Count - 3].SetActive(true); // Enable the third to last surface wave
+            surfaceWaves[surfaceWaves.Count - 2].SetActive(true); // Enable the second to last surface wave
+            surfaceWaves[surfaceWaves.Count - 1].SetActive(true); // Enable the last surface wave
         }
     }
 

@@ -177,6 +177,7 @@ public class Raycast : MonoBehaviour
             if (clickedObject.CompareTag("Surface Wave") && waterTestingManagerScript.objectivesComplete)
 
             {
+                Debug.Log("Surface wave clicked"); // Debug.Log
                 SurfaceWaveClicked(); // Call the SurfaceWaveClicked method
             }
 
