@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] deerPrefabs;
     public GameObject beaverPrefab;
     public GameObject raccoonPrefab;
-    public GameObject testTubePrefab;
+    //public GameObject testTubePrefab;
     public GameObject trashBagPrefab;
     public GameObject gasCanPrefab;
     public GameObject tirePrefab;
@@ -48,6 +49,7 @@ public class SpawnManager : MonoBehaviour
     private float yPositionInRiver = -1.75f;
     private float minimumZInRiver = -175.5f;
     private float maximumZInRiver = -175.5f;
+    private float spawnRadius = 60f; // Radius for spawning trash on the ground
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -110,33 +112,76 @@ public class SpawnManager : MonoBehaviour
     // Spawn trash on the ground
     private void SpawnTrashOnGround()
     {
+        Vector3 centerPoint = new Vector3(-50f, 0f, -80f); // Center point for spawning trash
+
         // For, i equals 0, i is less than numberOfTrashBagsToSpawn; when called i is equal to itself plus 1
         for (int i = 0; i < numberOfTrashBagsToSpawn; i++)
         {
-            Instantiate(trashBagPrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
-                yPositionOnGroundForTrashBag, Random.Range(minimumZOnGround, maximumZOnGround)), trashBagPrefab.transform.rotation); // Instantiate trashBagPrefab at new Vector3
+            Vector3 randomPosition = GetRandomNavMeshPosition(centerPoint, spawnRadius);
+            if (randomPosition != Vector3.zero)
+            {
+                Instantiate(trashBagPrefab, randomPosition, Quaternion.identity);
+                Debug.Log($"Spawned trash at: {randomPosition}");
+            }
+            else
+            {
+                Debug.LogWarning("Failed to find a valid NavMesh position for trash.");
+            }
+            //Instantiate(trashBagPrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+            //    yPositionOnGroundForTrashBag, Random.Range(minimumZOnGround, maximumZOnGround)), trashBagPrefab.transform.rotation); // Instantiate trashBagPrefab at new Vector3
         }
 
         // For, i equals 0, i is less than numberOfGasCansToSpawn; when called i is equal to itself plus 1
         for (int i = 0; i < numberOfGasCansToSpawn; i++)
         {
-            Instantiate(gasCanPrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
-                yPositionOnGroundForGasCan, Random.Range(minimumZOnGround, maximumZOnGround)), gasCanPrefab.transform.rotation); // Instantiate gasCanPrefab at new Vector3
+            Vector3 randomPosition = GetRandomNavMeshPosition(centerPoint, spawnRadius);
+            if (randomPosition != Vector3.zero)
+            {
+                Instantiate(gasCanPrefab, randomPosition, Quaternion.identity);
+                Debug.Log($"Spawned trash at: {randomPosition}");
+            }
+            else
+            {
+                Debug.LogWarning("Failed to find a valid NavMesh position for trash.");
+            }
+            //Instantiate(gasCanPrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+            //    yPositionOnGroundForGasCan, Random.Range(minimumZOnGround, maximumZOnGround)), gasCanPrefab.transform.rotation); // Instantiate gasCanPrefab at new Vector3
         }
 
         // For, i equals 0, i is less than numberOfAluminumCansToSpawn; when called i is equal to itself plus 1
         for (int i = 0; i < numberOfAluminumCansToSpawn; i++)
         {
             int aluminumCanIndex = Random.Range(0, aluminumCanPrefabs.Length); // aluminumCanIndex equals a number with in range of 0 to 2
-            Instantiate(aluminumCanPrefabs[aluminumCanIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
-                yPositionOnGroundForAluminumCan, Random.Range(minimumZOnGround, maximumZOnGround)), aluminumCanPrefabs[aluminumCanIndex].transform.rotation); // Instantiate aluminumCanPrefab at new Vector3
+
+            Vector3 randomPosition = GetRandomNavMeshPosition(centerPoint, spawnRadius);
+            if (randomPosition != Vector3.zero)
+            {
+                Instantiate(aluminumCanPrefabs[aluminumCanIndex], randomPosition, Quaternion.identity);
+                Debug.Log($"Spawned trash at: {randomPosition}");
+            }
+            else
+            {
+                Debug.LogWarning("Failed to find a valid NavMesh position for trash.");
+            }
+            //Instantiate(aluminumCanPrefabs[aluminumCanIndex], new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+            //    yPositionOnGroundForAluminumCan, Random.Range(minimumZOnGround, maximumZOnGround)), aluminumCanPrefabs[aluminumCanIndex].transform.rotation); // Instantiate aluminumCanPrefab at new Vector3
         }
 
         // For, i equals 0, i is less than numberOfTiresToSpawn; when called i is equal to itself plus 1
         for (int i = 0; i < numberOfTiresToSpawn; i++)
         {
-            Instantiate(tirePrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
-                yPositionOnGroundForTire, Random.Range(minimumZOnGround, maximumZOnGround)), tirePrefab.transform.rotation); // Instantiate tirePrefab at new Vector3
+            Vector3 randomPosition = GetRandomNavMeshPosition(centerPoint, spawnRadius);
+            if (randomPosition != Vector3.zero)
+            {
+                Instantiate(tirePrefab, randomPosition, Quaternion.identity);
+                Debug.Log($"Spawned trash at: {randomPosition}");
+            }
+            else
+            {
+                Debug.LogWarning("Failed to find a valid NavMesh position for trash.");
+            }
+            //Instantiate(tirePrefab, new Vector3(Random.Range(minimumXOnGround, maximumXOnGround),
+            //    yPositionOnGroundForTire, Random.Range(minimumZOnGround, maximumZOnGround)), tirePrefab.transform.rotation); // Instantiate tirePrefab at new Vector3
         }
     }
 
@@ -222,5 +267,19 @@ public class SpawnManager : MonoBehaviour
         {
             spawnedTestTubeCount--; // spawnedTestTubeCount is equal to itself minus 1
         }
+    }
+
+    private Vector3 GetRandomNavMeshPosition(Vector3 centerPoint, float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius; // Get a random direction within the radius
+        randomDirection += centerPoint; // Offset by the specified center point
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDirection, out hit, radius, NavMesh.AllAreas))
+        {
+            return hit.position; // Return the valid position on the NavMesh
+        }
+
+        return Vector3.zero; // Return zero if no valid position is found
     }
 }
