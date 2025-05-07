@@ -121,7 +121,7 @@ public class GameProgressManager : MonoBehaviour
 
                // Maps game state to Correct enum. Assumes alternating events of NPC and Minigame
                GameState = (GameState)(((CurrentProgressionStep + 1) / 2) - 1);
-               gameStateChanged.Invoke(GameState);
+               gameStateChanged?.Invoke(GameState);
         }
 
         // Move to the next progression step
