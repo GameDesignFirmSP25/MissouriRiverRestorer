@@ -59,6 +59,7 @@ public class RaycastScript : MonoBehaviour
     [Header("Script References")]
     public AnimalGameManager animalGameManagerScript;
     public ChangeablePlant changeablePlantScript;
+    public ObjectManager objectManagerScript;
 
     [Header("Booleans")]
     public static bool easternStarlingClicked = false;
@@ -432,6 +433,7 @@ public class RaycastScript : MonoBehaviour
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
 
+            ObjectManager.instance.SetObjectFound("European Starling"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -450,6 +452,8 @@ public class RaycastScript : MonoBehaviour
             wasWhiteTailedDeerPreviouslyClicked = true; // Set bool wasWhiteTailedDeerPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("White-Tailed Deer"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -468,6 +472,8 @@ public class RaycastScript : MonoBehaviour
             wasBandedPennantDragonflyPreviouslyClicked = true; // Set bool wasBandedPennantDragonflyPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Banded Pennant Dragonfly"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -486,6 +492,8 @@ public class RaycastScript : MonoBehaviour
             wasGarterSnakePreviouslyClicked = true; // Set bool wasGarterSnakePreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Common Garter Snake"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -504,6 +512,8 @@ public class RaycastScript : MonoBehaviour
             wasBaldEaglePreviouslyClicked = true; // Set bool wasBaldEaglePreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Bald Eagle"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -522,6 +532,8 @@ public class RaycastScript : MonoBehaviour
             wasPaintedLadyButterflyPreviouslyClicked = true; // Set bool wasPaintedLadyButterflyPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Painted Lady Butterfly"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -540,6 +552,8 @@ public class RaycastScript : MonoBehaviour
             wasAsianCarpPreviouslyClicked = true; // Set bool wasAsianCarpPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Asian Carp"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -558,6 +572,8 @@ public class RaycastScript : MonoBehaviour
             wasBeaverPreviouslyClicked = true; // Set bool wasBeaverPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Beaver"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -576,6 +592,8 @@ public class RaycastScript : MonoBehaviour
             wasRaccoonPreviouslyClicked = true; // Set bool wasRaccoonPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Raccoon"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -594,6 +612,8 @@ public class RaycastScript : MonoBehaviour
             wasMuskratPreviouslyClicked = true; // Set bool wasMuskratPreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Muskrat"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -612,6 +632,8 @@ public class RaycastScript : MonoBehaviour
             wasSnappingTurtlePreviouslyClicked = true; // Set bool wasSnappingTurtlePreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Snapping Turtle"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -630,6 +652,8 @@ public class RaycastScript : MonoBehaviour
             wasNorthernMapTurtlePreviouslyClicked = true; // Set bool wasNorthernMapTurtlePreviouslyClicked to true
             animalGameManagerScript.AnimalsFound += 1;
             //animalGameManagerScript.UpdateAnimalCounter();
+
+            ObjectManager.instance.SetObjectFound("Northern Map Turtle"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -649,6 +673,8 @@ public class RaycastScript : MonoBehaviour
             //                                // Pass the clicked plant to AnimalGameManager
             animalGameManagerScript.changeablePlant = clickedPlant; // Assign the clicked plant to the AnimalGameManager script
             animalGameManagerScript.BradfordPearTreeClicked(clickedPlant);
+
+            ObjectManager.instance.SetObjectFound("Bradford Pear"); // Set the object as found in the ObjectManager
         }
         else
         {
@@ -668,6 +694,7 @@ public class RaycastScript : MonoBehaviour
             //                                // Pass the clicked plant to AnimalGameManager
             animalGameManagerScript.changeablePlant = clickedPlant; // Assign the clicked plant to the AnimalGameManager script
             animalGameManagerScript.PurpleLoosestrifeClicked(clickedPlant);
+            ObjectManager.instance.SetObjectFound("Purple Loosestrife"); // Set the object as found in the ObjectManager
         }
         else
         {
