@@ -68,6 +68,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_bfd9316ed86e4d45a4a96a4a89d0310c_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 11042781b7219bf4c9eb0008560099dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -88,11 +92,14 @@ Material:
     m_Floats:
     - _AddPrecomputedVelocity: 0
     - _Alpha: 0.385
+    - _Alpha1: 0.811
+    - _Alpha2: 0.414
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Brightness: 10
+    - _Brightness: 2.92
+    - _Brightness2: 0.404
     - _BumpScale: 1
     - _Cleanliness: 0
     - _ClearCoatMask: 0
@@ -123,8 +130,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Saturation: 1.48
-    - _Smoothness: 0.836
+    - _Sat2: 6.88
+    - _Saturation: 0.64
+    - _Smoothness: 0.343
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -146,12 +154,18 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 0.5999999, g: 0.42619023, b: 0.08943388, a: 1}
+    - _Color2: {r: 0.49622637, g: 0.6696181, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.94716984, g: 0.8951257, b: 0.67731583, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
-    - _WaterColor: {r: 0.34464967, g: 0.26981127, b: 1, a: 1}
-    - _WaterColor2: {r: 0.3509434, g: 0.2795207, b: 0.12647206, a: 1}
+    - _WaterColor: {r: 0.509434, g: 0.40703297, b: 0.15667494, a: 1}
+    - _WaterColor2: {r: 0.5469357, g: 0.6075471, b: 0.12265573, a: 1}
+    - _WaterColor_A_1: {r: 0.7056604, g: 0.5395949, b: 0.07322883, a: 1}
+    - _WaterColor_A_2: {r: 0.41421345, g: 0.5245282, b: 0.09797787, a: 1}
+    - _Water_Color_B_1: {r: 0.34949803, g: 0.45036218, b: 0.96981126, a: 1}
+    - _Water_Color_B_2: {r: 0.03086507, g: 0.26685345, b: 0.3207547, a: 1}
     - _WaveColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
