@@ -108,14 +108,19 @@ public class EnvironmentController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Game Progress Manager gameStateChanged event is null");
+                Debug.LogWarning("Game Progress Manager gameStateChanged event is null");
             }
         }
         else
         {
             Debug.Log("Game Progress Manager Instance is null");
         }
-        ChangeProgressionState(GameProgressManager.instance.GameState);
+
+        if(GameProgressManager.instance != null)
+        {
+            ChangeProgressionState(GameProgressManager.instance.GameState);
+        }
+
     }
 
 
@@ -130,7 +135,11 @@ public class EnvironmentController : MonoBehaviour
     }
     private void OnDisable()
     {
-        GameProgressManager.instance.gameStateChanged.RemoveListener(ChangeProgressionState);
+        if (GameProgressManager.instance != null)
+        {
+            GameProgressManager.instance.gameStateChanged.RemoveListener(ChangeProgressionState);
+        }
+
     }
 
     private void ChangeProgressionState(GameState state)
