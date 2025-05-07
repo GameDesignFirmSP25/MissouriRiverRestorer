@@ -88,7 +88,7 @@ public class WaterTestingManager : BaseMiniGameManager
     private float targetProgress = 1f;
     private float loadingTime = 0f;
     private float showPanel = 3f;
-    private float progressIncrement = 0.1f;
+    private float progressIncrement = 0.2f;
     private float panelTimer = 0.1f;
 
     [Header("Booleans")]
