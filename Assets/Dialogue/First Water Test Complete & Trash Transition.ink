@@ -1,9 +1,9 @@
-Student: “Here are the samples!”
+Player: “Here are the samples!”
 
 <color=\#7F00FF>Dr. Waterson</color>: “Great work! Unfortunately, it seems like the water quality here is very poor.”
 <color=\#7F00FF>Dr. Waterson</color>: “Did you notice all that garbage floating by?”
 
-Student: “Yeah, it was awful…”
+Player: “Yeah, it was awful…”
 
 <color=\#7F00FF>Dr. Waterson</color>: “I would say our next course of action is addressing all of that litter.”
 

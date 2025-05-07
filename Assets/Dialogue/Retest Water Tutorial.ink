@@ -3,6 +3,6 @@
 <color=\#7F00FF>Dr. Waterson</color>: “Now is a good time to retest the water.”
 <color=\#7F00FF>Dr. Waterson</color>: “Head back to the water testing area and we’ll take another look.”
 
-Student: “Okay, I think I’ve got the hang of it now.”
+Player: “Okay, I think I’ve got the hang of it now.”
 
 <color=\#7F00FF>Dr. Waterson</color>: “I quite agree! Ohohoho!”
