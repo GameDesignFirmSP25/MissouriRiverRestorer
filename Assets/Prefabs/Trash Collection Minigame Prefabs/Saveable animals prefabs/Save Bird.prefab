@@ -52,6 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8063268970051958746}
   - component: {fileID: 4044707409963800901}
+  - component: {fileID: 8923184204915393070}
   m_Layer: 0
   m_Name: trash_icon
   m_TagString: Untagged
@@ -129,6 +130,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8923184204915393070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7022019235653062435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9668f68a60cae8c46af4e8ed29144bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enablePitch: 0
 --- !u!1 &7525832805764193331
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1804293574724093185}
   - component: {fileID: 1870425712875688445}
+  - component: {fileID: 3425167532508526932}
   m_Layer: 0
   m_Name: recycles_icon
   m_TagString: Untagged
@@ -87,6 +88,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3425167532508526932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8558829306855912505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9668f68a60cae8c46af4e8ed29144bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enablePitch: 0
 --- !u!1001 &5430947676992022062
 PrefabInstance:
   m_ObjectHideFlags: 0
