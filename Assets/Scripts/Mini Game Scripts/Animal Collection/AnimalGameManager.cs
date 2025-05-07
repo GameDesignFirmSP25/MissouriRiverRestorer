@@ -387,6 +387,7 @@ public class AnimalGameManager : BaseMiniGameManager
     public ClickCounter clickCounterScript;
     public ChangeablePlant changeablePlant;
     public EventsStartPanelClickHandler eventsStartPanelClickHandler;
+    public PausMenuManager pauseMenuManager;
 
     [Header("Player Input")]
     public StarterAssetsInputs playerInput;
@@ -434,6 +435,24 @@ public class AnimalGameManager : BaseMiniGameManager
     // Update is called once per frame
     void Update()
     {
+        if (pauseMenuManager.isPaused)
+        {
+            objectivesPanel.SetActive(false); // Hide objectives panel
+            exploringIndicatorPanel.SetActive(false); // Hide exploring indicator panel
+        }
+        else
+        {
+            if(lowerBankObjectivesActive || midBankObjectivesActive || upperBankObjectivesActive)
+            {
+                objectivesPanel.SetActive(true); // Show objectives panel
+            }
+
+            if (objectivesShown)
+            {
+                exploringIndicatorPanel.SetActive(true); // Show exploring indicator panel
+            }                              
+        }
+
         AnimalClicked(); // Check if animal is clicked
 
         DialoguePanelClicked(); // Check if any dialogue panel is clicked
