@@ -392,9 +392,20 @@ public class AnimalGameManager : BaseMiniGameManager
     public StarterAssetsInputs playerInput;
 
     [Header("Audio")]
-    public AudioSource interactButton;
-    public AudioSource invasiveSpeciesDisposed;
-    public AudioSource animalClickedSound;
+    [SerializeField]
+    private SFXMaker interactButton;
+
+    [SerializeField]
+    private SFXMaker invasiveSpeciesDisposed;
+
+    [SerializeField]
+    private SFXMaker animalClickedSound;
+
+    [SerializeField]
+    private SFXMaker correctPlantSwapped;
+
+    [SerializeField]
+    private SFXMaker incorrectPlantSwapped;
 
 
     private void Awake()
@@ -493,7 +504,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method that triggers on start button press
     public void StartButton()
     {
-        interactButton.Play(); // Play button sound
+        PlayButtonClick(); // Play button click sound
         exploringIndicatorPanel.SetActive(true); // show exploring indicator panel
         objectivesPanel.SetActive(true); // show objectives panel
         LowerBankObjectives(); //  Call method LowerBankEntered
@@ -562,7 +573,31 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to play button click sound
     public void PlayButtonClick()
     {
-        interactButton.Play(); // Play button click sound
+        interactButton.PlaySound(); // Play button click sound
+    }
+
+    // Method to play animal clicked sound
+    public void PlayAnimalClickedSound()
+    {
+        animalClickedSound.PlaySound(); // Play animal clicked sound
+    }
+
+    // Method to play invasive species disposed sound
+    public void PlayInvasiveSpeciesDisposedSound()
+    {
+        invasiveSpeciesDisposed.PlaySound(); // Play invasive species disposed sound
+    }
+
+    // Method to play correct plant swapped sound
+    public void PlayCorrectPlantSwappedSound()
+    {
+        correctPlantSwapped.PlaySound(); // Play correct plant swapped sound
+    }
+
+    // Method to play incorrect plant swapped sound
+    public void PlayIncorrectPlantSwappedSound()
+    {
+        incorrectPlantSwapped.PlaySound(); // Play incorrect plant swapped sound
     }
 
     // Method to get changeable plant script
@@ -686,19 +721,19 @@ public class AnimalGameManager : BaseMiniGameManager
 
         if (deerEventActive)
         {
-            invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
+            PlayInvasiveSpeciesDisposedSound(); // Play invasive species disposed sound
             clickCounterScript.IncrementProgress(deerClickIncrement); // Increment progress by variable progressIncrement
         }
 
         if (birdEventActive)
         {
-            invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
+            PlayInvasiveSpeciesDisposedSound(); // Play invasive species disposed sound
             clickCounterScript.IncrementProgress(birdClickIncrement); // Increment progress by variable progressIncrement
         }
 
         if (fishEventActive)
         {
-            invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
+            PlayInvasiveSpeciesDisposedSound(); // Play invasive species disposed sound
             clickCounterScript.IncrementProgress(fishClickIncrement); // Increment progress by variable progressIncrement
         }
     }
@@ -963,7 +998,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to return to the main scene
     public void ReturnButton()
     {
-        interactButton.Play(); // Play button sound
+        PlayButtonClick(); // Play button click sound
         playerInput.controlsLocked = false; // Lock player controls
         Time.timeScale = 1;
         SceneManager.LoadScene("Overworld"); //load main scene
@@ -1147,7 +1182,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on eastern starling
     private void EasternStarlingClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(1); // Activate the eastern starling dialogue panel
         RaycastScript.easternStarlingClicked = false; // Reset the click handler for eastern starling
         dialogueIsActive = true; // Set dialogue active
@@ -1158,7 +1193,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on white-tailed deer
     private void WhiteTailedDeerClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(2); // Activate the white-tailed deer dialogue panel
         RaycastScript.whiteTailedDeerClicked = false; // Reset the click handler for white-tailed deer
         dialogueIsActive = true; // Set dialogue active
@@ -1169,7 +1204,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on banded pennant dragonfly
     private void BandedPennantDragonflyClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(10); // Activate the banded pennant dragonfly dialogue panel
         RaycastScript.bandedPennantDragonflyClicked = false; // Reset the click handler for banded pennant dragonfly
         dialogueIsActive = true; // Set dialogue active
@@ -1180,7 +1215,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on garter snake
     private void CommonGarterSnakeClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(8); // Activate the common garter snake dialogue panel
         RaycastScript.garterSnakeClicked = false; // Reset the click handler for common garter snake
         dialogueIsActive = true; // Set dialogue active
@@ -1191,7 +1226,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on bald eagle
     private void BaldEagleClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(3); // Activate the bald eagle dialogue panel
         RaycastScript.baldEagleClicked = false; // Reset the click handler for bald eagle
         dialogueIsActive = true; // Set dialogue active
@@ -1202,7 +1237,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on muskrat
     private void MuskratClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(6); // Activate the muskrat dialogue panel
         RaycastScript.muskratClicked = false; // Reset the click handler for muskrat
         dialogueIsActive = true; // Set dialogue active
@@ -1213,7 +1248,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on snapping turtle
     private void SnappingTurtleClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(7); // Activate the snapping turtle dialogue panel
         RaycastScript.snappingTurtleClicked = false; // Reset the click handler for snapping turtle
         dialogueIsActive = true; // Set dialogue active
@@ -1224,7 +1259,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on beaver
     private void BeaverClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(4); // Activate the beaver dialogue panel
         RaycastScript.beaverClicked = false; // Reset the click handler for beaver
         dialogueIsActive = true; // Set dialogue active
@@ -1235,7 +1270,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on raccoon
     private void RaccoonClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(5); // Activate the raccoon dialogue panel
         RaycastScript.raccoonClicked = false; // Reset the click handler for raccoon
         dialogueIsActive = true; // Set dialogue active
@@ -1246,7 +1281,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on northern map turtle
     private void NorthernMapTurtleClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(9); // Activate the northern map turtle dialogue panel
         RaycastScript.northernMapTurtleClicked = false; // Reset the click handler for northern map turtle
         dialogueIsActive = true; // Set dialogue active
@@ -1257,7 +1292,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on asian carp
     private void AsianCarpClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(0); // Activate the asian carp dialogue panel
         RaycastScript.asianCarpClicked = false; // Reset the click handler for asian carp
         dialogueIsActive = true; // Set dialogue active
@@ -1268,7 +1303,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Handle clicks on painted lady butterfly
     private void PaintedLadyButterflyClicked()
     {
-        animalClickedSound.Play(); // Play animal clicked sound
+        PlayAnimalClickedSound(); // Play animal clicked sound
         ActivateDialoguePanel(11); // Activate the painted lady butterfly dialogue panel
         RaycastScript.paintedLadyButterflyClicked = false; // Reset the click handler for painted lady butterfly
         dialogueIsActive = true; // Set dialogue active
@@ -1505,7 +1540,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to handle Bradford Pear Tree click
     public void BradfordPearTreeClicked(ChangeablePlant clickedPlant)
     {
-        invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
+        PlayInvasiveSpeciesDisposedSound(); // Play invasive species disposed sound
         Debug.Log($"Bradford Pear Tree Clicked: {clickedPlant.plantID}"); // Debug.Log
         wasBradfordPearTreeClicked = true; // Set bool wasBradfordPearTreeClicked to true
         bradfordPearTreePanel.SetActive(true); // Show the Bradford Pear Tree panel
@@ -1517,7 +1552,7 @@ public class AnimalGameManager : BaseMiniGameManager
     // Method to handle Purple Loosestrife click
     public void PurpleLoosestrifeClicked(ChangeablePlant clickedPlant)
     {
-        invasiveSpeciesDisposed.Play(); // Play invasive species disposed sound
+        PlayInvasiveSpeciesDisposedSound(); // Play invasive species disposed sound
         Debug.Log($"Purple Loosestrife Clicked: {clickedPlant.plantID}"); // Debug.Log
         wasPurpleLoosestrifeClicked = true; // Set bool wasPurpleLoosestrifeClicked to true
         purpleLoosestrifePanel.SetActive(true); // Show the Purple Loosestrife panel
