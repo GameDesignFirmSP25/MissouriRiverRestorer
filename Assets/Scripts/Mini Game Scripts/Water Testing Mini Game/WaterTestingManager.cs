@@ -140,10 +140,29 @@ public class WaterTestingManager : BaseMiniGameManager
     public StarterAssetsInputs playerInput;
 
     [Header("Audio")]
-    public AudioSource interactButton;
-    public AudioSource goodWaterTest;
-    public AudioSource badWaterTest;
-    public AudioSource surfaceWaveClick;
+    [SerializeField]
+    private SFXMaker interactButton;
+
+    [SerializeField]
+    private SFXMaker goodWaterTest;
+
+    [SerializeField]
+    private SFXMaker badWaterTest;
+
+    [SerializeField]
+    private SFXMaker surfaceWaveClick;
+
+    [SerializeField]
+    private SFXMaker trashClicked;
+
+    [SerializeField]
+    private SFXMaker fishClicked;
+
+    [SerializeField]
+    private SFXMaker mammalClicked;
+
+    [SerializeField]
+    private SFXMaker riverbankClicked;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -263,7 +282,42 @@ public class WaterTestingManager : BaseMiniGameManager
 
     public void PlayButtonClick()
     {
-        interactButton.Play(); // Play button click sound
+        interactButton.PlaySound(); // Play button click sound
+    }
+
+    public void PlayGoodWaterTestSound()
+    {
+        goodWaterTest.PlaySound(); // Play good water test sound
+    }
+
+    public void PlayPoorWaterTestSound()
+    {
+        badWaterTest.PlaySound(); // Play bad water test sound
+    }
+
+    public void PlaySurfaceWaveClickSound()
+    {
+        surfaceWaveClick.PlaySound(); // Play surface wave click sound
+    }
+
+    public void PlayTrashClickedSound()
+    {
+        trashClicked.PlaySound(); // Play trash clicked sound
+    }
+
+    public void PlayFishClickedSound()
+    {
+        fishClicked.PlaySound(); // Play fish clicked sound
+    }
+
+    public void PlayMammalClickedSound()
+    {
+        mammalClicked.PlaySound(); // Play mammal clicked sound
+    }
+
+    public void PlayRiverbankClickedSound()
+    {
+        riverbankClicked.PlaySound(); // Play riverbank clicked sound
     }
 
     // Start game
@@ -565,7 +619,7 @@ public class WaterTestingManager : BaseMiniGameManager
 
             InvokeProgressBar(); // Call method InvokeProgressBar
 
-            surfaceWaveClick.Play(); // Play the surface wave click sound
+            PlaySurfaceWaveClickSound(); // Play surface wave click sound
 
             // Hide the surface wave by disabling its renderer and collider
             Renderer renderer = clickedSurfaceWave.GetComponent<Renderer>();
@@ -644,7 +698,7 @@ public class WaterTestingManager : BaseMiniGameManager
         if (!isMiniGameOver)
         {
             ActivatePanel(8); // Activate poor water quality panel
-            badWaterTest.Play(); // Play bad water test sound
+            PlayPoorWaterTestSound(); // Play bad water test sound
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isFirstWaterTestComplete = true; // Set bool isFirstWaterTestComplete to true
@@ -674,7 +728,7 @@ public class WaterTestingManager : BaseMiniGameManager
         if (!isMiniGameOver)
         {
             ActivatePanel(14); // Activate good water quality panel
-            goodWaterTest.Play(); // Play good water test sound
+            PlayGoodWaterTestSound(); // Play good water test sound
             progressBar.SetActive(false);// Disable progress bar
             isMiniGameOver = true; // Set bool isMiniGameOver to true
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
