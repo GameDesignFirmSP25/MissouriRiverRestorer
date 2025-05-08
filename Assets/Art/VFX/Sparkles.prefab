@@ -4852,7 +4852,7 @@ MonoBehaviour:
   mainSoundEffect: 68
   myAudioSource: {fileID: 7576648440464133430}
   canMakeSound: 1
-  intervalRange: {x: 2, y: 5}
+  intervalRange: {x: 7, y: 10}
 --- !u!82 &7576648440464133430
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4862,7 +4862,7 @@ AudioSource:
   m_GameObject: {fileID: 7378957295397415789}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1997003956336563998, guid: ea25a6fb74033c640b2e4711beb21078, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -4910,7 +4910,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.467
+      value: 0.766
       inSlope: 0
       outSlope: 0
       tangentMode: 0
