@@ -43,7 +43,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5886719738630382402}
-  - component: {fileID: 6649734419253855302}
   m_Layer: 0
   m_Name: BaseEnvironment
   m_TagString: Untagged
@@ -76,25 +75,6 @@ Transform:
   - {fileID: 988544961674638478}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6649734419253855302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3625627076666224051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 477d416955d90224d8760eb70b28d29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameProgress: 0
-  environment: {fileID: 6008101273242844191}
-  river: {fileID: 1163223043288103604}
-  progressionMaterials:
-  - {fileID: 2100000, guid: acdb3c2f2865dac44a45420dafb52f4b, type: 2}
-  - {fileID: 2100000, guid: 45a733001fd54ab4cb5f37e89fe7e8d3, type: 2}
-  sky: {fileID: 2100000, guid: 5452cb6754e36e34e83ff5aba8b7d8c8, type: 2}
 --- !u!1 &8612703991356006476
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,11 +646,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3623501307151646530, guid: 95b29769993f3ef4a9d6d9debef1de2a, type: 3}
   m_PrefabInstance: {fileID: 3613847127753260697}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1163223043288103604 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2450644160272663597, guid: 95b29769993f3ef4a9d6d9debef1de2a, type: 3}
-  m_PrefabInstance: {fileID: 3613847127753260697}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4225784815044765420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1171,11 +1146,6 @@ PrefabInstance:
 --- !u!4 &4839747382661465968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2027929437850828645, guid: 3b28a652b1f474945b7791f0edf8e87b, type: 3}
-  m_PrefabInstance: {fileID: 6849583119453796373}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6008101273242844191 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 896088545749894154, guid: 3b28a652b1f474945b7791f0edf8e87b, type: 3}
   m_PrefabInstance: {fileID: 6849583119453796373}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6984264534311570754

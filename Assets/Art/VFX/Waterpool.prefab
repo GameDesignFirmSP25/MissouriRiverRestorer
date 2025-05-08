@@ -107,7 +107,7 @@ MonoBehaviour:
   mainSoundEffect: 57
   myAudioSource: {fileID: 2630081749701030350}
   canMakeSound: 1
-  intervalRange: {x: 1.5, y: 3}
+  intervalRange: {x: 4, y: 9}
 --- !u!82 &2630081749701030350
 AudioSource:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.6
+      value: 0.661
       inSlope: 0
       outSlope: 0
       tangentMode: 0

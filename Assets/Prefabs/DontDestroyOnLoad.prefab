@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8216870005653535855}
   - component: {fileID: 6338725924468850249}
+  - component: {fileID: 3637177863791793034}
   m_Layer: 0
   m_Name: DontDestroyOnLoad
   m_TagString: Untagged
@@ -46,6 +47,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   birthTime: 0
+--- !u!114 &3637177863791793034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904197670377025308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 477d416955d90224d8760eb70b28d29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameProgress: 0
+  progressionMaterials: []
+  sky: {fileID: 0}
 --- !u!1001 &3087939093169455787
 PrefabInstance:
   m_ObjectHideFlags: 0
