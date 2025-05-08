@@ -33,6 +33,33 @@ public class EnvironmentController : MonoBehaviour
         }
     }
 
+
+    private GameProgressManager ProgressionManager
+    {
+        get
+        {
+            return GameProgressManager.instance;
+        }
+    }
+
+
+    public static EnvironmentController instance = null;
+
+    private void OnEnable()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Debug.LogWarning("More than one GameProgressManager started. Destroying duplicate");
+            Destroy(this);
+        }
+
+    }
+
     //private Material envMat;
     //Material EnvironmentMat
     //{
@@ -158,10 +185,14 @@ public class EnvironmentController : MonoBehaviour
 
     private void Update()
     {
-        if (GameProgressManager.instance != null)
+        if (ProgressionManager != null)
         {
             //gameProgress = (int)GameProgressManager.instance.GameState
-            ChangeProgressionState(GameProgressManager.instance.GameState);
+            ChangeProgressionState(ProgressionManager.GameState);
+        }
+        else
+        {
+            Debug.Log("GameProgressManager.instance is null");
         }
 
         if (Sky != null)
@@ -173,10 +204,14 @@ public class EnvironmentController : MonoBehaviour
 
     private void ChangeProgressionState(GameState state)
     {
-        gameProgress = ((int)state) / Enum.GetValues(typeof(GameState)).Length;
+        gameProgress = (((float)state) / (Enum.GetValues(typeof(GameState)).Length-1));
+        //0 - 0
+        //1 - .33
+        //2 - .66
+        //3 - 100
 
-
-        foreach(Material m in ProgressionMaterials)
+        //Debug.Log("GameState: " + state + ", " + (int)state + ", " + gameProgress);
+        foreach (Material m in ProgressionMaterials)
         {
             //Debug.Log("Setting Material: " + m);
             m.SetFloat("_GameStateLerp", gameProgress);

@@ -109,7 +109,7 @@ public class SFXMaker : MonoBehaviour
         if (soundEffect == SFXLibrary.SFXType.Default) { return; }
         SFXSO sound = SFXLibrary.GetSound(soundEffect);
 
-        Debug.Log(sound);
+        //Debug.Log(sound);
 
         AudioSource source = myAudioSource;
         AudioClip clip = sound.GetClip();
@@ -167,7 +167,7 @@ public class SFXMaker : MonoBehaviour
         if (mainSoundEffect == SFXLibrary.SFXType.Default) { return; }
 
         SFXSO sound = SFXLibrary.GetSound(mainSoundEffect);
-        Debug.Log(sound + ", " + sound.GetNumClips());
+        //Debug.Log(sound + ", " + sound.GetNumClips());
 
         AudioSource source = myAudioSource;
         AudioClip clip = sound.GetClip();
