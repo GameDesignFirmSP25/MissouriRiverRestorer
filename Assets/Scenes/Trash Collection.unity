@@ -2151,6 +2151,7 @@ Transform:
   - {fileID: 543450652885208459}
   - {fileID: 1224941655}
   - {fileID: 10836591}
+  - {fileID: 4293246179570337846}
   - {fileID: 1825953531}
   - {fileID: 497528813}
   - {fileID: 1782872402}
@@ -7475,23 +7476,31 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 468393401}
     m_Modifications:
     - target: {fileID: 2308883458704296351, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
       propertyPath: m_Name
       value: SickRaccoon
       objectReference: {fileID: 0}
     - target: {fileID: 5888233688634067252, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6641299
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888233688634067252, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6641299
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888233688634067252, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.04
+      value: 48.449467
       objectReference: {fileID: 0}
     - target: {fileID: 5888233688634067252, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.32
+      value: -6.497299
       objectReference: {fileID: 0}
     - target: {fileID: 5888233688634067252, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.87
+      value: 0.78656435
       objectReference: {fileID: 0}
     - target: {fileID: 5888233688634067252, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7526,6 +7535,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
+--- !u!4 &4293246179570337846 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5888233688634067252, guid: fea174028caaa5b4fb08e0c115447ae3, type: 3}
+  m_PrefabInstance: {fileID: 4293246179570337845}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7186473484489634559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7714,4 +7728,3 @@ SceneRoots:
   - {fileID: 38386836015371373}
   - {fileID: 7548470292030466582}
   - {fileID: 340573633}
-  - {fileID: 4293246179570337845}
