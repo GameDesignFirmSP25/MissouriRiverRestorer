@@ -87,6 +87,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb3b6e0fe8dfbb74494b88bdd670b431, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6622543157150682116}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb3b6e0fe8dfbb74494b88bdd670b431, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7463821475796830695}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eb3b6e0fe8dfbb74494b88bdd670b431, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5364823111373432049}
   m_SourcePrefab: {fileID: 100100000, guid: eb3b6e0fe8dfbb74494b88bdd670b431, type: 3}
 --- !u!1 &8296437593809212487 stripped
 GameObject:
@@ -186,3 +192,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 4811608012271969248}
+--- !u!114 &-7463821475796830695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296437593809212487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 50
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
+--- !u!114 &-5364823111373432049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296437593809212487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: 952effa1dbf9c5440bf2114471698a21, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  playerPosition: {fileID: 0}
+  message: Player is within interaction distance!
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}

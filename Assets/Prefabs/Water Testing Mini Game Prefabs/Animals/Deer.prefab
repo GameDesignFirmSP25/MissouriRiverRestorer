@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 589c67f17e4237a4585db7ede043d5a1, type: 3}
       propertyPath: m_Name
-      value: Dearfbx
+      value: Deer
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 589c67f17e4237a4585db7ede043d5a1, type: 3}
       propertyPath: m_TagString
@@ -76,6 +76,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 589c67f17e4237a4585db7ede043d5a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 957318666244637457}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 589c67f17e4237a4585db7ede043d5a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8249976502273854430}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 589c67f17e4237a4585db7ede043d5a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1048252894105645534}
   m_SourcePrefab: {fileID: 100100000, guid: 589c67f17e4237a4585db7ede043d5a1, type: 3}
 --- !u!1 &8926793864715470569 stripped
 GameObject:
@@ -153,3 +159,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 2512794243163334270}
+--- !u!114 &-8249976502273854430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926793864715470569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 47
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
+--- !u!114 &1048252894105645534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926793864715470569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: bbaf902d2cdd6644ba8605a0b4115752, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  playerPosition: {fileID: 0}
+  message: Player is within interaction distance!
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}

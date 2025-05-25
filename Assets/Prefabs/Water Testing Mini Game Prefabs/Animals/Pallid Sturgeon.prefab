@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: aa30b193d39302b4f951bc5c9de73846, type: 3}
       propertyPath: m_Name
-      value: Pallid_Sturgeon
+      value: Pallid Sturgeon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: aa30b193d39302b4f951bc5c9de73846, type: 3}
       propertyPath: m_TagString
@@ -84,6 +84,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa30b193d39302b4f951bc5c9de73846, type: 3}
       insertIndex: -1
       addedObject: {fileID: -3047365091670538386}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa30b193d39302b4f951bc5c9de73846, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2154298272040096044}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa30b193d39302b4f951bc5c9de73846, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7801677196782951477}
   m_SourcePrefab: {fileID: 100100000, guid: aa30b193d39302b4f951bc5c9de73846, type: 3}
 --- !u!1 &3110183148091357308 stripped
 GameObject:
@@ -170,3 +176,40 @@ MonoBehaviour:
   radius: 0
   isWaiting: 1
   isWalking: 0
+--- !u!114 &-2154298272040096044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3110183148091357308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 56
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
+--- !u!114 &-7801677196782951477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3110183148091357308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: 648ebeca8b1b5a544a8ef50cc87104c2, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  playerPosition: {fileID: 0}
+  message: Player is within interaction distance!
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}

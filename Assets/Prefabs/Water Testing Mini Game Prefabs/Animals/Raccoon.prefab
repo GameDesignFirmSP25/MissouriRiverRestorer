@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fafa0d48cb7bdb84aac9af46b43639e1, type: 3}
       propertyPath: m_Name
-      value: Racoon_whats the worst that can happen
+      value: Raccoon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fafa0d48cb7bdb84aac9af46b43639e1, type: 3}
       propertyPath: m_TagString
@@ -87,6 +87,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fafa0d48cb7bdb84aac9af46b43639e1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5021654330857909805}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fafa0d48cb7bdb84aac9af46b43639e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7794951645069564467}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fafa0d48cb7bdb84aac9af46b43639e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2210725731868061665}
   m_SourcePrefab: {fileID: 100100000, guid: fafa0d48cb7bdb84aac9af46b43639e1, type: 3}
 --- !u!1 &3658707680031890646 stripped
 GameObject:
@@ -186,3 +192,40 @@ NavMeshAgent:
   m_BaseOffset: 1.06
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-7794951645069564467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658707680031890646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 48
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
+--- !u!114 &-2210725731868061665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658707680031890646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: 57b69745d8cd2a541960b842fd671ea8, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  playerPosition: {fileID: 0}
+  message: Player is within interaction distance!
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}

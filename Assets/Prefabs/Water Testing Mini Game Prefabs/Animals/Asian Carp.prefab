@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d3b51a71da5f5af46872c7dc83d381d0, type: 3}
       propertyPath: m_Name
-      value: Asian_Karp
+      value: Asian Carp
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d3b51a71da5f5af46872c7dc83d381d0, type: 3}
       propertyPath: m_TagString
@@ -87,6 +87,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3b51a71da5f5af46872c7dc83d381d0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7275054742534631964}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3b51a71da5f5af46872c7dc83d381d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4421022575137002306}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3b51a71da5f5af46872c7dc83d381d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8022165108030048139}
   m_SourcePrefab: {fileID: 100100000, guid: d3b51a71da5f5af46872c7dc83d381d0, type: 3}
 --- !u!1 &3563861049586908305 stripped
 GameObject:
@@ -194,3 +200,40 @@ MonoBehaviour:
   radius: 0
   isWaiting: 1
   isWalking: 0
+--- !u!114 &4421022575137002306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563861049586908305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 56
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
+--- !u!114 &8022165108030048139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563861049586908305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: 5b1020cbbf0e64146b9d9765858e5848, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  playerPosition: {fileID: 0}
+  message: Player is within interaction distance!
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}

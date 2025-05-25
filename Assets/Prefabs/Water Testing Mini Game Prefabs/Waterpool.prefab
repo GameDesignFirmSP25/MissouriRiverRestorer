@@ -119,11 +119,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1997003956336563998, guid: ea25a6fb74033c640b2e4711beb21078, type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1467218678e3b6944bec5bd0c8443844, type: 3}
+  m_Resource: {fileID: 8300000, guid: 1467218678e3b6944bec5bd0c8443844, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.172
+  m_Pitch: 0.9490877
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -223,8 +223,9 @@ MonoBehaviour:
   player: {fileID: 0}
   playerPosition: {fileID: 0}
   message: Player is within interaction distance!
-  interactButton: {fileID: 0}
-  interactButtonText: {fileID: 0}
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}
 --- !u!65 &3301681083732334589
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class SpawnManager : MonoBehaviour
 {
+    [Header("Prefabs")]
     public GameObject[] aluminumCanPrefabs;
     public GameObject[] trashInRiverPrefabs;
     public GameObject[] fishPrefabs;
@@ -16,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject gasCanPrefab;
     public GameObject tirePrefab;
 
+    [Header("Integer Variables")]
     private int numberOfDeerToSpawn = 4;
     private int numberOfBeaverToSpawn = 2;
     private int numberOfRaccoonToSpawn = 2;
@@ -31,6 +33,7 @@ public class SpawnManager : MonoBehaviour
     //private int maximumTestTubesInRiver = 20;
     private int spawnedTestTubeCount = 0;
 
+    [Header("Float Variables")]
     private float spawnTime = 0.05f;
     private float spawnDelay = 2.5f;
     private float minimumXOnGround = -50f;
@@ -50,6 +53,12 @@ public class SpawnManager : MonoBehaviour
     private float minimumZInRiver = -175.5f;
     private float maximumZInRiver = -175.5f;
     private float spawnRadius = 60f; // Radius for spawning trash on the ground
+
+    [Header("Lists")]
+    public List<GameObject> spawnedTrashBags = new List<GameObject>();
+    public List<GameObject> spawnedGasCans = new List<GameObject>();
+    public List<GameObject> spawnedAluminumCans = new List<GameObject>();
+    public List<GameObject> spawnedTires = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -120,8 +129,9 @@ public class SpawnManager : MonoBehaviour
             Vector3 randomPosition = GetRandomNavMeshPosition(centerPoint, spawnRadius);
             if (randomPosition != Vector3.zero)
             {
-                Instantiate(trashBagPrefab, randomPosition, Quaternion.identity);
-                Debug.Log($"Spawned trash at: {randomPosition}");
+                GameObject trashBag = Instantiate(trashBagPrefab, randomPosition, Quaternion.identity);
+                spawnedTrashBags.Add(trashBag); // Add the spawned trash bag to the list
+                Debug.Log($"Spawned trash bag at: {randomPosition}");
             }
             else
             {
@@ -137,8 +147,9 @@ public class SpawnManager : MonoBehaviour
             Vector3 randomPosition = GetRandomNavMeshPosition(centerPoint, spawnRadius);
             if (randomPosition != Vector3.zero)
             {
-                Instantiate(gasCanPrefab, randomPosition, Quaternion.identity);
-                Debug.Log($"Spawned trash at: {randomPosition}");
+                GameObject gasCan = Instantiate(gasCanPrefab, randomPosition, Quaternion.identity);
+                spawnedGasCans.Add(gasCan); // Add the spawned gas can to the list
+                Debug.Log($"Spawned gas can at: {randomPosition}");
             }
             else
             {
@@ -156,8 +167,9 @@ public class SpawnManager : MonoBehaviour
             Vector3 randomPosition = GetRandomNavMeshPosition(centerPoint, spawnRadius);
             if (randomPosition != Vector3.zero)
             {
-                Instantiate(aluminumCanPrefabs[aluminumCanIndex], randomPosition, Quaternion.identity);
-                Debug.Log($"Spawned trash at: {randomPosition}");
+                GameObject aluminumCan = Instantiate(aluminumCanPrefabs[aluminumCanIndex], randomPosition, Quaternion.identity);
+                spawnedAluminumCans.Add(aluminumCan); // Add the spawned aluminum can to the list
+                Debug.Log($"Spawned aluminum can at: {randomPosition}");
             }
             else
             {
@@ -173,8 +185,9 @@ public class SpawnManager : MonoBehaviour
             Vector3 randomPosition = GetRandomNavMeshPosition(centerPoint, spawnRadius);
             if (randomPosition != Vector3.zero)
             {
-                Instantiate(tirePrefab, randomPosition, Quaternion.identity);
-                Debug.Log($"Spawned trash at: {randomPosition}");
+                GameObject tire = Instantiate(tirePrefab, randomPosition, Quaternion.identity);
+                spawnedTires.Add(tire); // Add the spawned tire to the list
+                Debug.Log($"Spawned tire at: {randomPosition}");
             }
             else
             {
@@ -237,6 +250,26 @@ public class SpawnManager : MonoBehaviour
                 spawnedFishInRiverCount++; // spawnedFishInRiverCount equals itself plus 1
             }
         }
+    }
+
+    public List<GameObject> GetSpawnedTrashBags()
+    {
+        return spawnedTrashBags; // Return the list of spawned trash bags
+    }
+
+    public List<GameObject> GetSpawnedGasCans()
+    {
+        return spawnedGasCans; // Return the list of spawned gas cans
+    }
+
+    public List<GameObject> GetSpawnedAluminumCans()
+    {
+        return spawnedAluminumCans; // Return the list of spawned aluminum cans
+    }
+
+    public List<GameObject> GetSpawnedTires()
+    {
+        return spawnedTires; // Return the list of spawned tires
     }
 
     // Method to call when trash is destroyed

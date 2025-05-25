@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 2270099382171331954}
   - component: {fileID: 5904705412768609897}
   - component: {fileID: 3007477572905469146}
+  - component: {fileID: -3430325563654014980}
   m_Layer: 0
   m_Name: Tire (static)
   m_TagString: 'Trash: tire'
@@ -249,6 +250,25 @@ MonoBehaviour:
   interactionObjectSO: {fileID: 11400000, guid: 399ab77761b9dd24d92439795fda032a, type: 2}
   waterTestingManagerScript: {fileID: 0}
   player: {fileID: 0}
+  playerPosition: {fileID: 0}
   message: Player is within interaction distance!
-  interactButton: {fileID: 0}
-  interactButtonText: {fileID: 0}
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}
+--- !u!114 &-3430325563654014980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206948340457878565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 62
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0

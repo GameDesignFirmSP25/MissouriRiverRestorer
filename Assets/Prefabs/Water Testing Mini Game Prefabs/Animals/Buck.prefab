@@ -87,6 +87,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bf5276eed048734791439b06fde441f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8070208231764799419}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bf5276eed048734791439b06fde441f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8386117241256546396}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bf5276eed048734791439b06fde441f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6418429118475480362}
   m_SourcePrefab: {fileID: 100100000, guid: 9bf5276eed048734791439b06fde441f, type: 3}
 --- !u!1 &8161921845226106698 stripped
 GameObject:
@@ -186,3 +192,40 @@ NavMeshAgent:
   m_BaseOffset: 1.56
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8386117241256546396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8161921845226106698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 47
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
+--- !u!114 &-6418429118475480362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8161921845226106698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: fc4a0b59fa87dd6428db192c5d2cd2cf, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  playerPosition: {fileID: 0}
+  message: Player is within interaction distance!
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}

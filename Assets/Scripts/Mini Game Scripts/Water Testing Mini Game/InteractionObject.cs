@@ -123,7 +123,7 @@ public class InteractionObject : MonoBehaviour
             }
         }
 
-        if (!WaterTestingManager.isFirstWaterTestComplete)
+        else if (!WaterTestingManager.isFirstWaterTestComplete)
         {
             // Check if the interaction type is "Aluminum Can" tag & bool isAluminumCanObjectiveComplete is false
             if (interactionObjectSO.interactionType == "Aluminum Can" && !WaterTestingManager.isAluminumCanObjectiveComplete)
@@ -175,18 +175,26 @@ public class InteractionObject : MonoBehaviour
         }
 
         // If bool isFirstWaterTestComplete is true & isSecondWaterTestComplete is false...
-        if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
+        else if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
         {
-            // Check if the interaction type is "Fish" tag & bool isFishObjectiveComplete is false
-            if (interactionObjectSO.interactionType == "Fish" && !WaterTestingManager.isFishObjectiveComplete)
+            // If bool isFishObjectiveComplete is false...
+            if (!WaterTestingManager.isFishObjectiveComplete)
             {
-                FishClicked(); // Call the FishClicked method
+                // If the interaction type is "Asian Carp", "Catfish", or "Pallid Sturgeon"...
+                if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Catfish" || interactionObjectSO.interactionType == "Pallid Sturgeon")
+                {
+                    FishClicked(); // Call the FishClicked method
+                }
             }
 
-            //Check if the interaction type is "Mammal" tag & bool isMammalObjectiveComplete is false
-            if (interactionObjectSO.interactionType == "Mammal" && !WaterTestingManager.isMammalObjectiveComplete)
+            // / If bool isMammalObjectiveComplete is false...
+            if (!WaterTestingManager.isMammalObjectiveComplete)
             {
-                MammalClicked(); // Call the MammalClicked method
+                // If the interaction type is "Beaver", "Buck", "Deer", or "Raccoon"...
+                if (interactionObjectSO.interactionType == "Beaver" || interactionObjectSO.interactionType == "Buck" || interactionObjectSO.interactionType == "Deer" || interactionObjectSO.interactionType == "Raccoon")
+                {
+                    MammalClicked(); // Call the MammalClicked method
+                }
             }
 
             //// Check if the interaction type is "Riverbank" tag & bool isRiverbankObjectiveComplete is false
@@ -215,6 +223,7 @@ public class InteractionObject : MonoBehaviour
         {
             WaterTestingManager.effectsOfAluminumPanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isAluminumCanObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
+            waterTestingManagerScript.HandleAluminumCanInteraction(); // Call the HandleAluminumCanInteraction method in WaterTestingManager
         }
     }
 
@@ -227,6 +236,7 @@ public class InteractionObject : MonoBehaviour
         {
             WaterTestingManager.effectsOfTirePanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isTireObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
+            waterTestingManagerScript.HandleTireInteraction(); // Call the HandleTireInteraction method in WaterTestingManager
         }
     }
 
@@ -239,6 +249,7 @@ public class InteractionObject : MonoBehaviour
         {
             WaterTestingManager.effectsOfGasPanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isGasCanObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
+            waterTestingManagerScript.HandleGasCanisterInteraction(); // Call the HandleGasCanisterInteraction method in WaterTestingManager
         }
     }
 
@@ -251,6 +262,7 @@ public class InteractionObject : MonoBehaviour
         {
             WaterTestingManager.effectsOfTrashPanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isTrashBagObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
+            waterTestingManagerScript.HandleTrashBagInteraction(); // Call the HandleTrashBagInteraction method in WaterTestingManager
         }
     }
 
@@ -288,4 +300,12 @@ public class InteractionObject : MonoBehaviour
     //        WaterTestingManager.isRiverbankObjectiveComplete = true; // Set bool isFishObjectiveComplete to true
     //    }
     //}
+
+    // Method to reset static variables
+    public static void ResetStaticVariables()
+    {
+        surfaceWaveClicked = false;
+        clickedSurfaceWave = null;
+        Debug.Log("InteractionObject static variables reset.");
+    }
 }

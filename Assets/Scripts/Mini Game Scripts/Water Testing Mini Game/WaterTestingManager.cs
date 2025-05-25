@@ -64,6 +64,10 @@ public class WaterTestingManager : BaseMiniGameManager
 
     [Header("Arrays and Lists")]
     public GameObject[] panels = new GameObject[16]; // Array of panels to manage
+    private List<GameObject> trashBags; // List to hold trash bag instances
+    private List<GameObject> gasCans; // List to hold gas can instances
+    private List<GameObject> aluminumCans; // List to hold aluminum can instances
+    private List<GameObject> tires; // List to hold tire instances
 
     [SerializeField]
     private List<GameObject> surfaceWaves = new List<GameObject>(); // List to hold surface wave instances
@@ -92,7 +96,7 @@ public class WaterTestingManager : BaseMiniGameManager
     private float showPanel = 3f;
     private float progressIncrement = 0.2f;
     private float panelTimer = 0.1f;
-    private float endGameTimer = 1.0f;
+    private float endGameTimer = .75f;
 
     [Header("Booleans")]
     public bool isPressed = false;
@@ -113,6 +117,7 @@ public class WaterTestingManager : BaseMiniGameManager
     public bool objectivesComplete = false;
     public bool gameStarted = false;
     public bool pauseButtonClicked = false;
+    public bool testIsRunning = false;
 
     [Header("Global Variables")]
     public static bool aPanelIsActive = false;
@@ -170,9 +175,13 @@ public class WaterTestingManager : BaseMiniGameManager
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Reset static variables in InteractionObject
+        InteractionObject.ResetStaticVariables();
+
         Time.timeScale = 0f; // Freezes time
         GetProgressBar(); // Call the GetProgressBar function to initialize the progress bar
         GetPanels(); // Call the GetPanels function to initialize the panels
+        GetLists(); // Call the GetLists function to initialize the lists
         additionalAnimals.SetActive(false); // Set additional animals to not active at the start
         objectivesPanel.SetActive(false); // Set objectivesPanel to not active at the start
         waterTestObjective.SetActive(false); // Set waterTestObjective to not active at the start
@@ -253,15 +262,39 @@ public class WaterTestingManager : BaseMiniGameManager
         // If slider value is equal to targetProgress variable and bool isWaterQualityGood is false...
         if (slider.value == targetProgress && !isWaterQualityGood)
         {
-            //PoorWaterQuality();
-            Invoke("PoorWaterQuality", endGameTimer); // Invoke method PoorWaterQuality after panelTimer (in seconds)
+            if (!isMiniGameOver)
+            {
+                testIsRunning = false; // Set bool testIsRunning to false
+                isMiniGameOver = true; // Set bool isMiniGameOver to true
+                Invoke("PoorWaterQuality", endGameTimer); // Invoke method PoorWaterQuality after panelTimer (in seconds)
+            }
+            else
+            {
+                // If isMiniGameOver and isCleanWaterPanelClicked is true...
+                if (cleanWaterPanelScript.isCleanWaterPanelClicked && !readyToTransition)
+                {
+                    EndMiniGame();
+                }
+            }
         }
 
         // If slider value is equal to targetProgress variable and bool isWaterQuality...
         if (slider.value == targetProgress && isWaterQualityGood)
         {
-            //GoodWaterQuality();
-            Invoke("GoodWaterQuality", endGameTimer); // Invoke method GoodWaterQuality after panelTimer (in seconds)
+            if (!isMiniGameOver)
+            {
+                testIsRunning = false; // Set bool testIsRunning to false
+                isMiniGameOver = true; // Set bool isMiniGameOver to true
+                Invoke("GoodWaterQuality", endGameTimer); // Invoke method GoodWaterQuality after panelTimer (in seconds)
+            }
+            else
+            {
+                // If isMiniGameOver and isPanelGreatJobClicked is true...
+                if (greatJobPanelScript.isGreatJobPanelClicked && !readyToTransition)
+                {
+                    EndMiniGame();
+                }
+            }
         }
     }
 
@@ -293,6 +326,27 @@ public class WaterTestingManager : BaseMiniGameManager
         GameObject panel16 = panels[15]; // Get the Great Job panel
     }
 
+    // Function to get lists
+    public void GetLists()
+    {
+        SpawnManager spawnManager = FindAnyObjectByType<SpawnManager>(); // Get SpawnManager component
+        if (spawnManager != null)
+        {
+            trashBags = spawnManager.GetSpawnedTrashBags(); // Get spawned trash bags from SpawnManager
+            Debug.Log($"Retrieved {trashBags.Count} trash objects from SpawnManager.");
+            gasCans = spawnManager.GetSpawnedGasCans(); // Get spawned gas cans from SpawnManager
+            Debug.Log($"Retrieved {gasCans.Count} gas objects from SpawnManager.");
+            aluminumCans = spawnManager.GetSpawnedAluminumCans(); // Get spawned aluminum cans from SpawnManager
+            Debug.Log($"Retrieved {aluminumCans.Count} aluminum objects from SpawnManager.");
+            tires = spawnManager.GetSpawnedTires(); // Get spawned tires from SpawnManager
+            Debug.Log($"Retrieved {tires.Count} tire objects from SpawnManager.");
+        }
+        else
+        {
+            Debug.LogWarning("SpawnManager not found in the scene.");
+        }
+    }
+
     public void PlayButtonClick()
     {
         interactButton.PlaySound(); // Play button click sound
@@ -308,30 +362,30 @@ public class WaterTestingManager : BaseMiniGameManager
         badWaterTest.PlaySound(); // Play bad water test sound
     }
 
-    public void PlaySurfaceWaveClickSound()
-    {
-        surfaceWaveClick.PlaySound(); // Play surface wave click sound
-    }
+    //public void PlaySurfaceWaveClickSound()
+    //{
+    //    surfaceWaveClick.PlaySound(); // Play surface wave click sound
+    //}
 
-    public void PlayTrashClickedSound()
-    {
-        trashClicked.PlaySound(); // Play trash clicked sound
-    }
+    //public void PlayTrashClickedSound()
+    //{
+    //    trashClicked.PlaySound(); // Play trash clicked sound
+    //}
 
-    public void PlayFishClickedSound()
-    {
-        fishClicked.PlaySound(); // Play fish clicked sound
-    }
+    //public void PlayFishClickedSound()
+    //{
+    //    fishClicked.PlaySound(); // Play fish clicked sound
+    //}
 
-    public void PlayMammalClickedSound()
-    {
-        mammalClicked.PlaySound(); // Play mammal clicked sound
-    }
+    //public void PlayMammalClickedSound()
+    //{
+    //    mammalClicked.PlaySound(); // Play mammal clicked sound
+    //}
 
-    public void PlayRiverbankClickedSound()
-    {
-        riverbankClicked.PlaySound(); // Play riverbank clicked sound
-    }
+    //public void PlayRiverbankClickedSound()
+    //{
+    //    riverbankClicked.PlaySound(); // Play riverbank clicked sound
+    //}
 
     // Start game
     private void StartGame()
@@ -341,6 +395,7 @@ public class WaterTestingManager : BaseMiniGameManager
         PlayButtonClick(); // Call PlayButtonClick method
         InteractionObject.isClickable = true; // Set bool isClickable to true
         gameStarted = true; // Set bool gameStarted to true
+        testIsRunning = true; // Set bool testIsRunning to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
 
         // If isFirstWaterTestComplete is false...
@@ -381,17 +436,17 @@ public class WaterTestingManager : BaseMiniGameManager
         playerInput.controlsLocked = false; // Unlock player controls when no panel is active
     }
 
-    // Method to deactivate all panels
-    public void DeactivateAllPanels()
-    {
-        foreach (GameObject panel in panels)
-        {
-            panel.SetActive(false); // Deactivate all panels
-        }
-        aPanelIsActive = false; // Set the active panel flag to false
-        Debug.Log("All panels deactivated."); // Debug.Log
-        playerInput.controlsLocked = false; // Unlock player controls when no panel is active
-    }
+    //// Method to deactivate all panels
+    //public void DeactivateAllPanels()
+    //{
+    //    foreach (GameObject panel in panels)
+    //    {
+    //        panel.SetActive(false); // Deactivate all panels
+    //    }
+    //    aPanelIsActive = false; // Set the active panel flag to false
+    //    Debug.Log("All panels deactivated."); // Debug.Log
+    //    playerInput.controlsLocked = false; // Unlock player controls when no panel is active
+    //}
 
     // Method to activate a specific panel
     public void ActivatePanel(int panelIndex)
@@ -417,56 +472,67 @@ public class WaterTestingManager : BaseMiniGameManager
             if (effectsOfTirePanelActive)
             {
                 tireEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(5); // Deactivate tireEffectsPanel
             }
             else if (effectsOfGasPanelActive)
             {
                 gasEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(3); // Deactivate gasEffectsPanel
             }
             else if (effectsOfTrashPanelActive)
             {
                 trashEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(4); // Deactivate trashEffectsPanel
             }
             else if (effectsOfAluminumPanelActive)
             {
                 aluminumEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(6); // Deactivate aluminumEffectsPanel
             }
             else if (effectsOfBiodiversity1PanelActive)
             {
                 biodiversityEffects1PanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(11); // Deactivate biodiversityEffects1Panel
             }
             else if (effectsOfBiodiversity2PanelActive)
             {
                 biodiversityEffects2PanelScript.OnPointerClick(null); // Call OnPointerClick method
-                DeactivatePanel(12); // Deactivate biodiversityEffects2Panel
+                PlayButtonClick(); // Call PlayButtonClick method
+                DeactivatePanel(13); // Deactivate biodiversityEffects2Panel
             }
             else if (effectsOfBiodiversity3PanelActive)
             {
                 biodiversityEffects3PanelScript.OnPointerClick(null); // Call OnPointerClick method
-                DeactivatePanel(13); // Deactivate biodiversityEffects3Panel
+                PlayButtonClick(); // Call PlayButtonClick method
+                DeactivatePanel(12); // Deactivate biodiversityEffects3Panel
             }
             else if (lookAtTrashPanelActive)
             {
                 lookAtTrashPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(2); // Deactivate lookAtTrashPanel
             }
             else if (biodiversityPanelActive)
             {
                 biodiversityPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(10); // Deactivate biodiversityPanel
             }
             else if (cleanWaterPanelActive)
             {
                 cleanWaterPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(9); // Deactivate cleanWaterPanel
             }
             else if (greatJobPanelActive)
             {
                 greatJobPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(15); // Deactivate greatJobPanel
             }
         }
@@ -551,8 +617,8 @@ public class WaterTestingManager : BaseMiniGameManager
         // If bool isFirstWaterTestComplete is true and bool isSecondWaterTestComplete is false...
         if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
-            // If bool isFishObjectiveComplete, isMammalObjectiveComplete, and isRiverbankObjectiveComplete are all true and objectivesComplete is false...
-            if (isFishObjectiveComplete && isMammalObjectiveComplete && isRiverbankObjectiveComplete && !objectivesComplete)
+            // If bool isFishObjectiveComplete and isMammalObjectiveComplete are all true and objectivesComplete is false...
+            if (isFishObjectiveComplete && isMammalObjectiveComplete && !objectivesComplete)
             {
                 Debug.Log("All objectives complete!"); // Debug.Log
                 objectivesComplete = true; // Set bool objectivesComplete to true
@@ -653,16 +719,24 @@ public class WaterTestingManager : BaseMiniGameManager
                 mammalObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
             }
 
-            // If bool isRiverbankObjectiveComplete is true and bool objectivesComplete is false...
-            if (isRiverbankObjectiveComplete && !objectivesComplete)
-            {
-                riverbankObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
-            }
+            //// If bool isRiverbankObjectiveComplete is true and bool objectivesComplete is false...
+            //if (isRiverbankObjectiveComplete && !objectivesComplete)
+            //{
+            //    riverbankObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            //}
         }
 
-        // If bool isFirstWaterTestComplete or isSecondWaterTestComplete are true...
-        if (isFirstWaterTestComplete || isSecondWaterTestComplete)
+        if (isMiniGameOver)
         {
+            //if (isFirstWaterTestComplete)
+            //{
+            //    waterTestObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            //}
+            //else if (isSecondWaterTestComplete)
+            //{
+            //    waterTestObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
+            //}
+
             waterTestObjectiveText.fontStyle = FontStyles.Strikethrough; // Set font style to strikethrough
         }
     }
@@ -686,8 +760,6 @@ public class WaterTestingManager : BaseMiniGameManager
         }
 
         InvokeProgressBar(); // Call method InvokeProgressBar
-
-        PlaySurfaceWaveClickSound(); // Play surface wave click sound
 
         // Hide the surface wave by disabling its renderer and collider
         Renderer renderer = clickedSurfaceWave.GetComponent<Renderer>();
@@ -762,12 +834,11 @@ public class WaterTestingManager : BaseMiniGameManager
     private void PoorWaterQuality()
     {
         // If bool isMiniGameOver is false...
-        if (!isMiniGameOver)
+        if (isMiniGameOver)
         {
             ActivatePanel(8); // Activate poor water quality panel
             PlayPoorWaterTestSound(); // Play bad water test sound
             progressBar.SetActive(false);// Disable progress bar
-            isMiniGameOver = true; // Set bool isMiniGameOver to true
             isFirstWaterTestComplete = true; // Set bool isFirstWaterTestComplete to true
             objectivesPanel.SetActive(false); // Disable objectives panel
             waterTestObjective.SetActive(false); // Disable waterTestObjective
@@ -775,29 +846,28 @@ public class WaterTestingManager : BaseMiniGameManager
             TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
             // If isMiniGameOver is true and isCleanWaterPanelClicked is false...
-            if (isMiniGameOver && !cleanWaterPanelScript.isCleanWaterPanelClicked)
+            if (!cleanWaterPanelScript.isCleanWaterPanelClicked)
             {
                 Invoke("ShowCleanWaterPanel", showPanel); // Invoke method ShowCleanWaterPanel after showPanel (in seconds)
             }
         }
 
-        // If isMiniGameOver and isCleanWaterPanelClicked is true...
-        if (isMiniGameOver && cleanWaterPanelScript.isCleanWaterPanelClicked && !readyToTransition)
-        {
-            EndMiniGame();
-        }
+        //// If isMiniGameOver and isCleanWaterPanelClicked is true...
+        //if (cleanWaterPanelScript.isCleanWaterPanelClicked && !readyToTransition)
+        //{
+        //    EndMiniGame();
+        //}
     }
 
     // Method for if water quality is good
     private void GoodWaterQuality()
     {
         // If isMiniGameOver is false...
-        if (!isMiniGameOver)
+        if (isMiniGameOver)
         {
             ActivatePanel(14); // Activate good water quality panel
             PlayGoodWaterTestSound(); // Play good water test sound
             progressBar.SetActive(false);// Disable progress bar
-            isMiniGameOver = true; // Set bool isMiniGameOver to true
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
             isSecondWaterTestComplete = true; // Set bool isSecondWaterTestComplete to true
             objectivesPanel.SetActive(false); // Disable objectives panel
@@ -805,18 +875,18 @@ public class WaterTestingManager : BaseMiniGameManager
 
             TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
-               // If isMiniGameOver is true and isGreatJobPanelClicked is false...
-               if (isMiniGameOver && !greatJobPanelScript.isGreatJobPanelClicked)
+            // If isMiniGameOver is true and isGreatJobPanelClicked is false...
+            if (!greatJobPanelScript.isGreatJobPanelClicked)
             {
                 Invoke("ShowGreatJobPanel", showPanel); // Invoke method ShowCleanWaterPanel after showPanel (in seconds)
             }
         }
 
-        // If isMiniGameOver and isPanelGreatJobClicked is true...
-        if (isMiniGameOver && greatJobPanelScript.isGreatJobPanelClicked && !readyToTransition)
-        {
-            EndMiniGame();
-        }
+        //// If isMiniGameOver and isPanelGreatJobClicked is true...
+        //if (greatJobPanelScript.isGreatJobPanelClicked && !readyToTransition)
+        //{
+        //    EndMiniGame();
+        //}
     }
 
     // Method to show clean water is essential panel
@@ -863,6 +933,60 @@ public class WaterTestingManager : BaseMiniGameManager
         {
             ActivatePanel(10); // Activate Biodiversity panel
             biodiversityPanelActive = true; // Set bool biodiversityPanelActive to true
+        }
+    }
+
+    public void HandleTrashBagInteraction()
+    {
+        foreach (GameObject trashBag in trashBags)
+        {
+            if (trashBag != null)
+            {
+                // Handle the interaction with the trash bag
+                // Add your logic here
+                SpriteRenderer iconSprite = trashBag.GetComponentInChildren<SpriteRenderer>();
+
+                iconSprite.enabled = false; // Disable the icon sprite
+            }
+        }
+    }
+
+    public void HandleGasCanisterInteraction()
+    {
+        foreach (GameObject gasCan in gasCans)
+        {
+            if (gasCan != null)
+            {
+                SpriteRenderer iconSprite = gasCan.GetComponentInChildren<SpriteRenderer>();
+
+                iconSprite.enabled = false; // Disable the icon sprite
+            }
+        }
+    }
+
+    public void HandleAluminumCanInteraction()
+    {
+        foreach (GameObject aluminumCan in aluminumCans)
+        {
+            if (aluminumCan != null)
+            {
+                SpriteRenderer iconSprite = aluminumCan.GetComponentInChildren<SpriteRenderer>();
+
+                iconSprite.enabled = false; // Disable the icon sprite
+            }
+        }
+    }
+
+    public void HandleTireInteraction()
+    {
+        foreach (GameObject tire in tires)
+        {
+            if (tire != null)
+            {
+                SpriteRenderer iconSprite = tire.GetComponentInChildren<SpriteRenderer>();
+
+                iconSprite.enabled = false; // Disable the icon sprite
+            }
         }
     }
 }
