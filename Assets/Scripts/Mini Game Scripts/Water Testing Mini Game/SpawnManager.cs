@@ -121,7 +121,7 @@ public class SpawnManager : MonoBehaviour
     // Spawn trash on the ground
     private void SpawnTrashOnGround()
     {
-        Vector3 centerPoint = new Vector3(-50f, 0f, -80f); // Center point for spawning trash
+        Vector3 centerPoint = new Vector3(-40f, 0f, -80f); // Center point for spawning trash
 
         // For, i equals 0, i is less than numberOfTrashBagsToSpawn; when called i is equal to itself plus 1
         for (int i = 0; i < numberOfTrashBagsToSpawn; i++)

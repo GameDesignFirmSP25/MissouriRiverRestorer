@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class InteractionObject : MonoBehaviour
 {
@@ -15,25 +16,31 @@ public class InteractionObject : MonoBehaviour
     [Header("String Variables")]
     public string message = "Player is within interaction distance!"; // Message to display when within interaction distance
 
-    [Header("Booleans")]
-    public static bool nearInteractionObject = false; // Static variable to track if the player is near an interaction object
+    [Header("Static Variables")]
     public static bool surfaceWaveClicked = false; // Static variable to track if the surface wave has been clicked
     public static InteractionObject clickedSurfaceWave; // Static variable to track the clicked surface wave object
-    public static bool isClickable = false; // Static variable to track if the object is clickable
+    public static InteractionObject currentActiveObject = null; // Static variable to track the current active object
+
+    [Header("Booleans")]
+    public bool nearInteractionObject = false; // Variable to track if the player is near an interaction object
+    public bool hasBeenInteractedWith = false; // Variable to track if the object has been interacted with
 
     [Header("UI Elements")]
     public GameObject interactPanel; // Reference to the UI Panel for interaction
     public Image interactPanelImage; // Reference to the UI image for interaction prompt
     public TextMeshProUGUI interactPanelText; // Reference to the UI text for interaction prompt
 
+    [Header("Lists")]
+    public static List<InteractionObject> allInteractionObjects = new List<InteractionObject>(); // List to store all interaction objects in the scene
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        waterTestingManagerScript = FindAnyObjectByType<WaterTestingManager>();
+        waterTestingManagerScript = FindAnyObjectByType<WaterTestingManager>(); // Find the WaterTestingManager script in the scene
 
-        player = GameObject.Find("PlayerArmature");
+        player = GameObject.Find("PlayerArmature"); // Find the player GameObject in the scene
 
-        playerPosition = player.GetComponent<Transform>();
+        playerPosition = player.GetComponent<Transform>(); // Get the Transform component of the player GameObject
 
         interactPanel = GameObject.Find("Interact Panel"); // Find the interact panel in the scene
 
@@ -49,46 +56,84 @@ public class InteractionObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isClickable)
-        {
-            CheckPlayerDistance();
+        CheckPlayerDistance(); // Check if the player is within interaction distance
 
-            // Handle interaction when the player presses "E"
-            if (nearInteractionObject && Input.GetKeyDown(KeyCode.E))
-            {
-                Interact();
-            }
+        // Handle interaction when the player presses "E"
+        // If the player is near an interaction object, the "E" key is pressed, and no panel is active
+        if (nearInteractionObject && Input.GetKeyDown(KeyCode.E) && !WaterTestingManager.aPanelIsActive)
+        {
+            Interact(); // Call the Interact method to handle interaction with the object
         }
+    }
+
+    // Unity event methods to manage the interaction object lifecycle
+    private void OnEnable()
+    {
+        allInteractionObjects.Add(this); // Add this interaction object to the list of all interaction objects when enabled
+    }
+
+    // Unity event method called when the object is disabled
+    private void OnDisable()
+    {
+        allInteractionObjects.Remove(this); // Remove this interaction object from the list of all interaction objects when disabled
     }
 
     // Method to check if the player is within interaction distance
     private void CheckPlayerDistance()
     {
+        // If the interactionObjectSO or playerPosition is null, exit the method
         if (interactionObjectSO == null || playerPosition == null)
         {
             return;
         }
 
+        // Check if the object has already been interacted with
+        // If hasBeenInteractedWith  is true...
+        if (hasBeenInteractedWith)
+        {
+            // If the current active object is this object...
+            if (currentActiveObject == this)
+            {
+                HideInteractionUI(); // Hide the interaction UI if the object has been interacted with
+                currentActiveObject = null; // Reset the current active object
+            }
+
+            nearInteractionObject = false; // Reset the nearInteractionObject flag
+            return; // Exit if the object has already been interacted with
+        }
+
         // Check if the player is within the interaction distance
+        // If the distance between the player and this interaction object is less than the interaction distance defined in the ScriptableObject...
         if (Vector3.Distance(playerPosition.position, transform.position) < interactionObjectSO.interactionDistance)
         {
-            // Display the message
-            Debug.Log(message);
-
-            if (!nearInteractionObject)
+            // If the current active object is not this object...
+            if (currentActiveObject != this)
             {
-                nearInteractionObject = true;
-                ShowInteractionUI();
+                Debug.Log(message); // Log the message indicating the player is within interaction distance
+
+                // Hide UI for previous object
+                // If there is a current active object...
+                if (currentActiveObject != null)
+                {
+                    currentActiveObject.HideInteractionUI(); // Hide the interaction UI for the previous object
+                    currentActiveObject.nearInteractionObject = false; // Reset the nearInteractionObject flag for the previous object
+                }
+
+                // Show UI for this object
+                ShowInteractionUI(); // Show the interaction UI for this object
+                currentActiveObject = this; // Set this object as the current active object
+                nearInteractionObject = true; // Set the nearInteractionObject flag to true
             }
         }
         else
         {
-            
-            if (nearInteractionObject)
+            // If the player is not within the interaction distance...
+            if (currentActiveObject == this)
             {
-                nearInteractionObject = false;
-                HideInteractionUI();
-            }  
+                HideInteractionUI(); // Hide the interaction UI for this object
+                currentActiveObject = null; // Reset the current active object
+                nearInteractionObject = false; // Reset the nearInteractionObject flag
+            }
         }
     }
 
@@ -110,66 +155,73 @@ public class InteractionObject : MonoBehaviour
     private void Interact()
     {
         // Implement the interaction logic here
-        Debug.Log("Interacting with " + interactionObjectSO.interactionType);
+        Debug.Log("Interacting with " + interactionObjectSO.interactionType); // Debug.Log
 
+        // If the interaction type is "Surface Wave" & bool objectivesComplete is true...
         if (interactionObjectSO.interactionType == "Surface Wave" && waterTestingManagerScript.objectivesComplete)
         {
             SurfaceWaveClicked (); // Call the SurfaceWaveInteraction method
-            
+
             // Play the interaction sound
+            // If the interactSound is not null...
             if (interactionObjectSO.interactSound != null)
             {
-                interactionObjectSO.interactSound.PlaySound();
+                interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
             }
         }
 
+        // If isFirstWaterTestComplete is false...
         else if (!WaterTestingManager.isFirstWaterTestComplete)
         {
-            // Check if the interaction type is "Aluminum Can" tag & bool isAluminumCanObjectiveComplete is false
+            // If the interaction type is "Aluminum Can" tag & bool isAluminumCanObjectiveComplete is false
             if (interactionObjectSO.interactionType == "Aluminum Can" && !WaterTestingManager.isAluminumCanObjectiveComplete)
             {
                 AluminumCanClicked(); // Call the AluminumCanClicked method
 
                 // Play the interaction sound
+                // If the interactSound is not null...
                 if (interactionObjectSO.interactSound != null)
                 {
-                    interactionObjectSO.interactSound.PlaySound();
+                    interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
                 }
             }
 
-            // Check if the interaction type is "Tire" tag & bool isTireObjectiveComplete is false
+            // If the interaction type is "Tire" tag & bool isTireObjectiveComplete is false
             if (interactionObjectSO.interactionType == "Tire" && !WaterTestingManager.isTireObjectiveComplete)
             {
                 TireClicked(); // Call the TireClicked method
 
                 // Play the interaction sound
+                // If the interactSound is not null...
                 if (interactionObjectSO.interactSound != null)
                 {
-                    interactionObjectSO.interactSound.PlaySound();
+                    interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
                 }
             }
 
-            // Check if the interaction type is "Gas Can" tag & bool isGasCanObjectiveComplete is false
-            if (interactionObjectSO.interactionType == "Gas Can" && !WaterTestingManager.isGasCanObjectiveComplete)
+            // If the interaction type is "Gas Can" tag & bool isGasCanObjectiveComplete is false
+            if (interactionObjectSO.interactionType == "Gas Canister" && !WaterTestingManager.isGasCanObjectiveComplete)
             {
                 GasCanisterClicked(); // Call the GasCanisterClicked method
 
                 // Play the interaction sound
+                // If the interactSound is not null...
                 if (interactionObjectSO.interactSound != null)
                 {
-                    interactionObjectSO.interactSound.PlaySound();
+                    interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
                 }
             }
 
-            // Check if the interaction type is "Trash Bag" tag & bool isTrashBagObjective is false
+            // If the interaction type is "Trash Bag" tag & bool isTrashBagObjective is false
             if (interactionObjectSO.interactionType == "Trash Bag" && !WaterTestingManager.isTrashBagObjectiveComplete)
             {
                 TrashBagClicked(); // Call the TrashBagClicked method
 
                 // Play the interaction sound
+                // If the interactSound is not null...
                 if (interactionObjectSO.interactSound != null)
                 {
-                    interactionObjectSO.interactSound.PlaySound();
+                    interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
                 }
             }
         }
@@ -196,34 +248,46 @@ public class InteractionObject : MonoBehaviour
                     MammalClicked(); // Call the MammalClicked method
                 }
             }
-
-            //// Check if the interaction type is "Riverbank" tag & bool isRiverbankObjectiveComplete is false
-            //if (interactionObjectSO.interactionType == "Riverbank" && !WaterTestingManager.isRiverbankObjectiveComplete)
-            //{
-            //    RiverbankClicked(); // Call the RiverbankClicked method
-            //}
-
         }
     }
 
     // Method to handle surface wave interaction
     private void SurfaceWaveClicked()
     {
-        Debug.Log("Surface Wave clicked: " + gameObject.name);
-        surfaceWaveClicked = true;
-        clickedSurfaceWave = this;
+        Debug.Log("Surface Wave clicked: " + gameObject.name); // Debug.Log
+        surfaceWaveClicked = true; // Set the static variable surfaceWaveClicked to true
+        clickedSurfaceWave = this; // Set the static variable clickedSurfaceWave to this instance
     }
 
-    // Method to handle aluminum can interaction
+    // Fix for the invalid foreach statement in the AluminumCanClicked method
     private void AluminumCanClicked()
     {
         Debug.Log("Aluminum can clicked"); // Debug.Log
 
+        // If bool aPanelIsActive is false...
         if (!WaterTestingManager.aPanelIsActive)
         {
             WaterTestingManager.effectsOfAluminumPanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isAluminumCanObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
             waterTestingManagerScript.HandleAluminumCanInteraction(); // Call the HandleAluminumCanInteraction method in WaterTestingManager
+
+            // Mark all aluminum cans as interacted
+            // Iterate through all interaction objects
+            foreach (var obj in allInteractionObjects)
+            {
+                // If the object is not null and its interaction type is "Aluminum Can"...
+                if (obj != null && obj.interactionObjectSO.interactionType == "Aluminum Can")
+                {
+                    obj.hasBeenInteractedWith = true; // Mark the object as interacted with
+
+                    // If the current active object is this object...
+                    if (currentActiveObject == obj)
+                    {
+                        obj.HideInteractionUI(); // Hide the interaction UI for this object
+                        currentActiveObject = null; // Reset the current active object
+                    }
+                }
+            }
         }
     }
 
@@ -232,11 +296,30 @@ public class InteractionObject : MonoBehaviour
     {
         Debug.Log("Tire clicked"); // Debug.Log
 
+        // If bool aPanelIsActive is false...
         if (!WaterTestingManager.aPanelIsActive)
         {
             WaterTestingManager.effectsOfTirePanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isTireObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
             waterTestingManagerScript.HandleTireInteraction(); // Call the HandleTireInteraction method in WaterTestingManager
+
+            // Mark all tires as interacted
+            // Iterate through all interaction objects
+            foreach (var obj in allInteractionObjects)
+            {
+                // If the object is not null and its interaction type is "Tire"...
+                if (obj != null && obj.interactionObjectSO.interactionType == "Tire")
+                {
+                    obj.hasBeenInteractedWith = true; // Mark the object as interacted with
+
+                    // If the current active object is this object...
+                    if (currentActiveObject == obj)
+                    {
+                        obj.HideInteractionUI(); // Hide the interaction UI for this object
+                        currentActiveObject = null; // Reset the current active object
+                    }
+                }
+            }
         }
     }
 
@@ -245,11 +328,30 @@ public class InteractionObject : MonoBehaviour
     {
         Debug.Log("Gas canister clicked"); // Debug.Log
 
+        // If bool aPanelIsActive is false...
         if (!WaterTestingManager.aPanelIsActive)
         {
             WaterTestingManager.effectsOfGasPanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isGasCanObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
             waterTestingManagerScript.HandleGasCanisterInteraction(); // Call the HandleGasCanisterInteraction method in WaterTestingManager
+
+            // Mark all gas cans as interacted
+            // Iterate through all interaction objects
+            foreach (var obj in allInteractionObjects)
+            {
+                // If the object is not null and its interaction type is "Gas Canister"...
+                if (obj != null && obj.interactionObjectSO.interactionType == "Gas Canister")
+                {
+                    obj.hasBeenInteractedWith = true; // Mark the object as interacted with
+
+                    // If the current active object is this object...
+                    if (currentActiveObject == obj)
+                    {
+                        obj.HideInteractionUI(); // Hide the interaction UI for this object
+                        currentActiveObject = null; // Reset the current active object
+                    }
+                }
+            }
         }
     }
 
@@ -258,11 +360,30 @@ public class InteractionObject : MonoBehaviour
     {
         Debug.Log("Trash bag clicked"); // Debug.Log
 
+        // If bool aPanelIsActive is false...
         if (!WaterTestingManager.aPanelIsActive)
         {
             WaterTestingManager.effectsOfTrashPanelActive = true; // Set bool effectsOfTrashPanelActive to true
             WaterTestingManager.isTrashBagObjectiveComplete = true; // Set bool isTrashBagObjectiveComplete to true
             waterTestingManagerScript.HandleTrashBagInteraction(); // Call the HandleTrashBagInteraction method in WaterTestingManager
+
+            // Mark all trash bags as interacted
+            // Iterate through all interaction objects
+            foreach (var obj in allInteractionObjects)
+            {
+                // If the object is not null and its interaction type is "Trash Bag"...
+                if (obj != null && obj.interactionObjectSO.interactionType == "Trash Bag")
+                {
+                    obj.hasBeenInteractedWith = true; // Mark the object as interacted with
+
+                    // If the current active object is this object...
+                    if (currentActiveObject == obj)
+                    {
+                        obj.HideInteractionUI(); // Hide the interaction UI for this object
+                        currentActiveObject = null; // Reset the current active object
+                    }
+                }
+            }
         }
     }
 
@@ -271,10 +392,29 @@ public class InteractionObject : MonoBehaviour
     {
         Debug.Log("Fish clicked"); // Debug.Log
 
+        // If bool aPanelIsActive is false...
         if (!WaterTestingManager.aPanelIsActive)
         {
             WaterTestingManager.effectsOfBiodiversity1PanelActive = true; // Set bool effectsOfFishPanelActive to true
             WaterTestingManager.isFishObjectiveComplete = true; // Set bool isFishObjectiveComplete to true
+
+            // Mark all fish as interacted
+            // Iterate through all interaction objects
+            foreach (var obj in allInteractionObjects)
+            {
+                // If the object is not null and its interaction type is "Asian Carp", "Catfish", or "Pallid Sturgeon"...
+                if (obj != null && (obj.interactionObjectSO.interactionType == "Asian Carp" || obj.interactionObjectSO.interactionType == "Catfish" || obj.interactionObjectSO.interactionType == "Pallid Sturgeon"))
+                {
+                    obj.hasBeenInteractedWith = true; // Mark the object as interacted with
+
+                    // If the current active object is this object...
+                    if (currentActiveObject == obj)
+                    {
+                        obj.HideInteractionUI(); // Hide the interaction UI for this object
+                        currentActiveObject = null; // Reset the current active object
+                    }
+                }
+            }
         }
     }
 
@@ -283,29 +423,37 @@ public class InteractionObject : MonoBehaviour
     {
         Debug.Log("Mammal clicked"); // Debug.Log
 
+        // If bool aPanelIsActive is false...
         if (!WaterTestingManager.aPanelIsActive)
         {
             WaterTestingManager.effectsOfBiodiversity3PanelActive = true; // Set bool effectsOfFishPanelActive to true
             WaterTestingManager.isMammalObjectiveComplete = true; // Set bool isFishObjectiveComplete to true
+
+            // Mark all mammals as interacted
+            // Iterate through all interaction objects
+            foreach (var obj in allInteractionObjects)
+            {
+                // If the object is not null and its interaction type is "Beaver", "Buck", "Deer", or "Raccoon"...
+                if (obj != null && (obj.interactionObjectSO.interactionType == "Beaver" || obj.interactionObjectSO.interactionType == "Buck" || obj.interactionObjectSO.interactionType == "Deer" || obj.interactionObjectSO.interactionType == "Raccoon"))
+                {
+                    obj.hasBeenInteractedWith = true; // Mark the object as interacted with
+
+                    // If the current active object is this object...
+                    if (currentActiveObject == obj)
+                    {
+                        obj.HideInteractionUI(); // Hide the interaction UI for this object
+                        currentActiveObject = null; // Reset the current active object
+                    }
+                }
+            }
         }
     }
-
-    //// Method to handle riverbank interaction
-    //private void RiverbankClicked()
-    //{
-    //    Debug.Log("Riverbank clicked"); // Debug.Log
-    //    if (!WaterTestingManager.aPanelIsActive)
-    //    {
-    //        WaterTestingManager.effectsOfBiodiversity2PanelActive = true; // Set bool effectsOfFishPanelActive to true
-    //        WaterTestingManager.isRiverbankObjectiveComplete = true; // Set bool isFishObjectiveComplete to true
-    //    }
-    //}
 
     // Method to reset static variables
     public static void ResetStaticVariables()
     {
-        surfaceWaveClicked = false;
-        clickedSurfaceWave = null;
-        Debug.Log("InteractionObject static variables reset.");
+        surfaceWaveClicked = false; // Reset the static variable surfaceWaveClicked to false
+        clickedSurfaceWave = null; // Reset the static variable clickedSurfaceWave to null
+        Debug.Log("InteractionObject static variables reset."); // Debug.Log
     }
 }
