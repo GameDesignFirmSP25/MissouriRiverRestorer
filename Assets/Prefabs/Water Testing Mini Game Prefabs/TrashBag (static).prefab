@@ -186,6 +186,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6560752165130553988}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 492152498690738199}
   m_SourcePrefab: {fileID: 100100000, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}
 --- !u!1 &5096770984934366158 stripped
 GameObject:
@@ -235,6 +238,24 @@ NavMeshAgent:
   m_BaseOffset: -0.01
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &492152498690738199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096770984934366158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: 46e3babafa81c154ab21ea734617643d, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  message: Player is within interaction distance!
+  interactButton: {fileID: 0}
+  interactButtonText: {fileID: 0}
 --- !u!4 &5616145520431432052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f48eb2b321fbf0408dfe637b9b8da7a, type: 3}

@@ -123,15 +123,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e299efb4066fb04b8524a79f3655a34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -65.1
+      value: 5.98
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e299efb4066fb04b8524a79f3655a34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4301546
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e299efb4066fb04b8524a79f3655a34, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -70.86
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e299efb4066fb04b8524a79f3655a34, type: 3}
       propertyPath: m_LocalRotation.w
@@ -186,6 +186,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0e299efb4066fb04b8524a79f3655a34, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4952758979961904898}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0e299efb4066fb04b8524a79f3655a34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2307616164773631110}
   m_SourcePrefab: {fileID: 100100000, guid: 0e299efb4066fb04b8524a79f3655a34, type: 3}
 --- !u!1 &5161111921597520767 stripped
 GameObject:
@@ -235,6 +238,24 @@ NavMeshAgent:
   m_BaseOffset: 0.45
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2307616164773631110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161111921597520767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: e5b2baffc81d1f8448abffe4769f8083, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  message: Player is within interaction distance!
+  interactButton: {fileID: 0}
+  interactButtonText: {fileID: 0}
 --- !u!4 &5536088729492046277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0e299efb4066fb04b8524a79f3655a34, type: 3}

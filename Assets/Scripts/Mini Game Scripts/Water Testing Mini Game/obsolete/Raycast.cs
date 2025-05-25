@@ -18,12 +18,12 @@ public class Raycast : MonoBehaviour
 
     public WaterTestingManager waterTestingManagerScript;
 
-    public static bool surfaceWaveClicked;
-    public static bool isClickable;
+    //public static bool surfaceWaveClicked;
+    //public static bool isClickable;
 
     private void Start()
     {
-        isClickable = false; // Set bool isClickable to false
+        //isClickable = false; // Set bool isClickable to false
         //testTubeClicked = false; // Set bool testTubeClicked to false
     }
 
@@ -35,24 +35,24 @@ public class Raycast : MonoBehaviour
     // Function to detect mouse clicks and perform raycasting
     public void MouseClicked() 
     {
-        if (isClickable)
-        {
-            // Detect left mouse click.
-            if (Input.GetMouseButtonDown(0))
-            {
-                // Check if the mouse is over a UI element
-                if (EventSystem.current.IsPointerOverGameObject())
-                {
-                    Debug.Log("Pointer is over a UI element.  Not raycasting."); // Debug.Log
-                    // Do something else or nothing
-                }
-                else
-                {
-                    CastRay(); // Call the CastRay function
+        //if (isClickable)
+        //{
+        //    // Detect left mouse click.
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        // Check if the mouse is over a UI element
+        //        if (EventSystem.current.IsPointerOverGameObject())
+        //        {
+        //            Debug.Log("Pointer is over a UI element.  Not raycasting."); // Debug.Log
+        //            // Do something else or nothing
+        //        }
+        //        else
+        //        {
+        //            CastRay(); // Call the CastRay function
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
     }
 
     //// Function to handle the Test Tube click event
@@ -66,7 +66,7 @@ public class Raycast : MonoBehaviour
     void SurfaceWaveClicked()
     {
         Debug.Log("Surface wave clicked"); // Debug.Log
-        surfaceWaveClicked = true; // Set bool surfaceWaveClicked to true  
+        //surfaceWaveClicked = true; // Set bool surfaceWaveClicked to true  
     }
     
     // Function to handle the Aluminum Can click event

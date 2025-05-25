@@ -72,7 +72,6 @@ public class WaterTestingManager : BaseMiniGameManager
     private List<Vector3> surfaceWaveWaypoints = new List<Vector3>(); // List to hold preplanned positions for the surface wave
 
     [Header("Scripts")]
-    public Raycast raycastScript;
     public PausMenuManager pauseMenuScript;
     public ProgressBar progressBarScript;
     public CleanWaterPanelClickHandler cleanWaterPanelScript;
@@ -83,6 +82,9 @@ public class WaterTestingManager : BaseMiniGameManager
     public TrashEffectsPanelClickHandler trashEffectsPanelScript;
     public TireEffectsPanelClickHandler tireEffectsPanelScript;
     public AluminumEffectsPanelClickHandler aluminumEffectsPanelScript;
+    public BiodiversityEffects1PanelClickHandler biodiversityEffects1PanelScript;
+    public BiodiversityEffects2PanelClickHandler biodiversityEffects2PanelScript;
+    public BiodiversityEffects3PanelClickHandler biodiversityEffects3PanelScript;
 
     [Header("Float Variables")]
     private float targetProgress = 1f;
@@ -90,6 +92,7 @@ public class WaterTestingManager : BaseMiniGameManager
     private float showPanel = 3f;
     private float progressIncrement = 0.2f;
     private float panelTimer = 0.1f;
+    private float endGameTimer = 1.0f;
 
     [Header("Booleans")]
     public bool isPressed = false;
@@ -98,13 +101,13 @@ public class WaterTestingManager : BaseMiniGameManager
     public bool firstWaterTestObjectivesVisible = false;
     public bool secondWaterTestObjectivesVisible = false;
     public bool firstWaterTestReady = true;
-    public bool panel3 = false;
-    public bool panel4 = false;
-    public bool panel5 = false;
-    public bool panel6 = false;
-    public bool panel11 = false;
-    public bool panel12 = false;
-    public bool panel13 = false;
+    //public bool panel3 = false;
+    //public bool panel4 = false;
+    //public bool panel5 = false;
+    //public bool panel6 = false;
+    //public bool panel11 = false;
+    //public bool panel12 = false;
+    //public bool panel13 = false;
     public bool secondWaterTestReady = false;
     public bool instructionsShown = false;
     public bool objectivesComplete = false;
@@ -204,8 +207,13 @@ public class WaterTestingManager : BaseMiniGameManager
     // Update is called once per frame
     void Update()
     {
+        if (aPanelIsActive)
+        {
+            CheckForEPress(); // Call CheckForEPress method
+        }
+
         // If bool surfaceWaveClicked is true...
-        if (Raycast.surfaceWaveClicked) 
+        if (InteractionObject.surfaceWaveClicked) 
         {
             // If the value on the slider component is less than the targetProgress variable...
             if (slider.value < targetProgress)
@@ -245,13 +253,15 @@ public class WaterTestingManager : BaseMiniGameManager
         // If slider value is equal to targetProgress variable and bool isWaterQualityGood is false...
         if (slider.value == targetProgress && !isWaterQualityGood)
         {
-            PoorWaterQuality();
+            //PoorWaterQuality();
+            Invoke("PoorWaterQuality", endGameTimer); // Invoke method PoorWaterQuality after panelTimer (in seconds)
         }
 
         // If slider value is equal to targetProgress variable and bool isWaterQuality...
         if (slider.value == targetProgress && isWaterQualityGood)
         {
-            GoodWaterQuality();
+            //GoodWaterQuality();
+            Invoke("GoodWaterQuality", endGameTimer); // Invoke method GoodWaterQuality after panelTimer (in seconds)
         }
     }
 
@@ -329,7 +339,7 @@ public class WaterTestingManager : BaseMiniGameManager
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
         PlayButtonClick(); // Call PlayButtonClick method
-        Raycast.isClickable = true; // Set bool isClickable to true
+        InteractionObject.isClickable = true; // Set bool isClickable to true
         gameStarted = true; // Set bool gameStarted to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
 
@@ -371,6 +381,18 @@ public class WaterTestingManager : BaseMiniGameManager
         playerInput.controlsLocked = false; // Unlock player controls when no panel is active
     }
 
+    // Method to deactivate all panels
+    public void DeactivateAllPanels()
+    {
+        foreach (GameObject panel in panels)
+        {
+            panel.SetActive(false); // Deactivate all panels
+        }
+        aPanelIsActive = false; // Set the active panel flag to false
+        Debug.Log("All panels deactivated."); // Debug.Log
+        playerInput.controlsLocked = false; // Unlock player controls when no panel is active
+    }
+
     // Method to activate a specific panel
     public void ActivatePanel(int panelIndex)
     {
@@ -384,6 +406,69 @@ public class WaterTestingManager : BaseMiniGameManager
         else
         {
             Debug.LogError("Invalid panel index: " + panelIndex); // Log an error if the index is invalid
+        }
+    }
+
+    // Method to check for E key press
+    private void CheckForEPress()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (effectsOfTirePanelActive)
+            {
+                tireEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(5); // Deactivate tireEffectsPanel
+            }
+            else if (effectsOfGasPanelActive)
+            {
+                gasEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(3); // Deactivate gasEffectsPanel
+            }
+            else if (effectsOfTrashPanelActive)
+            {
+                trashEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(4); // Deactivate trashEffectsPanel
+            }
+            else if (effectsOfAluminumPanelActive)
+            {
+                aluminumEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(6); // Deactivate aluminumEffectsPanel
+            }
+            else if (effectsOfBiodiversity1PanelActive)
+            {
+                biodiversityEffects1PanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(11); // Deactivate biodiversityEffects1Panel
+            }
+            else if (effectsOfBiodiversity2PanelActive)
+            {
+                biodiversityEffects2PanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(12); // Deactivate biodiversityEffects2Panel
+            }
+            else if (effectsOfBiodiversity3PanelActive)
+            {
+                biodiversityEffects3PanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(13); // Deactivate biodiversityEffects3Panel
+            }
+            else if (lookAtTrashPanelActive)
+            {
+                lookAtTrashPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(2); // Deactivate lookAtTrashPanel
+            }
+            else if (biodiversityPanelActive)
+            {
+                biodiversityPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(10); // Deactivate biodiversityPanel
+            }
+            else if (cleanWaterPanelActive)
+            {
+                cleanWaterPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(9); // Deactivate cleanWaterPanel
+            }
+            else if (greatJobPanelActive)
+            {
+                greatJobPanelScript.OnPointerClick(null); // Call OnPointerClick method
+                DeactivatePanel(15); // Deactivate greatJobPanel
+            }
         }
     }
 
@@ -412,44 +497,37 @@ public class WaterTestingManager : BaseMiniGameManager
     {
         if (!isFirstWaterTestComplete && firstWaterTestObjectivesVisible)
         {
-            if (effectsOfTirePanelActive && !panel5)
+            if (effectsOfTirePanelActive)
             {
                 ActivatePanel(5); // Activate the tire panel if effectsOfTirePanelActive is true
-                panel5 = true; // Set bool effectsOfTirePanelActive to true
             }
-            else if (effectsOfGasPanelActive && !panel3)
+            else if (effectsOfGasPanelActive)
             {
                 ActivatePanel(3); // Activate the gas panel if effectsOfGasPanelActive is true
-                panel3 = true; // Set bool effectsOfGasPanelActive to true
             }
-            else if (effectsOfTrashPanelActive && !panel4)
+            else if (effectsOfTrashPanelActive)
             {
                 ActivatePanel(4); // Activate the trash panel if effectsOfTrashPanelActive is true
-                panel4 = true; // Set bool effectsOfTrashPanelActive to true
             }
-            else if (effectsOfAluminumPanelActive && !panel6)
+            else if (effectsOfAluminumPanelActive)
             {
                 ActivatePanel(6); // Activate the aluminum panel if effectsOfAluminumPanelActive is true
-                panel6 = true; // Set bool effectsOfAluminumPanelActive to true
             }
         }
 
         if (isFirstWaterTestComplete && !isSecondWaterTestComplete && secondWaterTestObjectivesVisible)
         {
-            if (effectsOfBiodiversity1PanelActive && !panel11)
+            if (effectsOfBiodiversity1PanelActive)
             {
                 ActivatePanel(11); // Activate the biodiversity panel1 if effectsOfBiodiversity1PanelActive is true
-                panel11 = true; // Set bool effectsOfBiodiversity1PanelActive to true
             }
-            else if (effectsOfBiodiversity3PanelActive && !panel13)
+            else if (effectsOfBiodiversity2PanelActive)
             {
-                ActivatePanel(13); // Activate the biodiversity panel3 if effectsOfBiodiversity3PanelActive is true
-                panel13 = true; // Set bool effectsOfBiodiversity3PanelActive to true
+                ActivatePanel(13); // Activate the biodiversity panel2 if effectsOfBiodiversity2PanelActive is true
             }
-            else if (effectsOfBiodiversity2PanelActive && !panel12)
+            else if (effectsOfBiodiversity3PanelActive)
             {
-                ActivatePanel(12); // Activate the biodiversity panel2 if effectsOfBiodiversity2PanelActive is true
-                panel12 = true; // Set bool effectsOfBiodiversity2PanelActive to true
+                ActivatePanel(12); // Activate the biodiversity panel3 if effectsOfBiodiversity3PanelActive is true
             }
         }
     }
@@ -589,83 +667,63 @@ public class WaterTestingManager : BaseMiniGameManager
         }
     }
 
-    // Collect water
-    private void CollectWater()
-    {
-        // If left mouse button is down and isPressed is false...
-        if (Input.GetMouseButtonDown(0) && !isPressed) 
-        {
-            isPressed = true; // Set bool isPressed to true
-            InvokeProgressBar(); // Call method InvokeProgressBar
-            Debug.Log("Collecting water..."); // Debug.Log
-        }
-
-        // If left mouse button is down and isPressed is true...
-        if (Input.GetMouseButtonUp(0) && isPressed) 
-        {
-            isPressed = false; // Set bool isPressed to false
-        }
-    }
-
     private void MoveSurfaceWave()
     {
         // If the surface wave was clicked...
-        if (Raycast.surfaceWaveClicked)
+        if (InteractionObject.surfaceWaveClicked)
         {
-            if (raycastScript.clickedObject == null)
-            {
-                Debug.LogError("No clicked object found. Ensure the Raycast is detecting the surface wave.");
-                return;
-            }
-
-            GameObject clickedSurfaceWave = raycastScript.clickedObject; // Get the clicked surface wave
-
-            if (clickedSurfaceWave == null || !surfaceWaves.Contains(clickedSurfaceWave))
-            {
-                Debug.LogWarning("Clicked object is not a valid surface wave.");
-                return;
-            }
-
-            InvokeProgressBar(); // Call method InvokeProgressBar
-
-            PlaySurfaceWaveClickSound(); // Play surface wave click sound
-
-            // Hide the surface wave by disabling its renderer and collider
-            Renderer renderer = clickedSurfaceWave.GetComponent<Renderer>();
-            Collider collider = clickedSurfaceWave.GetComponent<Collider>();
-
-            if (renderer != null)
-            {
-                renderer.enabled = false;
-            }
-
-            if (collider != null)
-            {
-                collider.enabled = false;
-            }
-
-            Debug.Log($"SurfaceWave {clickedSurfaceWave.name} hidden.");
-
-            // Move the surface wave to a random preplanned position
-            if (surfaceWaveWaypoints.Count > 0)
-            {
-                int randomIndex = Random.Range(0, surfaceWaveWaypoints.Count); // Pick a random index
-                Vector3 newPosition = surfaceWaveWaypoints[randomIndex];
-                clickedSurfaceWave.transform.position = newPosition;
-
-                Debug.Log($"SurfaceWave {clickedSurfaceWave.name} moved to random position: {newPosition}");
-            }
-            else
-            {
-                Debug.LogError("No preplanned positions defined for SurfaceWave.");
-            }
-
-            // Make the surface wave visible again after a short delay
-            StartCoroutine(ShowSurfaceWaveAfterDelay(clickedSurfaceWave, 1f)); // 1-second delay
-
-            // Reset the raycast flag
-            Raycast.surfaceWaveClicked = false;
+            HandleSurfaceWaveClick(InteractionObject.clickedSurfaceWave); // Call HandleSurfaceWaveClick method   
         }
+    }
+
+    // Method to handle surface wave click
+    private void HandleSurfaceWaveClick(InteractionObject clickedSurfaceWave)
+    {
+        if (clickedSurfaceWave == null)
+        {
+            Debug.LogWarning("Clicked object is not a valid surface wave.");
+            return;
+        }
+
+        InvokeProgressBar(); // Call method InvokeProgressBar
+
+        PlaySurfaceWaveClickSound(); // Play surface wave click sound
+
+        // Hide the surface wave by disabling its renderer and collider
+        Renderer renderer = clickedSurfaceWave.GetComponent<Renderer>();
+        Collider collider = clickedSurfaceWave.GetComponent<Collider>();
+
+        if (renderer != null)
+        {
+            renderer.enabled = false;
+        }
+
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+
+        Debug.Log($"SurfaceWave {clickedSurfaceWave.name} hidden.");
+
+        // Move the surface wave to a random preplanned position
+        if (surfaceWaveWaypoints.Count > 0)
+        {
+            int randomIndex = Random.Range(0, surfaceWaveWaypoints.Count); // Pick a random index
+            Vector3 newPosition = surfaceWaveWaypoints[randomIndex];
+            clickedSurfaceWave.transform.position = newPosition;
+
+            Debug.Log($"SurfaceWave {clickedSurfaceWave.name} moved to random position: {newPosition}");
+        }
+        else
+        {
+            Debug.LogError("No preplanned positions defined for SurfaceWave.");
+        }
+
+        // Make the surface wave visible again after a short delay
+        StartCoroutine(ShowSurfaceWaveAfterDelay(clickedSurfaceWave.gameObject, 1f)); // 1-second delay
+
+        // Reset the raycast flag
+        InteractionObject.surfaceWaveClicked = false;
     }
 
     private IEnumerator ShowSurfaceWaveAfterDelay(GameObject surfaceWave, float delay)

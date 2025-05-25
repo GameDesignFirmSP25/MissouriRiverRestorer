@@ -28,7 +28,7 @@ public class SpawnManager : MonoBehaviour
     private int minimumFishInRiver = 8;
     private int maximumFishInRiver = 20;
     private int spawnedFishInRiverCount = 0;
-    private int maximumTestTubesInRiver = 20;
+    //private int maximumTestTubesInRiver = 20;
     private int spawnedTestTubeCount = 0;
 
     private float spawnTime = 0.05f;
@@ -38,10 +38,10 @@ public class SpawnManager : MonoBehaviour
     private float yPositionOnGroundForDeer = 5f;
     private float yPositionOnGroundForBeaver = 1.4f;
     private float yPositionOnGroundForRaccoon = 2f;
-    private float yPositionOnGroundForTrashBag = 1.25f;
-    private float yPositionOnGroundForGasCan = 1.4f;
-    private float yPositionOnGroundForAluminumCan = 1.5f;
-    private float yPositionOnGroundForTire = 1f;
+    //private float yPositionOnGroundForTrashBag = 1.25f;
+    //private float yPositionOnGroundForGasCan = 1.4f;
+    //private float yPositionOnGroundForAluminumCan = 1.5f;
+    //private float yPositionOnGroundForTire = 1f;
     private float minimumZOnGround = -152f;
     private float maximumZOnGround = -9f;
     private float minimumXInRiver = -23.5f;

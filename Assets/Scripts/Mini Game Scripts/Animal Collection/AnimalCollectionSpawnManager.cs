@@ -26,13 +26,13 @@ public class AnimalCollectionSpawnManager : MonoBehaviour
 
     [Header("Integer Variables")]
     private int numberOfMammalsToSpawn = 12;
-    private int numberOfInvasiveFishToSpawn = 8;
+    //private int numberOfInvasiveFishToSpawn = 8;
     private int numberOfNativeFishToSpawn = 20;
     //private int numberOfInvasiveBirdsToSpawn = 10;
     private int numberOfNativeBirdsToSpawn = 20;
     private int numberOfReptilesAmphibiansToSpawn = 7;
     private int numberOfInsectsToSpawn = 15;
-    private int spawnedInvasiveFish = 0;
+    //private int spawnedInvasiveFish = 0;
     private static int spawnedNativeFish = 20;
 
     [Header("Float Variables")]

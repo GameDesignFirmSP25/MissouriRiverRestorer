@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 1473420948206511223}
   - component: {fileID: 2644371941274174376}
   - component: {fileID: 2630081749701030350}
-  - component: {fileID: -1932951987340732821}
+  - component: {fileID: -8854753760391193434}
+  - component: {fileID: 3301681083732334589}
   m_Layer: 0
   m_Name: Waterpool
-  m_TagString: Untagged
+  m_TagString: Surface Wave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.220446e-16, y: 0, z: 2.220446e-16}
-  m_LocalScale: {x: 0.6096953, y: 0.017458951, z: 0.6096953}
+  m_LocalScale: {x: 1.5, y: 0.017458951, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -205,8 +206,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!136 &-1932951987340732821
-CapsuleCollider:
+--- !u!114 &-8854753760391193434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175047549492972871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb50c2fe439fa40a1aa70a26108147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: 4324696d2bcc17b48901aa107af5c1de, type: 2}
+  waterTestingManagerScript: {fileID: 0}
+  player: {fileID: 0}
+  playerPosition: {fileID: 0}
+  message: Player is within interaction distance!
+  interactButton: {fileID: 0}
+  interactButtonText: {fileID: 0}
+--- !u!65 &3301681083732334589
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -223,8 +243,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.99999994
-  m_Height: 209.90308
-  m_Direction: 1
-  m_Center: {x: 0, y: 104.95154, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2.66, z: 2}
+  m_Center: {x: 0, y: 0.6, z: 0}

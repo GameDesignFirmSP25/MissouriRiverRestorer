@@ -3,7 +3,7 @@ using UnityEngine;
 public class SurfaceWave : MonoBehaviour
 {
     public GameObject waveToSpawn;
-    private float spawnRange = 5f;
+    //private float spawnRange = 5f;
 
     public void MoveSurfaceWave()
     {

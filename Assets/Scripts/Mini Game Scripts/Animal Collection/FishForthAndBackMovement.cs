@@ -6,7 +6,7 @@ public class FishForthAndBackMovement : MonoBehaviour
     public Transform pointB;
     private float speed = 0.1f;
     private float rotationSpeed = 10f;
-    private bool goingToA = true;
+    //private bool goingToA = true;
     //public AnimalGameManager animalGameManager;
 
     void Update()
