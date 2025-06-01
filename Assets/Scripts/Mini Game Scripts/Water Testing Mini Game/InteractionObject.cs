@@ -50,7 +50,7 @@ public class InteractionObject : MonoBehaviour
 
         interactPanelImage.enabled = false; // Disable the interact panel image
 
-        interactPanelText.text = ""; // Clear the button text
+        interactPanelText.text = ""; // Clear the interact panel text
     }
 
     // Update is called once per frame
@@ -232,20 +232,34 @@ public class InteractionObject : MonoBehaviour
             // If bool isFishObjectiveComplete is false...
             if (!WaterTestingManager.isFishObjectiveComplete)
             {
-                // If the interaction type is "Asian Carp", "Catfish", or "Pallid Sturgeon"...
-                if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Catfish" || interactionObjectSO.interactionType == "Pallid Sturgeon")
+                // If the interaction type is "Fish: Asian Carp", "Fish: Catfish", or "Fish: Pallid Sturgeon"...
+                if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon")
                 {
                     FishClicked(); // Call the FishClicked method
+
+                    // Play the interaction sound
+                    // If the interactSound is not null...
+                    if (interactionObjectSO.interactSound != null)
+                    {
+                        interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                    }
                 }
             }
 
             // / If bool isMammalObjectiveComplete is false...
             if (!WaterTestingManager.isMammalObjectiveComplete)
             {
-                // If the interaction type is "Beaver", "Buck", "Deer", or "Raccoon"...
-                if (interactionObjectSO.interactionType == "Beaver" || interactionObjectSO.interactionType == "Buck" || interactionObjectSO.interactionType == "Deer" || interactionObjectSO.interactionType == "Raccoon")
+                // If the interaction type is "Mammal: Beaver", "Mammal: Buck", "Mammal: Deer", or "Mammal: Raccoon"...
+                if (interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" || interactionObjectSO.interactionType == "Mammal: Raccoon")
                 {
                     MammalClicked(); // Call the MammalClicked method
+
+                    // Play the interaction sound
+                    // If the interactSound is not null...
+                    if (interactionObjectSO.interactSound != null)
+                    {
+                        interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                    }
                 }
             }
         }
@@ -402,8 +416,8 @@ public class InteractionObject : MonoBehaviour
             // Iterate through all interaction objects
             foreach (var obj in allInteractionObjects)
             {
-                // If the object is not null and its interaction type is "Asian Carp", "Catfish", or "Pallid Sturgeon"...
-                if (obj != null && (obj.interactionObjectSO.interactionType == "Asian Carp" || obj.interactionObjectSO.interactionType == "Catfish" || obj.interactionObjectSO.interactionType == "Pallid Sturgeon"))
+                // If the object is not null and its interaction type is "Fish: Asian Carp", "Fish: Catfish", or "Fish: Pallid Sturgeon"...
+                if (obj != null && (obj.interactionObjectSO.interactionType == "Fish: Asian Carp" || obj.interactionObjectSO.interactionType == "Fish: Catfish" || obj.interactionObjectSO.interactionType == "Fish: Pallid Sturgeon"))
                 {
                     obj.hasBeenInteractedWith = true; // Mark the object as interacted with
 
@@ -433,8 +447,8 @@ public class InteractionObject : MonoBehaviour
             // Iterate through all interaction objects
             foreach (var obj in allInteractionObjects)
             {
-                // If the object is not null and its interaction type is "Beaver", "Buck", "Deer", or "Raccoon"...
-                if (obj != null && (obj.interactionObjectSO.interactionType == "Beaver" || obj.interactionObjectSO.interactionType == "Buck" || obj.interactionObjectSO.interactionType == "Deer" || obj.interactionObjectSO.interactionType == "Raccoon"))
+                // If the object is not null and its interaction type is "Mammal: Beaver", "Mammal: Buck", "Mammal: Deer", or "Mammal: Raccoon"...
+                if (obj != null && (obj.interactionObjectSO.interactionType == "Mammal: Beaver" || obj.interactionObjectSO.interactionType == "Mammal: Buck" || obj.interactionObjectSO.interactionType == "Mammal: Deer" || obj.interactionObjectSO.interactionType == "Mammal: Raccoon"))
                 {
                     obj.hasBeenInteractedWith = true; // Mark the object as interacted with
 
