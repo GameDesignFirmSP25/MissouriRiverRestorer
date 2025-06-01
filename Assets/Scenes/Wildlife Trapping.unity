@@ -30607,6 +30607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1104015051}
   radius: 0
+  wanderSpeed: 3.5
   isWaiting: 1
   isWalking: 0
 --- !u!1 &1104275561
@@ -40743,6 +40744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1513240677}
   radius: 0
+  wanderSpeed: 3.5
   isWaiting: 1
   isWalking: 0
 --- !u!114 &1513240679
@@ -40930,26 +40932,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02c1332571ef394fbc34c8df36ddc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easternStarlingNames: []
-  whiteTailedDeerNames: []
-  bandedPennantDragonflyNames: []
-  garterSnakeNames: []
-  baldEagleNames: []
-  paintedLadyButterflyNames: []
-  asianCarpNames: []
-  beaverNames: []
-  raccoonNames: []
-  muskratNames: []
-  snappingTurtleNames: []
-  northernMapTurtleNames: []
   _mainCamera: {fileID: 1528600523}
   animalGameManagerScript: {fileID: 1899327843}
-  changeablePlantScript: {fileID: 1223925552}
-  objectManagerScript: {fileID: 0}
   player: {fileID: 412831555}
-  clickable:
-    serializedVersion: 2
-    m_Bits: 64
   animalEventClicks:
     serializedVersion: 2
     m_Bits: 512
@@ -40962,12 +40947,6 @@ MonoBehaviour:
   fishEvent:
     serializedVersion: 2
     m_Bits: 0
-  bradfordPearTreeInteraction:
-    serializedVersion: 2
-    m_Bits: 16384
-  purpleLoosestrifeInteraction:
-    serializedVersion: 2
-    m_Bits: 32768
 --- !u!208 &1529706985
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -41256,6 +41235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1552960821}
   radius: 0
+  wanderSpeed: 3.5
   isWaiting: 1
   isWalking: 0
 --- !u!114 &1552960823
@@ -46457,6 +46437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1730350908}
   radius: 0
+  wanderSpeed: 3.5
   isWaiting: 1
   isWalking: 0
 --- !u!114 &1730350910
@@ -50008,6 +49989,7 @@ MonoBehaviour:
   fishEventZoneArrow: {fileID: 164679842}
   groupOfDeer: {fileID: 155208452}
   groupOfStarlings: {fileID: 1224445305}
+  groupOfCarp: {fileID: 655124204}
   dialoguePanels:
   - {fileID: 146506578}
   - {fileID: 1095311439}
@@ -54050,6 +54032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 2050147596}
   radius: 0
+  wanderSpeed: 3.5
   isWaiting: 1
   isWalking: 0
 --- !u!1001 &2050810199

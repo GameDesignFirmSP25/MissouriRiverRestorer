@@ -17,14 +17,14 @@ public class DeerEventZone : MonoBehaviour
             {
                 isDeerEventEntered = true;
                 deerEventTriggered = true; 
-                Debug.Log("Deer event triggered.");
+                //Debug.Log("Deer event triggered.");
 
                 animalGameManager.DeerEventZoneEntered(); // Call the method in AnimalGameManager to handle the event
 
             }
             else
             {
-                Debug.Log("Deer event already triggered.");
+                //Debug.Log("Deer event already triggered.");
             }
         }
     }
@@ -38,13 +38,13 @@ public class DeerEventZone : MonoBehaviour
             {
                 isDeerEventEntered = true;
                 deerEventTriggered = true;
-                Debug.Log("Deer event triggered.");
+                //Debug.Log("Deer event triggered.");
 
                 animalGameManager.DeerEventZoneEntered(); // Call the method in AnimalGameManager to handle the event
             }
             else
             {
-                Debug.Log("Deer event already triggered.");
+                //Debug.Log("Deer event already triggered.");
             }
         }
     }

@@ -18,13 +18,13 @@ public class BirdEventZone : MonoBehaviour
             {
                 isBirdEventEntered = true;
                 birdEventTriggered = true; 
-                Debug.Log("Bird event triggered.");
+                //Debug.Log("Bird event triggered.");
 
                 animalGameManager.BirdEventZoneEntered(); // Call the method in AnimalGameManager to handle the event
             }
             else
             {
-                Debug.Log("Bird event already triggered.");
+                //Debug.Log("Bird event already triggered.");
             }
         }
     }
@@ -38,12 +38,12 @@ public class BirdEventZone : MonoBehaviour
             {
                 isBirdEventEntered = true;
                 birdEventTriggered = true;
-                Debug.Log("Bird event triggered.");
+                //Debug.Log("Bird event triggered.");
                 animalGameManager.BirdEventZoneEntered(); // Call the method in AnimalGameManager to handle the event
             }
             else
             {
-                Debug.Log("Bird event already triggered.");
+                //Debug.Log("Bird event already triggered.");
             }
         }
     }

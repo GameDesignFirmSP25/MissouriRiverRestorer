@@ -271,10 +271,13 @@ public class AnimalGameManager : BaseMiniGameManager
     GameObject fishEventZoneArrow;
 
     [SerializeField]
-    GameObject groupOfDeer;
+    private GameObject groupOfDeer;
 
     [SerializeField]
-    GameObject groupOfStarlings;
+    private GameObject groupOfStarlings;
+
+    [SerializeField]
+    private GameObject groupOfCarp;
 
     [Header("Arrays and Lists")]
     public GameObject[] dialoguePanels = new GameObject[12];
@@ -450,6 +453,10 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     private SFXMaker plantGrabbed;
 
+    [Header("Materials")]
+    private Material deerInteraction;
+    private Material birdInteraction;
+    private Material fishInteraction;
 
     private void Awake()
     {
@@ -475,6 +482,7 @@ public class AnimalGameManager : BaseMiniGameManager
         conservationInteractionObjectScript.MidBankObjectiveObjectsNotReady(); // Call method MidBankObjectiveObjectsNotReady
         conservationInteractionObjectScript.UpperBankObjectiveObjectsNotReady(); // Call method UpperBankObjectiveObjectsNotReady
         conservationInteractionObjectScript.PlantSortingObjectiveObjectsNotReady(); // Call method PlantSortingObjectiveObjectsNotReady
+
         Time.timeScale = 0; // Freeze time at start of game
     }
 
@@ -523,11 +531,43 @@ public class AnimalGameManager : BaseMiniGameManager
         // If bool fishEventActive is true && bool eventZonePanelActive is false and fish EventObjectiveSet is true...
         if (fishEventActive && !eventZonePanelActive && fishEventObjectiveSet)
         {
+            foreach (FishBackAndForthMovement fish in groupOfCarp.GetComponentsInChildren<FishBackAndForthMovement>())
+            {
+                if (fish != null)
+                {
+                    fish.SetOutline(true); // Set outline for each bird in the group
+                }
+            }
+
+            foreach (FishForthAndBackMovement fish in groupOfCarp.GetComponentsInChildren<FishForthAndBackMovement>())
+            {
+                if (fish != null)
+                {
+                    fish.SetOutline(true); // Set outline for each bird in the group
+                }
+            }
+
             GetAnimalClicks(); // Call method GetAnimalClicks
         }
 
         if (fishEventZoneComplete)
         {
+            foreach (FishBackAndForthMovement fish in groupOfCarp.GetComponentsInChildren<FishBackAndForthMovement>())
+            {
+                if (fish != null)
+                {
+                    fish.SetOutline(false); // Set outline for each bird in the group
+                }
+            }
+
+            foreach (FishForthAndBackMovement fish in groupOfCarp.GetComponentsInChildren<FishForthAndBackMovement>())
+            {
+                if (fish != null)
+                {
+                    fish.SetOutline(false); // Hide outline for each bird in the group
+                }
+            }
+
             MidBankObjectives(); // Call method MidBankObjectives
             conservationInteractionObjectScript.LowerBankObjectiveObjectsNotReady(); // Call method LowerBankObjectiveObjectsNotReady
             conservationInteractionObjectScript.MidBankObjectiveObjectsReady(); // Call method MidBankObjectiveObjectsReady
@@ -542,11 +582,27 @@ public class AnimalGameManager : BaseMiniGameManager
         // If bool birdEventActive and bool eventZonePanelActive is false and bool bool birdEventObjectiveSet is true...
         if (birdEventActive && !eventZonePanelActive && birdEventObjectiveSet)
         {
+            foreach (BirdFlight bird in groupOfStarlings.GetComponentsInChildren<BirdFlight>())
+            {
+                if (bird != null)
+                {
+                    bird.SetOutline(true); // Set outline for each bird in the group
+                }
+            }
+
             GetAnimalClicks(); // Call method GetAnimalClicks
         }
 
         if (birdEventZoneComplete)
         {
+            foreach (BirdFlight bird in groupOfStarlings.GetComponentsInChildren<BirdFlight>())
+            {
+                if (bird != null)
+                {
+                    bird.SetOutline(false); // hide outline for each bird in the group
+                }
+            }
+
             UpperBankObjectives(); // Call method UpperBankObjectives
             conservationInteractionObjectScript.MidBankObjectiveObjectsNotReady(); // Call method MidBankObjectiveObjectsNotReady
             conservationInteractionObjectScript.UpperBankObjectiveObjectsReady(); // Call method UpperBankObjectiveObjectsReady
@@ -559,6 +615,14 @@ public class AnimalGameManager : BaseMiniGameManager
         // If bool deerEventActive and bool eventZonePanelActive is false and bool deerObjectiveSet is true...
         if (deerEventActive && !eventZonePanelActive && deerEventObjectiveSet)
         {
+            foreach (ChangeNavAgentSpeed deer in groupOfDeer.GetComponentsInChildren<ChangeNavAgentSpeed>())
+            {
+                if (deer != null)
+                {
+                    deer.SetOutline(true); // Set outline for each bird in the group
+                }
+            }
+
             GetAnimalClicks(); // Call method GetAnimalClicks
         } 
 
@@ -1000,6 +1064,7 @@ public class AnimalGameManager : BaseMiniGameManager
             // If slider value is less than variable targetProgress
             if (slider.value < targetProgress)
             {
+                
                 //Debug.Log("Checking for animal clicks."); // Debug.Log
                 CheckForAnimalClicks(); // Call method to check for animal clicks in event zones
             }
@@ -1944,6 +2009,14 @@ public class AnimalGameManager : BaseMiniGameManager
         // If bool deerEventZoneComplete is true, bool birdEventZoneComplete is true, and bool fishEventZoneComplete is true...
         if (deerEventZoneComplete && birdEventZoneComplete && fishEventZoneComplete && !eventZonePanelActive && !plantSortingPanelShown)
         {
+            foreach (ChangeNavAgentSpeed deer in groupOfDeer.GetComponentsInChildren<ChangeNavAgentSpeed>())
+            {
+                if (deer != null)
+                {
+                    deer.SetOutline(false); // Hide outline for each bird in the group
+                }
+            }
+
             eventZonesComplete = true; // Set bool eventZonesComplete to true
             //Debug.Log("All event zones are complete!"); // Debug.Log
             eventsObjectivesPanel.SetActive(false); // Hide event objectives panel

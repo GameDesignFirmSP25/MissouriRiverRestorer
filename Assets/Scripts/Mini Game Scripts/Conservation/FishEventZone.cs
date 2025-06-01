@@ -17,13 +17,13 @@ public class FishEventZone : MonoBehaviour
             {
                 isFishEventEntered = true;
                 fishEventTriggered = true;
-                Debug.Log("Fish event triggered.");
+                //Debug.Log("Fish event triggered.");
 
                 animalGameManager.FishEventZoneEntered();
             }
             else
             {
-                Debug.Log("Fish event already triggered.");
+                //Debug.Log("Fish event already triggered.");
             }
         }
     }
@@ -37,13 +37,13 @@ public class FishEventZone : MonoBehaviour
             {
                 isFishEventEntered = true;
                 fishEventTriggered = true;
-                Debug.Log("Fish event triggered.");
+                //Debug.Log("Fish event triggered.");
 
                 animalGameManager.FishEventZoneEntered();
             }
             else
             {
-                Debug.Log("Fish event already triggered.");
+                //Debug.Log("Fish event already triggered.");
             }
         }
     }

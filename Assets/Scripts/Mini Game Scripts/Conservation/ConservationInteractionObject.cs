@@ -58,6 +58,10 @@ public class ConservationInteractionObject : MonoBehaviour
     [Header("Lists")]
     public static List<ConservationInteractionObject> allConservationInteractionObjects = new List<ConservationInteractionObject>(); // List to store all interaction objects in the scene
 
+    [Header("Materials")]
+    private Material animalInteraction;
+    private Material plantInteraction;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -78,6 +82,36 @@ public class ConservationInteractionObject : MonoBehaviour
         interactionPanelImage.enabled = false; // Disable the interaction panel image
 
         interactionPanelText.text = ""; // Clear the interaction panel text
+
+        Renderer renderer = GetComponentInChildren<Renderer>(); // Get the Renderer component of the interaction object
+
+        if (renderer != null)
+        {
+            animalInteraction = new Material(renderer.material); // Create unique instance
+            plantInteraction = new Material(renderer.material);
+
+            animalInteraction.SetFloat("_OutlineType", 3);
+            plantInteraction.SetFloat("_OutlineType", 4);
+            
+            if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Beaver" ||
+                    interactionObjectSO.interactionType == "Common Garter Snake" || interactionObjectSO.interactionType == "Northern Map Turtle" ||
+                    interactionObjectSO.interactionType == "Snapping Turtle" || interactionObjectSO.interactionType == "Banded Pennant Dragonfly" ||
+                    interactionObjectSO.interactionType == "European Starling" || interactionObjectSO.interactionType == "Muskrat" ||
+                    interactionObjectSO.interactionType == "Bald Eagle" || interactionObjectSO.interactionType == "Painted Lady Butterfly" ||
+                    interactionObjectSO.interactionType == "Raccoon" || interactionObjectSO.interactionType == "White-Tailed Deer")
+            {
+                renderer.material = animalInteraction; // Assign one of them as the active material
+            }
+
+            if (interactionObjectSO.interactionType == "Bradford Pear" || interactionObjectSO.interactionType == "Purple Loosestrife")
+            {
+                renderer.material = plantInteraction; // Assign one of them as the active material
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"{gameObject.name} has no Renderer component in children. Material setup skipped.");
+        }
     }
 
     // Update is called once per frame
@@ -189,6 +223,21 @@ public class ConservationInteractionObject : MonoBehaviour
     {
         interactionPanelImage.enabled = true; // Enable the interact panel image
         interactionPanelText.text = "E to Interact with " + interactionObjectSO.interactionType; // Update the button text with the interaction type
+
+        if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Beaver" ||
+                    interactionObjectSO.interactionType == "Common Garter Snake" || interactionObjectSO.interactionType == "Northern Map Turtle" ||
+                    interactionObjectSO.interactionType == "Snapping Turtle" || interactionObjectSO.interactionType == "Banded Pennant Dragonfly" ||
+                    interactionObjectSO.interactionType == "European Starling" || interactionObjectSO.interactionType == "Muskrat" ||
+                    interactionObjectSO.interactionType == "Bald Eagle" || interactionObjectSO.interactionType == "Painted Lady Butterfly" ||
+                    interactionObjectSO.interactionType == "Raccoon" || interactionObjectSO.interactionType == "White-Tailed Deer")
+        {
+            animalInteraction.SetFloat("_HasOutline", 1.0f); // Enable the outline for animal interaction objects
+        }
+
+        if (interactionObjectSO.interactionType == "Bradford Pear" || interactionObjectSO.interactionType == "Purple Loosestrife")
+        {
+            plantInteraction.SetFloat("_HasOutline", 1.0f); // Enable the outline for plant interaction objects
+        }
     }
 
     // Method to hide the interaction UI
@@ -196,6 +245,21 @@ public class ConservationInteractionObject : MonoBehaviour
     {
         interactionPanelImage.enabled = false; // Disable the interact panel image
         interactionPanelText.text = ""; // Clear the button text
+
+        if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Beaver" ||
+                    interactionObjectSO.interactionType == "Common Garter Snake" || interactionObjectSO.interactionType == "Northern Map Turtle" ||
+                    interactionObjectSO.interactionType == "Snapping Turtle" || interactionObjectSO.interactionType == "Banded Pennant Dragonfly" ||
+                    interactionObjectSO.interactionType == "European Starling" || interactionObjectSO.interactionType == "Muskrat" ||
+                    interactionObjectSO.interactionType == "Bald Eagle" || interactionObjectSO.interactionType == "Painted Lady Butterfly" ||
+                    interactionObjectSO.interactionType == "Raccoon" || interactionObjectSO.interactionType == "White-Tailed Deer")
+        {
+            animalInteraction.SetFloat("_HasOutline", 0f); // Disable the outline for animal interaction objects
+        }
+
+        if (interactionObjectSO.interactionType == "Bradford Pear" || interactionObjectSO.interactionType == "Purple Loosestrife")
+        {
+            plantInteraction.SetFloat("_HasOutline", 0f); // Disable the outline for plant interaction objects
+        }
     }
 
     public void SetAbleToInteractFlag()

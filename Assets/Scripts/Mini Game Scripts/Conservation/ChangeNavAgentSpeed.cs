@@ -1,23 +1,27 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.LowLevel;
 
 public class ChangeNavAgentSpeed : MonoBehaviour
 {
+    [Header("NavMesh Agent")]
     public NavMeshAgent agent;
 
-    //public AnimalGameManager animalGameManager;
-
+    [Header("Float Variables")]
     public float radius;
     private float timer;
     private float waitTime = 8f;
     private float waitCounter = 0f;
     private float wanderRadius = 40f;
     private float wanderTimer = 10f;
+    public float wanderSpeed = 3.5f;
 
+    [Header("Booleans")]
     public bool isWaiting = true;
     public bool isWalking = false;
     private bool speedUpdated = false; // Track if the agent speed has been changed
+
+    [Header("Materials")]
+    private Material eventInteraction;
 
     void Start()
     {
@@ -27,14 +31,22 @@ public class ChangeNavAgentSpeed : MonoBehaviour
             agent = GetComponent<NavMeshAgent>();
         }
 
-
         agent.stoppingDistance = 1f; // Set a small stopping distance
 
-        
-        
         SetAgentSpeed(0); ; // Stop the agent
+
+        Renderer renderer = GetComponentInChildren<Renderer>(); // Get the Renderer component of the interaction object 
         
-       
+        if (renderer != null)
+        {
+            eventInteraction = new Material(renderer.material); // Create unique instance
+            eventInteraction.SetFloat("_OutlineType", 5);
+            renderer.material = eventInteraction; // Assign one of them as the active material
+        }
+        else
+        {
+            Debug.LogWarning($"{gameObject.name} has no Renderer component in children. Material setup skipped."); // Debug.LogWarning
+        }
     }
 
     void Update()
@@ -44,7 +56,7 @@ public class ChangeNavAgentSpeed : MonoBehaviour
         // If the deer event is not complete, stop the agent
         if (AnimalGameManager.deerEventZoneComplete && !speedUpdated)
         {
-            SetAgentSpeed(3.5f); // Set walking speed
+            SetAgentSpeed(wanderSpeed); // Set walking speed
         }
 
         AnimalMovement(); // Call the animal movement logic
@@ -143,5 +155,11 @@ public class ChangeNavAgentSpeed : MonoBehaviour
         {
             Debug.LogWarning("NavMeshAgent is not assigned.");
         }
+    }
+
+    public void SetOutline(bool enabled)
+    {
+        if (eventInteraction != null)
+            eventInteraction.SetFloat("_HasOutline", enabled ? 1.0f : 0.0f);
     }
 }
