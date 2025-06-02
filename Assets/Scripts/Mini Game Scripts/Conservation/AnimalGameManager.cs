@@ -662,7 +662,7 @@ public class AnimalGameManager : BaseMiniGameManager
         exploringIndicatorPanel.SetActive(false); // hide exploring indicator panel
         eventsObjectivesPanel.SetActive(false); // hide events objectives panel
         plantSortingObjective.SetActive(false); // hide plant sorting objective
-        Debug.Log("plantSortingObjective hidden");
+        //Debug.Log("plantSortingObjective hidden");
         eventsStartPanel.SetActive(false); // hide events start panel
         correctPlantSwappedPanel.SetActive(false); // hide correct plant swapped panel
         incorrectPlantSwappedPanel.SetActive(false); // hide incorrect plant swapped panel
@@ -2024,7 +2024,7 @@ public class AnimalGameManager : BaseMiniGameManager
             eventsObjectivesPanel.SetActive(false); // Hide event objectives panel
             objectivesPanel.SetActive(true); // Show objectives panel
             plantSortingObjective.SetActive(true); // Show plant sorting objective
-            Debug.Log("plantSortingObjective shown");
+            //Debug.Log("plantSortingObjective shown");
             plantSortingObjectiveText.text = "Find and click on invasive plants.";
             plantSortingObjectiveActive = true; // Set bool plantSortingObjectiveActive to true
             objectivesShown = true; // Set objectivesShown to true
