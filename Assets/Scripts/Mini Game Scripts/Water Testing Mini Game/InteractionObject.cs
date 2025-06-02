@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public class InteractionObject : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class InteractionObject : MonoBehaviour
 
     [Header("String Variables")]
     public string message = "Player is within interaction distance!"; // Message to display when within interaction distance
+    public string objectID;
 
     [Header("Static Variables")]
     public static bool surfaceWaveClicked = false; // Static variable to track if the surface wave has been clicked
@@ -24,6 +26,7 @@ public class InteractionObject : MonoBehaviour
     [Header("Booleans")]
     public bool nearInteractionObject = false; // Variable to track if the player is near an interaction object
     public bool hasBeenInteractedWith = false; // Variable to track if the object has been interacted with
+    public bool ableToInteractWith = false;
 
     [Header("UI Elements")]
     public GameObject interactPanel; // Reference to the UI Panel for interaction
@@ -33,6 +36,10 @@ public class InteractionObject : MonoBehaviour
     [Header("Lists")]
     public static List<InteractionObject> allInteractionObjects = new List<InteractionObject>(); // List to store all interaction objects in the scene
 
+    [Header("Materials")]
+    private Material trashInteraction;
+    private Material animalInteraction;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -51,6 +58,34 @@ public class InteractionObject : MonoBehaviour
         interactPanelImage.enabled = false; // Disable the interact panel image
 
         interactPanelText.text = ""; // Clear the interact panel text
+
+        Renderer renderer = GetComponentInChildren<Renderer>(); // Get the Renderer component of the interaction object
+
+        if (renderer != null)
+        {
+            trashInteraction = new Material(renderer.material);
+            animalInteraction = new Material(renderer.material); // Create unique instance
+
+            trashInteraction.SetFloat("_OutlineType", 1);
+            animalInteraction.SetFloat("_OutlineType", 3);
+
+            if (interactionObjectSO.interactionType == "Trash Bag" || interactionObjectSO.interactionType == "Tire" || interactionObjectSO.interactionType == "Gas Canister" ||
+                interactionObjectSO.interactionType == "Aluminum Can")
+            {
+                renderer.material = trashInteraction; // Assign one of them as the active material
+            }
+
+            if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon" || 
+                interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" || 
+                interactionObjectSO.interactionType == "Mammal: Raccoon")
+            {
+                renderer.material = animalInteraction; // Assign one of them as the active material
+            } 
+        }
+        else
+        {
+            Debug.LogWarning($"{gameObject.name} has no Renderer component in children. Material setup skipped.");
+        }
     }
 
     // Update is called once per frame
@@ -85,6 +120,26 @@ public class InteractionObject : MonoBehaviour
         if (interactionObjectSO == null || playerPosition == null)
         {
             return;
+        }
+
+        // If the player is not able to interact with the object...
+        if (!ableToInteractWith)
+        {
+            if (currentActiveObject == this)
+            {
+                HideInteractionUI(); // Hide the interaction UI if the player is not able to interact
+                currentActiveObject = null; // Reset the current active object
+            }
+
+            nearInteractionObject = false; // Reset the nearInteractionObject flag
+            return; // Exit the method if not able to interact
+        }
+        else if (ableToInteractWith)
+        {
+            if (currentActiveObject == this)
+            {
+                ShowInteractionUI(); // Hide the interaction UI if the player is able to interact
+            }
         }
 
         // Check if the object has already been interacted with
@@ -142,6 +197,19 @@ public class InteractionObject : MonoBehaviour
     {
         interactPanelImage.enabled = true; // Enable the interact panel image
         interactPanelText.text = "E to Interact with " + interactionObjectSO.interactionType; // Update the button text with the interaction type
+
+        if (interactionObjectSO.interactionType == "Trash Bag" || interactionObjectSO.interactionType == "Tire" || interactionObjectSO.interactionType == "Gas Canister" ||
+                interactionObjectSO.interactionType == "Aluminum Can")
+        {
+            trashInteraction.SetFloat("_HasOutline", 1.0f); // Set the outline for trash interaction objects
+        }
+
+        if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon" ||
+            interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" ||
+            interactionObjectSO.interactionType == "Mammal: Raccoon")
+        {
+            animalInteraction.SetFloat("_HasOutline", 1.0f); // Set the outline for animal interaction objects
+        }
     }
 
     // Method to hide the interaction UI
@@ -149,6 +217,25 @@ public class InteractionObject : MonoBehaviour
     {
         interactPanelImage.enabled = false; // Disable the interact panel image
         interactPanelText.text = ""; // Clear the button text
+
+        if (interactionObjectSO.interactionType == "Trash Bag" || interactionObjectSO.interactionType == "Tire" || interactionObjectSO.interactionType == "Gas Canister" ||
+                interactionObjectSO.interactionType == "Aluminum Can")
+        {
+            trashInteraction.SetFloat("_HasOutline", 0.0f); // Set the outline for trash interaction objects
+        }
+
+        if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon" ||
+            interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" ||
+            interactionObjectSO.interactionType == "Mammal: Raccoon")
+        {
+            animalInteraction.SetFloat("_HasOutline", 0.0f); // Set the outline for animal interaction objects
+        }
+    }
+
+    public void SetAbleToInteractFlag()
+    {
+        ableToInteractWith = true; // Set the ableToInteractWith flag to true
+        //Debug.Log("Able to interact with " + interactionObjectSO.interactionType); // Debug.Log
     }
 
     // Method to handle interaction with the object
@@ -469,5 +556,73 @@ public class InteractionObject : MonoBehaviour
         surfaceWaveClicked = false; // Reset the static variable surfaceWaveClicked to false
         clickedSurfaceWave = null; // Reset the static variable clickedSurfaceWave to null
         Debug.Log("InteractionObject static variables reset."); // Debug.Log
+    }
+
+    public void TrashObjectiveObjectsReady()
+    {
+        foreach (var obj in allInteractionObjects)
+        {
+            if (obj.objectID == "Trash Bag" || obj.objectID == "Tire" || obj.objectID == "Gas Canister" || obj.objectID == "Aluminum Can")
+            {
+                obj.ableToInteractWith = true; // Set the ableToInteractWith flag for trash-related objects
+            }
+        }
+    }
+
+    public void TrashObjectiveObjectsNotReady()
+    {
+        foreach (var obj in allInteractionObjects)
+        {
+            if (obj.objectID == "Trash Bag" || obj.objectID == "Tire" || obj.objectID == "Gas Canister" || obj.objectID == "Aluminum Can")
+            {
+                obj.ableToInteractWith = false; // Reset the ableToInteractWith flag for trash-related objects
+            }
+        }
+    }
+
+    public void AnimalObjectiveObjectsReady()
+    {
+        foreach (var obj in allInteractionObjects)
+        {
+            if (obj.objectID == "Fish: Asian Carp" || obj.objectID == "Fish: Catfish" || obj.objectID == "Fish: Pallid Sturgeon" ||
+                obj.objectID == "Mammal: Beaver" || obj.objectID == "Mammal: Buck" || obj.objectID == "Mammal: Deer" || obj.objectID == "Mammal: Raccoon")
+            {
+                obj.ableToInteractWith = true; // Set the ableToInteractWith flag for animal-related objects
+            }
+        }
+    }
+
+    public void AnimalObjectiveObjectsNotReady()
+    {
+        foreach (var obj in allInteractionObjects)
+        {
+            if (obj.objectID == "Fish: Asian Carp" || obj.objectID == "Fish: Catfish" || obj.objectID == "Fish: Pallid Sturgeon" ||
+                obj.objectID == "Mammal: Beaver" || obj.objectID == "Mammal: Buck" || obj.objectID == "Mammal: Deer" || obj.objectID == "Mammal: Raccoon")
+            {
+                obj.ableToInteractWith = false; // Reset the ableToInteractWith flag for animal-related objects
+            }
+        }
+    }
+
+    public void WaterTestObjectiveObjectsReady()
+    {
+        foreach (var obj in allInteractionObjects)
+        {
+            if (obj.objectID == "Surface Wave")
+            {
+                obj.ableToInteractWith = true; // Set the ableToInteractWith flag for surface wave objects
+            }
+        }
+    }
+
+    public void WaterTestObjectiveObjectsNotReady()
+    {
+        foreach (var obj in allInteractionObjects)
+        {
+            if (obj.objectID == "Surface Wave")
+            {
+                obj.ableToInteractWith = false; // Reset the ableToInteractWith flag for surface wave objects
+            }
+        }
     }
 }

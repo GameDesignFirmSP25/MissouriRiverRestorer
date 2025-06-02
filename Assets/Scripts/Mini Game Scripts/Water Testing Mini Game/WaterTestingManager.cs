@@ -89,6 +89,7 @@ public class WaterTestingManager : BaseMiniGameManager
     public BiodiversityEffects1PanelClickHandler biodiversityEffects1PanelScript;
     public BiodiversityEffects2PanelClickHandler biodiversityEffects2PanelScript;
     public BiodiversityEffects3PanelClickHandler biodiversityEffects3PanelScript;
+    public InteractionObject interactionObjectScript;
 
     [Header("Float Variables")]
     private float targetProgress = 1f;
@@ -97,6 +98,8 @@ public class WaterTestingManager : BaseMiniGameManager
     private float progressIncrement = 0.2f;
     private float panelTimer = 0.1f;
     private float endGameTimer = .75f;
+    private float panelCooldown = 0f;
+    private const float panelCooldownDuration = 0.2f; // Cooldown duration for panel activation
 
     [Header("Booleans")]
     public bool isPressed = false;
@@ -111,6 +114,7 @@ public class WaterTestingManager : BaseMiniGameManager
     public bool gameStarted = false;
     public bool pauseButtonClicked = false;
     public bool testIsRunning = false;
+    private bool waitForNextEPress = false; // Flag to wait for next E press
 
     [Header("Global Variables")]
     public static bool aPanelIsActive = false;
@@ -204,11 +208,20 @@ public class WaterTestingManager : BaseMiniGameManager
         {
             isWaterQualityGood = true; // Set bool isWaterQualityGood to true
         }
+
+        interactionObjectScript.TrashObjectiveObjectsNotReady(); // Call method to set trash objective objects not ready
+        interactionObjectScript.AnimalObjectiveObjectsNotReady(); // Call method to set fish objective objects not ready
+        interactionObjectScript.WaterTestObjectiveObjectsNotReady(); // Call method to set riverbank objective objects not ready
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (panelCooldown > 0f)
+        {
+            panelCooldown -= Time.deltaTime; // Decrease panelCooldown by Time.deltaTime
+        }
+
         // If bool aPanelIsActive is true...
         if (aPanelIsActive)
         {
@@ -378,6 +391,7 @@ public class WaterTestingManager : BaseMiniGameManager
         if (!isFirstWaterTestComplete)
         {
             DeactivatePanel(0); // Disable firstIntroductionPanel
+            waitForNextEPress = false; // Set flag to not wait for next E press
         }
 
         // If isFirstWaterTestComplete is true and isSecondWaterTestComplete is false...
@@ -385,6 +399,7 @@ public class WaterTestingManager : BaseMiniGameManager
         {
             DeactivatePanel(1); // Disable secondIntroductionPanel
             additionalAnimals.SetActive(true); // Activate additional animals in the scene
+            waitForNextEPress = false; // Set flag to not wait for next E press
         }
     }
 
@@ -413,6 +428,8 @@ public class WaterTestingManager : BaseMiniGameManager
         aPanelIsActive = false; // Set the active panel flag to false
         Debug.Log("Panel " + panelIndex + " deactivated."); // Debug.Log
         playerInput.controlsLocked = false; // Unlock player controls when no panel is active
+        panelCooldown = panelCooldownDuration; // Start cooldown for panel activation
+        waitForNextEPress = true; // Set flag to wait for next E press
     }
 
     // Method to set bool aPanelIsActive to false
@@ -440,8 +457,22 @@ public class WaterTestingManager : BaseMiniGameManager
     // Method to check for E key press
     private void CheckForEPress()
     {
+        bool eKeyDown = Input.GetKeyDown(KeyCode.E); // Check if E key is pressed
+
+        if (eKeyDown && waitForNextEPress)
+        {
+            waitForNextEPress = false; // Allow new panel to open after E is pressed again
+            return;
+        }
+
+        if (panelCooldown > 0f)
+        {
+            Debug.Log("Panel activation is on cooldown."); // Debug.Log
+            return; // Exit the method if panel activation is on cooldown
+        }
+
         //If the E key is pressed...
-        if (Input.GetKeyDown(KeyCode.E))
+        if (eKeyDown && !waitForNextEPress)
         {
             // If bool effectsOfTitePanelActive...
             if (effectsOfTirePanelActive)
@@ -449,6 +480,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 tireEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(5); // Deactivate tireEffectsPanel
+                waitForNextEPress = false;
             }
 
             // If bool effectsOfGasPanelActive...
@@ -457,6 +489,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 gasEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(3); // Deactivate gasEffectsPanel
+                waitForNextEPress = false;
             }
 
             // If bool effectsOfTrashPanelActive...
@@ -465,6 +498,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 trashEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(4); // Deactivate trashEffectsPanel
+                waitForNextEPress = false;
             }
 
             // If bool effectsOfAluminumPanelActive...
@@ -473,6 +507,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 aluminumEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(6); // Deactivate aluminumEffectsPanel
+                waitForNextEPress = false;
             }
 
             // If bool effectsOfBiodiversity1PanelActive...
@@ -481,6 +516,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 biodiversityEffects1PanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(11); // Deactivate biodiversityEffects1Panel
+                waitForNextEPress = false;
             }
 
             // If bool effectsOfBiodiversity2PanelActive...
@@ -489,6 +525,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 biodiversityEffects2PanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(13); // Deactivate biodiversityEffects2Panel
+                waitForNextEPress = false;
             }
 
             // If bool effectsOfBiodiversity3PanelActive...
@@ -497,6 +534,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 biodiversityEffects3PanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(12); // Deactivate biodiversityEffects3Panel
+                waitForNextEPress = false;
             }
 
             // If bool lookAtTrashPanelActive...
@@ -505,6 +543,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 lookAtTrashPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(2); // Deactivate lookAtTrashPanel
+                waitForNextEPress = false;
             }
 
             // If bool biodiversityPanelActive...
@@ -513,6 +552,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 biodiversityPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(10); // Deactivate biodiversityPanel
+                waitForNextEPress = false;
             }
 
             // If bool cleanWaterPanelActive...
@@ -521,6 +561,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 cleanWaterPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(9); // Deactivate cleanWaterPanel
+                waitForNextEPress = false;
             }
 
             // If bool greatJobPanelActive...
@@ -529,6 +570,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 greatJobPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(15); // Deactivate greatJobPanel
+                waitForNextEPress = false;
             }
         }
     }
@@ -542,6 +584,7 @@ public class WaterTestingManager : BaseMiniGameManager
             objectivesPanel.SetActive(true); // Enable objectives panel
             firstWaterTestObjectives.SetActive(true); // Enable objectives
             firstWaterTestObjectivesVisible = true; // Set bool objectivesVisible to true
+            interactionObjectScript.TrashObjectiveObjectsReady(); // Call method to set trash objective objects ready
         }
 
         // If bool secondWaterTestObjectivesVisible is false & bool isBiodiversityPanelClicked is true...
@@ -550,6 +593,7 @@ public class WaterTestingManager : BaseMiniGameManager
             objectivesPanel.SetActive(true); // Enable objectives panel
             secondWaterTestObjectives.SetActive(true); // Enable objectives
             secondWaterTestObjectivesVisible = true; // Set bool objectivesVisible to true
+            interactionObjectScript.AnimalObjectiveObjectsReady(); // Call method to set fish objective objects ready
         }
     }
 
@@ -648,6 +692,8 @@ public class WaterTestingManager : BaseMiniGameManager
             surfaceWaves[surfaceWaves.Count - 3].SetActive(true); // Enable the third to last surface wave
             surfaceWaves[surfaceWaves.Count - 2].SetActive(true); // Enable the second to last surface wave
             surfaceWaves[surfaceWaves.Count - 1].SetActive(true); // Enable the last surface wave
+            interactionObjectScript.WaterTestObjectiveObjectsReady(); // Call method to set water test objective objects ready
+            interactionObjectScript.TrashObjectiveObjectsNotReady(); // Call method to set trash objective objects not ready
         }
 
         // If bool objectivesComplete is true and bool secondWaterTestObjectivesVisible is true...
@@ -658,6 +704,8 @@ public class WaterTestingManager : BaseMiniGameManager
             surfaceWaves[surfaceWaves.Count - 3].SetActive(true); // Enable the third to last surface wave
             surfaceWaves[surfaceWaves.Count - 2].SetActive(true); // Enable the second to last surface wave
             surfaceWaves[surfaceWaves.Count - 1].SetActive(true); // Enable the last surface wave
+            interactionObjectScript.WaterTestObjectiveObjectsReady(); // Call method to set water test objective objects ready
+            interactionObjectScript.AnimalObjectiveObjectsNotReady(); // Call method to set animal objective objects not ready
         }
     }
 

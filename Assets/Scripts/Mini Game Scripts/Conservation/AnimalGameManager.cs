@@ -453,11 +453,6 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     private SFXMaker plantGrabbed;
 
-    [Header("Materials")]
-    private Material deerInteraction;
-    private Material birdInteraction;
-    private Material fishInteraction;
-
     private void Awake()
     {
         //UpdateAnimalCounter();

@@ -253,12 +253,12 @@ public class ConservationInteractionObject : MonoBehaviour
                     interactionObjectSO.interactionType == "Bald Eagle" || interactionObjectSO.interactionType == "Painted Lady Butterfly" ||
                     interactionObjectSO.interactionType == "Raccoon" || interactionObjectSO.interactionType == "White-Tailed Deer")
         {
-            animalInteraction.SetFloat("_HasOutline", 0f); // Disable the outline for animal interaction objects
+            animalInteraction.SetFloat("_HasOutline", 0.0f); // Disable the outline for animal interaction objects
         }
 
         if (interactionObjectSO.interactionType == "Bradford Pear" || interactionObjectSO.interactionType == "Purple Loosestrife")
         {
-            plantInteraction.SetFloat("_HasOutline", 0f); // Disable the outline for plant interaction objects
+            plantInteraction.SetFloat("_HasOutline", 0.0f); // Disable the outline for plant interaction objects
         }
     }
 
