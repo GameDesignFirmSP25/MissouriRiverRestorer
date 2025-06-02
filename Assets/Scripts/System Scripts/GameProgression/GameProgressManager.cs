@@ -63,7 +63,7 @@ public class GameProgressManager : MonoBehaviour
           }
 
           SceneManager.sceneLoaded += OnSceneLoad;
-          QuizButton.SetActive(false);
+          //QuizButton.SetActive(false);
      }
 
 
@@ -126,15 +126,26 @@ public class GameProgressManager : MonoBehaviour
 
         // Move to the next progression step
         CurrentProgressionStep++;
-          if(CurrentProgressionStep >= progressEvents.Count)
+          if(CurrentProgressionStep >= (progressEvents.Count - 1))
           {
                isAllEventsCompleted = true;
                Debug.Log("All Events Complete!");
                // Make all minigames interactable and disconnect from all progression events
                EnableAllWithoutProgress();
-               QuizButton.SetActive(true);
+               //QuizButton.SetActive(true);
 
-               return;
+               // Find the minigame data with the matching target scene name
+               CurrentMiniGamedData = minigames.FirstOrDefault(mg => mg.TargetSceneName == progressEvents[CurrentProgressionStep].TargetScene);
+               if (CurrentMiniGamedData == null)
+               {
+                   Debug.LogError("Could Not Find matching minigame data target scene name for progress event: " + progressEvents[CurrentProgressionStep].TargetScene);
+                   return;
+               }
+               CurrentMiniGamedData.IsTasked = true;
+               CurrentMiniGamedData.gameObject.SetActive(true);
+               CurrentMiniGamedData.IsInteractable = true;
+
+            return;
           }
 
           Debug.Log("Next Event: " + progressEvents[CurrentProgressionStep]._Name);
