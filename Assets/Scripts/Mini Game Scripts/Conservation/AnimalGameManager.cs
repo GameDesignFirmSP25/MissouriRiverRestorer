@@ -1000,7 +1000,7 @@ public class AnimalGameManager : BaseMiniGameManager
         if (Input.GetMouseButtonDown(0) && !isPressed)
         {
             isPressed = true; // Set bool isPressed to true
-            InvokeClickCounter(); // Call method InvokeProgressBar
+            //InvokeClickCounter(); // Call method InvokeProgressBar
             //Debug.Log("Animal clicked..."); // Debug.Log
         }
 
@@ -1008,7 +1008,7 @@ public class AnimalGameManager : BaseMiniGameManager
         if (Input.GetMouseButtonUp(0) && isPressed)
         {
             isPressed = false; // Set bool isPressed to false
-            RaycastScript.eventAnimalClicked = false; // Set bool testTubeClicked to false
+            RaycastScript.eventAnimalClicked = false; // Set bool eventAniamlClicked to false
         }
     }
 
@@ -1031,7 +1031,7 @@ public class AnimalGameManager : BaseMiniGameManager
     }
 
     // Method to increment progress on click counter
-    private void InvokeClickCounter()
+    public void InvokeClickCounter()
     {
         //Debug.Log("Click counted."); // Debug.Log
 

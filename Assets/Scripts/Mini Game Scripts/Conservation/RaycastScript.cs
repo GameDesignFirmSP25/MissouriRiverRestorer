@@ -55,16 +55,19 @@ public class RaycastScript : MonoBehaviour
                 Debug.Log("Deer event is active. Handling click on deer event animal.");
                 eventAnimalClicked = true; // Set eventAnimalClicked to true
                 HandleDeerEventClick(hit.collider.gameObject); // Handle the click on the deer GameObject in deer event
+                animalGameManagerScript.InvokeClickCounter();
             }
             if (animalGameManagerScript.birdEventActive)
             {
                 eventAnimalClicked = true; // Set eventAnimalClicked to true
                 HandleBirdEventClick(hit.collider.gameObject); // Handle the click on the bird GameObject in bird event 
+                animalGameManagerScript.InvokeClickCounter();
             }
             if (animalGameManagerScript.fishEventActive)
             {
                 eventAnimalClicked = true; // Set eventAnimalClicked to true
                 HandleFishEventClick(hit.collider.gameObject); // Handle the click on the asian carp GameObject in fish event
+                animalGameManagerScript.InvokeClickCounter();
             }
         }
     }
