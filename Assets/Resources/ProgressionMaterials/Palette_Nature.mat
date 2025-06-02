@@ -116,6 +116,7 @@ Material:
     - _GlowFrequency: 0
     - _GradientLerp: 1
     - _GustFrequency: 0.2
+    - _HasOutline: 0
     - _HeightOfInfluence: -30.64
     - _HueShiftAmount: 0
     - _InfluenceStrength: 1
@@ -127,6 +128,7 @@ Material:
     - _Outline: 5.75
     - _OutlineRecession: 6.89
     - _OutlineSize: 0
+    - _OutlineType: 0
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -155,16 +157,22 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - _AnimalColor: {r: 0, g: 0.40975088, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DialogueColor: {r: 0.5680022, g: 0.10377347, b: 1, a: 1}
     - _DirtyColor: {r: 0.94716984, g: 0.9035286, b: 0.74880034, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EventColor: {r: 0, g: 1, b: 0.06150101, a: 0}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _JournalColor: {r: 1, g: 0, b: 0.576075, a: 0}
     - _MultiplyColor: {r: 1, g: 1, b: 1, a: 1}
     - _NormalTiling: {r: 5, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
+    - _PlantColor: {r: 0.8916428, g: 1, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TrashColor: {r: 1, g: 0.50453556, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3879457683948920210

@@ -20,6 +20,8 @@ public class InteractionObject : MonoBehaviour
 
     [Header("Static Variables")]
     public static bool surfaceWaveClicked = false; // Static variable to track if the surface wave has been clicked
+    public static bool isAnyInteractionActive = false; // Static variable to track if any interaction is currently active
+    public static bool requireERelease = false; // Static variable to track if the player needs to release the "E" key after interaction
     public static InteractionObject clickedSurfaceWave; // Static variable to track the clicked surface wave object
     public static InteractionObject currentActiveObject = null; // Static variable to track the current active object
 
@@ -93,11 +95,29 @@ public class InteractionObject : MonoBehaviour
     {
         CheckPlayerDistance(); // Check if the player is within interaction distance
 
+        if (requireERelease)
+        {
+            if (!Input.GetKey(KeyCode.E))
+            {
+                requireERelease = false; // E was released, allow new interaction next frame
+                isAnyInteractionActive = false; // Reset the interaction state
+            }
+                
+            return;
+        }
+
         // Handle interaction when the player presses "E"
         // If the player is near an interaction object, the "E" key is pressed, and no panel is active
         if (nearInteractionObject && Input.GetKeyDown(KeyCode.E) && !WaterTestingManager.aPanelIsActive)
         {
+            if (isAnyInteractionActive)
+            {
+                Debug.Log("Interaction already active with another object."); // Debug.Log
+                return; // Exit if any interaction is already active
+            }
+
             Interact(); // Call the Interact method to handle interaction with the object
+            requireERelease = true; // Set the requireERelease flag to true to prevent immediate re-interaction
         }
     }
 
@@ -241,29 +261,16 @@ public class InteractionObject : MonoBehaviour
     // Method to handle interaction with the object
     private void Interact()
     {
-        // Implement the interaction logic here
-        Debug.Log("Interacting with " + interactionObjectSO.interactionType); // Debug.Log
-
-        // If the interaction type is "Surface Wave" & bool objectivesComplete is true...
-        if (interactionObjectSO.interactionType == "Surface Wave" && waterTestingManagerScript.objectivesComplete)
+        if (!isAnyInteractionActive)
         {
-            SurfaceWaveClicked (); // Call the SurfaceWaveInteraction method
+            isAnyInteractionActive = true; // Set the static variable IsAnyInteractionActive to true
 
-            // Play the interaction sound
-            // If the interactSound is not null...
-            if (interactionObjectSO.interactSound != null)
-            {
-                interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
-            }
-        }
+            Debug.Log("Interacting with " + interactionObjectSO.interactionType); // Debug.Log
 
-        // If isFirstWaterTestComplete is false...
-        else if (!WaterTestingManager.isFirstWaterTestComplete)
-        {
-            // If the interaction type is "Aluminum Can" tag & bool isAluminumCanObjectiveComplete is false
-            if (interactionObjectSO.interactionType == "Aluminum Can" && !WaterTestingManager.isAluminumCanObjectiveComplete)
+            // If the interaction type is "Surface Wave" & bool objectivesComplete is true...
+            if (interactionObjectSO.interactionType == "Surface Wave" && waterTestingManagerScript.objectivesComplete)
             {
-                AluminumCanClicked(); // Call the AluminumCanClicked method
+                SurfaceWaveClicked(); // Call the SurfaceWaveInteraction method
 
                 // Play the interaction sound
                 // If the interactSound is not null...
@@ -273,56 +280,52 @@ public class InteractionObject : MonoBehaviour
                 }
             }
 
-            // If the interaction type is "Tire" tag & bool isTireObjectiveComplete is false
-            if (interactionObjectSO.interactionType == "Tire" && !WaterTestingManager.isTireObjectiveComplete)
+            // If isFirstWaterTestComplete is false...
+            else if (!WaterTestingManager.isFirstWaterTestComplete)
             {
-                TireClicked(); // Call the TireClicked method
-
-                // Play the interaction sound
-                // If the interactSound is not null...
-                if (interactionObjectSO.interactSound != null)
+                // If the interaction type is "Aluminum Can" tag & bool isAluminumCanObjectiveComplete is false
+                if (interactionObjectSO.interactionType == "Aluminum Can" && !WaterTestingManager.isAluminumCanObjectiveComplete)
                 {
-                    interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                    AluminumCanClicked(); // Call the AluminumCanClicked method
+
+                    // Play the interaction sound
+                    // If the interactSound is not null...
+                    if (interactionObjectSO.interactSound != null)
+                    {
+                        interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                    }
                 }
-            }
 
-            // If the interaction type is "Gas Can" tag & bool isGasCanObjectiveComplete is false
-            if (interactionObjectSO.interactionType == "Gas Canister" && !WaterTestingManager.isGasCanObjectiveComplete)
-            {
-                GasCanisterClicked(); // Call the GasCanisterClicked method
-
-                // Play the interaction sound
-                // If the interactSound is not null...
-                if (interactionObjectSO.interactSound != null)
+                // If the interaction type is "Tire" tag & bool isTireObjectiveComplete is false
+                if (interactionObjectSO.interactionType == "Tire" && !WaterTestingManager.isTireObjectiveComplete)
                 {
-                    interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                    TireClicked(); // Call the TireClicked method
+
+                    // Play the interaction sound
+                    // If the interactSound is not null...
+                    if (interactionObjectSO.interactSound != null)
+                    {
+                        interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                    }
                 }
-            }
 
-            // If the interaction type is "Trash Bag" tag & bool isTrashBagObjective is false
-            if (interactionObjectSO.interactionType == "Trash Bag" && !WaterTestingManager.isTrashBagObjectiveComplete)
-            {
-                TrashBagClicked(); // Call the TrashBagClicked method
-
-                // Play the interaction sound
-                // If the interactSound is not null...
-                if (interactionObjectSO.interactSound != null)
+                // If the interaction type is "Gas Can" tag & bool isGasCanObjectiveComplete is false
+                if (interactionObjectSO.interactionType == "Gas Canister" && !WaterTestingManager.isGasCanObjectiveComplete)
                 {
-                    interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                    GasCanisterClicked(); // Call the GasCanisterClicked method
+
+                    // Play the interaction sound
+                    // If the interactSound is not null...
+                    if (interactionObjectSO.interactSound != null)
+                    {
+                        interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                    }
                 }
-            }
-        }
 
-        // If bool isFirstWaterTestComplete is true & isSecondWaterTestComplete is false...
-        else if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
-        {
-            // If bool isFishObjectiveComplete is false...
-            if (!WaterTestingManager.isFishObjectiveComplete)
-            {
-                // If the interaction type is "Fish: Asian Carp", "Fish: Catfish", or "Fish: Pallid Sturgeon"...
-                if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon")
+                // If the interaction type is "Trash Bag" tag & bool isTrashBagObjective is false
+                if (interactionObjectSO.interactionType == "Trash Bag" && !WaterTestingManager.isTrashBagObjectiveComplete)
                 {
-                    FishClicked(); // Call the FishClicked method
+                    TrashBagClicked(); // Call the TrashBagClicked method
 
                     // Play the interaction sound
                     // If the interactSound is not null...
@@ -333,23 +336,44 @@ public class InteractionObject : MonoBehaviour
                 }
             }
 
-            // / If bool isMammalObjectiveComplete is false...
-            if (!WaterTestingManager.isMammalObjectiveComplete)
+            // If bool isFirstWaterTestComplete is true & isSecondWaterTestComplete is false...
+            else if (WaterTestingManager.isFirstWaterTestComplete && !WaterTestingManager.isSecondWaterTestComplete)
             {
-                // If the interaction type is "Mammal: Beaver", "Mammal: Buck", "Mammal: Deer", or "Mammal: Raccoon"...
-                if (interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" || interactionObjectSO.interactionType == "Mammal: Raccoon")
+                // If bool isFishObjectiveComplete is false...
+                if (!WaterTestingManager.isFishObjectiveComplete)
                 {
-                    MammalClicked(); // Call the MammalClicked method
-
-                    // Play the interaction sound
-                    // If the interactSound is not null...
-                    if (interactionObjectSO.interactSound != null)
+                    // If the interaction type is "Fish: Asian Carp", "Fish: Catfish", or "Fish: Pallid Sturgeon"...
+                    if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon")
                     {
-                        interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                        FishClicked(); // Call the FishClicked method
+
+                        // Play the interaction sound
+                        // If the interactSound is not null...
+                        if (interactionObjectSO.interactSound != null)
+                        {
+                            interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                        }
+                    }
+                }
+
+                // / If bool isMammalObjectiveComplete is false...
+                if (!WaterTestingManager.isMammalObjectiveComplete)
+                {
+                    // If the interaction type is "Mammal: Beaver", "Mammal: Buck", "Mammal: Deer", or "Mammal: Raccoon"...
+                    if (interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" || interactionObjectSO.interactionType == "Mammal: Raccoon")
+                    {
+                        MammalClicked(); // Call the MammalClicked method
+
+                        // Play the interaction sound
+                        // If the interactSound is not null...
+                        if (interactionObjectSO.interactSound != null)
+                        {
+                            interactionObjectSO.interactSound.PlaySound(); // Play the interaction sound
+                        }
                     }
                 }
             }
-        }
+        } 
     }
 
     // Method to handle surface wave interaction

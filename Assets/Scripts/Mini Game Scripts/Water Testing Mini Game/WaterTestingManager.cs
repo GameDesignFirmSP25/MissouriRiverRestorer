@@ -234,7 +234,6 @@ public class WaterTestingManager : BaseMiniGameManager
             // If the value on the slider component is less than the targetProgress variable...
             if (slider.value < targetProgress)
             {
-                //CollectWater(); // call CollectWater method
                 MoveSurfaceWave(); // call MoveSurfaceWave method
 
                 // If bool instructionsShown and testingInstructionsActive are true...
@@ -382,7 +381,6 @@ public class WaterTestingManager : BaseMiniGameManager
         Time.timeScale = 1f; // Unfreeze time
         StartButton.SetActive(false); // Set StartButton to not active
         PlayButtonClick(); // Call PlayButtonClick method
-        //InteractionObject.isClickable = true; // Set bool isClickable to true
         gameStarted = true; // Set bool gameStarted to true
         testIsRunning = true; // Set bool testIsRunning to true
         StartCoroutine(TimeDelay()); // Start coroutine TimeDelay()
@@ -390,16 +388,14 @@ public class WaterTestingManager : BaseMiniGameManager
         // If isFirstWaterTestComplete is false...
         if (!isFirstWaterTestComplete)
         {
-            DeactivatePanel(0); // Disable firstIntroductionPanel
-            waitForNextEPress = false; // Set flag to not wait for next E press
+            DeactivatePanel(0, false); // Disable firstIntroductionPanel
         }
 
         // If isFirstWaterTestComplete is true and isSecondWaterTestComplete is false...
         if (isFirstWaterTestComplete && !isSecondWaterTestComplete)
         {
-            DeactivatePanel(1); // Disable secondIntroductionPanel
+            DeactivatePanel(1, false); // Disable secondIntroductionPanel
             additionalAnimals.SetActive(true); // Activate additional animals in the scene
-            waitForNextEPress = false; // Set flag to not wait for next E press
         }
     }
 
@@ -422,14 +418,14 @@ public class WaterTestingManager : BaseMiniGameManager
     }
 
     // Method to deactivate a specific panel
-    public void DeactivatePanel(int panelIndex)
+    public void DeactivatePanel(int panelIndex, bool requireNextE = true)
     {
         panels[panelIndex].SetActive(false); // Activate the specified panel
         aPanelIsActive = false; // Set the active panel flag to false
         Debug.Log("Panel " + panelIndex + " deactivated."); // Debug.Log
         playerInput.controlsLocked = false; // Unlock player controls when no panel is active
         panelCooldown = panelCooldownDuration; // Start cooldown for panel activation
-        waitForNextEPress = true; // Set flag to wait for next E press
+        waitForNextEPress = requireNextE; // Set flag to wait for next E press
     }
 
     // Method to set bool aPanelIsActive to false
@@ -462,7 +458,6 @@ public class WaterTestingManager : BaseMiniGameManager
         if (eKeyDown && waitForNextEPress)
         {
             waitForNextEPress = false; // Allow new panel to open after E is pressed again
-            return;
         }
 
         if (panelCooldown > 0f)
@@ -480,7 +475,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 tireEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(5); // Deactivate tireEffectsPanel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool effectsOfGasPanelActive...
@@ -489,7 +484,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 gasEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(3); // Deactivate gasEffectsPanel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool effectsOfTrashPanelActive...
@@ -498,7 +493,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 trashEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(4); // Deactivate trashEffectsPanel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool effectsOfAluminumPanelActive...
@@ -507,7 +502,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 aluminumEffectsPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(6); // Deactivate aluminumEffectsPanel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool effectsOfBiodiversity1PanelActive...
@@ -516,7 +511,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 biodiversityEffects1PanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(11); // Deactivate biodiversityEffects1Panel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool effectsOfBiodiversity2PanelActive...
@@ -525,7 +520,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 biodiversityEffects2PanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(13); // Deactivate biodiversityEffects2Panel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool effectsOfBiodiversity3PanelActive...
@@ -534,7 +529,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 biodiversityEffects3PanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(12); // Deactivate biodiversityEffects3Panel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool lookAtTrashPanelActive...
@@ -543,7 +538,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 lookAtTrashPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(2); // Deactivate lookAtTrashPanel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool biodiversityPanelActive...
@@ -552,7 +547,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 biodiversityPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(10); // Deactivate biodiversityPanel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool cleanWaterPanelActive...
@@ -561,7 +556,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 cleanWaterPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(9); // Deactivate cleanWaterPanel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
 
             // If bool greatJobPanelActive...
@@ -570,7 +565,7 @@ public class WaterTestingManager : BaseMiniGameManager
                 greatJobPanelScript.OnPointerClick(null); // Call OnPointerClick method
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(15); // Deactivate greatJobPanel
-                waitForNextEPress = false;
+                InteractionObject.requireERelease = true;
             }
         }
     }

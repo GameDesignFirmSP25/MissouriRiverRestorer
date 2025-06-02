@@ -361,6 +361,7 @@ public class AnimalGameManager : BaseMiniGameManager
     public bool lowerBankObjectivesActive = false;
     public bool midBankObjectivesActive = false;
     public bool upperBankObjectivesActive = false;
+    public bool plantSortingObjectiveActive = false;
     public bool lowerBankObjectivesComplete = false;
     public bool midBankObjectivesComplete = false;
     public bool upperBankObjectivesComplete = false;
@@ -496,9 +497,13 @@ public class AnimalGameManager : BaseMiniGameManager
         }
         else
         {
-            if (lowerBankObjectivesActive || midBankObjectivesActive || upperBankObjectivesActive)
+            if (lowerBankObjectivesActive || midBankObjectivesActive || upperBankObjectivesActive || eventZonesComplete || plantSortingObjectiveActive)
             {
                 objectivesPanel.SetActive(true); // Show objectives panel
+            }
+            else
+            {
+                objectivesPanel.SetActive(false); // Hide objectives panel
             }
 
             if (objectivesShown)
@@ -657,6 +662,7 @@ public class AnimalGameManager : BaseMiniGameManager
         exploringIndicatorPanel.SetActive(false); // hide exploring indicator panel
         eventsObjectivesPanel.SetActive(false); // hide events objectives panel
         plantSortingObjective.SetActive(false); // hide plant sorting objective
+        Debug.Log("plantSortingObjective hidden");
         eventsStartPanel.SetActive(false); // hide events start panel
         correctPlantSwappedPanel.SetActive(false); // hide correct plant swapped panel
         incorrectPlantSwappedPanel.SetActive(false); // hide incorrect plant swapped panel
@@ -1410,12 +1416,13 @@ public class AnimalGameManager : BaseMiniGameManager
     private void ShowPlantSortingPanel()
     {
         // If bool eventZonesComplete is true and bool eventZonePanelActive is false and bool objectivesShown is true and bool plantSortingPanelActive is false...
-        if (eventZonesComplete && !eventZonePanelActive && objectivesShown && !plantSortingPanelActive && startPlantSorting)
+        if (eventZonesComplete && !eventZonePanelActive && objectivesShown && !plantSortingPanelActive && startPlantSorting && !plantSortingPanelShown)
         {
             objectivesPanel.SetActive(true); // show objectives panel
             plantSortingPanel.SetActive(true); // Show plant sorting panel
             plantSortingPanelActive = true; // Set the flag to true to indicate the panel is active
             startPlantSorting = false; // Set the flag to false to prevent multiple calls
+            plantSortingPanelShown = true;
             conservationInteractionObjectScript.UpperBankObjectiveObjectsNotReady(); // Call method to set upper bank objective objects not ready
             conservationInteractionObjectScript.PlantSortingObjectiveObjectsReady(); // Call method to set plant sorting objective objects ready
             //playerInput.controlsLocked = true; // Lock player controls
@@ -2002,7 +2009,7 @@ public class AnimalGameManager : BaseMiniGameManager
     private void EventsComplete()
     {
         // If bool deerEventZoneComplete is true, bool birdEventZoneComplete is true, and bool fishEventZoneComplete is true...
-        if (deerEventZoneComplete && birdEventZoneComplete && fishEventZoneComplete && !eventZonePanelActive && !plantSortingPanelShown)
+        if (deerEventZoneComplete && birdEventZoneComplete && fishEventZoneComplete && !eventZonePanelActive)
         {
             foreach (ChangeNavAgentSpeed deer in groupOfDeer.GetComponentsInChildren<ChangeNavAgentSpeed>())
             {
@@ -2017,7 +2024,9 @@ public class AnimalGameManager : BaseMiniGameManager
             eventsObjectivesPanel.SetActive(false); // Hide event objectives panel
             objectivesPanel.SetActive(true); // Show objectives panel
             plantSortingObjective.SetActive(true); // Show plant sorting objective
+            Debug.Log("plantSortingObjective shown");
             plantSortingObjectiveText.text = "Find and click on invasive plants.";
+            plantSortingObjectiveActive = true; // Set bool plantSortingObjectiveActive to true
             objectivesShown = true; // Set objectivesShown to true
             bradfordPearsSwappedCounterText1.SetActive(true); // Show plants swapped counter text 1
             purpleLoosestrifesSwappedCounterText1.SetActive(true); // Show plants swapped counter text 1
@@ -2029,7 +2038,6 @@ public class AnimalGameManager : BaseMiniGameManager
     public void StartPlantSorting()
     {
         startPlantSorting = true; // Set startPlantSorting to true to allow plant sorting panel to be shown
-        plantSortingPanelShown = true; // Set plantSortingPanelShown to true to allow plant sorting panel to be shown
     }
 
     // Method to check if all objectives are complete
