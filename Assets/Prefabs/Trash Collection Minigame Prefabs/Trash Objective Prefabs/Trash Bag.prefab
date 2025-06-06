@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 272581673510366529}
   - component: {fileID: 8632496739771137706}
   - component: {fileID: 176367933874227033}
-  - component: {fileID: 97640985330073242}
   - component: {fileID: 6942266835837689019}
+  - component: {fileID: 8267806461056420266}
+  - component: {fileID: -277494437717626892}
   m_Layer: 0
   m_Name: Trash Bag
-  m_TagString: Trash
+  m_TagString: 'Trash: trash bag'
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,41 +110,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.97275376, y: 0.9762643, z: 0.94836485}
-  m_Center: {x: 0.00000016391277, y: 0.48813215, z: -0.024702594}
---- !u!114 &97640985330073242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631725197935876431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96ad745d266ddcc4eafb5217a2317d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trashCollectionGame: {fileID: 0}
-  playerScore: 0
-  CollectedTrash: 0
-  ObjectiveScupPanel: {fileID: 0}
-  ObjectiveGasCanPanel: {fileID: 0}
-  ObjectivePizzaSlicePanel: {fileID: 0}
-  ObjectiveTrashBagPanel: {fileID: 0}
-  ObjectiveBottlePanel: {fileID: 0}
-  ObjectiveSaveBirdPanel: {fileID: 0}
-  ObjectiveSaveFishPanel: {fileID: 0}
-  ObjectiveSaveDeerPanel: {fileID: 0}
-  ObjectiveScupPanelText: {fileID: 0}
-  ObjectiveGasCanPanelText: {fileID: 0}
-  ObjectivePizzaSlicePanelText: {fileID: 0}
-  ObjectiveTrashBagPanelText: {fileID: 0}
-  ObjectiveBottlePanelText: {fileID: 0}
-  ObjectiveSaveBirdPanelText: {fileID: 0}
-  ObjectiveSaveFishPanelText: {fileID: 0}
-  ObjectiveSaveDeerPanelText: {fileID: 0}
-  ObjectivePanelCloseButton: {fileID: 0}
-  ObjectivePanelCloseButton1: {fileID: 0}
+  m_Size: {x: 4.854982, y: 0.97626424, z: 2.4017904}
+  m_Center: {x: 0.1680038, y: 0.488132, z: 0.07577491}
 --- !u!114 &6942266835837689019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +132,45 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &8267806461056420266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631725197935876431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256d021e5c1a2e646a033650db652120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectSO: {fileID: 11400000, guid: 9654c3daa5d9b7d4cb439f87ace545a1, type: 2}
+  trashCollectionGameScript: {fileID: 0}
+  player: {fileID: 0}
+  playerPosition: {fileID: 0}
+  message: Player is within interaction distance!
+  nearInteractionObject: 0
+  hasBeenInteractedWith: 0
+  interactPanel: {fileID: 0}
+  interactPanelImage: {fileID: 0}
+  interactPanelText: {fileID: 0}
+--- !u!114 &-277494437717626892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631725197935876431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288aa69a0437ec24496ddc5ddae25046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeSoundEffect: 0
+  playOnAwake: 0
+  mainSoundEffect: 42
+  myAudioSource: {fileID: 0}
+  canMakeSound: 0
 --- !u!1 &9176209799059848307
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +182,7 @@ GameObject:
   - component: {fileID: 50055803044206265}
   - component: {fileID: 7750905645768117947}
   m_Layer: 0
-  m_Name: trash_icon
+  m_Name: trash_bag_icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

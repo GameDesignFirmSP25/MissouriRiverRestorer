@@ -67,7 +67,7 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
                     trashCollectionGame.strikethrough(); // call the strikethrough function
-                    trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
+                    //trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
                 }
                 if (hit.collider.CompareTag("Trash: Bottle") && !TrashCollectionGame.ObjectvBottle)
                 {
@@ -84,9 +84,9 @@ public class Trashcast : MonoBehaviour
 
                     Debug.Log("playerScore: " + CollectedTrash);
                     trashCollectionGame.strikethrough(); // call the strikethrough function
-                    trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
+                    //trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
                 }
-                if (hit.collider.CompareTag("Trash: trash bag")&& !TrashCollectionGame.ObjectvTrashBag)
+                if (hit.collider.CompareTag("Trash: trash bag") && !TrashCollectionGame.ObjectvTrashBag)
                 {
                     Time.timeScale = 0f; // set the time scale to 0
                     Debug.Log("Trash bag clicked");
@@ -99,7 +99,7 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
                     trashCollectionGame.strikethrough(); // call the strikethrough function
-                    trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
+                    //trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
                 }
                 if (hit.collider.CompareTag("Trash: Pizza Slice")&& !TrashCollectionGame.ObjectvPizzaSlice)
                 {
@@ -114,7 +114,7 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
                     trashCollectionGame.strikethrough(); // call the strikethrough function
-                    trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
+                    //trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
                 }
                 if (hit.collider.CompareTag("Trash: gas can")&& !TrashCollectionGame.ObjectvGasCan)
                 {
@@ -129,7 +129,7 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
                     trashCollectionGame.strikethrough(); // call the strikethrough function
-                    trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
+                    //trashCollectionGame.PlayTrashGrabbed(); // call the PlayTrashGrabbed function
                 }
                 if (hit.collider.CompareTag("Save bird") && !TrashCollectionGame.ObjectvSaveBird)
                 {
@@ -144,7 +144,7 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
                     trashCollectionGame.strikethrough(); // call the strikethrough function
-                    trashCollectionGame.PlayAnimalSaved(); // call the PlayAnimalSaved function
+                    //trashCollectionGame.PlayAnimalSaved(); // call the PlayAnimalSaved function
                 }
                 if (hit.collider.CompareTag("Save fish") && !TrashCollectionGame.ObjectvSaveFish)
                 {
@@ -159,7 +159,7 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
                     trashCollectionGame.strikethrough(); // call the strikethrough function
-                    trashCollectionGame.PlayAnimalSaved(); // call the PlayAnimalSaved function
+                    //trashCollectionGame.PlayAnimalSaved(); // call the PlayAnimalSaved function
                 }
                 if (hit.collider.CompareTag("Save deer") && !TrashCollectionGame.ObjectvSaveDeer)
                 {
@@ -174,7 +174,7 @@ public class Trashcast : MonoBehaviour
                     ObjectivePanelCloseButton.SetActive(true); // set the panel close button to active
                     ObjectivePanelCloseButton1.onClick.AddListener(CloseObjectivePanel); // add listener to the close button
                     trashCollectionGame.strikethrough(); // call the strikethrough function
-                    trashCollectionGame.PlayAnimalSaved(); // call the PlayAnimalSaved function
+                    //trashCollectionGame.PlayAnimalSaved(); // call the PlayAnimalSaved function
 
                 }
             }
