@@ -3538,6 +3538,7 @@ PrefabInstance:
     - {fileID: 8897294651053184570, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
     - {fileID: 6667805116452508209, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
     - {fileID: 5684044615539267027, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
+    - {fileID: 8549192471309739800, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 736375625033922114, guid: 80cbd27b2ce2a4e4fbda71911f5a0e90, type: 3}
       insertIndex: -1
@@ -4005,6 +4006,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 982735440}
     - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: GameState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
+      propertyPath: isAllEventsCompleted
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885158710569862063, guid: a2acb1632083a8442918898f53d5e9dc, type: 3}
       propertyPath: minigames.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -4140,6 +4149,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas - Overworld Pause and Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 3897269087882735893, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
+      propertyPath: m_margin.w
+      value: 13.532539
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897269087882735893, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
+      propertyPath: m_margin.x
+      value: 21.149292
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897269087882735893, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
+      propertyPath: m_margin.y
+      value: 12.397614
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897269087882735893, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
+      propertyPath: m_margin.z
+      value: 33.967773
+      objectReference: {fileID: 0}
     - target: {fileID: 3991064002074905930, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4154,6 +4179,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3991064002074905930, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055643360474722586, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4786406455291513539, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
@@ -4243,6 +4272,10 @@ PrefabInstance:
     - target: {fileID: 6815348193419189861, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8072048509590140951, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8805379172717097656, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

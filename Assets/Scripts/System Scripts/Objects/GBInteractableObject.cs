@@ -6,27 +6,34 @@ public class InteractableObject : MonoBehaviour
 
      public bool isWithinRange = false;
 
-
      public ObjectSO data;
 
-     private void Update()
-     {
-          if(isWithinRange)
-          {
-               InteractPopup.transform.LookAt(Camera.main.gameObject.transform);
-          }
-     }
+    void Awake()
+    {
+        if (InteractPopup != null)
+            InteractPopup.SetActive(false);
+    }
 
-     public void InRange()
-     {
-               isWithinRange = true;
-               InteractPopup.gameObject.SetActive(true);
-     }
+    private void Update()
+    {
+        if (isWithinRange)
+        {
+            transform.LookAt(Camera.main.gameObject.transform);
+        }
+    }
 
-     public void OutRange()
-     {
-               isWithinRange = false;
-               InteractPopup.gameObject.SetActive(false);
-     }
+    public void InRange()
+    {
+        isWithinRange = true;
+        if (InteractPopup != null)
+            InteractPopup.SetActive(true);
+    }
+
+    public void OutRange()
+    {
+        isWithinRange = false;
+        if (InteractPopup != null)
+            InteractPopup.SetActive(false);
+    }
 
 }
