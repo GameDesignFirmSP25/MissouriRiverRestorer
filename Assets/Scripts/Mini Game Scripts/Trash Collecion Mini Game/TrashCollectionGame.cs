@@ -19,12 +19,12 @@ public class TrashCollectionGame : BaseMiniGameManager
     public Trashcast trashcast;
 
     [Header("UI Elements")]
-    public Button StartBtn;
+    //public Button StartBtn;
     public GameObject Panel;
-    public GameObject StartButton;
+    //public GameObject StartButton;
 
-    public Button endbtn;
-    public GameObject EndButton;
+    //public Button endbtn;
+    //public GameObject EndButton;
     public GameObject Finishpanel1;
     
     
@@ -68,7 +68,8 @@ public class TrashCollectionGame : BaseMiniGameManager
 
     [Header("Bools")]
     public bool aPanelIsActive = false; // to check if any panel is active
-    public bool isgameComplete = false;
+    public bool isGameStarted = false; // to check if the game has started
+    public bool isGameComplete = false;
     private bool waitForNextEPress = false;
     private bool eKeyWasDownLastFrame = false;
     public static bool ObjectveScup = false;
@@ -109,33 +110,33 @@ public class TrashCollectionGame : BaseMiniGameManager
         Time.timeScale = 0f;
         Finishpanel1.SetActive(false);
 
-        EndButton.SetActive(false);
+        //EndButton.SetActive(false);
         Panel.SetActive(true);
-        StartButton.SetActive(true);
-        StartBtn.onClick.AddListener(StartGame);
-        if (trashcast.CollectedTrash >= GameScore && !isgameComplete)
+        //StartButton.SetActive(true);
+        //StartBtn.onClick.AddListener(StartGame);
+        if (trashcast.CollectedTrash >= GameScore && !isGameComplete)
         {
             gameCompleteScore();
         }
     }
 
-     private void OnDestroy()
-     {
-          StartBtn.onClick.RemoveListener(StartGame);
+     //private void OnDestroy()
+     //{
+     //     StartBtn.onClick.RemoveListener(StartGame);
 
          
-     }
+     //}
 
-     void Update()// Update is called once per frame
+    void Update()// Update is called once per frame
     {
-        if (IsAnyObjectivePanelOpen())
+        CheckForEPress();
+
+        if (CollectedTrash >= GameScore && !isGameComplete)
         {
-            CheckForEPress(); // Check if any objective panel is open and handle input accordingly
-            return; // Do not execute the rest of the Update method if any objective panel is open
-        }
-        if (CollectedTrash >= GameScore && !isgameComplete )
-        {
-            gameCompleteScore();
+            if (!IsAnyObjectivePanelOpen())
+            {
+                gameCompleteScore();
+            }
         }
        
     }
@@ -154,7 +155,8 @@ public class TrashCollectionGame : BaseMiniGameManager
     {
         Time.timeScale = 1f;
         GameScore = 8;
-        StartButton.SetActive(false);
+        isGameStarted = true; // set the game started to true
+        //StartButton.SetActive(false);
         PlayButtonClick();
         Panel.SetActive(false);
        
@@ -175,9 +177,23 @@ public class TrashCollectionGame : BaseMiniGameManager
 
         if (eKeyDown)
         {
-            CloseObjectivePanel();
-            waitForNextEPress = true;
-            PlayButtonClick();
+            if (IsAnyObjectivePanelOpen())
+            {
+                CloseObjectivePanel();
+                waitForNextEPress = true;
+                PlayButtonClick();
+                return; // Close the panel and wait for the next E press
+            }  
+        }
+
+        if (eKeyDown && !isGameStarted)
+        {
+            StartGame(); // Start the game if E is pressed
+        }
+
+        if (eKeyDown && isGameComplete)
+        {
+            Home(); // Go to the home scene if the game is complete
         }
     }
 
@@ -194,12 +210,12 @@ public class TrashCollectionGame : BaseMiniGameManager
     {
                 Time.timeScale = 0f;
                 Debug.Log("Trash Collected");
-                isgameComplete = true;
+                isGameComplete = true;
                 trashCollected = true; // set the global variable to true
                 // add panel to pop up
                 
                 Finishpanel1.SetActive(true);// sets panel active
-                EndButton.SetActive(true);
+                //EndButton.SetActive(true);
 
 
         // For Game Progression
@@ -207,7 +223,7 @@ public class TrashCollectionGame : BaseMiniGameManager
     }
     public void Home() 
     {
-        endbtn.onClick.RemoveListener(Home);
+        //endbtn.onClick.RemoveListener(Home);
           Time.timeScale = 1f;
           SceneManager.LoadScene("Overworld");
 

@@ -226,7 +226,6 @@ GameObject:
   - component: {fileID: 3671677753368101245}
   - component: {fileID: 7843229373423401877}
   - component: {fileID: 5148113421140154971}
-  - component: {fileID: 1965397885413033513}
   m_Layer: 5
   m_Name: Close Button (9)
   m_TagString: Untagged
@@ -352,18 +351,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1965397885413033513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6657850646936947877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f301fe579ea9814496963ec90ed2ce2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEffectsOfBiodiversity2PanelClicked: 0
-  playerInput: {fileID: 0}
-  gameManagerScript: {fileID: 0}

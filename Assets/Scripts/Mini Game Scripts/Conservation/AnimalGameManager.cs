@@ -222,11 +222,11 @@ public class AnimalGameManager : BaseMiniGameManager
     [SerializeField]
     GameObject plantsCorrectlySwappedCounterText1;
 
-    [SerializeField]
-    GameObject startButton;
+    //[SerializeField]
+    //GameObject startButton;
 
-    [SerializeField]
-    GameObject returnButton;
+    //[SerializeField]
+    //GameObject returnButton;
 
     [SerializeField]
     GameObject pauseButton;
@@ -401,6 +401,7 @@ public class AnimalGameManager : BaseMiniGameManager
     public bool wasReplaceWithYellowConeflowerButtonClicked = false;
     public bool readyToSpawnSycamoreTree = false;
     public bool isPressed = false;
+    public bool isGameStarted = false; // Boolean to check if the game has started
 
     [Header("Raycast Variables")]
     private Ray ray;
@@ -411,18 +412,6 @@ public class AnimalGameManager : BaseMiniGameManager
     public ChangeablePlant changeablePlant;
     public TypewriterUi typewriterUiScript;
     public ConservationInteractionObject conservationInteractionObjectScript;
-    public AsianCarpClickHandler asianCarpClickHandler;
-    public BaldEagleClickHandler baldEagleClickHandler;
-    public BandedPennantDragonflyClickHandler bandedPennantDragonflyClickHandler;
-    public BeaverClickHandler beaverClickHandler;
-    public EasternStarlingClickHandler easternStarlingClickHandler;
-    public GarterSnakeClickHandler garterSnakeClickHandler;
-    public MuskratClickHandler muskratClickHandler;
-    public NorthernMapTurtleClickHandler northernMapTurtleClickHandler;
-    public PaintedLadyButterflyClickHandler paintedLadyButterflyClickHandler;
-    public RaccoonClickHandler raccoonClickHandler;
-    public SnappingTurtleClickHandler snappingTurtleClickHandler;
-    public WhiteTailedDeerClickHandler whiteTailedDeerClickHandler;
     public EventsStartPanelClickHandler eventsStartPanelClickHandler;
     public DeerEventZonePanelClickHandler deerEventZonePanelClickHandler;
     public BirdEventZonePanelClickHandler birdEventZonePanelClickHandler;
@@ -640,7 +629,7 @@ public class AnimalGameManager : BaseMiniGameManager
     }
 
     // Method that triggers on start button press
-    public void StartButton()
+    public void StartGame()
     {
         PlayButtonClick(); // Play button click sound
         exploringIndicatorPanel.SetActive(true); // show exploring indicator panel
@@ -648,9 +637,10 @@ public class AnimalGameManager : BaseMiniGameManager
         LowerBankObjectives(); //  Call method LowerBankEntered
         conservationInteractionObjectScript.LowerBankObjectiveObjectsReady(); // Call method LowerBankObjectiveObjectsReady
         objectivesShown = true; // set objectivesShown to true
-        startButton.SetActive(false); // hide start button
+        //startButton.SetActive(false); // hide start button
         startPanel.SetActive(false); // hide start panel
         pauseButton.SetActive(true); // show pause button
+        isGameStarted = true; // set isGameStarted to true
         Time.timeScale = 1; // Unfreeze time
     }
 
@@ -666,8 +656,8 @@ public class AnimalGameManager : BaseMiniGameManager
         eventsStartPanel.SetActive(false); // hide events start panel
         correctPlantSwappedPanel.SetActive(false); // hide correct plant swapped panel
         incorrectPlantSwappedPanel.SetActive(false); // hide incorrect plant swapped panel
-        returnButton.SetActive(false); // hide return button
-        startButton.SetActive(true); // show start button
+        //returnButton.SetActive(false); // hide return button
+        //startButton.SetActive(true); // show start button
         startPanel.SetActive(true); // show start panel
         pauseButton.SetActive(false); // hide pause button
         endOfGamePanel.SetActive(false); // hide end of game panel
@@ -791,6 +781,16 @@ public class AnimalGameManager : BaseMiniGameManager
             return;
         }
 
+        if (eKeyDown && !isGameStarted)
+        {
+            StartGame(); // Start the game if E is pressed before the game starts
+        }
+
+        if (eKeyDown && trappingCompleted)
+        {
+            EndGame(); // End the game if trapping is completed and E is pressed
+        }
+
         //If the E key is pressed...
         if (eKeyDown && !eKeyWasDownLastFrame)
         {
@@ -805,8 +805,7 @@ public class AnimalGameManager : BaseMiniGameManager
             {
                 if (asianCarpPanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Asian Carp panel is active. Interacting..."); // Debug.Log
-                    asianCarpClickHandler.OnPointerClick(null); // Call OnPointerClick method in AsianCarpClickHandler
+                    asianCarpPanelActive = false; // Set Asian Carp panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(0); // Deactivate Asian Carp panel
@@ -814,8 +813,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (baldEaglePanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Bald Eagle panel is active. Interacting..."); // Debug.Log
-                    baldEagleClickHandler.OnPointerClick(null); // Call OnPointerClick method in BaldEagleClickHandler
+                    baldEaglePanelActive = false; // Set Bald Eagle panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(3); // Deactivate Bald Eagle panel
@@ -823,8 +821,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (bandedPennantDragonflyPanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Banded Pennant Dragonfly panel is active. Interacting..."); // Debug.Log
-                    bandedPennantDragonflyClickHandler.OnPointerClick(null); // Call OnPointerClick method in BandedPennantDragonflyClickHandler
+                    bandedPennantDragonflyPanelActive = false; // Set Banded Pennant Dragonfly panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(10); // Deactivate Banded Pennant Dragonfly panel
@@ -832,8 +829,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (beaverPanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Beaver panel is active. Interacting..."); // Debug.Log
-                    beaverClickHandler.OnPointerClick(null); // Call OnPointerClick method in BeaverClickHandler
+                    beaverPanelActive = false; // Set Beaver panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(4); // Deactivate Beaver panel
@@ -841,8 +837,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (easternStarlingPanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Eastern Starling panel is active. Interacting..."); // Debug.Log
-                    easternStarlingClickHandler.OnPointerClick(null); // Call OnPointerClick method in EasternStarlingClickHandler
+                    easternStarlingPanelActive = false; // Set Eastern Starling panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(1); // Deactivate Eastern Starling panel
@@ -850,8 +845,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (garterSnakePanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Garter Snake panel is active. Interacting..."); // Debug.Log
-                    garterSnakeClickHandler.OnPointerClick(null); // Call OnPointerClick method in GarterSnakeClickHandler
+                    garterSnakePanelActive = false; // Set Garter Snake panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(8); // Deactivate Garter Snake panel
@@ -859,8 +853,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (muskratPanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Muskrat panel is active. Interacting..."); // Debug.Log
-                    muskratClickHandler.OnPointerClick(null); // Call OnPointerClick method in MuskratClickHandler
+                    muskratPanelActive = false; // Set Muskrat panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(6); // Deactivate Muskrat panel
@@ -868,8 +861,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (northernMapTurtlePanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Northern Map Turtle panel is active. Interacting..."); // Debug.Log
-                    northernMapTurtleClickHandler.OnPointerClick(null); // Call OnPointerClick method in NorthernMapTurtleClickHandler
+                    northernMapTurtlePanelActive = false; // Set Northern Map Turtle panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(9); // Deactivate Northern Map Turtle panel
@@ -877,8 +869,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (paintedLadyButterflyPanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Painted Lady Butterfly panel is active. Interacting..."); // Debug.Log
-                    paintedLadyButterflyClickHandler.OnPointerClick(null); // Call OnPointerClick method in PaintedLadyButterflyClickHandler
+                    paintedLadyButterflyPanelActive = false; // Set Painted Lady Butterfly panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(11); // Deactivate Painted Lady Butterfly panel
@@ -886,8 +877,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (raccoonPanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Raccoon panel is active. Interacting..."); // Debug.Log
-                    raccoonClickHandler.OnPointerClick(null); // Call OnPointerClick method in RaccoonClickHandler
+                    raccoonPanelActive = false; // Set Raccoon panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(5); // Deactivate Raccoon panel
@@ -895,8 +885,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (snappingTurtlePanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("Snapping Turtle panel is active. Interacting..."); // Debug.Log
-                    snappingTurtleClickHandler.OnPointerClick(null); // Call OnPointerClick method in SnappingTurtleClickHandler
+                    snappingTurtlePanelActive = false; // Set Snapping Turtle panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(7); // Deactivate Snapping Turtle panel
@@ -904,8 +893,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 }
                 else if (whiteTailedDeerPanelActive && !hasResetDialogueState)
                 {
-                    //Debug.Log("White-Tailed Deer panel is active. Interacting..."); // Debug.Log
-                    whiteTailedDeerClickHandler.OnPointerClick(null); // Call OnPointerClick method in WhiteTailedDeerClickHandler
+                    whiteTailedDeerPanelActive = false; // Set White-Tailed Deer panel active to false
                     hasResetDialogueState = true; // Set the flag to true to prevent multiple calls
                     PlayButtonClick(); // Play button click sound
                     DeactivateDialoguePanel(2); // Deactivate White-Tailed Deer panel
@@ -916,43 +904,47 @@ public class AnimalGameManager : BaseMiniGameManager
             {
                 if (fishEventPanelActive)
                 {
-                    fishEventZonePanelClickHandler.OnPointerClick(null); // Call OnPointerClick method in FishEventZonePanelClickHandler
+                    eventZonePanelActive = false; // Set event zone panel active to false
                     PlayButtonClick(); // Play button click sound
                     fishEventZonePanel.SetActive(false); // Hide fish event zone
                     fishEventPanelActive = false; // Set fish event panel active to false
                 }
                 else if (birdEventPanelActive)
                 {
-                    birdEventZonePanelClickHandler.OnPointerClick(null); // Call OnPointerClick method in BirdEventZonePanelClickHandler
+                    eventZonePanelActive = false; // Set event zone panel active to false
                     PlayButtonClick(); // Play button click sound
                     birdEventZonePanel.SetActive(false); // Hide bird event zone
-                    birdEventPanelActive = false; // Set bird event panel active to false
+                    birdEventPanelActive = false; // Set bird event panel active to fals
                 }
                 else if (deerEventPanelActive)
                 {
-                    deerEventZonePanelClickHandler.OnPointerClick(null); // Call OnPointerClick method in DeerEventZonePanelClickHandler
+                    eventZonePanelActive = false; // Set event zone panel active to false
                     PlayButtonClick(); // Play button click sound
                     deerEventZonePanel.SetActive(false); // Hide deer event zone
                     deerEventPanelActive = false; // Set deer event panel active to false
                 }
+
+                playerInput.controlsLocked = false; // Unlock cursor
             }
             else if (plantSortingPanelActive)
             {
-                plantSortingPanelClickHandler.OnPointerClick(null); // Call OnPointerClick method in PlantSortingPanelClickHandler
+                plantSortingPanelActive = false; // Set plant sorting panel active to false
                 PlayButtonClick(); // Play button click sound
                 plantSortingPanel.SetActive(false); // Hide plant sorting panel
-                plantSortingPanelActive = false; // Set plant sorting panel active to false
+                playerInput.controlsLocked = false; // Unlock cursor
             }
             else if (ChangeablePlant.incorrectPlantSwappedPanelShown && TypewriterUi.isTypingComplete)
             {
                 //Debug.Log("Incorrect plant swapped panel is shown. Interacting..."); // Debug.Log
-                incorrectPlantSwappedPanelClickHandler.OnPointerClick(null); // Call OnPointerClick method in IncorrectPlantSwappedPanelClickHandler
+                playerInput.controlsLocked = false; // Unlock cursor
+                ChangeablePlant.TryClosePlantSwappedPanelsOnE(); // Call TryClosePlantSwappedPanelsOnE method in ChangeablePlant script
                 PlayButtonClick(); // Play button click sound
             }
             else if (ChangeablePlant.correctPlantSwappedPanelShown && TypewriterUi.isTypingComplete)
             {
                 //Debug.Log("Correct plant swapped panel is shown. Interacting..."); // Debug.Log
-                correctPlantSwappedPanelClickHandler.OnPointerClick(null); // Call OnPointerClick method in CorrectPlantSwappedPanelClickHandler
+                playerInput.controlsLocked = false; // Unlock cursor
+                ChangeablePlant.TryClosePlantSwappedPanelsOnE(); // Call TryClosePlantSwappedPanelsOnE method in ChangeablePlant script
                 PlayButtonClick(); // Play button click sound
             }
         }
@@ -1312,7 +1304,7 @@ public class AnimalGameManager : BaseMiniGameManager
     }
 
     // Method to return to the main scene
-    public void ReturnButton()
+    public void EndGame()
     {
         PlayButtonClick(); // Play button click sound
         playerInput.controlsLocked = false; // Lock player controls
@@ -2137,7 +2129,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 endOfGamePanel.SetActive(true); // Show end of game panel
                 endOfGamePanelActive = true; // Set end of game panel active
                 playerInput.controlsLocked = true; // Lock player controls
-                returnButton.SetActive(true); // Show return button
+                //returnButton.SetActive(true); // Show return button
                 trappingCompleted = true; // Set trappingCompleted to true   
                 TriggerMiniGameCompleteEvent(0);
             }

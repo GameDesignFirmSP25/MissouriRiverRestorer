@@ -122,11 +122,13 @@ public class GameProgressManager : MonoBehaviour
                // Maps game state to Correct enum. Assumes alternating events of NPC and Minigame
                GameState = (GameState)(((CurrentProgressionStep + 1) / 2) - 1);
                gameStateChanged?.Invoke(GameState);
-        }
+          }
 
-        // Move to the next progression step
-        CurrentProgressionStep++;
-          if(CurrentProgressionStep >= (progressEvents.Count - 1))
+          // Move to the next progression step
+          CurrentProgressionStep++;
+          Debug.Log("Current Progression Step: " + CurrentProgressionStep);
+
+          if (CurrentProgressionStep >= (progressEvents.Count - 1))
           {
                isAllEventsCompleted = true;
                Debug.Log("All Events Complete!");
@@ -163,6 +165,7 @@ public class GameProgressManager : MonoBehaviour
                CurrentMiniGamedData.IsTasked = true;
                CurrentMiniGamedData.gameObject.SetActive(true);
                CurrentMiniGamedData.IsInteractable = true;
+               SceneTransition.FindPanel(); // Ensure the panel is found before activating it
           }
      }
 

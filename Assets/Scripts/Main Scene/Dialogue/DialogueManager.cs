@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
 {
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
+    [SerializeField] private float resetTimer = 0.5f; // Timer to reset NPC interaction after dialogue ends
 
     [Header("Dialogue Box")]
     [SerializeField] private GameObject dialogueBox;
@@ -120,6 +121,13 @@ public class DialogueManager : MonoBehaviour
           dialogueBox.SetActive(false); // Hide the dialogue box
         PlayInteractButtonClick(); // Play the interact button click sound
         dialogueText.text = ""; // Clear the dialogue text
+        Invoke("NPCInteractable", resetTimer);
+    }
+
+    // Method to reset NPC interaction
+    private void NPCInteractable()
+    {
+        NPC.isInteractable = true; // Set NPC interaction to true
     }
 
     //Method to continue the story

@@ -1,0 +1,1 @@
+<color=\#7F00FF>Dr. Waterson</color>: “Go to trash cleanup!”

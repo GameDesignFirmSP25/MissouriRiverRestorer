@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 5804447680181344619}
   - component: {fileID: 7073317590147811960}
   - component: {fileID: 8406637046477084645}
-  - component: {fileID: 9096865956694572098}
   m_Layer: 5
   m_Name: Close Button (4)
   m_TagString: Untagged
@@ -214,21 +213,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &9096865956694572098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1044911117629377943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c612be539f1bab64e8ccbadae4573109, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEffectsOfGasPanelClicked: 0
-  playerInput: {fileID: 0}
-  gameManagerScript: {fileID: 0}
 --- !u!1 &6809197136783962009
 GameObject:
   m_ObjectHideFlags: 0
