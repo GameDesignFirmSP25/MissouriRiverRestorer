@@ -45,9 +45,16 @@ public class BirdFlight : MonoBehaviour
 
     private void Update()
     {
-        if (AnimalGameManager.birdEventZoneComplete && !birdsFlownAway && BirdEventZonePanelClickHandler.isBirdEventZonePanelClicked)
+        if (AnimalGameManager.birdEventZoneComplete)
         {
-            FlyAway(player.transform.position);
+            foreach (var bird in GameObject.FindObjectsByType<BirdFlight>(FindObjectsSortMode.None))
+            {
+                if (!bird.birdsFlownAway)
+                {
+                    bird.FlyAway(player.transform.position);
+                }
+            }
+            //FlyAway(player.transform.position);
         }
     }
 

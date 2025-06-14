@@ -178,6 +178,7 @@ public class WaterTestingManager : BaseMiniGameManager
         surfaceWaves[surfaceWaves.Count - 3].SetActive(false); // Disable the third to last surface wave
         surfaceWaves[surfaceWaves.Count - 2].SetActive(false); // Disable the second to last surface wave
         surfaceWaves[surfaceWaves.Count - 1].SetActive(false); // Disable the last surface wave
+        readyToTransition = false; // Set bool readyToTransition to false
         Cursor.visible = true; // Set Cursor to be visible
 
         // If isFirstWaterTestComplete is false...
@@ -561,6 +562,7 @@ public class WaterTestingManager : BaseMiniGameManager
             else if (cleanWaterPanelActive)
             {
                 isCleanWaterPanelClicked = true; // Set bool isCleanWaterPanelClicked to true
+                cleanWaterPanelActive = false; // Set bool cleanWaterPanelActive to false
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(9); // Deactivate cleanWaterPanel
                 InteractionObject.requireERelease = true;
@@ -570,6 +572,7 @@ public class WaterTestingManager : BaseMiniGameManager
             else if (greatJobPanelActive)
             {
                 isGreatJobPanelClicked = true; // Set bool isGreatJobPanelClicked to true
+                greatJobPanelActive = false; // Set bool greatJobPanelActive to false
                 PlayButtonClick(); // Call PlayButtonClick method
                 DeactivatePanel(15); // Deactivate greatJobPanel
                 InteractionObject.requireERelease = true;
@@ -900,7 +903,7 @@ public class WaterTestingManager : BaseMiniGameManager
             TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
             // If isMiniGameOver is true and isCleanWaterPanelClicked is false...
-            if (isCleanWaterPanelClicked)
+            if (!cleanWaterPanelActive && isFirstWaterTestComplete && !isSecondWaterTestComplete)
             {
                 Invoke("ShowCleanWaterPanel", showPanel); // Invoke method ShowCleanWaterPanel after showPanel (in seconds)
             }
@@ -924,7 +927,7 @@ public class WaterTestingManager : BaseMiniGameManager
             TriggerMiniGameCompleteEvent(0);   // Update game progress. Can add a score to pass through
 
             // If isMiniGameOver is true and isGreatJobPanelClicked is false...
-            if (isGreatJobPanelClicked)
+            if (!greatJobPanelActive && isFirstWaterTestComplete && isSecondWaterTestComplete)
             {
                 Invoke("ShowGreatJobPanel", showPanel); // Invoke method ShowCleanWaterPanel after showPanel (in seconds)
             }

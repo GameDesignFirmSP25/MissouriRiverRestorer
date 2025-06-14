@@ -1123,7 +1123,7 @@ public class AnimalGameManager : BaseMiniGameManager
                 fishEventPanelActive = true; // Set bool fishEventPanelActive to true
                 eventZonePanelActive = true; // Set bool eventZonePanelActive to true
                 playerInput.controlsLocked = true; // Lock player controls
-                fishEventZoneText.text = "Great Job! You caught the Asian Carp! Now Now the native fish are safe!"; // Set text for fish event zone
+                fishEventZoneText.text = "Great Job! You caught the Asian Carp! Now the native fish are safe!"; // Set text for fish event zone
                 FishEventZone.isFishEventEntered = false; // Set bool isFishEventEntered to false
                 slider.value = 0f; // Reset slider value to 0
                 CancelInvoke(); // Cancel any ongoing invocations

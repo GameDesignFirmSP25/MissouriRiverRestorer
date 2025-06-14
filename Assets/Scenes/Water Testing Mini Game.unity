@@ -983,6 +983,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clean Water Is Essential Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 6055026749386164826, guid: 186e0d948bffe64418b1c00c916fb461, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1012,11 +1016,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479970095496317145, guid: a362abcc7ecccd74db7d220023571591, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.628529
+      value: 2.878529
       objectReference: {fileID: 0}
     - target: {fileID: 479970095496317145, guid: a362abcc7ecccd74db7d220023571591, type: 3}
       propertyPath: m_LocalPosition.z
       value: -4.768585
+      objectReference: {fileID: 0}
+    - target: {fileID: 479970095496317145, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9986169
+      objectReference: {fileID: 0}
+    - target: {fileID: 479970095496317145, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.052577294
+      objectReference: {fileID: 0}
+    - target: {fileID: 479970095496317145, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0000076890055
+      objectReference: {fileID: 0}
+    - target: {fileID: 479970095496317145, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000040482703
       objectReference: {fileID: 0}
     - target: {fileID: 935272621159273741, guid: a362abcc7ecccd74db7d220023571591, type: 3}
       propertyPath: m_LocalScale.x
@@ -1074,17 +1094,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Third Person Character
       objectReference: {fileID: 0}
+    - target: {fileID: 3156874044077335831, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: TargetOffset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5132762941008358988, guid: a362abcc7ecccd74db7d220023571591, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00007343292
       objectReference: {fileID: 0}
     - target: {fileID: 5132762941008358988, guid: a362abcc7ecccd74db7d220023571591, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.628529
+      value: 2.878529
       objectReference: {fileID: 0}
     - target: {fileID: 5132762941008358988, guid: a362abcc7ecccd74db7d220023571591, type: 3}
       propertyPath: m_LocalPosition.z
       value: -4.768585
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132762941008358988, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9986169
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132762941008358988, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.052577298
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132762941008358988, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000007689006
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132762941008358988, guid: a362abcc7ecccd74db7d220023571591, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000040482706
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1778,14 +1818,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 913236551}
     m_Modifications:
-    - target: {fileID: 1276460959850947252, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
-      propertyPath: m_fontSize
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1276460959850947252, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 28
-      objectReference: {fileID: 0}
     - target: {fileID: 1654351183312028186, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1873,18 +1905,6 @@ PrefabInstance:
     - target: {fileID: 6596522841883553767, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6959602186428516793, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6959602186428516793, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6959602186428516793, guid: f1dd8f19b24d7b743a8e7aacccd5f498, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 20.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1984,6 +2004,10 @@ PrefabInstance:
     - target: {fileID: 6317295547612494621, guid: 570ae0e5d8e0a834da4c39ca955b039a, type: 3}
       propertyPath: m_Name
       value: Effects on Biodiversity Panel 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317295547612494621, guid: 570ae0e5d8e0a834da4c39ca955b039a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7027512585426245417, guid: 570ae0e5d8e0a834da4c39ca955b039a, type: 3}
       propertyPath: m_Pivot.x
@@ -3274,6 +3298,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Effects on Biodiversity Panel 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4132230304894291171, guid: 03d69ef58e22b6c4c8384355fa353ab1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9186082935207902341, guid: 03d69ef58e22b6c4c8384355fa353ab1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3779,7 +3807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ba01c5351ccd07943abe92a5c8ad6a1d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f8c145603e004f49ba146bca5257306, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4454,6 +4482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Good Water Quality Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 130268468165491722, guid: 9ab4d49e1cae46747b04a64fddb0011d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8264000364295731458, guid: 9ab4d49e1cae46747b04a64fddb0011d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4560,6 +4592,10 @@ PrefabInstance:
     - target: {fileID: 1964304123318569427, guid: 698cdb1210906b249b48dccdf2057a3e, type: 3}
       propertyPath: m_Name
       value: Effects on Biodiversity Panel 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964304123318569427, guid: 698cdb1210906b249b48dccdf2057a3e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2095520493410631767, guid: 698cdb1210906b249b48dccdf2057a3e, type: 3}
       propertyPath: m_Pivot.x
@@ -6529,6 +6565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Effects of Aluminum Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8880519492529224625, guid: e870ebb319984fe47b4fdb1411d63060, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6555,6 +6595,10 @@ PrefabInstance:
     - target: {fileID: 3491053036874114103, guid: d8cb6f0e69d237044be0660dcf3ee0ad, type: 3}
       propertyPath: m_Name
       value: Biodiversity Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491053036874114103, guid: d8cb6f0e69d237044be0660dcf3ee0ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6566294740905947664, guid: d8cb6f0e69d237044be0660dcf3ee0ad, type: 3}
       propertyPath: m_Pivot.x
@@ -9033,6 +9077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Effects of Trash Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8881939055694730481, guid: 80c4a23f5dde8be4ebbb3b82104256a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9135,30 +9183,6 @@ PrefabInstance:
     - target: {fileID: 676772200417113091, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561710926335782000, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561710926335782000, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561710926335782000, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 33.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561710926335782000, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -80.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5532405189773755505, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
-      propertyPath: m_fontSize
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 5532405189773755505, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 6865860446357202093, guid: 3f54508758ff2e441aeaedcf4c52cf3d, type: 3}
       propertyPath: m_Name
@@ -9383,6 +9407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Look At Trash Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 6598723822980038490, guid: 0f5612d7f3c0cdf4d9f83e5f35e473a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9409,6 +9437,10 @@ PrefabInstance:
     - target: {fileID: 1849612885146682617, guid: f979542f4a1789642b010284e10772ab, type: 3}
       propertyPath: m_Name
       value: Poor Water Quality Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849612885146682617, guid: f979542f4a1789642b010284e10772ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3079954609609702539, guid: f979542f4a1789642b010284e10772ab, type: 3}
       propertyPath: m_Pivot.x
@@ -9766,6 +9798,10 @@ PrefabInstance:
     - target: {fileID: 345590371368072734, guid: cf81f5100a93eb04b875502216dc7513, type: 3}
       propertyPath: m_Name
       value: Effects of Gas Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 345590371368072734, guid: cf81f5100a93eb04b875502216dc7513, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1695231757846089695, guid: cf81f5100a93eb04b875502216dc7513, type: 3}
       propertyPath: m_Pivot.x
@@ -10181,6 +10217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Great Job Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 981284625390793733, guid: 44b267ead1ea73a459a371e65ae3fa29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8775753119736851332, guid: 44b267ead1ea73a459a371e65ae3fa29, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10504,6 +10544,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Effects of Tire Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 4311243501245778308, guid: b538b2e729f489d41b0b93f7d75fc231, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10747,6 +10791,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Testing Instructions Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8396340516009172741, guid: d9ba7e7152baeaf4ab33ce521188441f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10853,18 +10901,6 @@ PrefabInstance:
     - target: {fileID: 3967578910476615942, guid: 251d4819db70e684dad023f6207a08d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8066697081032123813, guid: 251d4819db70e684dad023f6207a08d8, type: 3}
-      propertyPath: m_fontSize
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 8066697081032123813, guid: 251d4819db70e684dad023f6207a08d8, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 8923642241440102149, guid: 251d4819db70e684dad023f6207a08d8, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -261
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

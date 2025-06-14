@@ -146,6 +146,7 @@ public class GameProgressManager : MonoBehaviour
                CurrentMiniGamedData.IsTasked = true;
                CurrentMiniGamedData.gameObject.SetActive(true);
                CurrentMiniGamedData.IsInteractable = true;
+               SceneTransition.FindPanel(); // Ensure the panel is found before activating it
 
             return;
           }
