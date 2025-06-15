@@ -77,9 +77,9 @@ public class InteractionObject : MonoBehaviour
                 renderer.material = trashInteraction; // Assign one of them as the active material
             }
 
-            if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon" || 
-                interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" || 
-                interactionObjectSO.interactionType == "Mammal: Raccoon")
+            if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Catfish" || interactionObjectSO.interactionType == "Pallid Sturgeon" || 
+                interactionObjectSO.interactionType == "Beaver" || interactionObjectSO.interactionType == "Buck" || interactionObjectSO.interactionType == "Deer" || 
+                interactionObjectSO.interactionType == "Raccoon")
             {
                 renderer.material = animalInteraction; // Assign one of them as the active material
             } 
@@ -224,9 +224,9 @@ public class InteractionObject : MonoBehaviour
             trashInteraction.SetFloat("_HasOutline", 1.0f); // Set the outline for trash interaction objects
         }
 
-        if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon" ||
-            interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" ||
-            interactionObjectSO.interactionType == "Mammal: Raccoon")
+        if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Catfish" || interactionObjectSO.interactionType == "Pallid Sturgeon" ||
+            interactionObjectSO.interactionType == "Beaver" || interactionObjectSO.interactionType == "Buck" || interactionObjectSO.interactionType == "Deer" ||
+            interactionObjectSO.interactionType == "Raccoon")
         {
             animalInteraction.SetFloat("_HasOutline", 1.0f); // Set the outline for animal interaction objects
         }
@@ -244,9 +244,9 @@ public class InteractionObject : MonoBehaviour
             trashInteraction.SetFloat("_HasOutline", 0.0f); // Set the outline for trash interaction objects
         }
 
-        if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon" ||
-            interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" ||
-            interactionObjectSO.interactionType == "Mammal: Raccoon")
+        if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Catfish" || interactionObjectSO.interactionType == "Pallid Sturgeon" ||
+            interactionObjectSO.interactionType == "Beaver" || interactionObjectSO.interactionType == "Buck" || interactionObjectSO.interactionType == "Deer" ||
+            interactionObjectSO.interactionType == "Raccoon")
         {
             animalInteraction.SetFloat("_HasOutline", 0.0f); // Set the outline for animal interaction objects
         }
@@ -343,7 +343,7 @@ public class InteractionObject : MonoBehaviour
                 if (!WaterTestingManager.isFishObjectiveComplete)
                 {
                     // If the interaction type is "Fish: Asian Carp", "Fish: Catfish", or "Fish: Pallid Sturgeon"...
-                    if (interactionObjectSO.interactionType == "Fish: Asian Carp" || interactionObjectSO.interactionType == "Fish: Catfish" || interactionObjectSO.interactionType == "Fish: Pallid Sturgeon")
+                    if (interactionObjectSO.interactionType == "Asian Carp" || interactionObjectSO.interactionType == "Catfish" || interactionObjectSO.interactionType == "Pallid Sturgeon")
                     {
                         FishClicked(); // Call the FishClicked method
 
@@ -360,7 +360,7 @@ public class InteractionObject : MonoBehaviour
                 if (!WaterTestingManager.isMammalObjectiveComplete)
                 {
                     // If the interaction type is "Mammal: Beaver", "Mammal: Buck", "Mammal: Deer", or "Mammal: Raccoon"...
-                    if (interactionObjectSO.interactionType == "Mammal: Beaver" || interactionObjectSO.interactionType == "Mammal: Buck" || interactionObjectSO.interactionType == "Mammal: Deer" || interactionObjectSO.interactionType == "Mammal: Raccoon")
+                    if (interactionObjectSO.interactionType == "Beaver" || interactionObjectSO.interactionType == "Buck" || interactionObjectSO.interactionType == "Deer" || interactionObjectSO.interactionType == "Raccoon")
                     {
                         MammalClicked(); // Call the MammalClicked method
 
@@ -528,7 +528,7 @@ public class InteractionObject : MonoBehaviour
             foreach (var obj in allInteractionObjects)
             {
                 // If the object is not null and its interaction type is "Fish: Asian Carp", "Fish: Catfish", or "Fish: Pallid Sturgeon"...
-                if (obj != null && (obj.interactionObjectSO.interactionType == "Fish: Asian Carp" || obj.interactionObjectSO.interactionType == "Fish: Catfish" || obj.interactionObjectSO.interactionType == "Fish: Pallid Sturgeon"))
+                if (obj != null && (obj.interactionObjectSO.interactionType == "Asian Carp" || obj.interactionObjectSO.interactionType == "Catfish" || obj.interactionObjectSO.interactionType == "Pallid Sturgeon"))
                 {
                     obj.hasBeenInteractedWith = true; // Mark the object as interacted with
 
@@ -559,7 +559,7 @@ public class InteractionObject : MonoBehaviour
             foreach (var obj in allInteractionObjects)
             {
                 // If the object is not null and its interaction type is "Mammal: Beaver", "Mammal: Buck", "Mammal: Deer", or "Mammal: Raccoon"...
-                if (obj != null && (obj.interactionObjectSO.interactionType == "Mammal: Beaver" || obj.interactionObjectSO.interactionType == "Mammal: Buck" || obj.interactionObjectSO.interactionType == "Mammal: Deer" || obj.interactionObjectSO.interactionType == "Mammal: Raccoon"))
+                if (obj != null && (obj.interactionObjectSO.interactionType == "Beaver" || obj.interactionObjectSO.interactionType == "Buck" || obj.interactionObjectSO.interactionType == "Deer" || obj.interactionObjectSO.interactionType == "Raccoon"))
                 {
                     obj.hasBeenInteractedWith = true; // Mark the object as interacted with
 
@@ -608,8 +608,8 @@ public class InteractionObject : MonoBehaviour
     {
         foreach (var obj in allInteractionObjects)
         {
-            if (obj.objectID == "Fish: Asian Carp" || obj.objectID == "Fish: Catfish" || obj.objectID == "Fish: Pallid Sturgeon" ||
-                obj.objectID == "Mammal: Beaver" || obj.objectID == "Mammal: Buck" || obj.objectID == "Mammal: Deer" || obj.objectID == "Mammal: Raccoon")
+            if (obj.objectID == "Asian Carp" || obj.objectID == "Catfish" || obj.objectID == "Pallid Sturgeon" ||
+                obj.objectID == "Beaver" || obj.objectID == "Buck" || obj.objectID == "Deer" || obj.objectID == "Raccoon")
             {
                 obj.ableToInteractWith = true; // Set the ableToInteractWith flag for animal-related objects
             }
@@ -620,8 +620,8 @@ public class InteractionObject : MonoBehaviour
     {
         foreach (var obj in allInteractionObjects)
         {
-            if (obj.objectID == "Fish: Asian Carp" || obj.objectID == "Fish: Catfish" || obj.objectID == "Fish: Pallid Sturgeon" ||
-                obj.objectID == "Mammal: Beaver" || obj.objectID == "Mammal: Buck" || obj.objectID == "Mammal: Deer" || obj.objectID == "Mammal: Raccoon")
+            if (obj.objectID == "Asian Carp" || obj.objectID == "Catfish" || obj.objectID == "Pallid Sturgeon" ||
+                obj.objectID == "Beaver" || obj.objectID == "Buck" || obj.objectID == "Deer" || obj.objectID == "Raccoon")
             {
                 obj.ableToInteractWith = false; // Reset the ableToInteractWith flag for animal-related objects
             }

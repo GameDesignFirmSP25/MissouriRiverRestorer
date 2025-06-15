@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragonfly
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aed576709d7ea9c4e9926d0d8f4f8e87, type: 3}
+      propertyPath: m_TagString
+      value: Guidebook Objects
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -241,9 +245,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d00df85e8f3d21d4ea7afffac552fde9, type: 2}
     - target: {fileID: 5061955239504063668, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: ObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: d00df85e8f3d21d4ea7afffac552fde9, type: 2}
+    - target: {fileID: 5061955239504063668, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: InteractPopup
       value: 
       objectReference: {fileID: 2542447251557286396}
+    - target: {fileID: 5061955239504063668, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: interactPanel
+      value: 
+      objectReference: {fileID: 1463804981769954617, guid: 48663f5166c66934e9baceea0fa94669, type: 3}
+    - target: {fileID: 5061955239504063668, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: interactPanelText
+      value: 
+      objectReference: {fileID: 6129956562853094866, guid: 762be238a5ef31442ae499c7d7ca9dcf, type: 3}
+    - target: {fileID: 5061955239504063668, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
+      propertyPath: interactPanelImage
+      value: 
+      objectReference: {fileID: 8170926281421867890, guid: 48663f5166c66934e9baceea0fa94669, type: 3}
     - target: {fileID: 5299996111501757330, guid: f5274758a0af29e4599ba53a1916e065, type: 3}
       propertyPath: m_Name
       value: Banded Pennant Butterfly (NM)
