@@ -3005,10 +3005,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4893,6 +4893,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 8f8c145603e004f49ba146bca5257306, type: 3}
     - target: {fileID: 3897269087882735893, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897269087882735893, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
       propertyPath: m_margin.w
       value: 13.532539
       objectReference: {fileID: 0}
@@ -4907,6 +4911,10 @@ PrefabInstance:
     - target: {fileID: 3897269087882735893, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
       propertyPath: m_margin.z
       value: 125.83179
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897269087882735893, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3991064002074905930, guid: 60495326ffca46b4c93291d442f2a2a9, type: 3}
       propertyPath: m_AnchorMax.y
